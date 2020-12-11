@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
@@ -8,13 +8,13 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "kg.nurtelecom.ofd"
         minSdkVersion 22
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -33,12 +33,6 @@ android {
 }
 
 dependencies {
-
-    implementation project(path: ':core')
-    implementation project(path: ':network')
-    implementation project(path: ':data')
-    implementation project(path: ':storage')
-    implementation project(path: ':ui')
 
     implementation libs.kotlin
     implementation libs.androidx.values()

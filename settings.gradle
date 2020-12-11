@@ -1,2 +1,7 @@
+include ':ui'
+include ':storage'
+include ':data'
+include ':network'
+include ':core'
 include ':app'
 rootProject.name = "OFDApp"
