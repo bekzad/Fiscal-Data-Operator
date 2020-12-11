@@ -1,11 +1,11 @@
 package kg.nurtelecom.ofd
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import kg.nurtelecom.core.activity.SimpleActivity
+import kg.nurtelecom.ofd.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : SimpleActivity<ActivityMainBinding>() {
+    override fun getBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
     }
+
 }

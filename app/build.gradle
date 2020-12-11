@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -44,6 +47,9 @@ dependencies {
     implementation libs.androidx.values()
     implementation libs.google.values()
     implementation libs.koin.values()
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()

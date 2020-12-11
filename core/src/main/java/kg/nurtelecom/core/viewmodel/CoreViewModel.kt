@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kg.nurtelecom.core.Event
 import kotlinx.coroutines.launch
 
-class CoreViewModel : ViewModel() {
+abstract class CoreViewModel : ViewModel() {
 
     val event: MutableLiveData<Event> = MutableLiveData()
 
