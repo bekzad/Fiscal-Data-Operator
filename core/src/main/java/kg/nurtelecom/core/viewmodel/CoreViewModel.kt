@@ -1,8 +1,9 @@
-package kg.nurtelecom.core
+package kg.nurtelecom.core.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kg.nurtelecom.core.Event
 import kotlinx.coroutines.launch
 
 class CoreViewModel : ViewModel() {

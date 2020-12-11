@@ -1,7 +1,9 @@
-package kg.nurtelecom.core
+package kg.nurtelecom.core.activity
 
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
+import kg.nurtelecom.core.CoreEvent
+import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.core.extension.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.reflect.KClass

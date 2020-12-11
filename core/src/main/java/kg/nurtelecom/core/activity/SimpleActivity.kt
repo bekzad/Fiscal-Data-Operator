@@ -1,4 +1,4 @@
-package kg.nurtelecom.core
+package kg.nurtelecom.core.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
