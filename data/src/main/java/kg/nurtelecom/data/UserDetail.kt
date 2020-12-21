@@ -12,4 +12,3 @@ data class UserDetail (
     val middlename : String,
     val inn : String
 )
-

@@ -14,8 +14,8 @@ fun View.visible(isVisible: Boolean) {
 }
 
 fun Activity.handleApiError(
-        view: View,
-        retry: (() -> Unit)? = null
+    view: View,
+    retry: (() -> Unit)? = null
 ) {
     view.snackbar("Вы ввели неверные данные")
 }

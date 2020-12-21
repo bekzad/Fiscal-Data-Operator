@@ -6,4 +6,3 @@ data class Role (
     val description : String,
     val canAccessAdminApp : Boolean
 )
-

@@ -7,7 +7,7 @@ buildscript {
             "koin_version"     : "2.2.0",
             "okhttp_version"   : "4.9.0",
             "retrofit"         : "2.9.0",
-            "room_version"     : "2.2.5"
+            "room_version"     : "2.2.6"
     ]
 
     ext.libs = [
@@ -21,6 +21,9 @@ buildscript {
                     'core-ktx'        : "androidx.core:core-ktx:1.3.2",
                     'fragment-ktx'    : "androidx.fragment:fragment-ktx:1.2.5",
                     'lifecycle-ktx'   : "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0",
+                    'room'            : "androidx.room:room-runtime:$vers.room_version",
+                    'room-ktx'        : "androidx.room:room-ktx:$vers.room_version",
+                    'room-compiler'   : "androidx.room:room-compiler:$vers.room_version"
             ],
             'koin'           : [
                     'android'  : "org.koin:koin-android:$vers.koin_version",
@@ -40,8 +43,9 @@ buildscript {
                     'gson'    : "com.squareup.retrofit2:converter-gson:$vers.retrofit",
                     'logging' : "com.squareup.okhttp3:logging-interceptor:$vers.okhttp_version"
             ],
-            'room'           : [
+            'room'          :[
                     'runtime' : "androidx.room:room-runtime:$vers.room_version",
+                    'compiler': "androidx.room:room-compiler:$vers.room_version",
                     'room-ktx': "androidx.room:room-ktx:$vers.room_version",
                     'testing' : "androidx.room:room-testing:$vers.room_version",
             ],

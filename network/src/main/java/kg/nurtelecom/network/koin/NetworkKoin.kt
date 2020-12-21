@@ -14,7 +14,6 @@ val networkKoin = module {
     single { provideOkHttp() }
     single { provideRetrofit(get()) }
     single { get<Retrofit>().create(AuthorizationApi::class.java) }
-
 }
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
