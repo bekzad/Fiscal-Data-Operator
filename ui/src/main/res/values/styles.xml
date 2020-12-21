@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="style_card_view">
+        <item name="android:letterSpacing">-0.04</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
     <!--MainToolbar-->
     <style name="toolbar_main">
         <item name="android:layout_width">match_parent</item>

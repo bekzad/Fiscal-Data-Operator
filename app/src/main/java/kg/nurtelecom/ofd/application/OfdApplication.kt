@@ -5,6 +5,7 @@ import com.teamx.storage.storageKoin.storageKoin
 import kg.nurtelecom.auth.koin.authKoin
 import kg.nurtelecom.network.koin.networkKoin
 import kg.nurtelecom.ofd.koin.appKoin
+import kg.nurtelecom.sell.koin.sellKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -17,7 +18,7 @@ class OfdApplication : Application() {
     private fun initKoin() {
         startKoin {
             androidContext(this@OfdApplication)
-            modules(appKoin, networkKoin, storageKoin, authKoin)
+            modules(appKoin, networkKoin, storageKoin, authKoin, sellKoin)
         }
     }
 }
