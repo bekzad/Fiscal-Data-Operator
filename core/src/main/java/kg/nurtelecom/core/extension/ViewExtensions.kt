@@ -3,7 +3,6 @@ package kg.nurtelecom.core.extension
 import android.app.Activity
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
-import kg.nurtelecom.core.Resource
 
 fun View.enable(enabled: Boolean) {
     isEnabled = enabled
@@ -16,22 +15,9 @@ fun View.visible(isVisible: Boolean) {
 
 fun Activity.handleApiError(
         view: View,
-        failure: Resource.Failure,
         retry: (() -> Unit)? = null
 ) {
-    when {
-        failure.isNetworkError -> view.snackbar(
-                "Пожалуйста, проверьте ваше интернет соединение!",
-                retry
-        )
-        failure.errorCode == 401 -> {
-            view.snackbar("Вы ввели неверные данные")
-        }
-        else -> {
-            val error = failure.errorBody?.string().toString()
-            view.snackbar(error)
-        }
-    }
+    view.snackbar("Вы ввели неверные данные")
 }
 
 fun View.snackbar(message: String, action: (() -> Unit)? = null) {

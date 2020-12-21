@@ -35,7 +35,7 @@ android {
 
 dependencies {
     implementation libs.room.values()
-    kapt           libs.roomKapt.values()
+    kapt libs.roomKapt.values()
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()
 }

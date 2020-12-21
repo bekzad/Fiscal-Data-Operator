@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.viewbinding.ViewBinding
+import kg.nurtelecom.core.activity.SimpleActivity
 
 abstract class SimpleFragment<VB : ViewBinding> : Fragment() {
 
@@ -23,7 +25,5 @@ abstract class SimpleFragment<VB : ViewBinding> : Fragment() {
     abstract fun getBinding(): VB
     open fun setupViews() {}
     open fun navigateToFragment() {}
-
-
 
 }
