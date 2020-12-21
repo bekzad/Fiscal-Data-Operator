@@ -6,4 +6,3 @@ data class UserResult(
     val details : String,
     val resultDetail : String
 )
-

@@ -21,4 +21,5 @@ interface AuthorizationApi {
     @Headers("Authorization: Basic ZGV2OkZndkRlNHZkITM={token}")
     @POST("invalidate")
     suspend fun logout(@Header("token") token: String): LogoutResult
+
 }

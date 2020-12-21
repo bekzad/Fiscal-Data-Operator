@@ -11,4 +11,3 @@ data class Result (
     val accountNonLocked : Boolean,
     val credentialsNonExpired : Boolean
 )
-

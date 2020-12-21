@@ -7,4 +7,3 @@ data class CashRegister (
     val taxSalesPoint : TaxSalesPoint,
     val ofdStatus : String
 )
-

@@ -12,4 +12,3 @@ data class TaxSalesPoint (
     val ofdStatus : String,
     val taxAccountingMethod : String
 )
-
