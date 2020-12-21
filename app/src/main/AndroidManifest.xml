@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kg.nurtelecom.ofd">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".application.OfdApplication"
         android:allowBackup="true"
@@ -10,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OFDApp">
-        <activity android:name=".MainActivity">
+        <activity android:name="kg.nurtelecom.auth.ui.AuthActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:name="kg.nurtelecom.ofd.ui.main.MainActivity" />
+        <activity android:name=".ui.spalsh.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

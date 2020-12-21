@@ -22,5 +22,8 @@ abstract class SimpleFragment<VB : ViewBinding> : Fragment() {
 
     abstract fun getBinding(): VB
     open fun setupViews() {}
+    open fun navigateToFragment() {}
+
+
 
 }

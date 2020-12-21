@@ -1,2 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Main/Greeting-->
+    <string name="main_greeting">Главная</string>
+    <string name="text_fiscal_mode">Фискальный режим</string>
+    <string name="text_for_activity">Для деятельности</string>
+    <string name="text_merchant_profile">Профиль кассира</string>
+    <string name="text_contact_info">Контактные Данные</string>
+    <string name="text_change_password">Сменить пароль</string>
+    <string name="text_app_name">О! касса</string>
+    <string name="text_app_version">Версия приложения 1.1.0</string>
+    <string name="text_exit">ВЫХОД</string>
+
+    <!--History-->
+    <string name="text_sale_type">Кассовый чек</string>
+    <string name="text_counter">#123</string>
+    <string name="text_timestamp">25/09/19 - 15:43</string>
+    <string name="text_payment_amount">75.00 с</string>
+    <string name="text_profile">Профиль</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ed_login">Логин / Номер телефона</string>
+    <string name="ed_password">Пароль</string>
+    <string name="ed_gsr_key">Ключ</string>
+    <string name="tv_regime">Нефискальный режим</string>
+    <string name="btn_login">Войти</string>
+</resources>

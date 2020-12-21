@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -20,7 +21,7 @@ android {
     buildTypes {
 
         all {
-            buildConfigField "String", "URL", "\"https://staging-ofd.o.kg/pkkm/api\""
+            buildConfigField "String", "URL", '"https://staging-ofd.o.kg/pkkm/api/"'
         }
 
         release {
@@ -46,6 +47,8 @@ dependencies {
     implementation libs.koin.values()
     implementation libs.network.values()
     implementation libs.coroutines.values()
+    implementation libs.room.values()
+    kapt           libs.roomKapt.values()
 
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()

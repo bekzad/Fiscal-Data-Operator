@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -38,6 +41,7 @@ dependencies {
     implementation libs.androidx.values()
     implementation libs.google.values()
     implementation libs.koin.values()
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()

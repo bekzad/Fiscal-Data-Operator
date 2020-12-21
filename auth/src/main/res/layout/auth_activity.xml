@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_48dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:background="@color/colorShadedDark"
+            android:gravity="center"
+            android:hint="@string/ed_login"
+            android:inputType="textPersonName"
+            style="@style/application_editText"/>
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_48dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:background="@color/colorShadedDark"
+            android:gravity="center"
+            android:hint="@string/ed_password"
+            android:inputType="textPassword"
+            style="@style/application_editText"/>
+
+        <EditText
+            android:id="@+id/et_gsr_key"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_48dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:background="@color/colorShadedDark"
+            android:gravity="center"
+            android:hint="@string/ed_gsr_key"
+            android:inputType="number"
+            style="@style/application_editText"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_regime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16dp"
+                android:textColor="@color/colorWhite"
+                android:text="@string/tv_regime"
+                android:textSize="@dimen/text_16sp"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_16dp"
+                android:layout_weight="1"
+                tools:ignore="ExtraText" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_25dp"
+            android:layout_marginRight="@dimen/margin_16dp"
+            style="@style/green_btn"
+            android:text="@string/btn_login" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -41,6 +41,7 @@ dependencies {
     implementation libs.androidx.values()
     implementation libs.google.values()
     implementation libs.koin.values()
+    implementation libs.network.values()
 
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()
