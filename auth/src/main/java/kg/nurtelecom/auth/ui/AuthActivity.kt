@@ -1,13 +1,10 @@
 package kg.nurtelecom.auth.ui
 
-import android.content.Intent
-import android.util.Log
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import kg.nurtelecom.auth.databinding.AuthActivityBinding
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.text
-import kg.nurtelecom.core.Resource
 import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.handleApiError
 import kg.nurtelecom.core.extension.visible
@@ -56,14 +53,17 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
 
     private fun observeAuthorization() {
         // LOGIN ---> 10480_2 PASSWORD ---> Kr1_7W GSR-KEY ---> 910287
-        vm.loginResponse.observe(this, Observer {
-            vb.progressbar.visible(it is Resource.Loading)
+        vm.event.observe(this, Observer {
+//            vb.progressbar.visible(it is Resource.Loading)
             when (it) {
-                is Resource.Success -> {
-                    setResult(AUTH_RESULT)
-                    finish()
+                is AuthUser -> {
+                    if (it.access_token.isNotEmpty()){
+                        setResult(AUTH_RESULT)
+                        finish()
+                    } else {
+                        handleApiError(vb.root) {login()}
+                    }
                 }
-                is Resource.Failure -> handleApiError(vb.root, it) { login() }
             }
         })
     }
