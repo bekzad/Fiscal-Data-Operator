@@ -1,13 +1,14 @@
 package kg.nurtelecom.core.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kg.nurtelecom.core.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-abstract class CoreViewModel : ViewModel() {
+abstract class CoreViewModel() : ViewModel() {
 
     val event: MutableLiveData<Event> = MutableLiveData()
 

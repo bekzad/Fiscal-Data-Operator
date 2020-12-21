@@ -39,9 +39,8 @@ android {
 }
 
 dependencies {
-
-    implementation project(path: ':core')
     implementation project(path: ':data')
+    implementation project(path: ':core')
     implementation project(path: ':storage')
 
     implementation libs.koin.values()

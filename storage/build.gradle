@@ -34,13 +34,11 @@ android {
 }
 
 dependencies {
-
     implementation project(path: ':data')
-
     implementation libs.kotlin
     implementation libs.koin.values()
     implementation libs.room.values()
-    kapt           libs.roomKapt.values()
+    kapt libs.roomKapt.values()
 
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()

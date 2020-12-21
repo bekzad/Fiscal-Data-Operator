@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="kg.nurtelecom.sell.ui.activity.SellMainActivity">
+
+        </activity>
     </application>
 
 </manifest>

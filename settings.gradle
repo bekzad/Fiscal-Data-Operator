@@ -1,3 +1,4 @@
+include ':sell'
 include ':user'
 include ':data'
 include ':auth'
