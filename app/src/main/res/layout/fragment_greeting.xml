@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBlack"
+    android:padding="8dp">
+
+    <kg.nurtelecom.ofd.ui.CellView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/cell_fiscal_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/text_fiscal_mode"
+        app:subTitle="@string/text_for_activity"
+        app:position="top"/>
+    <kg.nurtelecom.ofd.ui.CellView
+        app:layout_constraintTop_toBottomOf="@id/cell_fiscal_mode"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/cell_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/text_merchant_profile"
+        app:subTitle="@string/text_contact_info"
+        app:position="bottom"/>
+
+    <kg.nurtelecom.ofd.ui.CellView
+        android:layout_marginTop="@dimen/margin_8dp"
+        app:layout_constraintTop_toBottomOf="@id/cell_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/cell_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/text_change_password"
+        app:showSubTitle="false"
+        app:position="single"/>
+
+    <ImageView
+        android:id="@+id/logo_main"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cell_change_password" />
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_app_name"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/app_text_normal"
+        app:layout_constraintTop_toBottomOf="@id/logo_main"
+        app:layout_constraintStart_toStartOf="@id/app_version"
+        app:layout_constraintEnd_toEndOf="@id/app_version"
+        android:layout_marginTop="@dimen/app_margin"/>
+    <TextView
+        android:id="@+id/app_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_app_version"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/app_text_normal"
+        app:layout_constraintTop_toBottomOf="@id/app_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/app_margin"/>
+
+    <TextView
+        android:id="@+id/tv_invalidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:clickable="true"
+        android:text="@string/text_exit"
+        android:textColor="@color/colorRed"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

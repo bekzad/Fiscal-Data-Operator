@@ -1,10 +1,12 @@
 package kg.nurtelecom.ofd.application
 
 import android.app.Application
+import com.teamx.storage.storageKoin.storageKoin
+import kg.nurtelecom.auth.koin.authKoin
+import kg.nurtelecom.network.koin.networkKoin
 import kg.nurtelecom.ofd.koin.appKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import org.koin.dsl.module
 
 class OfdApplication : Application() {
     override fun onCreate() {
@@ -15,7 +17,7 @@ class OfdApplication : Application() {
     private fun initKoin() {
         startKoin {
             androidContext(this@OfdApplication)
-            modules(appKoin)
+            modules(appKoin, networkKoin, storageKoin, authKoin)
         }
     }
 }

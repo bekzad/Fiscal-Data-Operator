@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--MainToolbar-->
+    <style name="toolbar_main">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/colorBlack</item>
+    </style>
+
+    <!--Top Cell-->
+    <style name="tv_tltle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/app_margin_small</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/app_text_large</item>
+    </style>
+
+    <style name="tv_subtitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorGrey</item>
+        <item name="android:textSize">@dimen/app_text_small</item>
+    </style>
+
+    <style name="iv_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/app_margin</item>
+    </style>
+
+    <style name="cell_button_top">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_cell_top</item>
+    </style>
+
+    <!--Single Cell-->
+    <style name="cell_button_single">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_cell_single</item>
+        <item name="android:padding">@dimen/app_margin_small</item>
+    </style>
+
+    <style name="tv_title_single">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/app_margin_small</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/app_text_large</item>
+    </style>
+
+    <style name="iv_icon_single">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/app_margin</item>
+    </style>
+
+    <!--Bottom Cell-->
+    <style name="cell_button_bottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_cell_bottom</item>
+        <item name="android:paddingLeft">@dimen/app_margin_small</item>
+    </style>
+
+    <style name="tv_title_bottom">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/app_margin_small</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/app_text_large</item>
+    </style>
+
+    <style name="tv_subtitle_bottom">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/app_margin_small</item>
+        <item name="android:layout_marginBottom">@dimen/app_margin_small</item>
+        <item name="android:textColor">@color/colorGrey</item>
+        <item name="android:textSize">@dimen/app_text_small</item>
+    </style>
+
+    <style name="iv_icon_bottom">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/app_margin</item>
+    </style>
+
+    <!--Detal Top-->
+</resources>

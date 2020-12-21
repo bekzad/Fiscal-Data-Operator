@@ -12,10 +12,10 @@ abstract class SimpleActivity<VB : ViewBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(vb.root)
         parseDataFromIntent()
-        setViews()
+        setupViews()
     }
 
-    open fun setViews() {}
+    open fun setupViews() {}
     open fun parseDataFromIntent() {}
 
     abstract fun getBinding(): VB

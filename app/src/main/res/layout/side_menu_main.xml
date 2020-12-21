@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:clickable="false"
+    android:focusable="false">
+    <kg.nurtelecom.ofd.ui.CellView
+        android:id="@+id/main_menu_item_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/main_greeting"
+        app:subTitle="@string/startWork"
+        app:position="top"/>
+    <kg.nurtelecom.ofd.ui.CellView
+        android:id="@+id/main_menu_item_app_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:position="bottom"
+        app:title="@string/info"
+        app:subTitle="@string/info_about_app"/>
+</LinearLayout>
