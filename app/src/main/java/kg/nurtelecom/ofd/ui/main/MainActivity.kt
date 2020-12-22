@@ -13,7 +13,6 @@ import kg.nurtelecom.ofd.databinding.SideMenuMainBinding
 import kg.nurtelecom.ofd.ui.main.fragment.aboutapp.AboutAppFragment
 import kg.nurtelecom.ofd.ui.main.fragment.greeting.GreetingFragment
 
-
 class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
 
     override fun getBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)

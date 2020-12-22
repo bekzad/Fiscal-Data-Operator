@@ -51,7 +51,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_16dp"
-        android:layout_marginRight="@dimen/margin_16dp" />
+        android:layout_marginRight="@dimen/margin_16dp"
+        app:title="Ttikt"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_close"
@@ -64,16 +66,6 @@
         android:textColor="#FF3B30"
         android:textSize="@dimen/text_14sp"
         android:text="Закрытие смены и z-отчет" />
-    <kg.nurtelecom.ofd.ui.CellView
-        android:id="@+id/main_menu_item_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        />
-    <kg.nurtelecom.ofd.ui.CellView
-        android:id="@+id/main_menu_item_app_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+
 
 </LinearLayout>
