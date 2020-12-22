@@ -3,6 +3,7 @@ package kg.nurtelecom.sell.ui.fragment.sell
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import kg.nurtelecom.core.extension.setToolbarTitle
@@ -73,6 +74,19 @@ class SellFragment :
             val activity = activity as AppCompatActivity
             activity.replaceFragment(PaymentMethodFragment.newInstance())
         }
+        vb.sumPayCv.navigate {
+            // navigate to PayMethodFragment
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val activity = activity as AppCompatActivity
+        activity
+            .supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.sell_container, fragment)
+            .commit()
     }
 
     override fun createViewBinding(
