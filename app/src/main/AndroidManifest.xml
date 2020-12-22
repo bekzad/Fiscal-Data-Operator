@@ -17,6 +17,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.spalsh.SplashActivity">
+        <activity android:name="kg.nurtelecom.user.ui.UserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

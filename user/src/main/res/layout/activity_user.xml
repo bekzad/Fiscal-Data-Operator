@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.card.MaterialCardView
@@ -76,7 +76,6 @@
                 android:textColorHint="@color/grey"
                 android:gravity="center_horizontal|top"/>
 
-
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -110,7 +109,7 @@
                 android:layout_marginTop="@dimen/margin_8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="+996"
+                android:layout_marginTop="@dimen/app_margin_small"
                 android:background="@null"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_20sp"
