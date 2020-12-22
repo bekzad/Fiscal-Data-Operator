@@ -1,43 +1,22 @@
 package kg.nurtelecom.sell.ui.fragment.add_product
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kg.nurtelecom.sell.R
-import kg.nurtelecom.sell.core.INavigation
 import kg.nurtelecom.sell.databinding.AddProductFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 
-class AddProductFragment : Fragment()
-    /*CoreFragment<AddProductFragmentBinding, SellMainViewModel>(SellMainViewModel::class)*/,
-    INavigation {
+class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
 
-    companion object {
-        fun newInstance() = AddProductFragment()
+    override val vm: SellMainViewModel by activityViewModels()
+
+    override fun setupViews() {
+        vb.productNotFromListButton.setOnClickListener { navigate() }
     }
 
-    private lateinit var vb: AddProductFragmentBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        vb = AddProductFragmentBinding.inflate(inflater, container, false)
-        setupViews()
-        return vb.root
-    }
-
-    private fun setupViews() {
-        vb.productNotFromListButton.setOnClickListener {
-            navigate()
-        }
-    }
-
-    override fun navigate() {
+    private fun navigate() {
         val activity = activity as AppCompatActivity
         activity.supportFragmentManager
             .beginTransaction()
@@ -46,8 +25,12 @@ class AddProductFragment : Fragment()
             .commit()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        println("onDestroyView() !")
+    override fun createViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): AddProductFragmentBinding = AddProductFragmentBinding.inflate(inflater, container, false)
+
+    companion object {
+        fun newInstance() = AddProductFragment()
     }
 }
