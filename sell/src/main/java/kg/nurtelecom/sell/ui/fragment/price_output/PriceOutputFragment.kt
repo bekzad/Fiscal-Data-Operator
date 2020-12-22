@@ -23,7 +23,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     }
 
     private fun sendProduct(product: Product) {
-        if (product.price != null) vm.addNewProduct(product)
+        vm.addNewProduct(product)
     }
 
     private fun setupCustomEditText() {
@@ -72,7 +72,6 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup?
     ): PriceOutputFragmentBinding = PriceOutputFragmentBinding.inflate(inflater, container, false)
-
 
     companion object {
         fun newInstance() = PriceOutputFragment()

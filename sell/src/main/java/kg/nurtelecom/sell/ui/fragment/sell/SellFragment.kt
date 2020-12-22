@@ -30,7 +30,6 @@ class SellFragment :
     }
 
     override fun setupViews() {
-        super.setupViews()
         setupRV(listOf())
         setupTaxView()
         navigate()
