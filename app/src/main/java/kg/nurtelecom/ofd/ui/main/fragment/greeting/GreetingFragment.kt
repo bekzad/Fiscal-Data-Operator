@@ -9,6 +9,7 @@ import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.ofd.R
 import kg.nurtelecom.ofd.databinding.FragmentGreetingBinding
 import kg.nurtelecom.ofd.ui.spalsh.SplashActivity
+import kg.nurtelecom.sell.ui.activity.SellMainActivity
 
 class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(GreetingVM::class) {
 
@@ -23,8 +24,11 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
 
     override fun setupViews() {
         super.setupViews()
-        vb.btnInvalidate.setOnClickListener { vm.logout() }
-        vb.cellFiscalMode.setOnClickListener { Log.i("ERLAN", "FiscalMode") }
+        vb.tvInvalidate.setOnClickListener { vm.logout() }
+        vb.cellFiscalMode.setOnClickListener {
+            val intent = Intent(activity, SellMainActivity::class.java)
+            startActivity(intent)
+        }
         vb.cellProfile.setOnClickListener { Log.i("ERLAN", "cellProfile") }
         vb.cellChangePassword.setOnClickListener { Log.i("ERLAN", "cellChangePassword") }
     }
