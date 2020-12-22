@@ -36,10 +36,10 @@ class ProductAdapter(private val productList: List<Product>) :
         private fun fetchProductExpression(product: Product): StringBuilder {
             val productExpressionLine = StringBuilder()
             val discount =
-                if (product.discount != null && compareToZero(product.discount)) (" + " + product.discount + "% ") else
+                if (product.discount != null && isNotZero(product.discount)) (" + " + product.discount + "% ") else
                     ""
             val allowance =
-                if (product.allowance != null && compareToZero(product.allowance)) ("+ " + product.allowance) + "%" else
+                if (product.allowance != null && isNotZero(product.allowance)) ("+ " + product.allowance) + "%" else
                     ""
             productExpressionLine.apply {
                 append("${product.price} * ")
@@ -49,9 +49,8 @@ class ProductAdapter(private val productList: List<Product>) :
             }
             return productExpressionLine
         }
-        fun compareToZero(value: Double): Boolean {
-            val bigValue = BigDecimal.valueOf(value)
-            return bigValue.compareTo(BigDecimal.ZERO) != 0
+        private fun isNotZero(value: BigDecimal): Boolean {
+            return value.compareTo(BigDecimal.ZERO) != 0
         }
     }
 }
