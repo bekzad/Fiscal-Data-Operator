@@ -23,7 +23,7 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
         val activity = activity as AppCompatActivity
         activity.supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, PriceOutputFragment.newInstance())
+            .replace(R.id.sell_container, PriceOutputFragment.newInstance())
             .addToBackStack(null)
             .commit()
     }

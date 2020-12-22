@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tb_sell_main"
         tools:openDrawer="end">
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/sellMainContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
