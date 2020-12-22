@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
+import androidx.lifecycle.observe
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
@@ -24,7 +25,7 @@ class SellFragment :
 
     override val vm: SellMainViewModel by activityViewModels()
 
-    private fun setupRV(product: List<Product>) {
+    private fun setupRV(product: MutableList<Product>) {
         vb.productRv.apply {
             productAdapter = ProductAdapter(product) { position ->
                 removeProduct(position)
@@ -34,7 +35,7 @@ class SellFragment :
     }
 
     override fun setupViews() {
-        setupRV(listOf())
+        vm.productList.value?.let { setupRV(it) }
         setupTaxView()
         navigateToAddFragment()
         navigateToPaymentMethod()
