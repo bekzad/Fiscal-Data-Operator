@@ -8,6 +8,7 @@ import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import kg.nurtelecom.ui.databinding.EditTextViewBinding
+import java.math.BigDecimal
 
 class CustomCardEditText(context: Context, attributeSet: AttributeSet? = null) :
     ConstraintLayout(context, attributeSet) {
@@ -26,12 +27,10 @@ class CustomCardEditText(context: Context, attributeSet: AttributeSet? = null) :
         binding.valueEt.setTextColor(color)
     }
 
-    fun fetchTextState(): Boolean {
-        var state = false
+    fun fetchTextState(action: (text: CharSequence?) -> Unit) {
         binding.valueEt.doOnTextChanged { text, _, _, _ ->
-            state = !text?.isEmpty()!!
+            action(text)
         }
-        return state
     }
 
     fun fetchInputData(): Double? {
