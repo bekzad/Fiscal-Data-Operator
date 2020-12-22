@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="fiscal_regime">Фискальный режим</string>
+    <string name="fiscal_regime_title">Фискальный режим</string>
     <string name="fiscal_regime_content">Это основной режим осуществления торговой деятельности. Все данные отправляются в ОФД.</string>
     <string name="add_product">Добавить товар</string>
     <string name="sum_pay">Сумма к оплате, сом:</string>
@@ -14,4 +14,8 @@
     <string name="tw_to_be_paid">Итого к оплате</string>
     <string name="btn_continue">Далее</string>
     <string name="et_received">Принято у клиента, сом:</string>
+
+    <string name="non_fiscal_regime_title">Не фискальный режим</string>
+    <string name="non_fiscal_regime_content">Нужен для обучения сотрудников, данные не передаются в ОФД.</string>
+    <string name="product_not_from_list">Товар не из списка</string>
 </resources>
