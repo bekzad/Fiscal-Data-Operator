@@ -24,4 +24,5 @@ class AuthViewModelImpl (private val authRepository: AuthRepository) : AuthViewM
         }
     }
 }
+
 class AuthUser(val access_token: String) : CoreEvent()
