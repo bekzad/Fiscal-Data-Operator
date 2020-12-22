@@ -37,8 +37,13 @@ class SellFragment :
     }
 
     private fun setupTaxView() {
+        vb.sumPayCv.apply {
+            setCardTitle(R.string.sum_pay)
+            addNextIcon()
+            setBackground(R.drawable.mask)
+        }
         vm.calculateTaxSum().observe(viewLifecycleOwner) {
-            vb.icSumPay.setContent(it)
+            vb.sumPayCv.setCardContent(it)
         }
     }
 
