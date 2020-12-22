@@ -33,7 +33,7 @@ class CustomCardEditText(context: Context, attributeSet: AttributeSet? = null) :
         }
     }
 
-    fun fetchInputData(): Double? {
-        return binding.valueEt.text.toString().toDoubleOrNull()
+    fun fetchInputData(): BigDecimal? {
+        return binding.valueEt.text.toString().toBigDecimalOrNull()
     }
 }
