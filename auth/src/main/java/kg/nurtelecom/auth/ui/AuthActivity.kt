@@ -3,8 +3,8 @@ package kg.nurtelecom.auth.ui
 import androidx.lifecycle.Observer
 import kg.nurtelecom.auth.databinding.AuthActivityBinding
 import kg.nurtelecom.core.activity.CoreActivity
+import kg.nurtelecom.core.extension.getTrimmedText
 import kg.nurtelecom.core.extension.enable
-import kg.nurtelecom.core.extension.handleApiError
 import kg.nurtelecom.core.extension.visible
 
 class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewModel::class) {
@@ -15,10 +15,9 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
     }
 
     private fun editTextHandler(): Array<String> {
-
-        val login = vb.etLogin.getText()
-        val password = vb.etPassword.getText()
-        val gsrKey = vb.etGsrKey.getText()
+        val login = getTrimmedText(vb.etLogin)
+        val password = getTrimmedText(vb.etPassword)
+        val gsrKey = getTrimmedText(vb.etGsrKey)
         return arrayOf(login, password, gsrKey)
     }
 
@@ -52,15 +51,11 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
     private fun observeAuthorization() {
         // LOGIN ---> 10480_2 PASSWORD ---> Kr1_7W GSR-KEY ---> 910287
         vm.event.observe(this, Observer {
-//            vb.progressbar.visible(it is Resource.Loading)
+            vb.progressbar.visible(it !is AuthUser)
             when (it) {
                 is AuthUser -> {
-                    if (it.access_token.isNotEmpty()){
-                        setResult(AUTH_RESULT)
-                        finish()
-                    } else {
-                        handleApiError(vb.root) {login()}
-                    }
+                    setResult(AUTH_RESULT)
+                    finish()
                 }
             }
         })

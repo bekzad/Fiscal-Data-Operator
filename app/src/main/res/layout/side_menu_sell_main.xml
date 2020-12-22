@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:clickable="false"
+    android:focusable="false">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:textColor="#8E8E93"
+        android:textSize="@dimen/text_14sp"
+        android:text="Открытие смены:"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_2dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/text_20sp"
+        android:text="27.06.20 / 08:45 "
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        style="@style/green_btn"
+        android:text="Продажа" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        style="@style/orange_btn"
+        android:text="Возврат" />
+    <kg.nurtelecom.ofd.ui.buttons.ButtonSingleView
+        android:id="@+id/main_sell_menu_item_app_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_25dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:background="@null"
+        android:textColor="#FF3B30"
+        android:textSize="@dimen/text_14sp"
+        android:text="Закрытие смены и z-отчет" />
+    <kg.nurtelecom.ofd.ui.CellView
+        android:id="@+id/main_menu_item_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        />
+    <kg.nurtelecom.ofd.ui.CellView
+        android:id="@+id/main_menu_item_app_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
