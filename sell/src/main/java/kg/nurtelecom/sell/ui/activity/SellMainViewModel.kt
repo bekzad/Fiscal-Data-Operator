@@ -9,10 +9,6 @@ import java.math.RoundingMode
 
 class SellMainViewModel : CoreViewModel() {
 
-    init {
-        println("SellMainViewModel INIT! ")
-    }
-
     val productList: MutableLiveData<MutableList<Product>> = MutableLiveData(mutableListOf())
 
     fun addNewProduct(product: Product) {
@@ -33,6 +29,10 @@ class SellMainViewModel : CoreViewModel() {
             taxSum = taxSum.add(totalPrice).add(tax)
         }
 
-        return MutableLiveData(taxSum.setScale(2, RoundingMode.CEILING))
+        return MutableLiveData(taxSum)
+    }
+
+    fun removeProductFromList() {
+        productList.value?.removeLast()
     }
 }

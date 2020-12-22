@@ -19,8 +19,7 @@ class SellMainActivity :
 
     private fun navigateToSellFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, SellFragment.newInstance())
-            .addToBackStack("kg.nurtelecom.sell.ui.fragment.sell.SellFragment")
+            .replace(R.id.container, SellFragment.newInstance())
             .commit()
     }
 }
