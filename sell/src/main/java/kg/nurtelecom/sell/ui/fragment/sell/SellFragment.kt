@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
+import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
