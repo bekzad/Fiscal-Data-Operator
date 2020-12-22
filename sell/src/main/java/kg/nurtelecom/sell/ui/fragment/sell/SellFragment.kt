@@ -26,7 +26,9 @@ class SellFragment :
 
     private fun setupRV(product: List<Product>) {
         vb.productRv.apply {
-            productAdapter = ProductAdapter(product)
+            productAdapter = ProductAdapter(product) { position ->
+                removeProduct(position)
+            }
             adapter = productAdapter
         }
     }
@@ -37,6 +39,13 @@ class SellFragment :
         navigateToAddFragment()
         navigateToPaymentMethod()
         subscribeToLiveData()
+        setupDialog()
+    }
+
+    private fun setupDialog() {
+        vb.modeDialog.apply {
+            setInvisible()
+        }
     }
 
     private fun setupTaxView() {
