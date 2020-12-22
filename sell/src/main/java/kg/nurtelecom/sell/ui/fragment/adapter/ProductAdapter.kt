@@ -49,8 +49,11 @@ class ProductAdapter(private val productList: List<Product>) :
             }
             return productExpressionLine
         }
+
         private fun isNotZero(value: BigDecimal): Boolean {
             return value.compareTo(BigDecimal.ZERO) != 0
+        }
+        
         fun compareToZero(value: Double): Boolean {
             val bigValue = BigDecimal.valueOf(value)
             return bigValue.compareTo(BigDecimal.ZERO) != 0
