@@ -81,7 +81,7 @@ class SellMainActivity :
     
     private fun navigateToSellFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, SellFragment.newInstance())
+            .replace(R.id.sell_container, SellFragment.newInstance())
             .commit()
     }
 
