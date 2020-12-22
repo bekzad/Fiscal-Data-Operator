@@ -7,7 +7,7 @@ import kg.nurtelecom.sell.databinding.ProductListItemBinding
 import kg.nurtelecom.sell.utils.isNotZero
 import kg.nurtelecom.data.sell.Product
 
-class ProductAdapter(private val productList: List<Product>) :
+class ProductAdapter(private val productList: List<Product>, private val itemClick: (position: Int) -> Unit) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -19,12 +19,16 @@ class ProductAdapter(private val productList: List<Product>) :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
         holder.bind(product)
+        holder.apply {
+            binding.removeProductIv.setOnClickListener {
+                itemClick(position)
+            }
+        }
     }
 
     override fun getItemCount(): Int = productList.size
 
-
-    inner class ProductViewHolder(private val binding: ProductListItemBinding) :
+    inner class ProductViewHolder(val binding: ProductListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {

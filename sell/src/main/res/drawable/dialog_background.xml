@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><!-- drawable/dialog_bg.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="280dp"
+    android:height="248dp"
+    android:viewportWidth="280"
+    android:viewportHeight="248">
+
+    <group>
+
+        <clip-path android:pathData="M2 0H278C279.105 0 280 0.895431 280 2V246C280 247.105 279.105 248 278 248H2C0.895431 248 0 247.105 0 246V2C0 0.895431 0.895431 0 2 0Z" />
+
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M0 0V248H280V0" />
+
+    </group>
+
+</vector>
