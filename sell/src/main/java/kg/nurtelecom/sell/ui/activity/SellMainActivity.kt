@@ -78,6 +78,12 @@ class SellMainActivity :
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
     }
+    
+    private fun navigateToSellFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, SellFragment.newInstance())
+            .commit()
+    }
 
     private fun drawerListener(): DrawerLayout.DrawerListener {
         return object : DrawerListener() {

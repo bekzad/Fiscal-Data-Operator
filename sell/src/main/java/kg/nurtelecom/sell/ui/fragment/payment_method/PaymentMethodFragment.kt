@@ -18,8 +18,6 @@ class PaymentMethodFragment() : CoreFragment<FragmentPaymentMethodBinding>() {
 
     override val vm: SellMainViewModel by activityViewModels()
 
-
-
     override fun createViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
