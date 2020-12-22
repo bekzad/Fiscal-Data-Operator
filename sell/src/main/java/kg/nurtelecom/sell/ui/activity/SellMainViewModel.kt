@@ -8,7 +8,7 @@ import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class   SellMainViewModel : CoreViewModel() {
+class SellMainViewModel : CoreViewModel() {
 
     val productList: MutableLiveData<MutableList<Product>> = MutableLiveData(mutableListOf())
 
@@ -31,9 +31,5 @@ class   SellMainViewModel : CoreViewModel() {
         }
 
         return MutableLiveData(taxSum.roundUp())
-    }
-
-    fun removeProductFromList() {
-        productList.value?.removeLast()
     }
 }
