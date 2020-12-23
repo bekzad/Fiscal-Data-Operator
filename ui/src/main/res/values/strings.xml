@@ -24,5 +24,19 @@
     <string name="next_icon_description">Next Icon</string>
     <string name="delete_icon">Delete Icon</string>
     <string name="price">Цена, сом</string>
-    <string name="zero">"0"</string>
+    <string name="zero">0</string>
+
+    <!--Side menu sell-->
+    <string name="text_menu">Меню</string>
+    <string name="text_shift_opening">Открытие смены:</string>
+    <string name="text_sale">Продажа</string>
+    <string name="text_return">Возврат</string>
+    <string name="text_report">X - отчет</string>
+    <string name="text_interim_report">Промежуточный отчет смены</string>
+    <string name="text_story">История</string>
+    <string name="text_story_list">Список операций за период</string>
+    <string name="text_information">Информация</string>
+    <string name="text_operations">Прочие операции</string>
+    <string name="text_operations_list">Список операций за период</string>
+    <string name="text_shift_closing">Закрытие смены и z-отчет</string>
 </resources>
