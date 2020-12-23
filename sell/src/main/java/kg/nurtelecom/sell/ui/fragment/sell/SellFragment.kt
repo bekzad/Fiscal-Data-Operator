@@ -26,7 +26,7 @@ class SellFragment :
 
     override val vm: SellMainViewModel by activityViewModels()
 
-    private fun setupRV(product: MutableList<Product>) {
+    private fun setupRV(product: MutableList<kg.nurtelecom.data.sell.Product>) {
         vb.productRv.apply {
             productAdapter = ProductAdapter(product) { position ->
                 removeProduct(position)

@@ -3,11 +3,15 @@ package kg.nurtelecom.sell.ui.fragment.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.databinding.ProductListItemBinding
 import kg.nurtelecom.sell.utils.isNotZero
 import kg.nurtelecom.data.sell.Product
 
-class ProductAdapter(private val productList: List<Product>, private val itemClick: (position: Int) -> Unit) :
+class ProductAdapter(
+    private val productList: List<Product>,
+    private val itemClick: (position: Int) -> Unit
+) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -46,6 +50,7 @@ class ProductAdapter(private val productList: List<Product>, private val itemCli
             val allowance =
                 if (product.allowance.isNotZero()) ("+ " + product.allowance) + "%" else
                     ""
+
             productExpressionLine.apply {
                 append("${product.price} * ")
                 append("${product.count.toInt()}")
