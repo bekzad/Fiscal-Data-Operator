@@ -28,7 +28,7 @@ class SellMainActivity :
     }
 
     private fun setupNavDrawer() {
-        val actionBarToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this,vb.drawerLayout, vb.tbSellMain,R.string.content_text, R.string.content_text )
+        val actionBarToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this,vb.drawerLayout, vb.tbSellMain,R.string.nav_open_drawer, R.string.nav_close_drawer )
         actionBarToggle.drawerArrowDrawable.color = resources.getColor(R.color.colorWhite)
         vb.drawerLayout.addDrawerListener(actionBarToggle)
         setupDrawerListener()
@@ -39,6 +39,36 @@ class SellMainActivity :
         vb.drawerLayout.addDrawerListener(drawerListener())
         val view = vb.navView.getHeaderView(0)
         val v = SideMenuSellMainBinding.bind(view)
+        v.btnSale.setOnClickListener {
+            replaceFragment(R.id.sellMainContainer, SellFragment.newInstance(), true)
+            vb.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        v.btnClose.setOnClickListener {
+            vb.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        v.btnReturn.setOnClickListener {
+            vb.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        v.sellMainMenuItemGreeting.setOnClickListener {
+//            replaceFragment(R.id.sellMainContainer, GreetingFragment.newInstance(), true)
+            vb.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        v.sellMainMenuItemReport.setOnClickListener {
+            // here place for replacing fragment
+            vb.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        v.sellMainMenuItemStory.setOnClickListener {
+            // here place for replacing fragment
+            vb.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        v.sellMainMenuItemInformation.setOnClickListener {
+            // here place for replacing fragment
+            vb.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        v.sellMainMenuItemOperations.setOnClickListener {
+            // here place for replacing fragment
+            vb.drawerLayout.closeDrawer(GravityCompat.START)
+        }
     }
 
     private fun drawerListener(): DrawerLayout.DrawerListener {
