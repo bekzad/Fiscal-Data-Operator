@@ -24,7 +24,7 @@ class SellMainActivity :
         super.setupViews()
         setSupportActionBar(vb.tbSellMain)
         setupNavDrawer()
-//        replaceFragment(R.id.container, SellFragment.newInstance())
+        replaceFragment(R.id.container, SellFragment.newInstance())
     }
 
     private fun setupNavDrawer() {
