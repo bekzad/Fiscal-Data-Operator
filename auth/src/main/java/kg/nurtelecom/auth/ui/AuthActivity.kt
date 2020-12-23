@@ -15,9 +15,9 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
     }
 
     private fun editTextHandler(): Array<String> {
-        val login = getTrimmedText(vb.etLogin)
-        val password = getTrimmedText(vb.etPassword)
-        val gsrKey = getTrimmedText(vb.etGsrKey)
+        val login = vb.etLogin.getTrimmedText()
+        val password = vb.etPassword.getTrimmedText()
+        val gsrKey = vb.etGsrKey.getTrimmedText()
         return arrayOf(login, password, gsrKey)
     }
 
