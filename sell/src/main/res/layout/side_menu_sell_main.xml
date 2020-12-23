@@ -66,6 +66,7 @@
         android:layout_marginRight="@dimen/margin_16dp"
         app:title="@string/text_report"
         app:subTitle="@string/text_interim_report"
+        app:showArrowIcon="true"
         app:position="top"/>
     <kg.nurtelecom.ofd.ui.CellView
         android:id="@+id/sell_main_menu_item_story"
@@ -75,6 +76,7 @@
         android:layout_marginRight="@dimen/margin_16dp"
         app:title="@string/text_story"
         app:subTitle="@string/text_story_list"
+        app:showArrowIcon="true"
         app:position="bottom"/>
     <kg.nurtelecom.ofd.ui.CellView
         android:id="@+id/sell_main_menu_item_information"
@@ -96,6 +98,7 @@
         android:layout_marginTop="@dimen/margin_8dp"
         app:title="@string/text_operations"
         app:subTitle="@string/text_operations_list"
+        app:showArrowIcon="true"
         app:position="bottom"/>
 
 
