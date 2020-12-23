@@ -16,10 +16,6 @@ import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 class SellFragment :
     CoreFragment<SellFragmentBinding>() {
 
-    companion object {
-        fun newInstance() = SellFragment()
-    }
-
     private lateinit var productAdapter: ProductAdapter
 
     override val vm: SellMainViewModel by activityViewModels()
@@ -32,6 +28,7 @@ class SellFragment :
     }
 
     override fun setupViews() {
+        super.setupViews()
         setupRV(listOf())
         setupTaxView()
         navigate()
@@ -67,5 +64,14 @@ class SellFragment :
         container: ViewGroup?
     ): SellFragmentBinding {
         return SellFragmentBinding.inflate(inflater, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).setToolbarTitle(R.string.text_sale)
+    }
+
+    companion object {
+        fun newInstance() = SellFragment()
     }
 }
