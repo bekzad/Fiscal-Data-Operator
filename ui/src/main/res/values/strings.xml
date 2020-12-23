@@ -27,6 +27,8 @@
     <string name="zero">0</string>
 
     <!--Side menu sell-->
+    <string name="nav_open_drawer">open</string>
+    <string name="nav_close_drawer">close</string>
     <string name="text_menu">Меню</string>
     <string name="text_shift_opening">Открытие смены:</string>
     <string name="text_sale">Продажа</string>
