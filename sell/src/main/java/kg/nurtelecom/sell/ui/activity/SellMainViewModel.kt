@@ -10,10 +10,10 @@ import java.math.RoundingMode
 
 class SellMainViewModel : CoreViewModel() {
 
-    val productList: MutableLiveData<MutableList<Product>> = MutableLiveData(mutableListOf())
+    val productList: MutableLiveData<MutableList<kg.nurtelecom.data.sell.Product>> = MutableLiveData(mutableListOf())
     val taxSum: MutableLiveData<Double> = MutableLiveData(0.0)
 
-    fun addNewProduct(product: Product) {
+    fun addNewProduct(product: kg.nurtelecom.data.sell.Product) {
         productList.value?.add(product)
         viewModelScope.launch {
             taxSum.value = calculateTaxSum()
