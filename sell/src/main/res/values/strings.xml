@@ -10,6 +10,7 @@
     <string name="discount">Скидка %</string>
     <string name="allowance">Надбавка %</string>
     <string name="count">Количество:</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="cash">Наличные</string>
+    <string name="payment_by_cash">Наличные</string>
+    <string name="payment_by_card">Оплата Картой</string>
+    <string name="tw_to_be_paid">Итого к оплате</string>
 </resources>
