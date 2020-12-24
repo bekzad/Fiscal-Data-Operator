@@ -40,5 +40,11 @@
     <string name="text_information">Информация</string>
     <string name="text_operations">Прочие операции</string>
     <string name="text_operations_list">Список операций за период</string>
-    <string name="text_shift_closing">Закрытие смены и z-отчет</string>
+    <string name="text_shift_closing_and_report">Закрытие смены и z-отчет</string>
+
+    <!--Bottom Sheet Dialog-->
+    <string name="text_shift_closing">Закрытие смены</string>
+    <string name="text_shift_close">Закрыть смену</string>
+    <string name="text_shift_cancel">Отмена</string>
+    <string name="text_shift_closing_description">Просле закрытия смены будет сформирован и отправлен Z отчет (отчет конца смены). Начать смену можно будет на следующий день.</string>
 </resources>

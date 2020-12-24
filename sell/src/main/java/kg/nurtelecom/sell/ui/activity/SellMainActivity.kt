@@ -11,6 +11,7 @@ import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
+import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 
 class SellMainActivity :
@@ -39,19 +40,22 @@ class SellMainActivity :
         vb.drawerLayout.addDrawerListener(drawerListener())
         val view = vb.navView.getHeaderView(0)
         val v = SideMenuSellMainBinding.bind(view)
-        v.btnSale.setOnClickListener {
+        val bottomSheetFragment = BottomSheetFragment()
+        v.sellMainMenuItemSale.setOnClickListener {
             replaceFragment(R.id.sellMainContainer, SellFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.btnClose.setOnClickListener {
+        v.sellMainMenuItemClose.setOnClickListener {
+            bottomSheetFragment.show(supportFragmentManager, "BottomSheetFragment")
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.btnReturn.setOnClickListener {
+        v.sellMainMenuItemReturn.setOnClickListener {
+            // here place for replacing fragment
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         v.sellMainMenuItemGreeting.setOnClickListener {
-//            replaceFragment(R.id.sellMainContainer, GreetingFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
+            finish()
         }
         v.sellMainMenuItemReport.setOnClickListener {
             // here place for replacing fragment
@@ -73,14 +77,10 @@ class SellMainActivity :
 
     private fun drawerListener(): DrawerLayout.DrawerListener {
         return object : DrawerLayout.DrawerListener {
-
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
             override fun onDrawerStateChanged(newState: Int) {}
-            override fun onDrawerClosed(drawerView: View) {}
-
-            override fun onDrawerOpened(drawerView: View) {
-                setToolbarTitle(resources.getString(R.string.text_menu))
-            }
+            override fun onDrawerOpened(drawerView: View) = setToolbarTitle(R.string.text_menu)
+            override fun onDrawerClosed(drawerView: View) = setToolbarTitle(R.string.text_sale)
         }
     }
 
