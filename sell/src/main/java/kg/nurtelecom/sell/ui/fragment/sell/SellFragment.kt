@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.sell
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -8,11 +9,13 @@ import androidx.lifecycle.observe
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
+import kg.nurtelecom.sell.ui.activity.SellMainActivity
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
 import kg.nurtelecom.sell.ui.fragment.adapter.Product
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
+import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 
 class SellFragment :
     CoreFragment<SellFragmentBinding>() {
@@ -33,6 +36,7 @@ class SellFragment :
         setupRV(listOf())
         setupTaxView()
         navigate()
+        navigateToPaymentMethod()
         observeProduct()
     }
 
@@ -61,6 +65,18 @@ class SellFragment :
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.container, AddProductFragment.newInstance())
+                .commit()
+        }
+    }
+
+    private fun navigateToPaymentMethod() {
+        vb.sumPayCv.setOnClickListener {
+            val activity = activity as AppCompatActivity
+            activity
+                .supportFragmentManager
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.container, PaymentMethodFragment.newInstance())
                 .commit()
         }
     }

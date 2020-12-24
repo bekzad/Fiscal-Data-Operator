@@ -44,7 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:gravity="center_vertical"
             android:text="@string/content_text"
             android:textAppearance="@style/GreenInfoCardCellValueTextStyle"
             android:textSize="@dimen/text_40sp"
