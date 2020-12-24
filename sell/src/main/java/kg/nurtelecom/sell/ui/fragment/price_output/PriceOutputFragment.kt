@@ -19,6 +19,9 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     override val vm: SellMainViewModel by activityViewModels()
 
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        PriceOutputFragmentBinding.inflate(inflater, container, false)
+
     override fun setupViews() {
         setupCustomEditText()
         vb.checkBtn.setOnClickListener {

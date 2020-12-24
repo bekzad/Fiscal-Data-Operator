@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ProductListItemBinding
 import kg.nurtelecom.sell.utils.isNotZero
 import kg.nurtelecom.data.sell.Product
 
 class ProductAdapter(
     private val productList: List<Product>,
-    private val itemClick: (position: Int) -> Unit
-) :
-    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+    private val itemClick: ItemClickListener
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding =
@@ -25,7 +25,7 @@ class ProductAdapter(
         holder.bind(product)
         holder.apply {
             binding.removeProductIv.setOnClickListener {
-                itemClick(position)
+                itemClick.removeItem(position)
             }
         }
     }
@@ -43,7 +43,6 @@ class ProductAdapter(
         }
 
         private fun fetchProductExpression(product: Product): StringBuilder {
-            val productExpressionLine = StringBuilder()
             val discount =
                 if (product.discount.isNotZero()) (" - " + product.discount + "% ") else
                     ""
@@ -51,13 +50,12 @@ class ProductAdapter(
                 if (product.allowance.isNotZero()) ("+ " + product.allowance) + "%" else
                     ""
 
-            productExpressionLine.apply {
-                append("${product.price} * ")
-                append("${product.count.toInt()}")
-                append(discount)
-                append(allowance)
+            return StringBuilder().also {
+                it.append("${product.price} * ")
+                it.append("${product.count.toInt()}")
+                it.append(discount)
+                it.append(allowance)
             }
-            return productExpressionLine
         }
     }
 }

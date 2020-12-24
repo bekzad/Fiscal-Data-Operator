@@ -26,8 +26,7 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
         super.setupViews()
         vb.tvInvalidate.setOnClickListener { vm.logout() }
         vb.cellFiscalMode.setOnClickListener {
-            val intent = Intent(activity, SellMainActivity::class.java)
-            startActivity(intent)
+            SellMainActivity.start(requireContext())
         }
         vb.cellProfile.setOnClickListener { Log.i("ERLAN", "cellProfile") }
         vb.cellChangePassword.setOnClickListener { Log.i("ERLAN", "cellChangePassword") }

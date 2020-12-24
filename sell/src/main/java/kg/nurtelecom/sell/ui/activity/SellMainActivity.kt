@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -11,6 +12,7 @@ import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.menu.DrawerListener
 import kg.nurtelecom.ofd.aboutapp.AboutAppFragment
+import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
@@ -108,4 +110,10 @@ class SellMainActivity :
 
     override fun getBinding(): ActivitySellMainBinding =
         ActivitySellMainBinding.inflate(layoutInflater)
+        
+    companion object {
+        fun start(context: Context?) {
+            context?.startActivity<SellMainActivity>()
+        }
+    }
 }
