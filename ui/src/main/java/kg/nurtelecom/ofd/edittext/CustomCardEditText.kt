@@ -19,11 +19,8 @@ class CustomCardEditText(context: Context, attributeSet: AttributeSet? = null) :
         binding.priceTv.setText(text)
     }
 
-    fun setTitleColor(@ColorInt color: Int) {
+    fun setTextColor(@ColorInt color: Int) {
         binding.priceTv.setTextColor(color)
-    }
-
-    fun setContentColor(@ColorInt color: Int) {
         binding.valueEt.setTextColor(color)
     }
 
