@@ -1,8 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.payment_method
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -55,9 +53,8 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
 
     override fun createViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?): FragmentPaymentMethodBinding {
-        return FragmentPaymentMethodBinding.inflate(inflater, container, false)
-    }
+        container: ViewGroup?
+    ): FragmentPaymentMethodBinding = FragmentPaymentMethodBinding.inflate(inflater, container, false)
 
     companion object {
         fun newInstance() = PaymentMethodFragment()
