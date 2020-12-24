@@ -12,4 +12,6 @@
     <string name="payment_by_cash">Наличные</string>
     <string name="payment_by_card">Оплата Картой</string>
     <string name="tw_to_be_paid">Итого к оплате</string>
+    <string name="btn_continue">Далее</string>
+    <string name="et_received">Принято у клиента, сом:</string>
 </resources>
