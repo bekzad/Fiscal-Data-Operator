@@ -36,7 +36,7 @@
                 android:background="@null"
                 android:hint="@string/zero"
                 android:inputType="number"
-                android:textSize="@dimen/text_32sp" />
+                android:textSize="@dimen/text_40sp" />
 
         </LinearLayout>
 
