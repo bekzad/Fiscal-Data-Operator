@@ -2,14 +2,14 @@ package kg.nurtelecom.sell.ui.fragment.sell
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import androidx.lifecycle.observe
+import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
@@ -19,18 +19,18 @@ import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 import kg.nurtelecom.sell.utils.replaceFragment
 
-class SellFragment :
-    CoreFragment<SellFragmentBinding>() {
+class SellFragment : CoreFragment<SellFragmentBinding>(), ItemClickListener {
 
     private lateinit var productAdapter: ProductAdapter
 
     override val vm: SellMainViewModel by activityViewModels()
 
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        SellFragmentBinding.inflate(inflater, container, false)
+
     private fun setupRV(product: MutableList<kg.nurtelecom.data.sell.Product>) {
         vb.productRv.apply {
-            productAdapter = ProductAdapter(product) { position ->
-                removeProduct(position)
-            }
+            productAdapter = ProductAdapter(product, this@SellFragment)
             adapter = productAdapter
         }
     }
@@ -79,21 +79,8 @@ class SellFragment :
         }
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        val activity = activity as AppCompatActivity
-        activity
-            .supportFragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.sell_container, fragment)
-            .commit()
-    }
-
-    override fun createViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): SellFragmentBinding {
-        return SellFragmentBinding.inflate(inflater, container, false)
+    companion object {
+        fun newInstance() = SellFragment()
     }
 
     override fun onResume() {

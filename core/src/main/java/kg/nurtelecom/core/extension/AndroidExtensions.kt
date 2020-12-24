@@ -1,6 +1,9 @@
 package kg.nurtelecom.core.extension
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
@@ -10,6 +13,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kg.nurtelecom.core.R
 
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
@@ -63,4 +67,10 @@ fun ListView.requestLayoutForChangedDataset() {
             this.requestLayout()
         }
     }
+}
+
+inline fun <reified T : Activity> Context.startActivity(noinline extra: Intent.() -> Unit = {}) {
+    val intent = Intent(this, T::class.java)
+    intent.extra()
+    startActivity(intent)
 }
