@@ -31,6 +31,8 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
         fun newInstance(): UserActivity{
             return UserActivity()
         }
+
     }
+
 }
 
