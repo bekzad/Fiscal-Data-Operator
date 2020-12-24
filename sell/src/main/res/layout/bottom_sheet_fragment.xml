@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#1D1D1E"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="com.google.android.material.BottomSheet">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp"
+        android:layout_gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        >
+
+        <TextView
+            android:id="@+id/sell_main_menu_tv_closing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/text_20sp"
+            android:layout_marginTop="@dimen/margin_45dp"
+            android:layout_marginLeft="@dimen/margin_44dp"
+            android:layout_marginRight="@dimen/margin_44dp"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:text="@string/text_shift_closing" />
+        <TextView
+            android:id="@+id/sell_main_menu_tv_closing_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/text_20sp"
+            android:paddingTop="@dimen/margin_5dp"
+            android:paddingBottom="@dimen/margin_5dp"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:layout_marginRight="@dimen/margin_16dp"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:text="@string/text_shift_closing_description" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sell_main_menu_item_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_25dp"
+            android:layout_marginRight="@dimen/margin_16dp"
+            android:background="@null"
+            android:textColor="@color/colorClickBlue"
+            android:textSize="@dimen/text_14sp"
+            android:text="@string/text_shift_cancel" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sell_main_menu_item_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_25dp"
+            android:layout_marginRight="@dimen/margin_16dp"
+            android:background="@null"
+            android:textColor="@color/colorRed"
+            android:textSize="@dimen/text_14sp"
+            android:text="@string/text_shift_close" />
+    </LinearLayout>
+
+</LinearLayout>
