@@ -32,7 +32,7 @@ class ProductAdapter(
 
     override fun getItemCount(): Int = productList.size
 
-    inner class ProductViewHolder(val binding: ProductListItemBinding) :
+     class ProductViewHolder(val binding: ProductListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
@@ -57,5 +57,12 @@ class ProductAdapter(
                 it.append(allowance)
             }
         }
+
+        companion object {
+            fun getInstance(parent: ViewGroup) {
+
+            }
+        }
+
     }
 }
