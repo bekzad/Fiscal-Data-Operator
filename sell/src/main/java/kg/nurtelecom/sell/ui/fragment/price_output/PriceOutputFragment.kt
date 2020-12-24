@@ -56,7 +56,6 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
             discount = vb.icProductDiscount.fetchInputData(),
             allowance = vb.icProductAllowance.fetchInputData()
         )
-        return product
     }
 
     override fun createViewBinding(

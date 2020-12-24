@@ -9,7 +9,7 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 import kg.nurtelecom.sell.utils.addFragment
-import kg.nurtelecom.sell.utils.getFragmentActivity
+import kg.nurtelecom.sell.utils.parentActivity
 
 class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
 
@@ -17,7 +17,7 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
 
     override fun setupViews() {
         vb.productNotFromListButton.setOnClickListener {
-            getFragmentActivity().addFragment(PriceOutputFragment.newInstance())
+            parentActivity.addFragment(PriceOutputFragment.newInstance())
         }
     }
 

@@ -15,9 +15,7 @@ class SellMainViewModel : CoreViewModel() {
 
     fun addNewProduct(product: Product) {
         productList.value?.add(product)
-        viewModelScope.launch {
-            taxSum.value = calculateTaxSum()
-        }
+        taxSum.value = calculateTaxSum()
     }
 
     fun calculateTaxSum(): LiveData<BigDecimal> {
