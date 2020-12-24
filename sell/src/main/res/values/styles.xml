@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SellButton">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_14sp</item>
+    </style>
+
+    <style name="SellGreenButton" parent="SellButton">
+        <item name="background">@drawable/greenbackground</item>
+    </style>
+
+    <style name="SellBlackButton" parent="SellButton">
+        <item name="background">@drawable/secondary</item>
+    </style>
+
+    <style name="SellEditText">
+        <item name="background">@null</item>
+        <item name="android:textSize">@dimen/text_40sp</item>
+    </style>
+
+    <style name="SellDiscountEditText" parent="SellEditText">
+        <item name="android:textColor">@color/sell_discount</item>
+        <item name="android:hint">@string/zero</item>
+        <item name="hintTextColor">@color/sell_discount</item>
+    </style>
+
+    <style name="SellAllowanceEditText" parent="SellEditText">
+        <item name="android:textColor">@color/sell_allowance</item>
+        <item name="android:hint">@string/zero</item>
+        <item name="hintTextColor">@color/sell_allowance</item>
+    </style>
+
+<!--    Payment method-->
+    <style name="style_normal_white_text" >
+        <item name="android:textSize">@dimen/app_text_normal</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="style_normal_black_text" >
+        <item name="android:textSize">@dimen/app_text_normal</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="style_tw_payment_amount" >
+        <item name="android:textSize">@dimen/text_40sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+<!--    Payment method-->
+
+    <dimen name="text_14sp">14sp</dimen>
+</resources>

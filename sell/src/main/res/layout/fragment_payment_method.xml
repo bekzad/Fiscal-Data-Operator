@@ -1,40 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/black"
     tools:context=".ui.fragment.payment_method.PaymentMethodFragment">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
         android:orientation="horizontal"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp">
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/btn_cash_payment"
-            android:layout_width="wrap_content"
+            style="@style/style_normal_white_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/cash"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/rectangle_green"/>
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:text="@string/payment_by_cash" />
+<!--            android:background="@drawable/rectangle_green"-->
+
 
         <Button
             android:id="@+id/btn_card_payment"
-            android:layout_width="wrap_content"
+            style="@style/style_normal_black_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Оплата Картой"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/rectangle_white"/>
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:text="@string/payment_by_card" />
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tw_to_be_paid"
+        style="@style/style_normal_white_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="@string/tw_to_be_paid"
+        app:layout_constraintBottom_toTopOf="@+id/tw_payment_amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tw_payment_amount"
+        style="@style/style_tw_payment_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="351.68 с" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
