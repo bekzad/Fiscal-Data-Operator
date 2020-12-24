@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@color/colorGrey"
     tools:context=".ui.fragment.payment_method.PaymentMethodFragment">
 
     <LinearLayout
@@ -25,8 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
+            android:background="@drawable/rectangle_green"
             android:text="@string/payment_by_cash" />
-<!--            android:background="@drawable/rectangle_green"-->
 
 
         <Button
@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
+            android:background="@drawable/rectangle_white"
             android:text="@string/payment_by_card" />
 
     </LinearLayout>

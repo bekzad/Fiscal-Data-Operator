@@ -15,11 +15,6 @@ import java.math.BigDecimal
 
 class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
-    companion object {
-        fun newInstance() = PriceOutputFragment()
-    }
-
-
     override val vm: SellMainViewModel by activityViewModels()
 
     override fun setupViews() {
@@ -71,4 +66,9 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup?
     ): PriceOutputFragmentBinding = PriceOutputFragmentBinding.inflate(inflater, container, false)
+
+
+    companion object {
+        fun newInstance() = PriceOutputFragment()
+    }
 }
