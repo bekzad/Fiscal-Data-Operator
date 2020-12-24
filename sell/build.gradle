@@ -48,10 +48,6 @@ dependencies {
     implementation libs.network.values()
     implementation libs.koin.values()
 
-    implementation project(path: ':core')
-    implementation project(path: ':ui')
-    implementation project(path: ':data')
-
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0"
+    testImplementation libs.testImpl.values()
+    androidTestImplementation libs.androidTestImpl.values()
 }
