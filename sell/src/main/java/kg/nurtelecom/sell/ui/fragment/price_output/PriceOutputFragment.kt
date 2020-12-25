@@ -56,21 +56,24 @@ class PriceOutputFragment : Fragment()
     private fun setupCustomEditText() {
         vb.priceEditText.apply {
             setTitle(R.string.price)
-            setContentColor(Color.BLACK)
+            setTextColor(Color.BLACK)
+            setBackground(R.drawable.white_background)
+            isEditable(true)
         }
         vb.countEditText.apply {
             setTitle(R.string.count)
-            setContentColor(Color.BLACK)
+            setTextColor(Color.BLACK)
+            setBackground(R.drawable.white_background)
         }
         vb.skidkaEditText.apply {
             setTitle(R.string.discount)
-            setTitleColor(Color.GREEN)
-            setContentColor(Color.GREEN)
+            setTextColor(Color.GREEN)
+            setBackground(R.drawable.white_background)
         }
         vb.allowanceEditText.apply {
             setTitle(R.string.allowance)
-            setTitleColor(Color.RED)
-            setContentColor(Color.RED)
+            setTextColor(Color.RED)
+            setBackground(R.drawable.white_background)
         }
     }
 
