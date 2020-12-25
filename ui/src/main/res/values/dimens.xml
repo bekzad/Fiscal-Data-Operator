@@ -48,5 +48,7 @@
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_5dp">5dp</dimen>
     <dimen name="padding_0dp">0dp</dimen>
+    
+    <dimen name="height_75dp">75dp</dimen>
 
 </resources>
