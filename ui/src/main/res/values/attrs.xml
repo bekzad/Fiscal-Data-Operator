@@ -17,6 +17,11 @@
         <attr name="hasCheckBoxButton" format="boolean"/>
         <attr name="hasDoneIcon" format="boolean"/>
         <attr name="hasProductSum" format="boolean"/>
+
+        <attr name="saleType" format="string"/>
+        <attr name="counter" format="string"/>
+        <attr name="timestamp" format="string"/>
+        <attr name="amount" format="string"/>
     </declare-styleable>
 
 </resources>
