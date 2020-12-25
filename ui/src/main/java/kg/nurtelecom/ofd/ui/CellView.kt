@@ -29,7 +29,7 @@ class CellView(context: Context, attr: AttributeSet) : ConstraintLayout(context,
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
-        //super.setOnClickListener(l)
+        super.setOnClickListener(l)
         vb.rootLayout.setOnClickListener(l)
     }
 
@@ -58,11 +58,4 @@ class CellView(context: Context, attr: AttributeSet) : ConstraintLayout(context,
     fun setCellIcon(resId: Int) {
         vb.cellViewIcon.setImageResource(resId)
     }
-
-//    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-//        Log.i("ERLAN", "onInterceptorTouchEvent")
-//        return true
-//    }
-
-
 }
