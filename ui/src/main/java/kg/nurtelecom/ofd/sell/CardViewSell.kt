@@ -1,14 +1,12 @@
 package kg.nurtelecom.ofd.sell
 
 import android.content.Context
-import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import kg.nurtelecom.ui.databinding.CardViewSellBinding
-import java.math.BigDecimal
 
 class CardViewSell(context: Context, attrs: AttributeSet? = null) :
     ConstraintLayout(context, attrs) {

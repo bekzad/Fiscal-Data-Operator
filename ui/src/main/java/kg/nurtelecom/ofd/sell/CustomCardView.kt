@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.DimenRes
-import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.google.android.material.card.MaterialCardView
