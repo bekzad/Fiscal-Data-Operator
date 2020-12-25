@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.payment_method
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +24,8 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
         }
         vb.etReceived.apply {
             setTitle(R.string.et_received)
-            setContentColor(R.color.colorBlack)
+            setTitleColor(Color.BLACK)
+            setContentColor(Color.BLACK)
         }
     }
 
