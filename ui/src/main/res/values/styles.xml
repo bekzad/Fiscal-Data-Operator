@@ -94,4 +94,138 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginEnd">@dimen/app_margin</item>
     </style>
+
+
+
+
+
+
+
+
+<!--    new styles -->
+    <style name="BaseTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/textWhite</item>
+    </style>
+
+    <style name="BaseTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/BaseTextAppearance</item>
+    </style>
+
+    <style name="SmallLabelTextStyle" parent="BaseTextStyle">
+        <item name="android:textSize">@dimen/text_14sp</item>
+    </style>
+
+    <style name="ErrorLabelTextStyle" parent="SmallLabelTextStyle">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+
+    <style name="ItemCellTitleTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/lightGrey</item>
+    </style>
+
+    <style name="CellSubTitleTextStyle" parent="ItemCellTitleTextStyle">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">@dimen/text_14sp</item>
+    </style>
+
+    <style name="DialogTitleTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_20sp</item>
+    </style>
+
+    <style name="DialogBodyTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="ProductCellTitleTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/asphalt</item>
+    </style>
+
+    <style name="ProductCellValueTextStyle" parent="ProductCellTitleTextStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_20sp</item>
+    </style>
+
+    <style name="InfoCardCellTitleTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CardCellValueTextStyle" parent="InfoCardCellTitleTextStyle">
+        <item name="android:textSize">@dimen/text_40sp</item>
+    </style>
+
+    <style name="GreenInfoCardCellTitleTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="GreenInfoCardCellValueTextStyle" parent="GreenInfoCardCellTitleTextStyle">
+        <item name="android:textSize">@dimen/text_40sp</item>
+    </style>
+
+    <style name="InfoCardCellGreenTitleTextStyle" parent="InfoCardCellTitleTextStyle">
+        <item name="android:textColor">@color/saleGreen</item>
+    </style>
+
+    <style name="InfoCardCellGreenValueTextStyle" parent="InfoCardCellGreenTitleTextStyle">
+        <item name="android:textSize">@dimen/text_40sp</item>
+    </style>
+
+    <style name="InfoCardCellRedTitleTextStyle" parent="InfoCardCellTitleTextStyle">
+        <item name="android:textColor">@color/saleRed</item>
+    </style>
+
+    <style name="InfoCardCellRedValueTextStyle" parent="InfoCardCellRedTitleTextStyle">
+        <item name="android:textSize">@dimen/text_40sp</item>
+    </style>
+
+    <style name="HistoryItemTitleTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/lightGrey</item>
+    </style>
+
+    <style name="HistoryItemSecondaryTextStyle" parent="HistoryItemTitleTextStyle">
+        <item name="android:textSize">@dimen/text_14sp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="ToolbarTextStyle" parent="BaseTextStyle">
+        <item name="android:textSize">@dimen/text_20sp</item>
+    </style>
+
+    <style name="CellViewStyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+
+
+    <style name="BaseButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_14sp</item>
+    </style>
+
+    <style name="GreenButtonStyle" parent="BaseButtonStyle">
+        <item name="backgroundTint">@color/green</item>
+    </style>
+
+    <style name="OrangeButtonStyle" parent="BaseButtonStyle">
+        <item name="backgroundTint">@color/orange</item>
+    </style>
+
+    <style name="BlueButtonStyle" parent="BaseButtonStyle">
+        <item name="backgroundTint">@color/blue</item>
+    </style>
+
+    <style name="DashedBorderButtonStyle" parent="BaseButtonStyle">
+        <item name="backgroundTint">@color/grey</item>
+        <item name="android:background">@drawable/bg_dashed_border</item>
+    </style>
+
 </resources>

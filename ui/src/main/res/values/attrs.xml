@@ -8,8 +8,15 @@
             <enum name="single" value="3"/>
         </attr>
         <attr name="title" format="string"/>
+        <attr name="value" format="string"/>
+        <attr name="text" format="string"/>
         <attr name="subTitle" format="string"/>
         <attr name="showArrowIcon" format="boolean"/>
         <attr name="showSubTitle" format="boolean"/>
+        <attr name="hasRemoveButton" format="boolean"/>
+        <attr name="hasCheckBoxButton" format="boolean"/>
+        <attr name="hasDoneIcon" format="boolean"/>
+        <attr name="hasProductSum" format="boolean"/>
     </declare-styleable>
+
 </resources>
