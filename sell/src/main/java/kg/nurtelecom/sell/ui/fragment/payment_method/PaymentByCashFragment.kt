@@ -23,7 +23,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
         }
         vb.etReceived.apply {
             setTitle(R.string.et_received)
-            setBackgroundColor(R.drawable.white_background)
+            setContentColor(R.color.colorBlack)
         }
     }
 

@@ -21,6 +21,10 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
             setCardTitle(R.string.sum_pay)
             setBackground(R.drawable.green_background)
         }
+        vb.etReceivedCard.apply {
+            setCardTitle(R.string.et_received)
+            setBackground(R.drawable.white_background)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

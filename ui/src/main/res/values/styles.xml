@@ -8,6 +8,15 @@
     </style>
 
     <style name="BaseTextStyle">
+    <!--MainToolbar-->
+    <style name="toolbar_main">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/colorBlack</item>
+    </style>
+
+    <!--Top Cell-->
+    <style name="tv_tltle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">@style/BaseTextAppearance</item>

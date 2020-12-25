@@ -7,6 +7,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.google.android.material.card.MaterialCardView
+import kg.nurtelecom.ui.R
 import kg.nurtelecom.ui.databinding.ViewCardBinding
 import java.math.BigDecimal
 
@@ -24,8 +25,12 @@ class CustomCardView(context: Context, attrs: AttributeSet? = null) :
         binding.cardContent.text = value.toString()
     }
 
+    fun setContentColor(@ColorRes color: Int) {
+        binding.cardContent.setTextColor(resources.getColor(color))
+    }
+
     fun setContentTextSize(@DimenRes size: Int) {
-        binding.cardContent.textSize = size.toFloat()
+        binding.cardContent.textSize = resources.getDimension(size)
     }
 
     fun addNextIcon() {
