@@ -29,7 +29,7 @@ class SellMainViewModel : CoreViewModel() {
             taxSum = taxSum.add(totalPrice).add(tax)
         }
 
-        return MutableLiveData(taxSum)
+        return MutableLiveData(taxSum.setScale(2, RoundingMode.CEILING))
     }
 
     fun removeProductFromList() {
