@@ -7,6 +7,7 @@ import androidx.annotation.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import kg.nurtelecom.ui.databinding.CardViewSellBinding
+import java.math.BigDecimal
 
 class CardViewSell(context: Context, attrs: AttributeSet? = null) :
     ConstraintLayout(context, attrs) {
@@ -18,7 +19,7 @@ class CardViewSell(context: Context, attrs: AttributeSet? = null) :
         binding.cardTitle.setText(title)
     }
 
-    fun setContent(value: Double) {
+    fun setContent(value: BigDecimal) {
         binding.cardContent.setText(value.toString())
     }
 
@@ -45,7 +46,7 @@ class CardViewSell(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    fun fetchInputData(): Double? {
-        return binding.cardContent.text.toString().toDoubleOrNull()
+    fun fetchInputData(): BigDecimal {
+        return binding.cardContent.text.toString().toBigDecimal()
     }
 }
