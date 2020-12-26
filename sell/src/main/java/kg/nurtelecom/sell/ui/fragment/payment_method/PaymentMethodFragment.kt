@@ -55,8 +55,9 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
 
     override fun createViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentPaymentMethodBinding = FragmentPaymentMethodBinding.inflate(inflater, container, false)
+        container: ViewGroup?): FragmentPaymentMethodBinding {
+        return FragmentPaymentMethodBinding.inflate(inflater, container, false)
+    }
 
     companion object {
         fun newInstance() = PaymentMethodFragment()
