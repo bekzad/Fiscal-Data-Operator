@@ -47,6 +47,6 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
     ): FragmentPaymentByCashBinding = FragmentPaymentByCashBinding.inflate(inflater, container, false)
 
     companion object {
-        fun newInstance() = PaymentByCardFragment()
+        fun newInstance() = PaymentByCashFragment()
     }
 }

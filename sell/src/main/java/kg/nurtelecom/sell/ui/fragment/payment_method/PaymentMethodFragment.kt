@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.sell.R
@@ -28,7 +27,7 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
                 .supportFragmentManager
                 .beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.container, PaymentByCashFragment())
+                .replace(R.id.container, PaymentByCashFragment.newInstance())
                 .commit()
         }
 
@@ -56,8 +55,9 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
 
     override fun createViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentPaymentMethodBinding = FragmentPaymentMethodBinding.inflate(inflater, container, false)
+        container: ViewGroup?): FragmentPaymentMethodBinding {
+        return FragmentPaymentMethodBinding.inflate(inflater, container, false)
+    }
 
     companion object {
         fun newInstance() = PaymentMethodFragment()
