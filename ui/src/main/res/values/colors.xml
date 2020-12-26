@@ -40,4 +40,46 @@
 
     <color name="transparent">#00FFFFFF</color>
 
+    <!--    new color's names-->
+
+    <color name="black">#000000</color>
+
+    <color name="asphalt">#4A4A4A</color>
+
+    <color name="grey">#8E8E93</color>
+
+    <color name="darkGrey">#252527</color>
+
+    <color name="lightBlack">#1C1C1E</color>
+
+    <color name="lightGrey">#C8C8C8</color>
+
+    <color name="teal">#4DB6AC</color>
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="textWhite">#EFEFF4</color>
+
+    <color name="blue">#4A90E2</color>
+
+    <color name="green">#82B752</color>
+
+    <color name="orange">#F76201</color>
+
+    <color name="pink">#F0047F</color>
+
+    <color name="keyboardWhite">#ECEFF0</color>
+
+    <color name="red">#FF3B30</color>
+
+    <color name="saleRed">#C0392B</color>
+
+    <color name="saleGreen">#27AE60</color>
+
+    <color name="changeYellow">#F5A623</color>
+
+    <color name="clickBlue">#007AFF</color>
+
+    <color name="transparent">#00FFFFFF</color>
+
 </resources>
