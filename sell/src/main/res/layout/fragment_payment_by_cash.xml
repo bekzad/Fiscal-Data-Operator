@@ -8,7 +8,7 @@
     android:padding="@dimen/padding_16dp"
     tools:context=".ui.fragment.payment_method.PaymentByCashFragment">
 
-    <kg.nurtelecom.ofd.sell.CustomCardView
+    <kg.nurtelecom.ofd.sell.CardViewSell
         android:id="@+id/cw_sum"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <kg.nurtelecom.ofd.sell.CustomCardEditText
+    <kg.nurtelecom.ofd.sell.CardViewSell
         android:id="@+id/et_received"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -25,10 +25,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cw_sum" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_continue"
+        style="@style/btn_green"
         android:layout_width="0dp"
         android:layout_height="44dp"
+        android:enabled="false"
         android:text="@string/btn_continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
