@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCardBinding
@@ -17,12 +18,19 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
 
     override fun setupViews() {
         super.setupViews()
+
+        vb.btnContinueCard.setOnClickListener {
+            navigateToPrintCheck()
+        }
         vb.cwSumCard.apply {
-            setCardTitle(R.string.sum_pay)
+            isEditable(false)
+            setTitle(R.string.sum_pay)
             setBackground(R.drawable.green_background)
         }
         vb.etReceivedCard.apply {
-            setCardTitle(R.string.et_received)
+            isEditable(false)
+            setTitle(R.string.et_received)
+            setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
             setBackground(R.drawable.white_background)
         }
     }
@@ -34,8 +42,13 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
 
     private fun subscribeToLiveData() {
         vm.calculateTaxSum().observe(viewLifecycleOwner) {sum ->
-            vb.cwSumCard.setCardContent(sum)
+            vb.cwSumCard.setContent(sum)
+            vb.etReceivedCard.setContent(sum)
         }
+    }
+
+    private fun navigateToPrintCheck() {
+        // TO DO inflates the print check fragment
     }
 
     override fun createViewBinding(
