@@ -1,7 +1,6 @@
 package kg.nurtelecom.sell.ui.activity
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.utils.roundUp

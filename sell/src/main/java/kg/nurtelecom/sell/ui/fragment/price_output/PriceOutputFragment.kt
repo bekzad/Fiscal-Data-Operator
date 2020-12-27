@@ -2,8 +2,8 @@ package kg.nurtelecom.sell.ui.fragment.price_output
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
@@ -14,6 +14,8 @@ import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.utils.isZero
 import kg.nurtelecom.sell.utils.replaceFragment
 import java.math.BigDecimal
+import kg.nurtelecom.sell.utils.parentActivity
+import kg.nurtelecom.sell.utils.replaceFragment
 
 class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
@@ -23,10 +25,8 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         PriceOutputFragmentBinding.inflate(inflater, container, false)
 
     override fun setupViews() {
+        vb.checkBtn.setOnClickListener { navigateToSellFragment() }
         setupCustomEditText()
-        vb.checkBtn.setOnClickListener {
-            navigate()
-        }
     }
 
     private fun sendProduct(product: Product) {
@@ -39,8 +39,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         }
     }
 
-    private fun navigate() {
-        val activity = activity as AppCompatActivity
+    private fun navigateToSellFragment() {
         sendProduct(fetchProductData())
         activity.replaceFragment(SellFragment.newInstance())
     }

@@ -17,13 +17,13 @@ class CustomDialog(context: Context, attributeSet: AttributeSet? = null) : Const
 
     private val binding = DialogViewBinding.inflate(LayoutInflater.from(context), this, true)
 
-    fun setDialogTitle(@StringRes text: Int = R.string.fiscal_regime_title) {
+    /*fun setDialogTitle(@StringRes text: Int = R.string.fiscal_regime_title) {
         binding.regimeTv.setText(text)
     }
 
     fun setDialogContent(@StringRes text: Int = R.string.fiscal_regime_content) {
         binding.regimeMessage.setText(text)
-    }
+    }*/
 
     @RequiresApi(Build.VERSION_CODES.M)
     fun setTitleStyle(@StyleRes style: Int) {

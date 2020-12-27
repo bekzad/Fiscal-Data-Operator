@@ -32,7 +32,7 @@ class ProductAdapter(
 
     override fun getItemCount(): Int = productList.size
 
-     class ProductViewHolder(val binding: ProductListItemBinding) :
+    class ProductViewHolder(val binding: ProductListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
@@ -52,7 +52,7 @@ class ProductAdapter(
 
             return StringBuilder().also {
                 it.append("${product.price} * ")
-                it.append("${product.count.toInt()}")
+                it.append("${product.count.toInt()} ")
                 it.append(discount)
                 it.append(allowance)
             }
