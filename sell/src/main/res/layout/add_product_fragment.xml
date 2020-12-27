@@ -9,10 +9,9 @@
 
     <Button
         android:id="@+id/product_not_from_list_button"
-        style="@style/SellBlackButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/product_not_from_list"
+        android:text="Товар не из списка"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

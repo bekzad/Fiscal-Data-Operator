@@ -28,7 +28,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ItemClickListener {
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         SellFragmentBinding.inflate(inflater, container, false)
 
-    private fun setupRV(product: MutableList<kg.nurtelecom.data.sell.Product>) {
+    private fun setupRV(product: MutableList<Product>) {
         vb.productRv.apply {
             productAdapter = ProductAdapter(product, this@SellFragment)
             adapter = productAdapter
@@ -45,9 +45,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ItemClickListener {
     }
 
     private fun setupDialog() {
-        vb.modeDialog.apply {
-            setInvisible()
-        }
+        vb.modeDialog.setInvisible()
     }
 
     private fun setupTaxView() {
