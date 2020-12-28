@@ -48,6 +48,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ItemClickListener {
         vb.modeDialog.setInvisible()
     }
 
+    // TODO: must be changed
     private fun setupTaxView() {
         vm.calculateTaxSum().observe(viewLifecycleOwner) {
             vb.icSumPay.setContent(it)
