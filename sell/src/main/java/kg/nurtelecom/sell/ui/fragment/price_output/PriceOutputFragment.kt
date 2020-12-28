@@ -24,7 +24,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     }
 
     private fun sendProduct(product: Product) {
-        vm.addNewProduct(product)
+        if (product.price != null) vm.addNewProduct(product)
     }
 
 
