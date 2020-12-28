@@ -1,4 +1,4 @@
-package kg.nurtelecom.storage.roomDatabase
+package kg.nurtelecom.storage.roomdatabase
 
 import android.content.Context
 import androidx.room.Database
