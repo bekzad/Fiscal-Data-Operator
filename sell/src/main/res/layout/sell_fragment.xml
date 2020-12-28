@@ -13,7 +13,7 @@
         android:padding="8dp">
 
         <kg.nurtelecom.ofd.sell.InfoCardCellView
-            android:id="@+id/sum_pay_cv"
+            android:id="@+id/sum_pay_ic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -30,7 +30,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sum_pay_cv" />
+            app:layout_constraintTop_toBottomOf="@id/sum_pay_ic" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_rv"

@@ -52,7 +52,7 @@ class SellFragment : Fragment()/*CoreFragment<SellFragmentBinding, SellMainViewM
     }
 
     private fun setupTaxView() {
-        vb.sumPayCv.apply {
+        vb.sumPayIc.apply {
             isEditable(false)
             setTitle(R.string.sum_pay)
             addNextIcon()
@@ -60,7 +60,7 @@ class SellFragment : Fragment()/*CoreFragment<SellFragmentBinding, SellMainViewM
             setTextColor(R.color.colorWhite)
         }
         vms.calculateTaxSum().observe(viewLifecycleOwner) {
-            vb.sumPayCv.setContent(it)
+            vb.sumPayIc.setContent(it)
         }
     }
 
