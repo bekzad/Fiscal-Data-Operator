@@ -6,7 +6,6 @@ import kg.nurtelecom.auth.databinding.AuthActivityBinding
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.getTrimmedText
 import kg.nurtelecom.core.extension.enable
-import kg.nurtelecom.core.extension.visible
 
 class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewModel::class) {
 
@@ -23,7 +22,6 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
     }
 
     override fun setupViews() {
-        vb.progressbar.visible(false)
         vb.btnLogin.enable(false)
 
 //        vb.etLogin.addTextChangedListener {
@@ -50,9 +48,7 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
     }
 
     private fun observeAuthorization() {
-        // LOGIN ---> 10480_2 PASSWORD ---> Kr1_7W GSR-KEY ---> 910287
         vm.event.observe(this, Observer {
-            vb.progressbar.visible(it !is AuthUser)
             when (it) {
                 is AuthUser -> {
                     setResult(AUTH_RESULT)

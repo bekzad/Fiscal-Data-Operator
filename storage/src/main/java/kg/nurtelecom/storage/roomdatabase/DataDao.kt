@@ -1,4 +1,4 @@
-package kg.nurtelecom.storage.roomDatabase
+package kg.nurtelecom.storage.roomdatabase
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
