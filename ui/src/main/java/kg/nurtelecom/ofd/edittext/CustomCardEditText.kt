@@ -21,11 +21,11 @@ class CustomCardEditText(context: Context, attributeSet: AttributeSet? = null) :
 
     fun setTextColor(@ColorInt color: Int) {
         binding.priceTv.setTextColor(color)
-        binding.valueEt.setTextColor(color)
+        binding.productExpressionEt.setTextColor(color)
     }
 
-    fun fetchTextState(action: (text: CharSequence?) -> Unit) {
-        binding.valueEt.doOnTextChanged { text, _, _, _ ->
+    fun handleTextState(action: (text: CharSequence?) -> Unit) {
+        binding.productExpressionEt.doOnTextChanged { text, _, _, _ ->
             action(text)
         }
     }

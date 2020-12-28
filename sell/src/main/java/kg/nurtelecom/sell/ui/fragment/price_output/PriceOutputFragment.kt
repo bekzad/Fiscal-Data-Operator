@@ -44,6 +44,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         activity.replaceFragment(SellFragment.newInstance())
     }
 
+    // TODO: must be big decimal
     private fun fetchProductData(): Product {
         val product: Product
         val countCanBeZero = vb.icProductCount.fetchInputData()

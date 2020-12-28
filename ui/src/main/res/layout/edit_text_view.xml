@@ -28,7 +28,7 @@
                 android:text="@string/price" />
 
             <EditText
-                android:id="@+id/value_et"
+                android:id="@+id/product_expression_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8dp"
