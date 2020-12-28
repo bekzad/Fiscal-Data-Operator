@@ -144,7 +144,14 @@
                 android:gravity="center_horizontal|top"/>
 
 
+
+
         </com.google.android.material.card.MaterialCardView>
+
+        <kg.nurtelecom.ofd.ui.edittext.InputTextField
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/test_password"/>
 
     </LinearLayout>
 

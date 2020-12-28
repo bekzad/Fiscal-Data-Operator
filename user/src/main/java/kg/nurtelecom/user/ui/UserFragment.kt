@@ -1,15 +1,14 @@
 package kg.nurtelecom.user.ui
 
 import android.os.Bundle
+import android.text.InputType
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.user.databinding.FragmentUserBinding
 
 class UserFragment : CoreFragment<FragmentUserBinding, UserVM>(UserVM::class) {
-
-    private lateinit var binding: FragmentUserBinding
-    private lateinit var uservm: UserVM
 
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
@@ -28,6 +27,22 @@ class UserFragment : CoreFragment<FragmentUserBinding, UserVM>(UserVM::class) {
     }
 
     override fun getBinding() = FragmentUserBinding.inflate(layoutInflater)
+
+    override fun setupViews() {
+        super.setupViews()
+        vb.testPassword.apply {
+            fetchIconType()
+            setHint("password")
+            setInputType(InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD)
+            setOnIconChanged {
+                this.switchIconType()
+            }
+        }
+    }
+
+    companion object{
+        fun getInctance() = UserFragment()
+    }
 
 }
 

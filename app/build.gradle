@@ -43,6 +43,7 @@ dependencies {
     implementation project(path: ':sell')
     implementation project(path: ':ui')
     implementation project(path: ':auth')
+    implementation project(path: ':user')
 
     implementation libs.kotlin
     implementation libs.androidx.values()

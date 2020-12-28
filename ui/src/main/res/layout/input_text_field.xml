@@ -13,7 +13,7 @@
         android:paddingRight="@dimen/margin_16dp"
         android:paddingTop="@dimen/margin_8dp"
         android:paddingBottom="@dimen/margin_8dp"
-        android:background="@drawable/text_input_field"
+        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +26,8 @@
             android:background="@null"
             android:gravity="center_horizontal|top"
             android:hint="Your text"
+
+            android:textColor="@color/white"
             android:textColorHint="@color/colorGrey"
             android:textSize="@dimen/app_text_large" />
 
@@ -33,11 +35,10 @@
             android:id="@+id/input_field_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/password_visibility_true"
+            android:src="@drawable/ic_baseline_visibility_off"
             android:layout_gravity="center_vertical|right"
             android:clickable="true"
-            android:focusable="true"
-            android:visibility="gone"/>
+            android:focusable="true" />
 
     </com.google.android.material.card.MaterialCardView>
 
