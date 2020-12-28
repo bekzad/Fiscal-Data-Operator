@@ -34,12 +34,6 @@ class ProductAdapter(private var productList: List<Product>) : RecyclerView.Adap
             return productExpressionLine
         }
 
-        private fun fetchProductSumWithDiscount(product: Product): Double {
-            val sumOfProduct = (product.price * product.count)
-            val discount = (product.discount?.div(100)) ?: 0.0
-            val allowance = (product.allowance?.div(100)) ?: 0.0
-            return sumOfProduct - (sumOfProduct * discount) + (sumOfProduct * allowance)
-        }
     } // RecyclerViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
