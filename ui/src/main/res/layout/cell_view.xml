@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
     style="@style/CellViewStyle">
 
     <TextView
         android:id="@+id/title"
         style="@style/ItemCellTitleTextStyle"
-        android:text="Title"
+        tools:text="Title"
         app:layout_constraintBottom_toTopOf="@id/subTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -15,8 +16,8 @@
     <TextView
         android:id="@+id/subTitle"
         style="@style/CellSubTitleTextStyle"
-        android:text="Sub Title"
-        android:visibility="visible"
+        tools:text="Sub Title"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
