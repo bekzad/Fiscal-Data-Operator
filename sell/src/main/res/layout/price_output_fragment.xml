@@ -17,81 +17,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/product_price_cw"
+    <kg.nurtelecom.ofd.sell.InfoCardCellView
+        android:id="@+id/product_price_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/position_tv"
-        app:layout_constraintTop_toBottomOf="@id/position_tv">
+        app:layout_constraintTop_toBottomOf="@id/position_tv" />
 
-        <kg.nurtelecom.ofd.sell.InfoCardCellView
-            android:id="@+id/product_price_ic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/product_count_cw"
+    <kg.nurtelecom.ofd.sell.InfoCardCellView
+        android:id="@+id/product_count_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorWhite"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@id/product_price_cw"
-        app:layout_constraintStart_toStartOf="@id/product_price_cw"
-        app:layout_constraintTop_toBottomOf="@id/product_price_cw">
-
-        <kg.nurtelecom.ofd.sell.InfoCardCellView
-            android:id="@+id/product_count_ic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.card.MaterialCardView>
+        app:layout_constraintEnd_toEndOf="@id/product_price_et"
+        app:layout_constraintStart_toStartOf="@id/product_price_et"
+        app:layout_constraintTop_toBottomOf="@id/product_price_et" />
 
     <LinearLayout
         android:id="@+id/group_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:orientation="horizontal"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/product_count_cw">
+        app:layout_constraintTop_toBottomOf="@id/product_count_et">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/product_discount_cw"
+        <kg.nurtelecom.ofd.sell.InfoCardCellView
+            android:id="@+id/product_discount_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorWhite"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
-            android:color="@color/colorBlack"
-            app:layout_constraintEnd_toStartOf="@+id/product_discount_cw"
-            app:layout_constraintStart_toStartOf="@id/product_count_cw"
-            app:layout_constraintTop_toBottomOf="@id/product_count_cw">
+            app:layout_constraintEnd_toStartOf="@+id/product_discount_et"
+            app:layout_constraintStart_toStartOf="@id/product_count_et"
+            app:layout_constraintTop_toBottomOf="@id/product_count_et" />
 
-            <kg.nurtelecom.ofd.sell.InfoCardCellView
-                android:id="@+id/product_discount_ic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </androidx.cardview.widget.CardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/product_allowance_cw"
+        <kg.nurtelecom.ofd.sell.InfoCardCellView
+            android:id="@+id/product_allowance_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorWhite"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_count_cw">
+            app:layout_constraintTop_toBottomOf="@id/product_count_et" />
 
-            <kg.nurtelecom.ofd.sell.InfoCardCellView
-                android:id="@+id/product_allowance_ic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
     <Button

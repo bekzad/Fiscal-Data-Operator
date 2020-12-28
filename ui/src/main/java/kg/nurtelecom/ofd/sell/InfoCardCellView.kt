@@ -34,7 +34,7 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
     }
 
     fun setBackground(@ColorRes colorId: Int) {
-        binding.container.setBackgroundColor(ContextCompat.getColor(context, colorId))
+        binding.cardView.setCardBackgroundColor(ContextCompat.getColor(context, colorId))
     }
 
     fun isEditable(editable: Boolean) {

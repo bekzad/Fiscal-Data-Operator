@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.price_output
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,17 +55,17 @@ class PriceOutputFragment : Fragment()
     }
 
     private fun setupCustomEditText() {
-        vb.productPriceIc.apply {
+        vb.productPriceEt.apply {
             setTitle(R.string.price)
         }
-        vb.productCountIc.apply {
+        vb.productCountEt.apply {
             setTitle(R.string.count)
         }
-        vb.productDiscountIc.apply {
+        vb.productDiscountEt.apply {
             setTitle(R.string.discount)
             setTextColor(R.color.colorGreen)
         }
-        vb.productAllowanceIc.apply {
+        vb.productAllowanceEt.apply {
             setTitle(R.string.allowance)
             setTextColor(R.color.colorRed)
         }
@@ -82,10 +83,10 @@ class PriceOutputFragment : Fragment()
     private fun fetchProductData(): Product {
         val product: Product
         val zero = BigDecimal.ZERO
-        val price = vb.productPriceIc.fetchInputData() ?: return Product(null, zero, zero)
-        val count = vb.productCountIc.fetchInputData() ?: BigDecimal.ONE
-        val discountPercentage = vb.productDiscountIc.fetchInputData() ?: zero
-        val allowancePercentage = vb.productAllowanceIc.fetchInputData() ?: zero
+        val price = vb.productPriceEt.fetchInputData() ?: return Product(null, zero, zero)
+        val count = vb.productCountEt.fetchInputData() ?: BigDecimal.ONE
+        val discountPercentage = vb.productDiscountEt.fetchInputData() ?: zero
+        val allowancePercentage = vb.productAllowanceEt.fetchInputData() ?: zero
 
         val totalPrice = price.multiply(count)
         val hundred = BigDecimal("100.0")

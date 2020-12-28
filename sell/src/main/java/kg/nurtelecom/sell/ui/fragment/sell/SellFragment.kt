@@ -57,7 +57,7 @@ class SellFragment : Fragment()/*CoreFragment<SellFragmentBinding, SellMainViewM
             setTitle(R.string.sum_pay)
             addNextIcon()
             setBackground(R.color.green)
-//            setTextColor(R.color.colorWhite)
+            setTextColor(R.color.colorWhite)
         }
         vms.calculateTaxSum().observe(viewLifecycleOwner) {
             vb.sumPayCv.setContent(it)
