@@ -55,8 +55,7 @@
         android:layout_marginRight="@dimen/margin_16dp"
         app:title="@string/main_greeting"
         app:showSubTitle="false"
-        app:showArrowIcon="true"
-        app:position="single"/>
+        app:showArrowIcon="true" />
     <kg.nurtelecom.ofd.ui.CellView
         android:id="@+id/sell_main_menu_item_report"
         android:layout_width="match_parent"
@@ -66,8 +65,7 @@
         android:layout_marginRight="@dimen/margin_16dp"
         app:title="@string/text_report"
         app:subTitle="@string/text_interim_report"
-        app:showArrowIcon="true"
-        app:position="top"/>
+        app:showArrowIcon="true" />
     <kg.nurtelecom.ofd.ui.CellView
         android:id="@+id/sell_main_menu_item_story"
         android:layout_width="match_parent"
@@ -76,8 +74,7 @@
         android:layout_marginRight="@dimen/margin_16dp"
         app:title="@string/text_story"
         app:subTitle="@string/text_story_list"
-        app:showArrowIcon="true"
-        app:position="bottom"/>
+        app:showArrowIcon="true" />
     <kg.nurtelecom.ofd.ui.CellView
         android:id="@+id/sell_main_menu_item_information"
         android:layout_width="match_parent"
@@ -87,8 +84,7 @@
         android:layout_marginRight="@dimen/margin_16dp"
         app:title="@string/text_information"
         app:showSubTitle="false"
-        app:showArrowIcon="true"
-        app:position="single"/>
+        app:showArrowIcon="true" />
     <kg.nurtelecom.ofd.ui.CellView
         android:id="@+id/sell_main_menu_item_operations"
         android:layout_width="match_parent"
@@ -99,7 +95,7 @@
         app:title="@string/text_operations"
         app:subTitle="@string/text_operations_list"
         app:showArrowIcon="true"
-        app:position="bottom"/>
+        />
 
 
     <androidx.appcompat.widget.AppCompatButton
