@@ -23,17 +23,14 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
         vb.btnContinue.setOnClickListener {
             navigateToPrintCheck()
         }
-
         vb.cwSum.apply {
             isEditable(false)
             setTitle(R.string.sum_pay)
-            setBackground(R.drawable.green_background)
+            setTextColor(R.color.colorWhite)
+            setBackground(R.color.colorGreen)
         }
         vb.etReceived.apply {
-            isEditable(true)
             setTitle(R.string.et_received)
-            setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
-            setBackground(R.drawable.white_background)
         }
         vb.etReceived.apply {
             fetchTextState {
