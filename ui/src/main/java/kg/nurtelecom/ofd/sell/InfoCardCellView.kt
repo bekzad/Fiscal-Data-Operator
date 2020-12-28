@@ -5,14 +5,15 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
-import kg.nurtelecom.ui.databinding.CardViewSellBinding
+import kg.nurtelecom.ui.databinding.InfoCardViewSellBinding
 import java.math.BigDecimal
 
-class CardViewSell(context: Context, attrs: AttributeSet? = null) :
+class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
     ConstraintLayout(context, attrs) {
 
-    private val binding = CardViewSellBinding
+    private val binding = InfoCardViewSellBinding
         .inflate(LayoutInflater.from(context), this, true)
 
     fun setTitle(@StringRes title: Int) {
@@ -23,17 +24,17 @@ class CardViewSell(context: Context, attrs: AttributeSet? = null) :
         binding.cardContent.setText(value.toString())
     }
 
-    fun setTextColor(@ColorInt color: Int) {
-        binding.cardTitle.setTextColor(color)
-        binding.cardContent.setTextColor(color)
+    fun setTextColor(@ColorRes colorId: Int) {
+        binding.cardTitle.setTextColor(ContextCompat.getColor(context, colorId))
+        binding.cardContent.setTextColor(ContextCompat.getColor(context, colorId))
     }
 
     fun addNextIcon() {
         binding.cardNextIcon.visibility = VISIBLE
     }
 
-    fun setBackground(@DrawableRes resourceId: Int) {
-        binding.cardView.setBackgroundResource(resourceId)
+    fun setBackground(@ColorRes colorId: Int) {
+        binding.cardView.setCardBackgroundColor(ContextCompat.getColor(context, colorId))
     }
 
     fun isEditable(editable: Boolean) {
@@ -46,7 +47,7 @@ class CardViewSell(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    fun fetchInputData(): BigDecimal {
-        return binding.cardContent.text.toString().toBigDecimal()
+    fun fetchInputData(): BigDecimal? {
+        return binding.cardContent.text.toString().toBigDecimalOrNull()
     }
 }

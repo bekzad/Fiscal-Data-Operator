@@ -8,7 +8,7 @@
     android:padding="@dimen/padding_16dp"
     tools:context=".ui.fragment.payment_method.PaymentByCashFragment">
 
-    <kg.nurtelecom.ofd.sell.CardViewSell
+    <kg.nurtelecom.ofd.sell.InfoCardCellView
         android:id="@+id/cw_sum"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <kg.nurtelecom.ofd.sell.CardViewSell
+    <kg.nurtelecom.ofd.sell.InfoCardCellView
         android:id="@+id/et_received"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
