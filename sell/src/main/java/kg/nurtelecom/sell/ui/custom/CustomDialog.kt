@@ -12,7 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.DialogViewBinding
 
-
+// TODO: must be change
 class CustomDialog(context: Context, attributeSet: AttributeSet? = null) : ConstraintLayout(context, attributeSet) {
 
     private val binding = DialogViewBinding.inflate(LayoutInflater.from(context), this, true)
