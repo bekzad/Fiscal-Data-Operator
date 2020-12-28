@@ -5,15 +5,14 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
-import kg.nurtelecom.ui.databinding.InfoCardCellViewBinding
+import kg.nurtelecom.ui.databinding.CardViewSellBinding
 import java.math.BigDecimal
 
-class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
+class CardViewSell(context: Context, attrs: AttributeSet? = null) :
     ConstraintLayout(context, attrs) {
 
-    private val binding = InfoCardCellViewBinding
+    private val binding = CardViewSellBinding
         .inflate(LayoutInflater.from(context), this, true)
 
     fun setTitle(@StringRes title: Int) {
@@ -24,17 +23,17 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
         binding.cardContent.setText(value.toString())
     }
 
-    fun setTextColor(@ColorRes colorId: Int) {
-        binding.cardTitle.setTextColor(ContextCompat.getColor(context, colorId))
-        binding.cardContent.setTextColor(ContextCompat.getColor(context, colorId))
+    fun setTextColor(@ColorInt color: Int) {
+        binding.cardTitle.setTextColor(color)
+        binding.cardContent.setTextColor(color)
     }
 
     fun addNextIcon() {
         binding.cardNextIcon.visibility = VISIBLE
     }
 
-    fun setBackground(@ColorRes colorId: Int) {
-        binding.container.setBackgroundColor(ContextCompat.getColor(context, colorId))
+    fun setBackground(@DrawableRes resourceId: Int) {
+        binding.cardView.setBackgroundResource(resourceId)
     }
 
     fun isEditable(editable: Boolean) {
@@ -47,7 +46,7 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    fun fetchInputData(): BigDecimal? {
-        return binding.cardContent.text.toString().toBigDecimalOrNull()
+    fun fetchInputData(): BigDecimal {
+        return binding.cardContent.text.toString().toBigDecimal()
     }
 }

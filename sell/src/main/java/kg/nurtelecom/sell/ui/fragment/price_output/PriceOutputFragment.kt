@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.price_output
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.adapter.Product
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
-import java.math.BigDecimal
 
 class PriceOutputFragment : Fragment()
     /*CoreFragment<PriceOutputFragmentBinding, SellMainViewModel>(SellMainViewModel::class)*/, INavigation {
@@ -54,19 +54,29 @@ class PriceOutputFragment : Fragment()
     }
 
     private fun setupCustomEditText() {
-        vb.productPriceIc.apply {
+        vb.priceEditText.apply {
             setTitle(R.string.price)
+            setTitleColor(Color.BLACK)
+            setContentColor(Color.BLACK)
+            setBackgroundColor(Color.WHITE)
         }
-        vb.productCountIc.apply {
+        vb.countEditText.apply {
             setTitle(R.string.count)
+            setTitleColor(Color.BLACK)
+            setContentColor(Color.BLACK)
+            setBackgroundColor(Color.WHITE)
         }
-        vb.productDiscountIc.apply {
+        vb.skidkaEditText.apply {
             setTitle(R.string.discount)
-            setTextColor(R.color.colorGreen)
+            setTitleColor(Color.GREEN)
+            setContentColor(Color.BLACK)
+            setBackgroundColor(Color.WHITE)
         }
-        vb.productAllowanceIc.apply {
+        vb.allowanceEditText.apply {
             setTitle(R.string.allowance)
-            setTextColor(R.color.colorRed)
+            setTitleColor(Color.RED)
+            setContentColor(Color.BLACK)
+            setBackgroundColor(Color.WHITE)
         }
     }
 
@@ -80,25 +90,21 @@ class PriceOutputFragment : Fragment()
     }
 
     private fun fetchProductData(): Product {
-        val product: Product
-        val zero = BigDecimal.ZERO
-        val price = vb.productPriceIc.fetchInputData() ?: return Product(null, zero, zero)
-        val count = vb.productCountIc.fetchInputData() ?: BigDecimal.ONE
-        val discountPercentage = vb.productDiscountIc.fetchInputData() ?: zero
-        val allowancePercentage = vb.productAllowanceIc.fetchInputData() ?: zero
+        var product: Product
+        val price = vb.priceEditText.fetchInputData() ?: return Product(0.0,0.0, 0.0)
+        val count = vb.countEditText.fetchInputData() ?: 1.0
+        val discount = vb.skidkaEditText.fetchInputData() ?: 0.0
+        val allowance = vb.allowanceEditText.fetchInputData() ?: 0.0
 
-        val totalPrice = price.multiply(count)
-        val hundred = BigDecimal("100.0")
-        val discount = totalPrice.multiply(discountPercentage).divide(hundred)
-        val allowance = totalPrice.multiply(allowancePercentage).divide(hundred)
-        val totalPriceWithDiscount = totalPrice.subtract(discount).add(allowance)
+        val totalPrice = price.times(count)
+        val totalPriceWithDiscount = totalPrice - totalPrice * discount / 100.0 + totalPrice * allowance / 100.0
 
         product = Product(
             price = price,
             count = count,
             totalPrice = totalPriceWithDiscount,
-            discount = discountPercentage,
-            allowance = allowancePercentage
+            discount = discount,
+            allowance = allowance
         )
         return product
     }
