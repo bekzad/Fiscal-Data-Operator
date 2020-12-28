@@ -44,6 +44,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ItemClickListener {
         setupDialog()
     }
 
+    // TODO: use extension
     private fun setupDialog() {
         vb.modeDialog.setInvisible()
     }

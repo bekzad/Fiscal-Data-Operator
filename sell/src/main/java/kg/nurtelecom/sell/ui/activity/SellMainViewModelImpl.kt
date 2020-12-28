@@ -6,23 +6,35 @@ import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 import java.math.RoundingMode
+import kg.nurtelecom.data.sell.AllProducts
+import kg.nurtelecom.data.sell.Product
 
 
 abstract class SellMainViewModel : CoreViewModel() {
 
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<Double>
+    abstract val selectProductData: MutableLiveData<AllProducts>
 
     abstract fun addNewProduct(product: Product)
 
     abstract fun removeProductFromList(position: Int)
+
+    abstract fun sendSelectedProduct(product: AllProducts)
+
+    // TODO: must be changed
+    abstract val allProducts: MutableLiveData<MutableList<AllProducts>>
 }
 
 
 class SellMainViewModelImpl : SellMainViewModel() {
 
-    override val productList: MutableLiveData<MutableList<Product>> = MutableLiveData(mutableListOf())
+    override val productList: MutableLiveData<MutableList<Product>> =
+        MutableLiveData(mutableListOf())
+
     override val taxSum: MutableLiveData<Double> = MutableLiveData(0.0)
+
+    override val selectProductData: MutableLiveData<AllProducts> = MutableLiveData()
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
@@ -45,8 +57,21 @@ class SellMainViewModelImpl : SellMainViewModel() {
         return MutableLiveData(taxSum.roundUp())
     }
 
-    override fun removeProductFromList(position : Int) {
+    override fun removeProductFromList(position: Int) {
         productList.value?.removeAt(position)
         taxSum.value = calculateTaxSum()
     }
+
+    override fun sendSelectedProduct(product: AllProducts) {
+        selectProductData.value = product
+    }
+
+    // TODO: must be changed
+    private val mockedAllProducts = mutableListOf(
+        AllProducts("Test product name1", 25.00),
+        AllProducts("Test product name2", 30.00)
+    )
+    override val allProducts: MutableLiveData<MutableList<AllProducts>> =
+        MutableLiveData(mockedAllProducts)
+
 }

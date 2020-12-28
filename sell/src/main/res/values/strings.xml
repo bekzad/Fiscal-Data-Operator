@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="fiscal_regime_title">Фискальный режим</string>
-    <string name="fiscal_regime_content">Это основной режим осуществления торговой деятельности. Все данные отправляются в ОФД.</string>
-    <string name="add_product">Добавить товар</string>
-    <string name="sum_pay">Сумма к оплате, сом:</string>
-    <string name="test_sum">5123.2</string>
-    <string name="discount">Скидка %</string>
-    <string name="allowance">Надбавка %</string>
-    <string name="count">Количество:</string>
-    
     <string name="payment_by_cash">Наличные</string>
     <string name="payment_by_card">Оплата Картой</string>
     <string name="tw_to_be_paid">Итого к оплате</string>
     <string name="btn_continue">Далее</string>
     <string name="et_received">Принято у клиента, сом:</string>
 
-    <string name="non_fiscal_regime_title">Не фискальный режим</string>
-    <string name="non_fiscal_regime_content">Нужен для обучения сотрудников, данные не передаются в ОФД.</string>
+    <string name="fiscal_mode_title">Фискальный режим</string>
+    <string name="non_fiscal_mode_title">Не фискальный режим</string>
+    <string name="fiscal_mode_dialog_content">Это основной режим осуществления торговой деятельности. Все данные
+отправляются в ОФД.</string>
+    <string name="non_fiscal_mode_dialog_content">Нужен для обучения сотрудников, данные не передаются в ОФД.</string>
+    <string name="sale">Продажа</string>
+    <string name="amount_to_pay">Сумма к оплате, сом:</string>
+    <string name="added_products">Добавленые товары:</string>
+    <string name="add_product">Добавить товар</string>
+    <string name="product_selection">Выбор товара</string>
+    <string name="price_entry">Ввод цены</string>
+    <string name="quantity_pcs">Количество, шт.</string>
+    <string name="discount">Скидка %</string>
+    <string name="allowance">Надбавка %</string>
+    <string name="in_check">В чек</string>
+    <string name="price_som">Цена, сом:</string>
+    <string name="non_fiscal_mode_message">Нефискальный режим. Его можно отключить в боковом меню.</string>
+    <string name="alert_icon_description">Alert icon</string>
+    <string name="count">Count</string>
     <string name="product_not_from_list">Товар не из списка</string>
+    <string name="position_with_n">Позиция №</string>
+    <string name="position">Позиция</string>
+
 </resources>

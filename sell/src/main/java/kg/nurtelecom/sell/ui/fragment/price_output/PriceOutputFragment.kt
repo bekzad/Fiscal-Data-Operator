@@ -25,8 +25,9 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         PriceOutputFragmentBinding.inflate(inflater, container, false)
 
     override fun setupViews() {
-        vb.checkBtn.setOnClickListener { navigateToSellFragment() }
         setupCustomEditText()
+        subscribeSelectedProduct()
+        vb.checkBtn.setOnClickListener { navigateToSellFragment() }
     }
 
     private fun sendProduct(product: Product) {
@@ -44,7 +45,12 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         activity.replaceFragment(SellFragment.newInstance())
     }
 
-    // TODO: must be big decimal
+    private fun subscribeSelectedProduct() {
+        vm.selectProductData.observe(this, {
+            vb.productPriceEt.setText(it.productPrice.toString())
+        })
+    }
+
     private fun fetchProductData(): Product {
         val product: Product
         val countCanBeZero = vb.icProductCount.fetchInputData()
@@ -57,11 +63,6 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
             allowance = vb.icProductAllowance.fetchInputData()
         )
     }
-
-    override fun createViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): PriceOutputFragmentBinding = PriceOutputFragmentBinding.inflate(inflater, container, false)
 
     companion object {
         fun newInstance() = PriceOutputFragment()
