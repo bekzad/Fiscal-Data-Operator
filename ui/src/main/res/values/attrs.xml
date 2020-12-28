@@ -17,6 +17,10 @@
         <attr name="hasCheckBoxButton" format="boolean"/>
         <attr name="hasDoneIcon" format="boolean"/>
         <attr name="hasProductSum" format="boolean"/>
+
+        <attr name="showRightIcon" format="boolean"/>
+        <attr name="showLeftIcon" format="boolean"/>
+        <attr name="showCheckBox" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="CellView">

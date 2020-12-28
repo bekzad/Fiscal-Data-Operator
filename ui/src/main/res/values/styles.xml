@@ -137,12 +137,19 @@
     </style>
 
     <style name="ProductCellTitleTextStyle" parent="BaseTextStyle">
+        <item name="android:layout_marginLeft">@dimen/margin_16dp</item>
         <item name="android:textColor">@color/asphalt</item>
     </style>
 
     <style name="ProductCellValueTextStyle" parent="ProductCellTitleTextStyle">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_20sp</item>
+    </style>
+
+    <style name="ProductCellSubTitleTextStyle" parent="ProductCellValueTextStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:ems">10</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="InfoCardCellTitleTextStyle" parent="BaseTextStyle">
@@ -197,9 +204,12 @@
         <item name="android:clickable">true</item>
         <item name="android:background">@color/darkGrey</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/size_75dp</item>
+        <item name="android:layout_height">@dimen/height_75dp</item>
     </style>
 
+    <style name="ProductCellViewStyle" parent="CellViewStyle">
+        <item name="android:background">@color/white</item>
+    </style>
 
     <style name="BaseButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_height">wrap_content</item>
