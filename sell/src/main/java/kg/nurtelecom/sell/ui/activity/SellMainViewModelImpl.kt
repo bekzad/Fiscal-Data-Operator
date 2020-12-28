@@ -7,12 +7,24 @@ import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class SellMainViewModel : CoreViewModel() {
 
-    val productList: MutableLiveData<MutableList<Product>> = MutableLiveData(mutableListOf())
-    val taxSum: MutableLiveData<Double> = MutableLiveData(0.0)
+abstract class SellMainViewModel : CoreViewModel() {
 
-    fun addNewProduct(product: Product) {
+    abstract val productList: MutableLiveData<MutableList<Product>>
+    abstract val taxSum: MutableLiveData<Double>
+
+    abstract fun addNewProduct(product: Product)
+
+    abstract fun removeProductFromList(position: Int)
+}
+
+
+class SellMainViewModelImpl : SellMainViewModel() {
+
+    override val productList: MutableLiveData<MutableList<Product>> = MutableLiveData(mutableListOf())
+    override val taxSum: MutableLiveData<Double> = MutableLiveData(0.0)
+
+    override fun addNewProduct(product: Product) {
         productList.value?.add(product)
         taxSum.value = calculateTaxSum()
     }
@@ -31,5 +43,10 @@ class SellMainViewModel : CoreViewModel() {
         }
 
         return MutableLiveData(taxSum.roundUp())
+    }
+
+    override fun removeProductFromList(position : Int) {
+        productList.value?.removeAt(position)
+        taxSum.value = calculateTaxSum()
     }
 }
