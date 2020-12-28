@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:padding="8dp">
 
-        <kg.nurtelecom.ofd.sell.CustomCardView
+        <kg.nurtelecom.ofd.sell.InfoCardCellView
             android:id="@+id/sum_pay_cv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.google.android.material.card.MaterialCardView
 import kg.nurtelecom.ui.databinding.ViewCardBinding
+import java.math.BigDecimal
 
 class CustomCardView(context: Context, attrs: AttributeSet? = null) :
     MaterialCardView(context, attrs) {
@@ -19,7 +20,7 @@ class CustomCardView(context: Context, attrs: AttributeSet? = null) :
         binding.cardTitle.setText(title)
     }
 
-    fun setCardContent(value: Double) {
+    fun setCardContent(value: BigDecimal) {
         binding.cardContent.text = value.toString()
     }
 

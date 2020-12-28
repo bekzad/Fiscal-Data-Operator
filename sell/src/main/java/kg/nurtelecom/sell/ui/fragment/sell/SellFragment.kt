@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.INavigation
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
@@ -55,12 +53,14 @@ class SellFragment : Fragment()/*CoreFragment<SellFragmentBinding, SellMainViewM
 
     private fun setupTaxView() {
         vb.sumPayCv.apply {
-            setCardTitle(R.string.sum_pay)
+            isEditable(false)
+            setTitle(R.string.sum_pay)
             addNextIcon()
-            setBackground(R.drawable.mask)
+            setBackground(R.color.green)
+            setTextColor(R.color.colorWhite)
         }
         vms.calculateTaxSum().observe(viewLifecycleOwner) {
-            vb.sumPayCv.setCardContent(it)
+            vb.sumPayCv.setContent(it)
         }
     }
 

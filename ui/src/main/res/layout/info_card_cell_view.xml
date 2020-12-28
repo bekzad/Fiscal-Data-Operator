@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
+    app:cardBackgroundColor="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:background="@drawable/mask">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/card_title"
-            style="@style/GreenInfoCardCellTitleTextStyle"
+            style="@style/InfoCardCellTitleTextStyle"
             android:text="@string/title_text"
             android:textSize="@dimen/text_16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
 
         <EditText
             android:id="@+id/card_content"
-            style="@style/GreenInfoCardCellValueTextStyle"
+            style="@style/CardCellValueTextStyle"
             android:layout_width="0dp"
             android:layout_marginTop="5dp"
             android:background="@null"
