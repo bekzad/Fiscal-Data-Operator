@@ -11,10 +11,10 @@ class ReceiptDetailView(context: Context, attr: AttributeSet) : ConstraintLayout
     private val vb = DetailViewBinding.inflate(LayoutInflater.from(context), this, true)
 
     fun setReceipt(saleType: String, counter: String, timestamp: String, amount: String) {
-        vb.tvTitleDetailSaleType.text = saleType
-        vb.tvDetailCounter.text = counter
-        vb.tvDetailTimestamp.text = timestamp
-        vb.tvDetailAmount.text = amount
+        vb.tvTitle.text = saleType
+        vb.tvCounter.text = counter
+        vb.tvTimestamp.text = timestamp
+        vb.tvAmount.text = amount
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
