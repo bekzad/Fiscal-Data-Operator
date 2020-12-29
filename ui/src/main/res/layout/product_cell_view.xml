@@ -9,7 +9,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBoxProductCellView"
+        android:id="@+id/cb_productCellView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,42 +20,42 @@
     <ImageView
         android:clickable="true"
         android:focusable="true"
-        android:id="@+id/productCellLeftIcon"
+        android:id="@+id/iv_productCellLeftIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_remove_circle_outline_24"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/checkBoxProductCellView"
+        app:layout_constraintStart_toEndOf="@id/cb_productCellView"
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tv_productCellTitle"
         style="@style/ProductCellTitleTextStyle"
         tools:text="Title"
-        app:layout_constraintBottom_toTopOf="@id/subTitle"
-        app:layout_constraintStart_toEndOf="@id/productCellLeftIcon"
+        app:layout_constraintBottom_toTopOf="@id/tv_productCellSubTitle"
+        app:layout_constraintStart_toEndOf="@id/iv_productCellLeftIcon"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/subTitle"
+        android:id="@+id/tv_productCellSubTitle"
         style="@style/ProductCellSubTitleTextStyle"
         tools:text="Sub title"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/productCellLeftIcon"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintStart_toEndOf="@+id/iv_productCellLeftIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titleProductCell" />
 
     <TextView
-        android:id="@+id/productCellValueText"
+        android:id="@+id/tv_productCellValueText"
         style="@style/ProductCellValueTextStyle"
         tools:text="value"
-        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/tv_productCellSubTitle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/productCellRightIcon" />
+        app:layout_constraintEnd_toStartOf="@id/iv_ProductCellRightIcon" />
 
     <ImageView
         android:visibility="gone"
-        android:id="@+id/productCellRightIcon"
+        android:id="@+id/iv_ProductCellRightIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_keyboard_arrow_right_24"

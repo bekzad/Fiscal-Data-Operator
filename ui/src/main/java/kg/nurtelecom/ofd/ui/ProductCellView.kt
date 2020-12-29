@@ -21,9 +21,9 @@ class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(c
                 setTitle(getString(R.styleable.custom_view_title).toString())
                 setSubTitle(getString(R.styleable.custom_view_subTitle))
                 setValueText(getString(R.styleable.custom_view_value))
-                vb.checkBoxProductCellView.visible(getBoolean(R.styleable.custom_view_showCheckBox, false))
-                vb.productCellLeftIcon.visible(getBoolean(R.styleable.custom_view_showLeftIcon, false))
-                vb.productCellRightIcon.visible(getBoolean(R.styleable.custom_view_showRightIcon, false))
+                vb.cbProductCellView.visible(getBoolean(R.styleable.custom_view_showCheckBox, false))
+                vb.ivProductCellLeftIcon.visible(getBoolean(R.styleable.custom_view_showLeftIcon, false))
+                vb.ivProductCellRightIcon.visible(getBoolean(R.styleable.custom_view_showRightIcon, false))
             } finally {
                 recycle()
             }
@@ -31,27 +31,27 @@ class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(c
     }
 
     fun setTitle(title: String) {
-        vb.title.text = title
+        vb.tvProductCellTitle.text = title
     }
 
     fun setSubTitle(subTitleText: String?) {
-        vb.subTitle.visible(!subTitleText.isNullOrEmpty())
-        vb.subTitle.text = subTitleText
+        vb.tvProductCellSubTitle.visible(!subTitleText.isNullOrEmpty())
+        vb.tvProductCellSubTitle.text = subTitleText
     }
 
     fun setValueText(text: String?) {
-        vb.productCellValueText.visible(!text.isNullOrEmpty())
-        vb.productCellValueText.text = text
+        vb.tvProductCellValueText.visible(!text.isNullOrEmpty())
+        vb.tvProductCellValueText.text = text
     }
 
     fun setOnCheckedChangeListener(listener: CompoundButton.OnCheckedChangeListener) {
-        vb.checkBoxProductCellView.visible(true)
-        vb.checkBoxProductCellView.setOnCheckedChangeListener(listener)
+        vb.cbProductCellView.visible(true)
+        vb.cbProductCellView.setOnCheckedChangeListener(listener)
     }
 
     fun setOnLeftIconClickListener(listener: OnClickListener) {
-        vb.productCellLeftIcon.visible(true)
-        vb.productCellLeftIcon.setOnClickListener(listener)
+        vb.ivProductCellLeftIcon.visible(true)
+        vb.ivProductCellLeftIcon.setOnClickListener(listener)
     }
 
     fun setOnCellClickListener(listener: OnClickListener) {
@@ -59,7 +59,7 @@ class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(c
     }
 
     fun setLeftIconImageResource(resId: Int) {
-        vb.productCellLeftIcon.visible(true)
-        vb.productCellLeftIcon.setImageResource(resId)
+        vb.ivProductCellRightIcon.visible(true)
+        vb.ivProductCellRightIcon.setImageResource(resId)
     }
 }
