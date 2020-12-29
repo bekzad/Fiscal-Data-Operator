@@ -8,11 +8,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
+import kg.nurtelecom.ofd.ui.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
 import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
+import kg.nurtelecom.sell.ui.fragment.story.HistoryFragment
 
 class SellMainActivity :
     CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
@@ -61,12 +63,12 @@ class SellMainActivity :
             // here place for replacing fragment
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.sellMainMenuItemStory.setOnClickListener {
-            // here place for replacing fragment
+        v.sellMainMenuItemHistory.setOnClickListener {
+            replaceFragment(R.id.sellMainContainer, HistoryFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         v.sellMainMenuItemInformation.setOnClickListener {
-            // here place for replacing fragment
+            replaceFragment(R.id.sellMainContainer, AboutAppFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         v.sellMainMenuItemOperations.setOnClickListener {

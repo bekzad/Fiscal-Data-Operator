@@ -10,9 +10,6 @@ class AuthRepository(
     private val appPrefs: AppPreferences,
     private val dataDao: DataDao
 ) {
-
-    fun isSigning() = appPrefs.token.isNotEmpty()
-
     suspend fun fetchAccessToken(login: String, password: String, gsrKey: String) : AccessToken {
         val response = authApi.fetchAccessToken(login, password, gsrKey)
         saveToken(response.access_token)
