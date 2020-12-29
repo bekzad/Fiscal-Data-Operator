@@ -20,7 +20,7 @@
     <ImageView
         android:clickable="true"
         android:focusable="true"
-        android:id="@+id/iv_productCellLeftIcon"
+        android:id="@+id/iv_productCell_leftIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_remove_circle_outline_24"
@@ -30,32 +30,32 @@
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/tv_productCellTitle"
+        android:id="@+id/tv_productCell_title"
         style="@style/ProductCellTitleTextStyle"
         tools:text="Title"
-        app:layout_constraintBottom_toTopOf="@id/tv_productCellSubTitle"
-        app:layout_constraintStart_toEndOf="@id/iv_productCellLeftIcon"
+        app:layout_constraintBottom_toTopOf="@id/tv_productCell_subTitle"
+        app:layout_constraintStart_toEndOf="@id/iv_productCell_leftIcon"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_productCellSubTitle"
+        android:id="@+id/tv_productCell_subTitle"
         style="@style/ProductCellSubTitleTextStyle"
         tools:text="Sub title"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_productCellLeftIcon"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titleProductCell" />
+        app:layout_constraintStart_toEndOf="@+id/iv_productCell_leftIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_productCell_title" />
 
     <TextView
-        android:id="@+id/tv_productCellValueText"
+        android:id="@+id/tv_productCell_value_text"
         style="@style/ProductCellValueTextStyle"
         tools:text="value"
-        app:layout_constraintTop_toBottomOf="@id/tv_productCellSubTitle"
+        app:layout_constraintTop_toTopOf="@id/tv_productCell_subTitle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iv_ProductCellRightIcon" />
+        app:layout_constraintEnd_toStartOf="@id/iv_productCell_right_icon" />
 
     <ImageView
         android:visibility="gone"
-        android:id="@+id/iv_ProductCellRightIcon"
+        android:id="@+id/iv_productCell_right_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
