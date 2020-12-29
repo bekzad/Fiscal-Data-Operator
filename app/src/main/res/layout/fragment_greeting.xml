@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBlack"
-    android:padding="8dp">
+    android:padding="@dimen/padding_8dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/first_selection"
+        android:id="@+id/cv_first_selection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/radius_5dp"
@@ -39,61 +38,51 @@
     <androidx.cardview.widget.CardView
         android:layout_marginTop="@dimen/margin_8dp"
         app:cardCornerRadius="@dimen/radius_5dp"
-        android:id="@+id/second_selection"
+        android:id="@+id/cv_second_selection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/first_selection"
+        app:layout_constraintTop_toBottomOf="@id/cv_first_selection"
         app:layout_constraintStart_toStartOf="parent">
         <kg.nurtelecom.ofd.ui.CellView
             android:id="@+id/cell_change_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/text_change_password"
-            app:showSubTitle="false" />
+            app:title="@string/text_change_password"/>
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/logo_main"
+        android:id="@+id/iv_logo_main"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="@dimen/margin_32dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/second_selection" />
+        app:layout_constraintTop_toBottomOf="@id/cv_second_selection" />
 
     <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tv_app_name"
         android:text="@string/text_app_name"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/app_text_normal"
-        app:layout_constraintTop_toBottomOf="@id/logo_main"
-        app:layout_constraintStart_toStartOf="@id/app_version"
-        app:layout_constraintEnd_toEndOf="@id/app_version"
+        style="@style/BaseTextStyle"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo_main"
+        app:layout_constraintStart_toStartOf="@id/tv_app_version"
+        app:layout_constraintEnd_toEndOf="@id/tv_app_version"
         android:layout_marginTop="@dimen/app_margin"/>
     <TextView
-        android:id="@+id/app_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tv_app_version"
+        style="@style/BaseTextStyle"
         android:text="@string/text_app_version"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/app_text_normal"
-        app:layout_constraintTop_toBottomOf="@id/app_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/app_margin"/>
 
-    <TextView
-        android:id="@+id/tv_invalidate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:clickable="true"
+    <Button
+        android:id="@+id/btn_invalidate"
+        style="@style/BaseButtonStyle"
         android:text="@string/text_exit"
         android:textColor="@color/colorRed"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="@dimen/margin_32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

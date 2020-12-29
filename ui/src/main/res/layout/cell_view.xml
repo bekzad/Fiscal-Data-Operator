@@ -6,24 +6,24 @@
     style="@style/CellViewStyle">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tv_cellView_title"
         style="@style/ItemCellTitleTextStyle"
         tools:text="Title"
-        app:layout_constraintBottom_toTopOf="@id/subTitle"
+        app:layout_constraintBottom_toTopOf="@id/tv_cellView_subTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/subTitle"
+        android:id="@+id/tv_cellView_subTitle"
         style="@style/CellSubTitleTextStyle"
         tools:text="Sub Title"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_cellView_title" />
 
     <ImageView
-        android:id="@+id/cellViewIcon"
+        android:id="@+id/iv_cellView_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_keyboard_arrow_right_24"

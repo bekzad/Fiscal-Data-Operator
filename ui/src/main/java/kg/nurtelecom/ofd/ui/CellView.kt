@@ -34,19 +34,19 @@ class CellView(context: Context, attr: AttributeSet) : ConstraintLayout(context,
     }
 
     fun setTitle(titleText: String) {
-        vb.title.text = titleText
+        vb.tvCellViewTitle.text = titleText
     }
 
     fun setSubTitle(subTitleText: String?) {
-        vb.subTitle.visible(!subTitleText.isNullOrEmpty())
-        vb.subTitle.text = subTitleText
+        vb.tvCellViewSubTitle.visible(!subTitleText.isNullOrEmpty())
+        vb.tvCellViewSubTitle.text = subTitleText
     }
 
     fun setIconIsVisible(value: Boolean) {
-        vb.cellViewIcon.visible(value)
+        vb.ivCellViewIcon.visible(value)
     }
 
     fun setCellIcon(resId: Int) {
-        vb.cellViewIcon.setImageResource(resId)
+        vb.ivCellViewIcon.setImageResource(resId)
     }
 }

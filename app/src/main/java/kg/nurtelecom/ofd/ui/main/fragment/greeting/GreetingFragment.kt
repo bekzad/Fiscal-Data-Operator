@@ -25,11 +25,8 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
 
     override fun setupViews() {
         super.setupViews()
-        vb.tvInvalidate.setOnClickListener { vm.logout() }
-        vb.cellFiscalMode.setOnClickListener {
-            val intent = Intent(activity, SellMainActivity::class.java)
-            startActivity(intent)
-        }
+        vb.btnInvalidate.setOnClickListener { vm.logout() }
+        vb.cellFiscalMode.setOnClickListener { Log.i("ERLAN", "FiscalMode") }
         vb.cellProfile.setOnClickListener { Log.i("ERLAN", "cellProfile") }
         vb.cellChangePassword.setOnClickListener { Log.i("ERLAN", "cellChangePassword") }
     }
