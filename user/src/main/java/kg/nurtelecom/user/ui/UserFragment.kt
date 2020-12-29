@@ -23,7 +23,6 @@ class UserFragment : CoreFragment<FragmentUserBinding, UserVM>(UserVM::class) {
             vb.etPhone.setText(it.msiSdn)
             vb.etIdentification.setText(it.inn)
         })
-
     }
 
     override fun getBinding() = FragmentUserBinding.inflate(layoutInflater)
@@ -31,7 +30,6 @@ class UserFragment : CoreFragment<FragmentUserBinding, UserVM>(UserVM::class) {
     override fun setupViews() {
         super.setupViews()
         vb.testPassword.apply {
-            fetchIconType()
             setHint("password")
             setInputType(InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD)
             setOnIconChanged {

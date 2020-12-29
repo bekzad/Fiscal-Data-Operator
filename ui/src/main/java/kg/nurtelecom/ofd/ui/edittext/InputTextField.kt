@@ -5,7 +5,6 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.constraintlayout.solver.SolverVariableValues
 import androidx.constraintlayout.widget.ConstraintLayout
 import kg.nurtelecom.ui.R
 import kg.nurtelecom.ui.databinding.InputTextFieldBinding
@@ -19,6 +18,7 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
     }
 
     init {
+        fetchTag(R.drawable.ic_baseline_visibility_off)
         setIcon(R.drawable.ic_baseline_visibility_off)
     }
 
@@ -43,19 +43,21 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
     }
 
    private fun setIcon(resId: Int) {
-        binding.inputFieldIcon.setTag(resId)
+        binding.inputFieldIcon.setImageResource(resId)
     }
 
     fun switchIconType() {
         println("lol")
         when (binding.inputFieldIcon.tag){
             R.drawable.ic_baseline_visibility_off ->{
-                binding.etInputText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                binding.etInputText.inputType = InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD
+                fetchTag(R.drawable.ic_baseline_visibility)
                 setIcon(R.drawable.ic_baseline_visibility)
                 println("sos")
             }
             R.drawable.ic_baseline_visibility ->{
-                binding.etInputText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                binding.etInputText.inputType = InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                fetchTag(R.drawable.ic_baseline_visibility_off)
                 setIcon(R.drawable.ic_baseline_visibility_off)
             }
         }
@@ -65,13 +67,7 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
         binding.inputFieldIcon.setOnClickListener(listener)
     }
 
-    fun fetchIconType() {
-        println(binding.inputFieldIcon.tag)
-
-    }
-
     fun fetchTag(resId: Int){
-        
-
+        binding.inputFieldIcon.setTag(resId)
     }
 }
