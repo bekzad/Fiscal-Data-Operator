@@ -53,5 +53,7 @@
     <dimen name="size_75dp">75dp</dimen>
 
     <dimen name="height_75dp">75dp</dimen>
+    <dimen name="height_18dp">18dp</dimen>
+    <dimen name="width_18dp">18dp</dimen>
 
 </resources>
