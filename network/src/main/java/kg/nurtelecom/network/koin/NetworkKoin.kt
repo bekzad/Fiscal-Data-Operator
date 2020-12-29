@@ -3,6 +3,7 @@ package kg.nurtelecom.network.koin
 import kg.nurtelecom.network.BuildConfig
 import kg.nurtelecom.network.UnsafeOkHttpClient
 import kg.nurtelecom.network.data.api.AuthorizationApi
+import kg.nurtelecom.network.data.api.HistoryApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -14,6 +15,7 @@ val networkKoin = module {
     single { provideOkHttp() }
     single { provideRetrofit(get()) }
     single { get<Retrofit>().create(AuthorizationApi::class.java) }
+    single { get<Retrofit>().create(HistoryApi::class.java) }
 }
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {

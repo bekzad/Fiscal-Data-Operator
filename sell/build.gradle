@@ -36,13 +36,18 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':core')
+    implementation project(path: ':network')
+    implementation project(path: ':data')
+    implementation project(path: ':storage')
+    implementation project(path: ':ui')
+
     implementation libs.kotlin
     implementation libs.androidx.values()
     implementation libs.google.values()
+    implementation libs.network.values()
     implementation libs.koin.values()
-
-    implementation project(path: ':core')
-    implementation project(path: ':ui')
+    implementation libs.room.values()
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'

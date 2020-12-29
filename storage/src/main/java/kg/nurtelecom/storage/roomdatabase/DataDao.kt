@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import kg.nurtelecom.data.UserDetail
-
+import kg.nurtelecom.data.history.Content
 
 @Dao
 interface DataDao {
@@ -24,7 +24,10 @@ interface DataDao {
     //обнов.
      @Update
      fun updateUserData(userDetailModel: UserDetail)
+     
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertCheckHistory(content: List<Content>)
 
-
-
+    @Query("SELECT * FROM history")
+    fun getAllCheckHistory(): LiveData<List<Content>>
 }
