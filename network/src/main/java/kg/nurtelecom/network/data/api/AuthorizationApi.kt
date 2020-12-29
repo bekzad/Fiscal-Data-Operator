@@ -3,7 +3,6 @@ package kg.nurtelecom.network.data.api
 import kg.nurtelecom.data.AccessToken
 import kg.nurtelecom.data.LogoutResult
 import kg.nurtelecom.data.UserResult
-import retrofit2.Response
 import retrofit2.http.*
 
 interface AuthorizationApi {
@@ -21,5 +20,4 @@ interface AuthorizationApi {
     @Headers("Authorization: Basic ZGV2OkZndkRlNHZkITM={token}")
     @POST("invalidate")
     suspend fun logout(@Header("token") token: String): LogoutResult
-
 }

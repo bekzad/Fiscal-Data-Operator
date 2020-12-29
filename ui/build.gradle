@@ -45,6 +45,8 @@ dependencies {
     implementation libs.koin.values()
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    implementation project(path: ':core')
+
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()
 }

@@ -1,10 +1,10 @@
-package kg.nurtelecom.ofd.ui.main.fragment.aboutapp
+package kg.nurtelecom.ofd.ui.aboutapp
 
 import androidx.appcompat.app.AppCompatActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.SimpleFragment
-import kg.nurtelecom.ofd.R
-import kg.nurtelecom.ofd.databinding.FragmentAboutAppBinding
+import kg.nurtelecom.ui.R
+import kg.nurtelecom.ui.databinding.FragmentAboutAppBinding
 
 class AboutAppFragment : SimpleFragment<FragmentAboutAppBinding>() {
     override fun getBinding(): FragmentAboutAppBinding = FragmentAboutAppBinding.inflate(layoutInflater)

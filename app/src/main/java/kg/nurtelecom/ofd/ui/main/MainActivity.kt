@@ -10,7 +10,7 @@ import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.ofd.R
 import kg.nurtelecom.ofd.databinding.ActivityMainBinding
 import kg.nurtelecom.ofd.databinding.SideMenuMainBinding
-import kg.nurtelecom.ofd.ui.main.fragment.aboutapp.AboutAppFragment
+import kg.nurtelecom.ofd.ui.aboutapp.AboutAppFragment
 import kg.nurtelecom.ofd.ui.main.fragment.greeting.GreetingFragment
 
 class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
