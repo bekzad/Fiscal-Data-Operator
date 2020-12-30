@@ -81,8 +81,8 @@ class SellMainActivity :
         return object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
             override fun onDrawerStateChanged(newState: Int) {}
+            override fun onDrawerClosed(drawerView: View) {}
             override fun onDrawerOpened(drawerView: View) = setToolbarTitle(R.string.text_menu)
-            override fun onDrawerClosed(drawerView: View) = setToolbarTitle(R.string.text_sale)
         }
     }
 
