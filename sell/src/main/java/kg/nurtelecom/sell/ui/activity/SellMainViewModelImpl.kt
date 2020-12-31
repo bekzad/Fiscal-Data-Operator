@@ -71,6 +71,7 @@ class SellMainViewModelImpl : SellMainViewModel() {
         AllProducts("Test product name1", 25.00),
         AllProducts("Test product name2", 30.00)
     )
+
     override val allProducts: MutableLiveData<MutableList<AllProducts>> =
         MutableLiveData(mockedAllProducts)
 

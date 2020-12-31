@@ -59,6 +59,7 @@ class ProductAdapter(
         }
 
         companion object {
+            // TODO: must be changed
             fun getInstance(parent: ViewGroup) {
 
             }
