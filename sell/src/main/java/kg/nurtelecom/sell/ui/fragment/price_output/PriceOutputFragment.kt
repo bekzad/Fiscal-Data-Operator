@@ -46,7 +46,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     }
 
     private fun subscribeSelectedProduct() {
-        vm.selectProductData.observe(this, {
+        vm.selectProductData.observe(viewLifecycleOwner, {
             vb.productPriceEt.setText(it.productPrice.toString())
         })
     }

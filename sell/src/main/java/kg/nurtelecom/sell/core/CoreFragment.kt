@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 
+
 abstract class CoreFragment<VB: ViewBinding> : Fragment() {
 
     private var _vb: VB? = null
@@ -25,7 +26,7 @@ abstract class CoreFragment<VB: ViewBinding> : Fragment() {
         return vb.root
     }
 
-    abstract fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+    protected abstract fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
     open fun setupViews() {}
 
