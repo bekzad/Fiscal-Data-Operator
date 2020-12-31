@@ -1,6 +1,7 @@
 package kg.nurtelecom.ofd.edittext
 
 import android.content.Context
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.ColorInt
@@ -19,13 +20,17 @@ class CustomCardEditText(context: Context, attributeSet: AttributeSet? = null) :
         binding.priceTv.setText(text)
     }
 
-    fun setText(text: String = "") {
+    fun setText(text: String) {
         binding.productExpressionEt.setText(text)
     }
 
     fun setTextColor(@ColorInt color: Int) {
         binding.priceTv.setTextColor(color)
         binding.productExpressionEt.setTextColor(color)
+    }
+
+    fun setInputType(type: Int) {
+        binding.productExpressionEt.inputType = type
     }
 
     fun handleTextState(action: (text: CharSequence?) -> Unit) {

@@ -34,7 +34,7 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
     }
 
     private fun subscribeToAllProducts() {
-        vm.allProducts.observe(this, {
+        vm.allProducts.observe(viewLifecycleOwner, {
             allProductsAdapter.notifyItemInserted(it.lastIndex)
         })
     }
