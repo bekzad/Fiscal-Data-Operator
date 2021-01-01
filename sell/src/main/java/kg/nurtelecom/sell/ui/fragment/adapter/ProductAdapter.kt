@@ -4,41 +4,37 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.data.sell.Product
-import kg.nurtelecom.sell.core.ItemClickListener
+import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.ProductListItemBinding
 import kg.nurtelecom.sell.utils.isNotZero
 import kg.nurtelecom.data.sell.Product
 
 class ProductAdapter(
     private val productList: List<Product>,
-    private val itemClick: ItemClickListener
+    private val itemClick: ProductItemClickListener
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val binding =
-            ProductListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProductViewHolder(binding)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ProductViewHolder.getInstance(parent, itemClick)
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
-        holder.bind(product)
-        holder.apply {
-            binding.removeProductIv.setOnClickListener {
-                itemClick.removeItem(position)
-            }
-        }
+        holder.bind(product, position)
     }
 
     override fun getItemCount(): Int = productList.size
 
-    class ProductViewHolder(val binding: ProductListItemBinding) :
+    class ProductViewHolder(
+        private val binding: ProductListItemBinding,
+        private val itemClick: ProductItemClickListener
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
+        fun bind(product: Product, position: Int) {
             binding.apply {
                 productCountTv.text = fetchProductExpression(product)
                 productSumTv.text = product.totalPrice.toString()
+                removeProductIv.setOnClickListener { itemClick.removeItem(position) }
             }
         }
 
@@ -59,11 +55,11 @@ class ProductAdapter(
         }
 
         companion object {
-            // TODO: must be changed
-            fun getInstance(parent: ViewGroup) {
-
+            fun getInstance(parent: ViewGroup, itemClick: ProductItemClickListener): ProductViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ProductListItemBinding.inflate(layoutInflater, parent, false)
+                return ProductViewHolder(binding, itemClick)
             }
         }
-
     }
 }

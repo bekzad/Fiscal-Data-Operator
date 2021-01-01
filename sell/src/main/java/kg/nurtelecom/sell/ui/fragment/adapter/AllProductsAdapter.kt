@@ -15,28 +15,35 @@ class AllProductsAdapter(
     private val itemClick: NavigationHost
 ) : RecyclerView.Adapter<AllProductsAdapter.AllProductViewHolder>() {
 
-    class AllProductViewHolder(val binding: AllProductsItemListBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class AllProductViewHolder private constructor(
+        private val binding: AllProductsItemListBinding,
+        private val itemClick: NavigationHost
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-            fun bind(product: AllProducts) {
-                binding.apply {
-                    productNameTv.text = product.productName
-                    productPriceTv.text = product.productPrice.toString()
-                }
+        fun bind(product: AllProducts) {
+            binding.apply {
+                productNameTv.text = product.productName
+                productPriceTv.text = product.productPrice.toString()
+                navigateIv.setOnClickListener { itemClick.navigateTo(product) }
             }
+        }
+
+        companion object {
+            fun getInstance(parent: ViewGroup, itemClick: NavigationHost): AllProductViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = AllProductsItemListBinding.inflate(layoutInflater, parent, false)
+                return AllProductViewHolder(binding, itemClick)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllProductViewHolder {
-        val binding = AllProductsItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return AllProductViewHolder(binding)
+        return AllProductViewHolder.getInstance(parent, itemClick)
     }
 
     override fun onBindViewHolder(holder: AllProductViewHolder, position: Int) {
         val product = productList[position]
-        holder.apply {
-            bind(product)
-            binding.navigateIv.setOnClickListener { itemClick.navigateTo(product) }
-        }
+        holder.bind(product)
     }
 
     override fun getItemCount() = productList.size
