@@ -9,7 +9,7 @@ import kg.nurtelecom.sell.R
 import androidx.lifecycle.observe
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
-import kg.nurtelecom.sell.core.ItemClickListener
+import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
@@ -19,7 +19,8 @@ import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 import kg.nurtelecom.sell.utils.replaceFragment
 
-class SellFragment : CoreFragment<SellFragmentBinding>(), ItemClickListener {
+
+class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListener {
 
     private lateinit var productAdapter: ProductAdapter
 
@@ -60,6 +61,9 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ItemClickListener {
         vm.productList.observe(viewLifecycleOwner, { product ->
             setupRV(product)
         })
+        vm.taxSum.observe(viewLifecycleOwner) {
+            vb.sumPayCv.setCardContent(it)
+        }
     }
 
     private fun navigateToAddFragment() {
