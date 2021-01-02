@@ -13,7 +13,7 @@ abstract class CoreAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (position in items.indices) {
-            (holder as? Binder<T>)?.bind(items[position])
+            (holder as Binder<T>).bind(items[position])
         }
     }
 

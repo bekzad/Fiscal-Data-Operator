@@ -9,17 +9,22 @@ import kg.nurtelecom.sell.databinding.ProductListItemBinding
 import kg.nurtelecom.sell.utils.isNotZero
 import kg.nurtelecom.data.sell.Product
 
-class ProductAdapter(
-    private val productList: List<Product>,
-    private val itemClick: ProductItemClickListener
-) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(private val itemClick: ProductItemClickListener) :
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+
+    var productList: List<Product> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ProductViewHolder.getInstance(parent, itemClick)
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val product = productList[position]
-        holder.bind(product, position)
+        if (position in productList.indices) {
+            holder.bind(productList[position], position)
+        }
     }
 
     override fun getItemCount(): Int = productList.size
@@ -27,8 +32,7 @@ class ProductAdapter(
     class ProductViewHolder(
         private val binding: ProductListItemBinding,
         private val itemClick: ProductItemClickListener
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product, position: Int) {
             binding.apply {
@@ -55,7 +59,10 @@ class ProductAdapter(
         }
 
         companion object {
-            fun getInstance(parent: ViewGroup, itemClick: ProductItemClickListener): ProductViewHolder {
+            fun getInstance(
+                parent: ViewGroup,
+                itemClick: ProductItemClickListener
+            ): ProductViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ProductListItemBinding.inflate(layoutInflater, parent, false)
                 return ProductViewHolder(binding, itemClick)
