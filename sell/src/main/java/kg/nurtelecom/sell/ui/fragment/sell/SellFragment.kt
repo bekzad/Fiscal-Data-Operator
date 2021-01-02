@@ -29,15 +29,15 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         SellFragmentBinding.inflate(inflater, container, false)
 
-    private fun setupRV(product: MutableList<Product>) {
+    private fun setupRV() {
         vb.productRv.apply {
-            productAdapter = ProductAdapter(product, this@SellFragment)
+            productAdapter = ProductAdapter(this@SellFragment)
             adapter = productAdapter
         }
     }
 
     override fun setupViews() {
-        vm.productList.value?.let { setupRV(it) }
+        setupRV()
         setupTaxView()
         navigateToAddFragment()
         navigateToPaymentMethod()
@@ -59,7 +59,8 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
 
     private fun subscribeToLiveData() {
         vm.productList.observe(viewLifecycleOwner, { product ->
-            setupRV(product)
+            productAdapter.productList = product
+
         })
         vm.taxSum.observe(viewLifecycleOwner) {
             vb.sumPayCv.setCardContent(it)
@@ -71,6 +72,11 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
             val activity = activity as AppCompatActivity
             activity.replaceFragment(AddProductFragment.newInstance())
         }
+    }
+
+    override fun removeItem(position: Int) {
+        vm.removeProductFromList(position)
+        productAdapter.notifyDataSetChanged()
     }
 
     private fun navigateToPaymentMethod() {

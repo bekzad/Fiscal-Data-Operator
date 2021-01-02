@@ -17,6 +17,7 @@ import java.math.BigDecimal
 import kg.nurtelecom.sell.utils.parentActivity
 import kg.nurtelecom.sell.utils.replaceFragment
 
+
 class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     override val vm: SellMainViewModel by activityViewModels()
