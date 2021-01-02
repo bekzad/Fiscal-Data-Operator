@@ -13,6 +13,7 @@ import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 import kg.nurtelecom.sell.utils.addFragment
 import kg.nurtelecom.sell.utils.parentActivity
 
+
 class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), NavigationHost {
 
     private lateinit var allProductsAdapter: AllProductsAdapter
