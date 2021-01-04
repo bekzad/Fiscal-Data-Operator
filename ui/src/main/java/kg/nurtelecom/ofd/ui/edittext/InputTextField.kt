@@ -18,8 +18,8 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
     }
 
     init {
-        fetchTag(R.drawable.ic_baseline_visibility_off)
-        setIcon(R.drawable.ic_baseline_visibility_off)
+//        fetchTag(R.drawable.ic_baseline_visibility_off)
+//        setIcon(R.drawable.ic_baseline_visibility_off)
     }
 
     fun setInputType(type: Int) {
@@ -30,44 +30,43 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
         binding.etInputText.hint = text
     }
 
-    fun setEyesIconIsVisible(value: Boolean) {
-        if (value) {
-            binding.inputFieldIcon.visibility = VISIBLE
-        }else{
-            binding.inputFieldIcon.visibility = GONE
-        }
-    }
+//    fun setEyesIconIsVisible(value: Boolean) {
+//        if (value) {
+//            binding.layoutTextInput.visibility = VISIBLE
+//        }else{
+//            binding.layoutTextInput.visibility = GONE
+//        }
+//    }
 
     fun setOnTextChanged(listener: TextWatcher) {
         binding.etInputText.addTextChangedListener(listener)
     }
 
-   private fun setIcon(resId: Int) {
-        binding.inputFieldIcon.setImageResource(resId)
-    }
+//   private fun setIcon(resId: Int) {
+//        binding.inputFieldIcon.setImageResource(resId)
+//    }
 
-    fun switchIconType() {
-        println("lol")
-        when (binding.inputFieldIcon.tag){
-            R.drawable.ic_baseline_visibility_off ->{
-                binding.etInputText.inputType = InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD
-                fetchTag(R.drawable.ic_baseline_visibility)
-                setIcon(R.drawable.ic_baseline_visibility)
-                println("sos")
-            }
-            R.drawable.ic_baseline_visibility ->{
-                binding.etInputText.inputType = InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                fetchTag(R.drawable.ic_baseline_visibility_off)
-                setIcon(R.drawable.ic_baseline_visibility_off)
-            }
+//    fun switchIconType() {
+//        when (binding.inputFieldIcon.tag){
+//            R.drawable.ic_baseline_visibility_off ->{
+//                binding.etInputText.inputType = InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD
+//                fetchTag(R.drawable.ic_baseline_visibility)
+//                setIcon(R.drawable.ic_baseline_visibility)
+//
+//            }
+//            R.drawable.ic_baseline_visibility ->{
+//                binding.etInputText.inputType = InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+//                fetchTag(R.drawable.ic_baseline_visibility_off)
+//                setIcon(R.drawable.ic_baseline_visibility_off)
+//            }
         }
-    }
+//    }
 
-    fun setOnIconChanged(listener: OnClickListener){
-        binding.inputFieldIcon.setOnClickListener(listener)
-    }
-
-    fun fetchTag(resId: Int){
-        binding.inputFieldIcon.setTag(resId)
-    }
-}
+//    fun setOnIconChanged(listener: OnClickListener){
+//        binding.inputFieldIcon.setOnClickListener(listener)
+//    }
+//
+//    fun fetchTag(resId: Int){
+//        binding.inputFieldIcon.setTag(resId)
+//    }
+//}

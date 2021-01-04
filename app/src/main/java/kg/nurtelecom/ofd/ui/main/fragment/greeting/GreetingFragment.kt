@@ -29,7 +29,6 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
         vb.cellProfile.setOnClickListener {
             val activity = activity as AppCompatActivity
             activity.supportFragmentManager.beginTransaction().replace(R.id.mainContainer, UserFragment.getInctance()).commit()
-            println("что нибудь")
         }
         vb.cellChangePassword.setOnClickListener { Log.i("ERLAN", "cellChangePassword") }
     }

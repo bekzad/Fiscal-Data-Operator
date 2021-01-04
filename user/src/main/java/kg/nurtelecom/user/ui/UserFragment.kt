@@ -30,17 +30,17 @@ class UserFragment : CoreFragment<FragmentUserBinding, UserVM>(UserVM::class) {
     override fun setupViews() {
         super.setupViews()
         vb.testPassword.apply {
-            setHint("password")
-            setInputType(InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD)
-            setOnIconChanged {
-                this.switchIconType()
-            }
+            setHint("your text")
+//            setEyesIconIsVisible(true)
+//            setInputType(InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD)
+//            setOnIconChanged {
+//                this.switchIconType()
+//            }
         }
     }
 
     companion object{
         fun getInctance() = UserFragment()
     }
-
 }
 
