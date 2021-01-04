@@ -42,7 +42,7 @@
             android:id="@+id/main_surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlue"
+            android:background="@drawable/text_input_field"
             android:layout_marginBottom="@dimen/app_margin">
 
             <EditText
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Фамилия"
-                android:background="@color/colorGreen"
+                android:background="@null"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/app_text_large"
                 android:textColorHint="@color/colorGrey"
@@ -78,6 +78,7 @@
                 android:textColorHint="@color/colorGrey"
                 android:gravity="center_horizontal|top"/>
 
+
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -98,6 +99,7 @@
                 android:textSize="@dimen/app_text_large"
                 android:textColorHint="@color/colorGrey"
                 android:gravity="center_horizontal|top"/>
+
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -137,25 +139,18 @@
                 android:layout_height="wrap_content"
                 android:hint="ИНН"
                 android:background="@null"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/app_text_large"
                 android:textColorHint="@color/colorGrey"
                 android:gravity="center_horizontal|top"/>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/text_input_field"
-            android:layout_marginBottom="@dimen/app_margin">
-
         <kg.nurtelecom.ofd.ui.edittext.InputTextField
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/test_password" />
-
-        </com.google.android.material.card.MaterialCardView>
+            android:id="@+id/test_password"
+            android:background="@color/black"/>
 
     </LinearLayout>
 

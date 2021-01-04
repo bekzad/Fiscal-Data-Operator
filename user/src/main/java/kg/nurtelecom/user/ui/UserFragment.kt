@@ -42,5 +42,6 @@ class UserFragment : CoreFragment<FragmentUserBinding, UserVM>(UserVM::class) {
     companion object{
         fun getInctance() = UserFragment()
     }
+
 }
 
