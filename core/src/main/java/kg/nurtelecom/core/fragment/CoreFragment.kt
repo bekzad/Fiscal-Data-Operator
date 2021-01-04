@@ -5,7 +5,6 @@ import androidx.viewbinding.ViewBinding
 import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.extension.toast
 import kg.nurtelecom.core.viewmodel.CoreViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.reflect.KClass
 
@@ -13,7 +12,6 @@ abstract class CoreFragment<VB : ViewBinding, VM : CoreViewModel>(vmClass: KClas
     SimpleFragment<VB>() {
 
     protected val vm: VM by viewModel(clazz = vmClass)
-    protected val vms: VM by sharedViewModel(clazz = vmClass)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

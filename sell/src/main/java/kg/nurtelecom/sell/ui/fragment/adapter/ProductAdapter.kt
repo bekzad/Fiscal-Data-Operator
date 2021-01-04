@@ -59,10 +59,7 @@ class ProductAdapter(private val itemClick: ProductItemClickListener) :
         }
 
         companion object {
-            fun getInstance(
-                parent: ViewGroup,
-                itemClick: ProductItemClickListener
-            ): ProductViewHolder {
+            fun getInstance(parent: ViewGroup, itemClick: ProductItemClickListener): ProductViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ProductListItemBinding.inflate(layoutInflater, parent, false)
                 return ProductViewHolder(binding, itemClick)
