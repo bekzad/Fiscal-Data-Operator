@@ -29,5 +29,5 @@ interface DataDao {
     fun insertCheckHistory(content: List<Content>)
 
     @Query("SELECT * FROM history")
-    fun getAllCheckHistory(): LiveData<List<Content>>
+    fun getAllCheckHistory(): List<Content>
 }
