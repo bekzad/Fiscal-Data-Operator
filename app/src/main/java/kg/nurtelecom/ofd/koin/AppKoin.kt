@@ -11,8 +11,6 @@ import kg.nurtelecom.ofd.repository.GreetingRepository
 import kg.nurtelecom.ofd.repository.SplashRepository
 import kg.nurtelecom.ofd.ui.spalsh.SplashVM
 import kg.nurtelecom.ofd.ui.spalsh.SplashVMImpl
-import kg.nurtelecom.sell.ui.fragment.story.HistoryViewModel
-import kg.nurtelecom.sell.ui.fragment.story.HistoryViewModelImpl
 import org.koin.dsl.module
 
 val appKoin = module {

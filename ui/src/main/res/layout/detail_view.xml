@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,18 +12,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/margin_8dp"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        app:cardBackgroundColor="@color/darkGrey"
+        app:cardCornerRadius="@dimen/radius_0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/darkGrey"
         tools:ignore="RtlSymmetry">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingTop="@dimen/margin_12dp"
-            android:paddingBottom="@dimen/margin_4dp"
-            android:orientation="vertical">
+            android:paddingBottom="@dimen/margin_4dp">
 
             <ImageView
                 android:id="@+id/iv_detail_icon"
@@ -35,11 +40,11 @@
 
             <TextView
                 android:id="@+id/tv_title"
+                style="@style/HistoryItemTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_32dp"
                 android:text="@string/text_sale_type"
-                style="@style/HistoryItemTitleTextStyle"
                 app:layout_constraintLeft_toRightOf="@id/iv_detail_icon"
                 app:layout_constraintStart_toStartOf="@id/iv_detail_icon"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,21 +61,21 @@
 
             <TextView
                 android:id="@+id/tv_timestamp"
+                style="@style/HistoryItemSecondaryTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_36dp"
                 android:text="@string/text_timestamp"
-                style="@style/HistoryItemSecondaryTextStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_counter" />
 
             <TextView
                 android:id="@+id/tv_amount"
+                style="@style/HistoryItemTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/text_payment_amount"
-                style="@style/HistoryItemTitleTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -57,7 +57,7 @@
                 android:textSize="@dimen/text_16sp"/>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switch1"
+                android:id="@+id/switch_fiscal_regime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/margin_16dp"
