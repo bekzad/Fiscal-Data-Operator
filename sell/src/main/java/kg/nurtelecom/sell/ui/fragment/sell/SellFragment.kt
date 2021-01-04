@@ -14,6 +14,8 @@ import kg.nurtelecom.sell.databinding.SellFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
 import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.sell.ui.custom.CustomDialog.Companion.FISCAL_REGIME
+import kg.nurtelecom.sell.ui.custom.CustomDialog.Companion.NON_FISCAL_REGIME
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
@@ -45,9 +47,9 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         setupDialog()
     }
 
-    // TODO: use extension
     private fun setupDialog() {
-        vb.modeDialog.setInvisible()
+        vb.modeDialog.setupDialog(FISCAL_REGIME)
+        vb.modeDialog.hideDialog()
     }
 
     // TODO: must be changed
@@ -60,7 +62,6 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     private fun subscribeToLiveData() {
         vm.productList.observe(viewLifecycleOwner, { product ->
             productAdapter.productList = product
-
         })
         vm.taxSum.observe(viewLifecycleOwner) {
             vb.sumPayCv.setCardContent(it)
