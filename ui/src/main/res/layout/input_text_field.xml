@@ -18,7 +18,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:passwordToggleDrawable="@drawable/show_password_selector"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:passwordToggleTint="@color/colorGrey">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_input_text"
