@@ -15,7 +15,17 @@ class AllProductsAdapter(
     private val itemClick: NavigationHost
 ) : RecyclerView.Adapter<AllProductsAdapter.AllProductViewHolder>() {
 
-    class AllProductViewHolder private constructor(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllProductViewHolder {
+        return AllProductViewHolder.getInstance(parent, itemClick)
+    }
+
+    override fun onBindViewHolder(holder: AllProductViewHolder, position: Int) {
+        holder.bind(productList[position])
+    }
+
+    override fun getItemCount() = productList.size
+
+    class AllProductViewHolder (
         private val binding: AllProductsItemListBinding,
         private val itemClick: NavigationHost
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -36,15 +46,4 @@ class AllProductsAdapter(
             }
         }
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllProductViewHolder {
-        return AllProductViewHolder.getInstance(parent, itemClick)
-    }
-
-    override fun onBindViewHolder(holder: AllProductViewHolder, position: Int) {
-        val product = productList[position]
-        holder.bind(product)
-    }
-
-    override fun getItemCount() = productList.size
 }
