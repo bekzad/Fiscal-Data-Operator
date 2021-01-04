@@ -1,5 +1,6 @@
 package kg.nurtelecom.auth.ui
 
+import android.util.Log
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import kg.nurtelecom.auth.databinding.AuthActivityBinding
@@ -11,7 +12,7 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
 
     private fun login() {
         val (login, password, gsrKey) = editTextHandler()
-        vm.login(login, password, gsrKey)
+        vm.login(login, password, gsrKey, isFiscalRegime())
     }
 
     private fun editTextHandler(): Array<String> {
@@ -19,6 +20,10 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
         val password = vb.etPassword.getTrimmedText()
         val gsrKey = vb.etGsrKey.getTrimmedText()
         return arrayOf(login, password, gsrKey)
+    }
+
+    private fun isFiscalRegime(): Boolean {
+        return  vb.switchFiscalRegime.isChecked
     }
 
     override fun setupViews() {

@@ -14,7 +14,7 @@ import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
 import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
-import kg.nurtelecom.sell.ui.fragment.story.HistoryFragment
+import kg.nurtelecom.sell.ui.fragment.history.HistoryFragment
 
 class SellMainActivity :
     CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {

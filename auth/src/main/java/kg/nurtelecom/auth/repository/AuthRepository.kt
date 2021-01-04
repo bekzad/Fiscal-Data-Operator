@@ -10,11 +10,16 @@ class AuthRepository(
     private val appPrefs: AppPreferences,
     private val dataDao: DataDao
 ) {
-    suspend fun fetchAccessToken(login: String, password: String, gsrKey: String) : AccessToken {
+    suspend fun fetchAccessToken(login: String, password: String, gsrKey: String, isFiscalRegime: Boolean) : AccessToken {
         val response = authApi.fetchAccessToken(login, password, gsrKey)
         saveToken(response.access_token)
         saveRefreshToken(response.refresh_token)
+        saveFiscalRegime(isFiscalRegime)
         return response
+    }
+
+    private fun saveFiscalRegime(fiscalRegime: Boolean) {
+        appPrefs.fiscalRegime = fiscalRegime
     }
 
     private fun saveToken(token: String) {
