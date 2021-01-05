@@ -24,10 +24,4 @@ interface DataDao {
     //обнов.
      @Update
      fun updateUserData(userDetailModel: UserDetail)
-     
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCheckHistory(content: List<Content>)
-
-    @Query("SELECT * FROM history")
-    fun getAllCheckHistory(): List<Content>
 }

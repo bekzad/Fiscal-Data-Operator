@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import kg.nurtelecom.data.UserDetail
 import kg.nurtelecom.data.history.Content
 
-@Database(entities = [UserDetail::class, Content::class], version = 2)
+@Database(entities = [UserDetail::class], version = 2)
 abstract class RoomDB : RoomDatabase() {
 
     abstract fun getDataDao(): DataDao

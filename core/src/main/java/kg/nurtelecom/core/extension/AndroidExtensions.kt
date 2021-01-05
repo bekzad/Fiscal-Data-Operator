@@ -5,6 +5,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
@@ -28,3 +32,10 @@ fun AppCompatActivity.setToolbarTitle(resId: Int) {
 fun AppCompatActivity.getCurrentVisibleFragment() : Fragment{
     return supportFragmentManager.fragments.last()
 }
+
+fun Date.formatForLocalDateTimeDefaults(): String {
+    val sdf = SimpleDateFormat("yyyy/MM/dd - HH:mm", Locale.getDefault())
+    return sdf.format(this)
+}
+
+fun LocalDateTime.formatForServerDateTimeDefaults() = format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"))
