@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -18,7 +19,10 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         private val receiptDetailView: ReceiptDetailView = view as ReceiptDetailView
 
-        fun getCustomView(): ReceiptDetailView {
+        fun getCustomView(item: Content): ReceiptDetailView {
+            itemView.setOnClickListener {
+                Log.d("ITEM", item.id.toString())
+            }
             return receiptDetailView
         }
     }
@@ -32,7 +36,7 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.getCustomView().setReceipt(items[position]);
+        holder.getCustomView(items[position]).setReceipt(items[position]);
     }
 
     override fun getItemCount(): Int {

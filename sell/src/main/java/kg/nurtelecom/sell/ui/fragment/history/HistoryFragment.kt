@@ -24,7 +24,7 @@ class HistoryFragment : CoreFragment<HistoryRecycleViewBinding, HistoryViewModel
 
     override fun setupViews() {
         initRecyclerView()
-        vm.fetchCheckHistory()
+        vm.fetchChecksHistory()
     }
 
     private fun initRecyclerView() {
@@ -41,7 +41,7 @@ class HistoryFragment : CoreFragment<HistoryRecycleViewBinding, HistoryViewModel
     }
 
     private fun observeCheckHistory() {
-        vm.checkHistoryData.observe(this, Observer {
+        vm.checksHistoryData.observe(this, Observer {
             if(it != null) {
                 historyAdapter.setListData(it as ArrayList<Content>)
                 historyAdapter.notifyDataSetChanged()
