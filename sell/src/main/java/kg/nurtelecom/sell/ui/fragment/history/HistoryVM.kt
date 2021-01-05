@@ -6,17 +6,16 @@ import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.repository.SellRepository
 
 abstract class HistoryViewModel : CoreViewModel() {
-    abstract var checkHistoryData: MutableLiveData<List<Content>>
-    abstract fun fetchCheckHistory()
+    abstract var checksHistoryData: MutableLiveData<List<Content>>
+    abstract fun fetchChecksHistory()
 }
 
 class HistoryViewModelImpl (private val sellRepository: SellRepository) : HistoryViewModel() {
-    override var  checkHistoryData: MutableLiveData<List<Content>> = MutableLiveData()
+    override var  checksHistoryData: MutableLiveData<List<Content>> = MutableLiveData()
 
-    override fun fetchCheckHistory() {
+    override fun fetchChecksHistory() {
         safeUICall {
-            sellRepository.insertCheckHistory()
-            checkHistoryData.postValue(sellRepository.fetchCheckHistory())
+            checksHistoryData.postValue(sellRepository.fetchChecksHistory())
         }
     }
 }
