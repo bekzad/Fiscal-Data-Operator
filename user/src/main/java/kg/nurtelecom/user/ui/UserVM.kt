@@ -23,6 +23,7 @@ class UserVMImpl(private val repository: UserRepository): UserVM(){
             userData.postValue(repository.fetchUserData())
         }
     }
+    
 }
 
 
