@@ -27,72 +27,12 @@
             android:id="@+id/et_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
             android:backgroundTint="@color/colorInputTextField"
             android:gravity="center_horizontal|top"
-            android:inputType="textPassword"
             android:textColor="@color/colorGrey"
             android:textColorHint="@color/colorGrey"
-            android:textSize="@dimen/app_text_large" />
+            android:textSize="@dimen/app_text_normal" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-
-        <!--    <com.google.android.material.card.MaterialCardView-->
-        <!--        android:id="@+id/main_surname"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:backgroundTint="@color/black"-->
-        <!--        android:paddingLeft="@dimen/margin_16dp"-->
-        <!--        android:paddingTop="@dimen/margin_8dp"-->
-        <!--        android:paddingRight="@dimen/margin_16dp"-->
-        <!--        android:paddingBottom="@dimen/margin_8dp"-->
-        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-        <!--        <com.google.android.material.textfield.TextInputLayout-->
-        <!--            android:id="@+id/layoutTextInput"-->
-        <!--            app:passwordToggleDrawable="@drawable/show_password_selector"-->
-        <!--            app:passwordToggleEnabled="true"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content">-->
-
-        <!--            <com.google.android.material.textfield.TextInputEditText-->
-        <!--                android:id="@+id/et_input_text"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:background="@null"-->
-        <!--                android:gravity="center_horizontal|top"-->
-        <!--                android:textColor="@color/colorGrey"-->
-        <!--                android:textSize="@dimen/app_text_large" />-->
-
-
-
-    <!--        <EditText-->
-        <!--            android:id="@+id/et_input_text"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@null"-->
-        <!--            android:gravity="center_horizontal|top"-->
-        <!--            android:hint="Your text"-->
-
-        <!--            android:textColor="@color/white"-->
-        <!--            android:textColorHint="@color/colorGrey"-->
-        <!--            android:textSize="@dimen/app_text_large" />-->
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/input_field_icon"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:src="@drawable/ic_baseline_visibility_off"-->
-        <!--            android:layout_gravity="center_vertical|right"-->
-        <!--            android:clickable="true"-->
-        <!--            android:focusable="true"-->
-        <!--            android:visibility="gone"/>-->
-
-
-<!--    </com.google.android.material.card.MaterialCardView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

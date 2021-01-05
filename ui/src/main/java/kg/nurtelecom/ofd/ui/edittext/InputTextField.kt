@@ -1,12 +1,11 @@
 package kg.nurtelecom.ofd.ui.edittext
 
 import android.content.Context
-import android.text.InputType
+
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import kg.nurtelecom.ui.R
 import kg.nurtelecom.ui.databinding.InputTextFieldBinding
 
 class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(context, attr) {
@@ -18,8 +17,9 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
     }
 
     init {
-//        fetchTag(R.drawable.ic_baseline_visibility_off)
-//        setIcon(R.drawable.ic_baseline_visibility_off)
+
+        setPasswordEditText(true)
+
     }
 
     fun setInputType(type: Int) {
@@ -30,43 +30,13 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
         binding.etInputText.hint = text
     }
 
-//    fun setEyesIconIsVisible(value: Boolean) {
-//        if (value) {
-//            binding.layoutTextInput.visibility = VISIBLE
-//        }else{
-//            binding.layoutTextInput.visibility = GONE
-//        }
-//    }
+    fun setPasswordEditText(value: Boolean) {
+        binding.textInputLayout.isPasswordVisibilityToggleEnabled = value
+
+    }
 
     fun setOnTextChanged(listener: TextWatcher) {
         binding.etInputText.addTextChangedListener(listener)
     }
 
-//   private fun setIcon(resId: Int) {
-//        binding.inputFieldIcon.setImageResource(resId)
-//    }
-
-//    fun switchIconType() {
-//        when (binding.inputFieldIcon.tag){
-//            R.drawable.ic_baseline_visibility_off ->{
-//                binding.etInputText.inputType = InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD
-//                fetchTag(R.drawable.ic_baseline_visibility)
-//                setIcon(R.drawable.ic_baseline_visibility)
-//
-//            }
-//            R.drawable.ic_baseline_visibility ->{
-//                binding.etInputText.inputType = InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-//                fetchTag(R.drawable.ic_baseline_visibility_off)
-//                setIcon(R.drawable.ic_baseline_visibility_off)
-//            }
-        }
-//    }
-
-//    fun setOnIconChanged(listener: OnClickListener){
-//        binding.inputFieldIcon.setOnClickListener(listener)
-//    }
-//
-//    fun fetchTag(resId: Int){
-//        binding.inputFieldIcon.setTag(resId)
-//    }
-//}
+}

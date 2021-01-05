@@ -100,7 +100,6 @@
                 android:textColorHint="@color/colorGrey"
                 android:gravity="center_horizontal|top"/>
 
-
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -146,12 +145,16 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <kg.nurtelecom.ofd.ui.edittext.InputTextField
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/test_password" />
-
     </LinearLayout>
+
+    <kg.nurtelecom.ofd.ui.edittext.InputTextField
+        android:id="@+id/test_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_margin_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_change"
