@@ -6,20 +6,18 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.textfield.TextInputLayout
 import kg.nurtelecom.ui.databinding.InputTextFieldBinding
 
 class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(context, attr) {
 
-    private val binding by lazy {
-        InputTextFieldBinding.inflate(
-            LayoutInflater.from(context), this, true
-        )
-    }
+    var binding: InputTextFieldBinding =
+        InputTextFieldBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
-
-        setPasswordEditText(true)
-
+        setPasswordEditText(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+        //setPasswordEditText(TextInputLayout.END_ICON_CLEAR_TEXT)
+        //setPasswordEditText(TextInputLayout.END_ICON_NONE)
     }
 
     fun setInputType(type: Int) {
@@ -30,9 +28,8 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
         binding.etInputText.hint = text
     }
 
-    fun setPasswordEditText(value: Boolean) {
-        binding.textInputLayout.isPasswordVisibilityToggleEnabled = value
-
+    fun setPasswordEditText(endIconMode: Int) {
+        binding.textInputLayout.endIconMode = endIconMode
     }
 
     fun setOnTextChanged(listener: TextWatcher) {

@@ -17,16 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
+        <kg.nurtelecom.ofd.ui.edittext.InputTextField
             android:id="@+id/et_login"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_48dp"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:background="@color/colorShadedDark"
-            android:gravity="center"
-            android:hint="@string/ed_login"
-            android:inputType="textPersonName"
-            style="@style/application_editText"/>
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/et_password"

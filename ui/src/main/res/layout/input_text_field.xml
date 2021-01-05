@@ -6,29 +6,24 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_layout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/text_input_field"
-        android:paddingLeft="@dimen/margin_16dp"
-        android:paddingTop="@dimen/margin_8dp"
-        android:paddingRight="@dimen/margin_16dp"
-        android:paddingBottom="@dimen/margin_8dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:background="@color/colorInputTextField"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:passwordToggleDrawable="@drawable/show_password_selector"
-        app:passwordToggleEnabled="true"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
-        app:passwordToggleTint="@color/colorGrey">
+        app:hintEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorInputTextField"
-            android:gravity="center_horizontal|top"
+            android:gravity="center"
             android:textColor="@color/colorGrey"
             android:textColorHint="@color/colorGrey"
             android:textSize="@dimen/app_text_normal" />
