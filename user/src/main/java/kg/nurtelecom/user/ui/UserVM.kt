@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.UserDetail
-import kg.nurtelecom.data.UserDetailModel
 import kg.nurtelecom.user.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,7 +22,6 @@ class UserVMImpl(private val repository: UserRepository): UserVM(){
             userData.postValue(repository.fetchUserData())
         }
     }
-    
 }
 
 

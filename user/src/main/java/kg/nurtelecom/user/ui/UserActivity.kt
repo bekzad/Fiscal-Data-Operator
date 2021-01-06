@@ -1,31 +1,55 @@
 package kg.nurtelecom.user.ui
 
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import kg.nurtelecom.core.activity.CoreActivity
-import kg.nurtelecom.core.fragment.CoreFragment
+import kg.nurtelecom.core.extension.enable
+import kg.nurtelecom.core.extension.text
 import kg.nurtelecom.user.databinding.ActivityUserBinding
 import java.util.regex.Pattern
 
 class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
+
+    private fun editTextHandler(): Array<String> {
+        val surname = text(vb.etSurname)
+        val name = text(vb.etName)
+        val middleName = text(vb.etMiddlename)
+        val phone = text(vb.etPhone)
+        val inn = text(vb.etIdentification)
+        return arrayOf(surname, name, middleName, phone, inn)
+    }
+
+    override fun setupViews() {
+        super.setupViews()
+        vm.fetchUserData()
+
+        vb.etSurname.addTextChangedListener {
+            val (surname, name, phone) = editTextHandler()
+            vb.btnChange.enable(surname.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty())
+        }
+
+        vb.etName.addTextChangedListener {
+            val (surname, name, phone) = editTextHandler()
+            vb.btnChange.enable(surname.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty())
+        }
+    }
 
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
         observeUserData()
         validateOfTheIdentificationNumber ()
     }
+
     private fun observeUserData(){
         vm.userData.observe(this, Observer {
-            vb.etSurname.setText(it.middlename)
-            vb.etName.setText(it.firstname)
-            vb.etLastname.setText(it.lastname)
+            vb.etSurname.setText(it.firstname)
+            vb.etName.setText(it.lastname)
+            vb.etMiddlename.setText(it.middlename)
             vb.etPhone.setText(it.msisdn)
             vb.etIdentification.setText(it.inn)
         })
     }
-    override fun setupViews() {
-        super.setupViews()
-        vm.fetchUserData()
-    }
+
     override fun getBinding() = ActivityUserBinding.inflate(layoutInflater)
 
     private fun validateOfTheIdentificationNumber (): Boolean {
@@ -40,8 +64,7 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
             return true
         }
     }
-
-    companion object {
+      companion object {
 
         fun newInstance(): UserActivity{
             return UserActivity()
