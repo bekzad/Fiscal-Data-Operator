@@ -2,16 +2,8 @@ package kg.nurtelecom.ofd.sell
 
 import android.content.Context
 import android.graphics.Color
-import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.annotation.*
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.card.MaterialCardView
 import kg.nurtelecom.ui.R
