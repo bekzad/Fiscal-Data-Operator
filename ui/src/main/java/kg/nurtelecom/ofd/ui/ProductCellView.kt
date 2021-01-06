@@ -15,15 +15,15 @@ class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(c
     init {
         context.theme.obtainStyledAttributes(
             attr,
-            R.styleable.custom_view,
+            R.styleable.ProductCellView,
             0, 0).apply {
             try {
-                setTitle(getString(R.styleable.custom_view_title).toString())
-                setSubTitle(getString(R.styleable.custom_view_subTitle))
-                setValueText(getString(R.styleable.custom_view_value))
-                vb.cbProductCellView.visible(getBoolean(R.styleable.custom_view_showCheckBox, false))
-                vb.ivProductCellLeftIcon.visible(getBoolean(R.styleable.custom_view_showLeftIcon, false))
-                vb.ivProductCellRightIcon.visible(getBoolean(R.styleable.custom_view_showRightIcon, false))
+                setTitle(getString(R.styleable.ProductCellView_title).toString())
+                setSubTitle(getString(R.styleable.ProductCellView_subTitle))
+                setCellValue(getString(R.styleable.ProductCellView_value))
+                vb.cbSelectItem.visible(getBoolean(R.styleable.ProductCellView_showCheckBox, false))
+                vb.ivLeftIcon.visible(getBoolean(R.styleable.ProductCellView_showLeftIcon, false))
+                vb.ivRightIcon.visible(getBoolean(R.styleable.ProductCellView_showRightIcon, false))
             } finally {
                 recycle()
             }
@@ -31,27 +31,25 @@ class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(c
     }
 
     fun setTitle(title: String) {
-        vb.tvProductCellTitle.text = title
+        vb.tvTitle.text = title
     }
 
     fun setSubTitle(subTitleText: String?) {
-        vb.tvProductCellSubTitle.visible(!subTitleText.isNullOrEmpty())
-        vb.tvProductCellSubTitle.text = subTitleText
+        vb.tvSubTitle.visible(!subTitleText.isNullOrEmpty())
+        vb.tvSubTitle.text = subTitleText
     }
 
-    fun setValueText(text: String?) {
-        vb.tvProductCellValueText.visible(!text.isNullOrEmpty())
-        vb.tvProductCellValueText.text = text
+    fun setCellValue(text: String?) {
+        vb.tvCellValue.visible(!text.isNullOrEmpty())
+        vb.tvCellValue.text = text
     }
 
     fun setOnCheckedChangeListener(listener: CompoundButton.OnCheckedChangeListener) {
-        vb.cbProductCellView.visible(true)
-        vb.cbProductCellView.setOnCheckedChangeListener(listener)
+        vb.cbSelectItem.setOnCheckedChangeListener(listener)
     }
 
     fun setOnLeftIconClickListener(listener: OnClickListener) {
-        vb.ivProductCellLeftIcon.visible(true)
-        vb.ivProductCellLeftIcon.setOnClickListener(listener)
+        vb.ivLeftIcon.setOnClickListener(listener)
     }
 
     fun setOnCellClickListener(listener: OnClickListener) {
@@ -59,7 +57,7 @@ class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(c
     }
 
     fun setLeftIconImageResource(resId: Int) {
-        vb.ivProductCellRightIcon.visible(true)
-        vb.ivProductCellRightIcon.setImageResource(resId)
+        vb.ivRightIcon.visible(true)
+        vb.ivRightIcon.setImageResource(resId)
     }
 }
