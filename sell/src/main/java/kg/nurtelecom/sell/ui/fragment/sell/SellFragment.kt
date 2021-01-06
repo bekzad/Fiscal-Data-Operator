@@ -62,7 +62,7 @@ class SellFragment :
     }
 
     private fun navigateToPaymentMethod() {
-        vb.sumPayCv.setOnClickListener {
+        vb.icSumPay.setOnClickListener {
             val activity = activity as AppCompatActivity
             activity
                 .supportFragmentManager
