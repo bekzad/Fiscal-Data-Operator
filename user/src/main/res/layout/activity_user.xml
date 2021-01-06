@@ -167,5 +167,5 @@
         android:textColor="@color/white"
         android:textSize="@dimen/text_20sp">
 
-    </Button>
+    </com.google.android.material.button.MaterialButton>
 </androidx.constraintlayout.widget.ConstraintLayout>
