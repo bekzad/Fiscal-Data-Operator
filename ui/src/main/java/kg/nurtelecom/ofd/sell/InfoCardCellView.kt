@@ -2,6 +2,7 @@ package kg.nurtelecom.ofd.sell
 
 import android.content.Context
 import android.graphics.Color
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.core.widget.doOnTextChanged
@@ -38,7 +39,9 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
                     // Set edit text
                     val editable = getBoolean(R.styleable.InfoCardCellView_is_editable, true)
                     vb.etInfoCardContent.setTextColor(txtColor)
-                    vb.etInfoCardContent.isEnabled = editable
+                    if (!editable) {
+                        vb.etInfoCardContent.inputType = InputType.TYPE_NULL
+                    }
 
                     // Set the next icon
                     val addNextIcon = getBoolean(R.styleable.InfoCardCellView_add_next_icon, false)
