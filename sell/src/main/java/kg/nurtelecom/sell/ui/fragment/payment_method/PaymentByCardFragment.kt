@@ -22,17 +22,6 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
         vb.btnContinueCard.setOnClickListener {
             navigateToPrintCheck()
         }
-        vb.cwSumCard.apply {
-            isEditable(false)
-            setTitle(R.string.sum_pay)
-            setBackground(R.drawable.green_background)
-        }
-        vb.etReceivedCard.apply {
-            isEditable(false)
-            setTitle(R.string.et_received)
-            setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
-            setBackground(R.drawable.white_background)
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,8 +31,8 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
 
     private fun subscribeToLiveData() {
         vm.calculateTaxSum().observe(viewLifecycleOwner) {sum ->
-            vb.cwSumCard.setContent(sum)
-            vb.etReceivedCard.setContent(sum)
+            vb.icSumCard.setContent(sum)
+            vb.icReceivedCard.setContent(sum)
         }
     }
 

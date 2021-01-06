@@ -2,6 +2,8 @@
 <resources>
     <declare-styleable name="ProductCellView">
         <attr name="title" format="string"/>
+        <attr name="value" format="string"/>
+        <attr name="text" format="string"/>
         <attr name="subTitle" format="string"/>
         <attr name="value" format="string"/>
         <attr name="showRightIcon" format="boolean"/>
@@ -17,8 +19,13 @@
         <attr name="title"/>
         <attr name="subTitle"/>
         <attr name="showArrowIcon" format="boolean"/>
+        <attr name="showSubTitle" format="boolean"/>
+        <attr name="hasRemoveButton" format="boolean"/>
+        <attr name="hasCheckBoxButton" format="boolean"/>
+        <attr name="hasDoneIcon" format="boolean"/>
+        <attr name="hasProductSum" format="boolean"/>
     </declare-styleable>
-        
+
     <declare-styleable name="InfoCardCellView">
         <attr name="android:background" />
         <attr name="android:textColor" />
