@@ -7,4 +7,7 @@
     <string name="info">Информация</string>
     <string name="info_about_app">Информация о приложении</string>
     <string name="menu">Меню</string>
+    <string name="test_print_x_report">Тестовая печать x-отчета</string>
+    <string name="test_print_z_report">тестовая печать Z-отчета</string>
+    <string name="test_empty">Тест без позиций</string>
 </resources>

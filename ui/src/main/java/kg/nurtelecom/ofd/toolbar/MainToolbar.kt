@@ -12,17 +12,16 @@ class MainToolbar(context: Context, attr: AttributeSet) : Toolbar(context, attr)
 
     init {
         context.theme.obtainStyledAttributes(attr, R.styleable.ToolbarView, 0, 0).apply {
-            title = getString(R.styleable.ToolbarView_title).toString()
-            vb.tbTitle.text = title
+            vb.toolbar.title = getString(R.styleable.ToolbarView_title).toString()
             recycle()
         }
     }
 
     override fun setTitle(title: CharSequence?) {
-        vb.mainToolbar.title = title
+        vb.toolbar.title = title
     }
 
     override fun setTitle(resId: Int) {
-        vb.mainToolbar.setTitle(resId)
+        vb.toolbar.setTitle(resId)
     }
 }

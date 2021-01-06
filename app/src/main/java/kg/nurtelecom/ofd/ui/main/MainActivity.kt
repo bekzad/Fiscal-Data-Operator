@@ -1,5 +1,6 @@
 package kg.nurtelecom.ofd.ui.main
 
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -37,18 +38,24 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
     private fun setupDrawerListener() {
         vb.drawerLayout.addDrawerListener(drawerListener())
         val view = vb.navView.getHeaderView(0)
-        val v = SideMenuMainBinding.bind(view)
-        v.mainMenuItemAppInfo.setOnClickListener {
+        val menuView = SideMenuMainBinding.bind(view)
+        menuView.mainMenuItemAppInfo.setOnClickListener {
             if (getCurrentVisibleFragment() !is AboutAppFragment) {
                 replaceFragment(R.id.mainContainer, AboutAppFragment.newInstance(), true)
             }
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.mainMenuItemMain.setOnClickListener {
+        menuView.mainMenuItemMain.setOnClickListener {
             if (getCurrentVisibleFragment() !is GreetingFragment) {
                 replaceFragment(R.id.mainContainer, GreetingFragment.newInstance())
             }
             vb.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        menuView.btnTestXReport.setOnClickListener {
+            Log.i("TAG", "Clicked on button test X report")
+        }
+        menuView.btnTestZReport.setOnClickListener {
+            Log.i("TAG", "Clicked on button test Z report")
         }
     }
 
