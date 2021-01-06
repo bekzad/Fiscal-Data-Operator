@@ -15,13 +15,13 @@ class CellView(context: Context, attr: AttributeSet) : ConstraintLayout(context,
     init {
         context.theme.obtainStyledAttributes(
             attr,
-            R.styleable.custom_view,
+            R.styleable.CellView,
             0, 0
         ).apply {
             try {
-                setTitle(getString(R.styleable.custom_view_title).toString())
-                setSubTitle(getString(R.styleable.custom_view_subTitle))
-                setIconIsVisible(getBoolean(R.styleable.custom_view_showArrowIcon, true))
+                setTitle(getString(R.styleable.CellView_title).toString())
+                setSubTitle(getString(R.styleable.CellView_subTitle))
+                setIconIsVisible(getBoolean(R.styleable.CellView_showArrowIcon, true))
             } finally {
                 recycle()
             }
@@ -34,19 +34,19 @@ class CellView(context: Context, attr: AttributeSet) : ConstraintLayout(context,
     }
 
     fun setTitle(titleText: String) {
-        vb.tvCellViewTitle.text = titleText
+        vb.tvTitle.text = titleText
     }
 
     fun setSubTitle(subTitleText: String?) {
-        vb.tvCellViewSubTitle.visible(!subTitleText.isNullOrEmpty())
-        vb.tvCellViewSubTitle.text = subTitleText
+        vb.tvSubTitle.visible(!subTitleText.isNullOrEmpty())
+        vb.tvSubTitle.text = subTitleText
     }
 
     fun setIconIsVisible(value: Boolean) {
-        vb.ivCellViewIcon.visible(value)
+        vb.ivArrowIcon.visible(value)
     }
 
     fun setCellIcon(resId: Int) {
-        vb.ivCellViewIcon.setImageResource(resId)
+        vb.ivArrowIcon.setImageResource(resId)
     }
 }
