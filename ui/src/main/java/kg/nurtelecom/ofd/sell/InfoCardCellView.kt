@@ -31,16 +31,16 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
                     // Set title text
                     val txtColor = getColor(R.styleable.InfoCardCellView_android_textColor, Color.BLACK)
                     val titleText = getString(R.styleable.InfoCardCellView_title_text) ?: ""
-                    vb.twInfoCardTitle.apply {
+                    vb.tvTitle.apply {
                         setTextColor(txtColor)
                         setText(titleText)
                     }
 
                     // Set edit text
                     val editable = getBoolean(R.styleable.InfoCardCellView_is_editable, true)
-                    vb.etInfoCardContent.setTextColor(txtColor)
+                    vb.etContent.setTextColor(txtColor)
                     if (!editable) {
-                        vb.etInfoCardContent.inputType = InputType.TYPE_NULL
+                        vb.etContent.inputType = InputType.TYPE_NULL
                     }
 
                     // Set the next icon
@@ -51,7 +51,7 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
 
                     // Set the hint
                     val hint = getString(R.styleable.InfoCardCellView_hint_text) ?: "0"
-                    vb.etInfoCardContent.setHint(hint)
+                    vb.etContent.setHint(hint)
 
                 } finally {
                     recycle()
@@ -60,16 +60,16 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
     }
 
     fun setContent(value: BigDecimal) {
-        vb.etInfoCardContent.setText(value.toString())
+        vb.etContent.setText(value.toString())
     }
 
     fun fetchTextState(action: (text: CharSequence?) -> Unit) {
-        vb.etInfoCardContent.doOnTextChanged { text, _, _, _ ->
+        vb.etContent.doOnTextChanged { text, _, _, _ ->
             action(text)
         }
     }
 
     fun fetchInputData(): BigDecimal? {
-        return vb.etInfoCardContent.text.toString().toBigDecimalOrNull()
+        return vb.etContent.text.toString().toBigDecimalOrNull()
     }
 }
