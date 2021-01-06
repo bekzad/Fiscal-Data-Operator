@@ -11,8 +11,8 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
+        android:paddingTop="@dimen/margin_8dp"
+        android:paddingEnd="@dimen/margin_16dp"
         android:paddingBottom="8dp">
 
         <ImageView
@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/delete_icon"
-            android:src="@drawable/delete"
-            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_baseline_remove_circle_outline_24"
+            android:layout_marginStart="@dimen/margin_16dp"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="@string/title_text"
-            android:textAppearance="@style/style_card_view"
+            android:textAppearance="@style/GreenInfoCardCellTitleTextStyle"
             android:textSize="@dimen/text_16sp"
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toEndOf="@id/delete_icon"
@@ -46,7 +46,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:text="@string/content_text"
-            android:textAppearance="@style/style_card_view"
+            android:textAppearance="@style/GreenInfoCardCellValueTextStyle"
             android:textSize="@dimen/text_40sp"
             app:layout_constraintStart_toStartOf="@id/card_title"
             app:layout_constraintTop_toBottomOf="@id/card_title" />

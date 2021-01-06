@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <kg.nurtelecom.ofd.sell.InfoCardCellView
+    <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_product_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="@id/position_tv"
         app:layout_constraintTop_toBottomOf="@id/position_tv"/>
 
-    <kg.nurtelecom.ofd.sell.InfoCardCellView
+    <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_product_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,25 +48,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ic_product_count">
 
-        <kg.nurtelecom.ofd.sell.InfoCardCellView
+        <kg.nurtelecom.ofd.cell.InfoCardCellView
             android:id="@+id/ic_product_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
-            android:textColor="@color/colorGreen"
+            android:textColor="@color/green"
             app:title_text="@string/discount"
             app:layout_constraintStart_toStartOf="@id/ic_product_count"
             app:layout_constraintEnd_toStartOf="@+id/ic_product_count"
             app:layout_constraintTop_toBottomOf="@id/ic_product_count"/>
 
-        <kg.nurtelecom.ofd.sell.InfoCardCellView
+        <kg.nurtelecom.ofd.cell.InfoCardCellView
             android:id="@+id/ic_product_allowance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
-            android:textColor="@color/colorRed"
+            android:textColor="@color/red"
             app:title_text="@string/allowance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ic_product_count"/>
@@ -79,7 +79,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/colorGreen"
+        android:backgroundTint="@color/green"
         android:enabled="true"
         android:text="В ЧЕК"
         app:layout_constraintBottom_toBottomOf="parent"

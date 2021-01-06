@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:background="@color/colorInputTextField"
+        android:background="@color/lightBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,11 +22,11 @@
             android:id="@+id/et_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorInputTextField"
+            android:backgroundTint="@color/lightBlack"
             android:gravity="center"
-            android:textColor="@color/colorGrey"
-            android:textColorHint="@color/colorGrey"
-            android:textSize="@dimen/app_text_normal" />
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
+            android:textSize="@dimen/text_20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

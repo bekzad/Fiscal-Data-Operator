@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlack">
+    android:background="@color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,37 +17,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <kg.nurtelecom.ofd.ui.edittext.InputTextField
+        <EditText
             android:id="@+id/et_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/size_48dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:background="@color/lightBlack"
+            android:gravity="center"
+            android:hint="@string/ed_login" />
 
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_48dp"
+            android:layout_height="@dimen/size_48dp"
             android:layout_marginTop="@dimen/margin_16dp"
-            android:background="@color/colorShadedDark"
+            android:background="@color/lightBlack"
             android:gravity="center"
             android:hint="@string/ed_password"
-            android:inputType="textPassword"
-            style="@style/application_editText"/>
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/et_gsr_key"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_48dp"
+            android:layout_height="@dimen/size_48dp"
             android:layout_marginTop="@dimen/margin_16dp"
-            android:background="@color/colorShadedDark"
+            android:background="@color/lightBlack"
             android:gravity="center"
             android:hint="@string/ed_gsr_key"
-            android:inputType="number"
-            style="@style/application_editText"/>
+            android:inputType="number" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_16dp"
             android:orientation="horizontal">
 
             <TextView
@@ -55,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_16dp"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 android:text="@string/tv_regime"
                 android:textSize="@dimen/text_16sp"/>
 
@@ -68,14 +70,14 @@
                 tools:ignore="ExtraText" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_16dp"
-            android:layout_marginTop="@dimen/margin_25dp"
+            android:layout_marginTop="@dimen/margin_16dp"
             android:layout_marginRight="@dimen/margin_16dp"
-            style="@style/green_btn"
+            style="@style/GreenButtonStyle"
             android:text="@string/btn_login" />
     </LinearLayout>
 

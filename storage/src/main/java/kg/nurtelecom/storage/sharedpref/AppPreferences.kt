@@ -1,8 +1,9 @@
 package kg.nurtelecom.storage.sharedpref
 
 import android.content.Context
-import com.teamx.storage.base.BasePreferences
-import com.teamx.storage.base.PreferenceDelegate
+import kg.nurtelecom.storage.sharedpref.base.BasePreferences
+import kg.nurtelecom.storage.sharedpref.base.PreferenceDelegate
+
 
 class AppPreferences(context: Context) : BasePreferences(context) {
 

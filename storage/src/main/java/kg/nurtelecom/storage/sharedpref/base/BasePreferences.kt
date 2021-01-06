@@ -1,4 +1,4 @@
-package com.teamx.storage.base
+package kg.nurtelecom.storage.sharedpref.base
 
 import android.content.Context
 import android.content.SharedPreferences

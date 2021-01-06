@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorBlack"
-    android:padding="@dimen/padding_8dp">
+    android:background="@color/black"
+    android:padding="@dimen/margin_8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_first_selection"
@@ -16,7 +16,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <kg.nurtelecom.ofd.ui.CellView
+            <kg.nurtelecom.ofd.cell.CellView
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/cell_fiscal_mode"
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 app:title="@string/text_fiscal_mode"
                 app:subTitle="@string/text_for_activity" />
-            <kg.nurtelecom.ofd.ui.CellView
+            <kg.nurtelecom.ofd.cell.CellView
                 app:layout_constraintTop_toBottomOf="@id/cell_fiscal_mode"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/cell_profile"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/cv_first_selection"
         app:layout_constraintStart_toStartOf="parent">
-        <kg.nurtelecom.ofd.ui.CellView
+        <kg.nurtelecom.ofd.cell.CellView
             android:id="@+id/cell_change_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_logo_main"
         app:layout_constraintStart_toStartOf="@id/tv_app_version"
         app:layout_constraintEnd_toEndOf="@id/tv_app_version"
-        android:layout_marginTop="@dimen/app_margin"/>
+        android:layout_marginTop="@dimen/margin_16dp"/>
     <TextView
         android:id="@+id/tv_app_version"
         style="@style/BaseTextStyle"
@@ -75,13 +75,13 @@
         app:layout_constraintTop_toBottomOf="@id/tv_app_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/app_margin"/>
+        android:layout_marginTop="@dimen/margin_16dp"/>
 
     <Button
         android:id="@+id/btn_invalidate"
         style="@style/BaseButtonStyle"
         android:text="@string/text_exit"
-        android:textColor="@color/colorRed"
+        android:textColor="@color/red"
         android:layout_marginBottom="@dimen/margin_32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

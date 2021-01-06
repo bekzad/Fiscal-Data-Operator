@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/cb_select_item"
         android:visibility="gone"
-        android:buttonTint="@color/colorPink"
+        android:buttonTint="@color/pink"
         android:minWidth="@dimen/size_18dp"
         android:minHeight="@dimen/size_18dp"
         tools:checked="true"
