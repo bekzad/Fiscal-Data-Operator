@@ -12,13 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/main_greeting"
-        app:subTitle="@string/startWork"
-        app:position="top"/>
+        app:subTitle="@string/startWork" />
     <kg.nurtelecom.ofd.ui.CellView
         android:id="@+id/main_menu_item_app_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:position="bottom"
         app:title="@string/info"
         app:subTitle="@string/info_about_app"/>
 </LinearLayout>

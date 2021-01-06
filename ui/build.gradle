@@ -37,6 +37,8 @@ android {
 
 dependencies {
 
+    implementation project(path: ':core')
+
     implementation libs.kotlin
     implementation libs.androidx.values()
     implementation libs.google.values()
