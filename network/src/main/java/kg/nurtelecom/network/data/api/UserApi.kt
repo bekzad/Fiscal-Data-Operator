@@ -5,9 +5,10 @@ import kg.nurtelecom.data.UserUpdateResult
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.*
 import kg.nurtelecom.data.ChangePasswordBody
 import kg.nurtelecom.data.UserDetailModel
-import retrofit2.http.*
+
 
 interface UserApi {
 
@@ -17,7 +18,7 @@ interface UserApi {
         @Body userDetail: UserDetail)
 
     : UserUpdateResult
-    
+
     @POST("change-password")
     suspend fun changeUserPassword(
         @Header("Authorization") token: String,
