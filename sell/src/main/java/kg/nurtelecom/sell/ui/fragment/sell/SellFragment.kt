@@ -39,13 +39,8 @@ class SellFragment :
     }
 
     private fun setupTaxView() {
-        vb.sumPayCv.apply {
-            setCardTitle(R.string.sum_pay)
-            addNextIcon()
-            setBackground(R.drawable.green_background)
-        }
         vm.calculateTaxSum().observe(viewLifecycleOwner) {
-            vb.sumPayCv.setCardContent(it)
+            vb.icSumPay.setContent(it)
         }
     }
 
@@ -68,7 +63,7 @@ class SellFragment :
     }
 
     private fun navigateToPaymentMethod() {
-        vb.sumPayCv.setOnClickListener {
+        vb.icSumPay.setOnClickListener {
             val activity = activity as AppCompatActivity
             activity
                 .supportFragmentManager
