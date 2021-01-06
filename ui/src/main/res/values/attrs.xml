@@ -19,6 +19,15 @@
         <attr name="hasProductSum" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="ProductCellView">
+        <attr name="title"/>
+        <attr name="subTitle"/>
+        <attr name="value"/>
+        <attr name="showRightIcon" format="boolean"/>
+        <attr name="showLeftIcon" format="boolean"/>
+        <attr name="showCheckBox" format="boolean"/>
+    </declare-styleable>
+
     <declare-styleable name="CellView">
         <attr name="title"/>
         <attr name="subTitle"/>
