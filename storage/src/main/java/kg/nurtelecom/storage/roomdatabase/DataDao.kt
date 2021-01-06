@@ -19,7 +19,7 @@ interface DataDao {
 
     //запрос
     @Query("SELECT * FROM user")
-    fun getUserData(): UserDetail
+    fun getAllData(): LiveData<List<UserDetail>>
 
     //обнов.
     @Update
