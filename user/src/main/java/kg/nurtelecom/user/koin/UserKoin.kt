@@ -10,6 +10,5 @@ import org.koin.dsl.module
 val userKoin = module {
 
     viewModel<UserVM> { UserVMImpl() }
-    single { RoomDB.getInstance(get()) }
     single { UserRepository(get()) }
 }

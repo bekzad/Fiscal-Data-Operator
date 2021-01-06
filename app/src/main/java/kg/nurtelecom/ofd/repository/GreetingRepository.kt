@@ -11,6 +11,4 @@ class GreetingRepository(private val network: AuthorizationApi, private val appP
         appPref.token = ""
         return result
     }
-
-
 }

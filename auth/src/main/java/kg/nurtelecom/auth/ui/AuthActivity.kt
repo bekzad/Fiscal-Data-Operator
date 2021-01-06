@@ -18,7 +18,7 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
 
     private fun editTextHandler(): Array<String> {
 
-        val login = text(vb.etLogin)
+        val login = ""//text(vb.etLogin)
         val password = text(vb.etPassword)
         val gsrKey = text(vb.etGsrKey)
         return arrayOf(login, password, gsrKey)
@@ -28,10 +28,10 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
         vb.progressbar.visible(false)
         vb.btnLogin.enable(false)
 
-        vb.etLogin.addTextChangedListener {
-            val (login, password, gsrKey) = editTextHandler()
-            vb.btnLogin.enable(login.isNotEmpty() && password.isNotEmpty() && gsrKey.isNotEmpty())
-        }
+//        vb.etLogin.addTextChangedListener {
+//            val (login, password, gsrKey) = editTextHandler()
+//            vb.btnLogin.enable(login.isNotEmpty() && password.isNotEmpty() && gsrKey.isNotEmpty())
+//        }
 
         vb.etPassword.addTextChangedListener {
             val (login, password, gsrKey) = editTextHandler()
