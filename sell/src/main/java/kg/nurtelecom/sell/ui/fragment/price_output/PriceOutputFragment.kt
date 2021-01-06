@@ -1,6 +1,5 @@
 package kg.nurtelecom.sell.ui.fragment.price_output
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +26,13 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         if (product.price != null) vm.addNewProduct(product)
     }
 
+    private fun setupCustomEditText() {
+        vb.icProductPrice.apply {
+            fetchTextState {
+                vb.checkBtn.isEnabled = !it?.isEmpty()!!
+            }
+        }
+    }
 
     private fun navigate() {
         val activity = activity as AppCompatActivity

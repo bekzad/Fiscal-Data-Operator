@@ -9,21 +9,27 @@
     tools:context=".ui.fragment.payment_method.PaymentByCardFragment">
 
     <kg.nurtelecom.ofd.sell.InfoCardCellView
-        android:id="@+id/cw_sum_card"
+        android:id="@+id/ic_sum_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:title_text="@string/sum_pay"
+        app:is_editable="false"
+        android:background="@color/colorGreen"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <kg.nurtelecom.ofd.sell.InfoCardCellView
-        android:id="@+id/et_received_card"
+        android:id="@+id/ic_received_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16dp"
+        app:title_text="@string/et_received"
+        app:is_editable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cw_sum_card" />
+        app:layout_constraintTop_toBottomOf="@id/ic_sum_card" />
 
     <Button
         android:id="@+id/btn_continue_card"
