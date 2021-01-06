@@ -6,14 +6,6 @@
 
     <dimen name="text_40sp">40sp</dimen>
     <dimen name="text_32sp">32sp</dimen>
-
-
-
-
-    <!--    new dimens-->
-
-    <dimen name="radius_5dp">5dp</dimen>
-
     <dimen name="text_24sp">24sp</dimen>
     <dimen name="text_20sp">20sp</dimen>
     <dimen name="text_19sp">19sp</dimen>
@@ -40,13 +32,5 @@
     <dimen name="size_24dp">24dp</dimen>
     <dimen name="size_18dp">18dp</dimen>
     <dimen name="size_0dp">0dp</dimen>
-
-    <dimen name="margin_0dp">0dp</dimen>
-
-    <dimen name="padding_16dp">16dp</dimen>
-    <dimen name="padding_14dp">14dp</dimen>
-    <dimen name="padding_8dp">8dp</dimen>
-    <dimen name="padding_5dp">5dp</dimen>
-    <dimen name="padding_0dp">0dp</dimen>
 
 </resources>

@@ -7,7 +7,7 @@ import kg.nurtelecom.sell.ui.fragment.adapter.Product
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class SellMainViewModel : CoreViewModel() {
+class   SellMainViewModel : CoreViewModel() {
 
     val productList: MutableLiveData<MutableList<Product>> = MutableLiveData(mutableListOf())
 
