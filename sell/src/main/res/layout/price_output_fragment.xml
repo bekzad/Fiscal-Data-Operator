@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <kg.nurtelecom.ofd.sell.InfoCardCellView
+    <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_product_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="@id/position_tv"
         app:layout_constraintTop_toBottomOf="@id/position_tv"/>
 
-    <kg.nurtelecom.ofd.sell.InfoCardCellView
+    <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_product_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ic_product_count">
 
-        <kg.nurtelecom.ofd.sell.InfoCardCellView
+        <kg.nurtelecom.ofd.cell.InfoCardCellView
             android:id="@+id/ic_product_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             app:layout_constraintEnd_toStartOf="@+id/ic_product_count"
             app:layout_constraintTop_toBottomOf="@id/ic_product_count"/>
 
-        <kg.nurtelecom.ofd.sell.InfoCardCellView
+        <kg.nurtelecom.ofd.cell.InfoCardCellView
             android:id="@+id/ic_product_allowance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

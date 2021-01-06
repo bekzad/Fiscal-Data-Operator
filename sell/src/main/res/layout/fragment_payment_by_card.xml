@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    android:padding="@dimen/padding_16dp"
+    android:padding="@dimen/margin_16dp"
     tools:context=".ui.fragment.payment_method.PaymentByCardFragment">
 
-    <kg.nurtelecom.ofd.sell.InfoCardCellView
+    <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_sum_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:title_text="@string/sum_pay"
         app:is_editable="false"
-        android:background="@color/colorGreen"
-        android:textColor="@color/colorWhite"
+        android:background="@color/green"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <kg.nurtelecom.ofd.sell.InfoCardCellView
+    <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_received_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
