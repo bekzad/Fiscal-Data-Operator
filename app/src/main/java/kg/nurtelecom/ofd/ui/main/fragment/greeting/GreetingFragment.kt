@@ -3,6 +3,7 @@ package kg.nurtelecom.ofd.ui.main.fragment.greeting
 import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import kg.nurtelecom.changepassword.ui.ChangePasswordActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.extension.snackbar
 import kg.nurtelecom.core.fragment.CoreFragment
@@ -26,15 +27,18 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
     override fun setupViews() {
         super.setupViews()
         vb.btnInvalidate.setOnClickListener { vm.logout() }
+        vb.cellChangePassword.setOnClickListener {
+            val intent = Intent(activity,ChangePasswordActivity::class.java)
+            startActivity(intent)
+        }
         vb.cellFiscalMode.setOnClickListener {
             SellMainActivity.start(requireContext())
         }
-        
+
         vb.cellProfile.setOnClickListener {
             val intent = Intent(activity, UserActivity::class.java)
             startActivity(intent)
         }
-        vb.cellChangePassword.setOnClickListener { Log.i("ERLAN", "cellChangePassword") }
     }
 
     override fun subscribeToLiveData() {

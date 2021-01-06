@@ -5,7 +5,7 @@ import kg.nurtelecom.auth.databinding.AuthActivityBinding
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.enable
 
-class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewModel::class) {
+class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewModel::class) {
 
     private fun login() {
         val (login, password, gsrKey) = editTextHandler()
