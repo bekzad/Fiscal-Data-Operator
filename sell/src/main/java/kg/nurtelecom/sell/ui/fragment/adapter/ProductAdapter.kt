@@ -18,7 +18,7 @@ class ProductAdapter(private val itemClick: ProductItemClickListener) :
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder =
         ProductViewHolder.getInstance(parent, itemClick)
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
