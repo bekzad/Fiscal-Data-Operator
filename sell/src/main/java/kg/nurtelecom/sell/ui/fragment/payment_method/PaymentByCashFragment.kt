@@ -23,16 +23,8 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
         vb.btnContinue.setOnClickListener {
             navigateToPrintCheck()
         }
-        vb.cwSum.apply {
-            isEditable(false)
-            setTitle(R.string.sum_pay)
-            setTextColor(R.color.colorWhite)
-            setBackground(R.color.colorGreen)
-        }
-        vb.etReceived.apply {
-            setTitle(R.string.et_received)
-        }
-        vb.etReceived.apply {
+
+        vb.icReceived.apply {
             fetchTextState {
                 if (it != null) vb.btnContinue.isEnabled = it.isNotEmpty()
             }
@@ -47,7 +39,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
     private fun subscribeToLiveData() {
         val anotherTax = BigDecimal("1.01")
         vm.calculateTaxSum().observe(viewLifecycleOwner) {sum ->
-            vb.cwSum.setContent(sum.multiply(anotherTax).setScale(2, RoundingMode.CEILING))
+            vb.icSum.setContent(sum.multiply(anotherTax).setScale(2, RoundingMode.CEILING))
         }
     }
 
