@@ -9,8 +9,6 @@ import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.ofd.R
 import kg.nurtelecom.ofd.databinding.FragmentGreetingBinding
 import kg.nurtelecom.ofd.ui.spalsh.SplashActivity
-import kg.nurtelecom.sell.ui.activity.SellMainActivity
-import kg.nurtelecom.user.ui.UserFragment
 
 class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(GreetingVM::class) {
 

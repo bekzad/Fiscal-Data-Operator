@@ -1,4 +1,4 @@
-package kg.nurtelecom.ofd.ui.buttons
+package kg.nurtelecom.ofd.cell
 
 import android.content.Context
 import android.util.AttributeSet

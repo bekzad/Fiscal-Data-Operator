@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.OFDApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorBlack</item>
-        <item name="colorPrimaryVariant">@color/colorAsphalt</item>
-        <item name="colorOnPrimary">@color/colorWhite</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/asphalt</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorGrey</item>
-        <item name="colorSecondaryVariant">@color/colorLightGrey</item>
-        <item name="colorOnSecondary">@color/colorSaleGreen</item>
+        <item name="colorSecondary">@color/grey</item>
+        <item name="colorSecondaryVariant">@color/lightGrey</item>
+        <item name="colorOnSecondary">@color/saleGreen</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

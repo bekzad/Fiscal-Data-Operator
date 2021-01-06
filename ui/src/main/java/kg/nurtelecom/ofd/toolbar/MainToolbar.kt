@@ -1,4 +1,4 @@
-package kg.nurtelecom.ui.toolbar
+package kg.nurtelecom.ofd.toolbar
 
 import android.content.Context
 import android.util.AttributeSet
@@ -13,8 +13,8 @@ class MainToolbar(context: Context, attr: AttributeSet) : Toolbar(context, attr)
     private var title: String
 
     init {
-        context.theme.obtainStyledAttributes(attr, R.styleable.custom_view, 0, 0).apply {
-            title = getString(R.styleable.custom_view_title).toString()
+        context.theme.obtainStyledAttributes(attr, R.styleable.ToolbarView, 0, 0).apply {
+            title = getString(R.styleable.ToolbarView_title).toString()
             vb.tbTitle.text = title
             recycle()
         }

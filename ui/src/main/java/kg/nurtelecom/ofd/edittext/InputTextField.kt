@@ -1,4 +1,4 @@
-package kg.nurtelecom.ofd.ui.edittext
+package kg.nurtelecom.ofd.edittext
 
 import android.content.Context
 import android.text.TextWatcher

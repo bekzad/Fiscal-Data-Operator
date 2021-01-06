@@ -9,10 +9,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_16dp"
-        android:layout_marginTop="@dimen/padding_8dp"
-        android:layout_marginEnd="@dimen/padding_16dp"
-        android:layout_marginBottom="@dimen/padding_8dp"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:layout_marginBottom="@dimen/margin_8dp"
         android:background="@null">
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_marginTop="5dp"
             android:background="@null"
             android:inputType="numberDecimal"
-            android:textColorHint="@color/colorLightGrey"
+            android:textColorHint="@color/lightGrey"
             app:layout_constraintEnd_toStartOf="@id/iv_next_icon"
             app:layout_constraintStart_toStartOf="@id/tv_title"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />

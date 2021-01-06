@@ -12,13 +12,13 @@
         android:layout_height="match_parent"
         android:padding="8dp">
 
-        <kg.nurtelecom.ofd.sell.InfoCardCellView
+        <kg.nurtelecom.ofd.cell.InfoCardCellView
             android:id="@+id/ic_sum_pay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@color/colorGreen"
-            android:textColor="@color/colorWhite"
+            android:background="@color/green"
+            android:textColor="@color/white"
             app:is_editable="false"
             app:add_next_icon="true"
             app:title_text="Сумма к оплате, сом:"
