@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.core.activity.CoreActivity
+import kg.nurtelecom.core.extension.getCurrentVisibleFragment
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.ofd.R
@@ -27,10 +28,10 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
 
     private fun setupNavDrawer() {
         val actionBarToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this,vb.drawerLayout, vb.tbMain,R.string.nav_open_drawer, R.string.nav_close_drawer )
-        actionBarToggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
         vb.drawerLayout.addDrawerListener(actionBarToggle)
         setupDrawerListener()
         actionBarToggle.syncState()
+        vb.tbMain.setNavigationIcon(R.drawable.ic_baseline_menu_24)
     }
 
     private fun setupDrawerListener() {
@@ -38,24 +39,35 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
         val view = vb.navView.getHeaderView(0)
         val v = SideMenuMainBinding.bind(view)
         v.mainMenuItemAppInfo.setOnClickListener {
-            replaceFragment(R.id.mainContainer, AboutAppFragment.newInstance(), true)
+            if (getCurrentVisibleFragment() !is AboutAppFragment) {
+                replaceFragment(R.id.mainContainer, AboutAppFragment.newInstance(), true)
+            }
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         v.mainMenuItemMain.setOnClickListener {
-            replaceFragment(R.id.mainContainer, GreetingFragment.newInstance())
+            if (getCurrentVisibleFragment() !is GreetingFragment) {
+                replaceFragment(R.id.mainContainer, GreetingFragment.newInstance())
+            }
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
     }
 
     private fun drawerListener(): DrawerLayout.DrawerListener {
-        return object : DrawerLayout.DrawerListener {
-
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
-            override fun onDrawerStateChanged(newState: Int) {}
-            override fun onDrawerClosed(drawerView: View) {}
+        return object : DrawerListener() {
 
             override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
                 setToolbarTitle(resources.getString(R.string.menu))
+                vb.tbMain.setNavigationIcon(R.drawable.ic_baseline_close_24)
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                vb.tbMain.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+                when (getCurrentVisibleFragment()) {
+                    is GreetingFragment -> setToolbarTitle(R.string.main_greeting)
+                    is AboutAppFragment -> setToolbarTitle(R.string.info_about_app)
+                }
             }
         }
     }
@@ -67,4 +79,23 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
             super.onBackPressed()
         }
     }
+}
+
+abstract class DrawerListener : DrawerLayout.DrawerListener {
+    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+
+    }
+
+    override fun onDrawerOpened(drawerView: View) {
+
+    }
+
+    override fun onDrawerClosed(drawerView: View) {
+
+    }
+
+    override fun onDrawerStateChanged(newState: Int) {
+
+    }
+
 }
