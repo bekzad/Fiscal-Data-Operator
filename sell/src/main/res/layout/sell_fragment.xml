@@ -12,14 +12,20 @@
         android:layout_height="match_parent"
         android:padding="8dp">
 
-        <kg.nurtelecom.ofd.sell.CustomCardView
-            android:id="@+id/sum_pay_cv"
+        <kg.nurtelecom.ofd.sell.InfoCardCellView
+            android:id="@+id/ic_sum_pay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:background="@color/colorGreen"
+            android:textColor="@color/colorWhite"
+            app:is_editable="false"
+            app:add_next_icon="true"
+            app:title_text="Сумма к оплате, сом:"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/added_products_tv"
@@ -30,7 +36,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sum_pay_cv" />
+            app:layout_constraintTop_toBottomOf="@id/ic_sum_pay" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_rv"
@@ -39,12 +45,12 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:padding="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/add_product_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/added_products_tv"
-            tools:listitem="@layout/product_list_item"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            tools:listitem="@layout/product_list_item" />
 
         <kg.nurtelecom.sell.ui.custom.CustomDialog
             android:id="@+id/mode_dialog"

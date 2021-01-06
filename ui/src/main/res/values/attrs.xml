@@ -19,4 +19,14 @@
         <attr name="hasProductSum" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="InfoCardCellView">
+        <attr name="android:background" />
+        <attr name="android:textColor" />
+        <attr name="is_editable" format="boolean" />
+        <attr name="add_next_icon" format="boolean" />
+        <attr name="title_text" format="string"/>
+        <attr name="content_text" format="string"/>
+        <attr name="hint_text" format="string"/>
+    </declare-styleable>
+
 </resources>

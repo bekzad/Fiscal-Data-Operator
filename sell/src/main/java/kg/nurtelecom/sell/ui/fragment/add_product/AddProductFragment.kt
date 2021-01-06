@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.INavigation
 import kg.nurtelecom.sell.databinding.AddProductFragmentBinding
-import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 
 class AddProductFragment : Fragment()

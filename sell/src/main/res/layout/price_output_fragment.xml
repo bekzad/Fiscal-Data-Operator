@@ -17,64 +17,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <kg.nurtelecom.ofd.sell.CustomCardEditText
-        android:id="@+id/price_edit_text"
+    <kg.nurtelecom.ofd.sell.InfoCardCellView
+        android:id="@+id/ic_product_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        app:title_text="@string/price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/position_tv"
-        app:layout_constraintTop_toBottomOf="@id/position_tv" />
+        app:layout_constraintTop_toBottomOf="@id/position_tv"/>
 
-
-    <kg.nurtelecom.ofd.sell.CustomCardEditText
-        android:id="@+id/count_edit_text"
+    <kg.nurtelecom.ofd.sell.InfoCardCellView
+        android:id="@+id/ic_product_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@id/price_edit_text"
-        app:layout_constraintStart_toStartOf="@id/price_edit_text"
-        app:layout_constraintTop_toBottomOf="@id/price_edit_text" />
+        app:title_text="@string/count"
+        app:hint_text="1"
+        app:layout_constraintEnd_toEndOf="@id/ic_product_price"
+        app:layout_constraintStart_toStartOf="@id/ic_product_price"
+        app:layout_constraintTop_toBottomOf="@id/ic_product_price"/>
 
     <LinearLayout
         android:id="@+id/group_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/count_edit_text">
+        app:layout_constraintTop_toBottomOf="@id/ic_product_count">
 
-        <kg.nurtelecom.ofd.sell.CustomCardEditText
-            android:id="@+id/skidka_edit_text"
+        <kg.nurtelecom.ofd.sell.InfoCardCellView
+            android:id="@+id/ic_product_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
-            app:layout_constraintEnd_toStartOf="@+id/skidka_edit_text"
-            app:layout_constraintStart_toStartOf="@id/count_edit_text"
-            app:layout_constraintTop_toBottomOf="@id/count_edit_text" />
+            android:textColor="@color/colorGreen"
+            app:title_text="@string/discount"
+            app:layout_constraintStart_toStartOf="@id/ic_product_count"
+            app:layout_constraintEnd_toStartOf="@+id/ic_product_count"
+            app:layout_constraintTop_toBottomOf="@id/ic_product_count"/>
 
-        <kg.nurtelecom.ofd.sell.CustomCardEditText
-            android:id="@+id/allowance_edit_text"
+        <kg.nurtelecom.ofd.sell.InfoCardCellView
+            android:id="@+id/ic_product_allowance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
+            android:textColor="@color/colorRed"
+            app:title_text="@string/allowance"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/count_edit_text" />
-
+            app:layout_constraintTop_toBottomOf="@id/ic_product_count"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/check_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/mask"
-        android:enabled="true"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorGreen"
+        android:enabled="true"
         android:text="В ЧЕК"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

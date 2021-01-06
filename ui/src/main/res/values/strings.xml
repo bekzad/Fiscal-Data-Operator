@@ -18,10 +18,11 @@
     <string name="text_payment_amount">75.00 с</string>
     <string name="text_profile">Профиль</string>
 
+<!--    sell-->
     <string name="title_text">Сумма к оплате, сом:</string>
-    <string name="content_text">351.68</string>
+    <string name="content_text">0</string>
     <string name="next_icon_description">Next Icon</string>
     <string name="delete_icon">Delete Icon</string>
     <string name="price">Цена, сом</string>
-    <string name="zero">0</string>
+    <string name="zero">"0"</string>
 </resources>
