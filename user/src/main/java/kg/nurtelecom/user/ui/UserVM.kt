@@ -9,7 +9,6 @@ abstract class UserVM : CoreViewModel() {
 
  abstract var userData: MutableLiveData<UserDetailModel>
 }
-
     class UserVMImpl: UserVM(){
 
     override var  userData: MutableLiveData<UserDetailModel> = MutableLiveData()

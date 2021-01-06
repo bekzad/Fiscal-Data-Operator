@@ -1,7 +1,6 @@
 package kg.nurtelecom.ofd.ui.edittext
 
 import android.content.Context
-
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -35,5 +34,4 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
     fun setOnTextChanged(listener: TextWatcher) {
         binding.etInputText.addTextChangedListener(listener)
     }
-
 }
