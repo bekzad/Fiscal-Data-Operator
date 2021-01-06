@@ -43,32 +43,12 @@ class PriceOutputFragment : Fragment()
         vb.checkBtn.setOnClickListener {
             navigate()
         }
-        setupCustomEditText()
-        /*vb.priceEditText. { text, _, _, _ ->
-            vb.checkBtn.isEnabled = !text?.isEmpty()!!
-        }*/
     }
 
     private fun sendProduct(product: Product) {
         if (product.price != null) vms.addNewProduct(product)
     }
 
-    private fun setupCustomEditText() {
-        vb.productPriceIc.apply {
-            setTitle(R.string.price)
-        }
-        vb.productCountIc.apply {
-            setTitle(R.string.count)
-        }
-        vb.productDiscountIc.apply {
-            setTitle(R.string.discount)
-            setTextColor(R.color.colorGreen)
-        }
-        vb.productAllowanceIc.apply {
-            setTitle(R.string.allowance)
-            setTextColor(R.color.colorRed)
-        }
-    }
 
     override fun navigate() {
         val activity = activity as AppCompatActivity
@@ -82,10 +62,10 @@ class PriceOutputFragment : Fragment()
     private fun fetchProductData(): Product {
         val product: Product
         val zero = BigDecimal.ZERO
-        val price = vb.productPriceIc.fetchInputData() ?: return Product(null, zero, zero)
-        val count = vb.productCountIc.fetchInputData() ?: BigDecimal.ONE
-        val discountPercentage = vb.productDiscountIc.fetchInputData() ?: zero
-        val allowancePercentage = vb.productAllowanceIc.fetchInputData() ?: zero
+        val price = vb.icProductPrice.fetchInputData() ?: return Product(null, zero, zero)
+        val count = vb.icProductCount.fetchInputData() ?: BigDecimal.ONE
+        val discountPercentage = vb.icProductDiscount.fetchInputData() ?: zero
+        val allowancePercentage = vb.icProductAllowance.fetchInputData() ?: zero
 
         val totalPrice = price.multiply(count)
         val hundred = BigDecimal("100.0")

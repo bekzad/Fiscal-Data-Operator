@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/container"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mcv_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
-        android:paddingStart="@dimen/padding_16dp"
-        android:paddingTop="@dimen/padding_8dp"
-        android:paddingEnd="@dimen/padding_16dp"
-        android:paddingBottom="@dimen/padding_8dp">
+        android:layout_marginStart="@dimen/padding_16dp"
+        android:layout_marginTop="@dimen/padding_8dp"
+        android:layout_marginEnd="@dimen/padding_16dp"
+        android:layout_marginBottom="@dimen/padding_8dp"
+        android:background="@null">
 
         <TextView
-            android:id="@+id/card_title"
+            android:id="@+id/tw_info_card_title"
             style="@style/InfoCardCellTitleTextStyle"
+            android:background="@null"
             android:text="@string/title_text"
             android:textSize="@dimen/text_16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/card_content"
+            android:id="@+id/et_info_card_content"
             style="@style/CardCellValueTextStyle"
             android:layout_width="0dp"
             android:layout_marginTop="5dp"
             android:background="@null"
-            android:hint="@string/zero"
             android:inputType="numberDecimal"
             android:textColorHint="@color/colorLightGrey"
-            app:layout_constraintEnd_toStartOf="@id/card_next_icon"
-            app:layout_constraintStart_toStartOf="@id/card_title"
-            app:layout_constraintTop_toBottomOf="@id/card_title" />
+            app:layout_constraintEnd_toStartOf="@id/iv_next_icon"
+            app:layout_constraintStart_toStartOf="@id/tw_info_card_title"
+            app:layout_constraintTop_toBottomOf="@id/tw_info_card_title" />
 
         <ImageView
-            android:id="@+id/card_next_icon"
+            android:id="@+id/iv_next_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/next_icon_description"
@@ -44,3 +48,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
