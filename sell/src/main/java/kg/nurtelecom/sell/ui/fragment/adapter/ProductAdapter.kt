@@ -50,12 +50,8 @@ class ProductAdapter(private val itemClick: ProductItemClickListener) :
                 if (product.allowance.isNotZero()) ("+ " + product.allowance) + "%" else
                     ""
 
-            return StringBuilder().also {
-                it.append("${product.price} * ")
-                it.append("${product.count.toInt()} ")
-                it.append(discount)
-                it.append(allowance)
-            }
+        private fun isNotZero(value: BigDecimal?): Boolean {
+            return value?.compareTo(BigDecimal.ZERO) != 0
         }
 
         companion object {
