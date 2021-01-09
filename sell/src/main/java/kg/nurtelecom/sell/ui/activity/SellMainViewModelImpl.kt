@@ -8,12 +8,14 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.Product
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 
 abstract class SellMainViewModel : CoreViewModel() {
 
     abstract val productList: MutableLiveData<MutableList<Product>>
-    abstract val taxSum: MutableLiveData<Double>
+    abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectProductData: MutableLiveData<AllProducts>
 
     abstract fun addNewProduct(product: Product)
@@ -32,7 +34,7 @@ class SellMainViewModelImpl : SellMainViewModel() {
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
 
-    override val taxSum: MutableLiveData<Double> = MutableLiveData(0.0)
+    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
     override val selectProductData: MutableLiveData<AllProducts> = MutableLiveData()
 
@@ -41,7 +43,7 @@ class SellMainViewModelImpl : SellMainViewModel() {
         taxSum.value = calculateTaxSum()
     }
 
-    fun calculateTaxSum(): LiveData<BigDecimal> {
+    private fun calculateTaxSum(): BigDecimal {
         var taxSum = BigDecimal.ZERO
         var totalPrice: BigDecimal
         var tax: BigDecimal
@@ -68,8 +70,8 @@ class SellMainViewModelImpl : SellMainViewModel() {
 
     // TODO: must be changed
     private val mockedAllProducts = mutableListOf(
-        AllProducts("Test product name1", 25.00),
-        AllProducts("Test product name2", 30.00)
+        AllProducts("Test product name1", BigDecimal("25.00")),
+        AllProducts("Test product name2", BigDecimal("45.00"))
     )
 
     override val allProducts: MutableLiveData<MutableList<AllProducts>> =

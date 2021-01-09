@@ -15,7 +15,6 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.ui.custom.CustomDialog.Companion.FISCAL_REGIME
-import kg.nurtelecom.sell.ui.custom.CustomDialog.Companion.NON_FISCAL_REGIME
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
@@ -54,7 +53,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
 
     // TODO: must be changed
     private fun setupTaxView() {
-        vm.calculateTaxSum().observe(viewLifecycleOwner) {
+        vm.taxSum.observe(viewLifecycleOwner) {
             vb.icSumPay.setContent(it)
         }
     }
@@ -64,7 +63,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
             productAdapter.productList = product
         })
         vm.taxSum.observe(viewLifecycleOwner) {
-            vb.sumPayCv.setCardContent(it)
+            vb.icSumPay.setContent(it)
         }
     }
 
@@ -84,9 +83,6 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         vb.icSumPay.setOnClickListener {
             val activity = activity as AppCompatActivity
             activity.replaceFragment(PaymentMethodFragment.newInstance())
-        }
-        vb.sumPayCv.navigate {
-            // navigate to PayMethodFragment
         }
     }
 
