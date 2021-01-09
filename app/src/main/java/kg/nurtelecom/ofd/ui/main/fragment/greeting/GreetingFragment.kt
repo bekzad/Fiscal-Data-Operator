@@ -24,7 +24,7 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
 
     override fun setupViews() {
         super.setupViews()
-        vb.tvInvalidate.setOnClickListener { vm.logout() }
+        vb.btnInvalidate.setOnClickListener { vm.logout() }
         vb.cellFiscalMode.setOnClickListener {
             SellMainActivity.start(requireContext())
         }

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.data.sell.Product
-import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
@@ -16,6 +15,7 @@ import kg.nurtelecom.sell.utils.replaceFragment
 import java.math.BigDecimal
 import kg.nurtelecom.sell.utils.parentActivity
 import kg.nurtelecom.sell.utils.replaceFragment
+import java.math.BigDecimal
 
 
 class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
@@ -48,7 +48,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     private fun subscribeSelectedProduct() {
         vm.selectProductData.observe(viewLifecycleOwner, {
-            vb.productPriceEt.setText(it.productPrice.toString())
+            vb.icProductPrice.setContent(it.productPrice)
         })
     }
 

@@ -1,4 +1,4 @@
-package com.teamx.storage.storageKoin
+package kg.nurtelecom.storage.storageKoin
 
 import kg.nurtelecom.storage.roomdatabase.RoomDB
 import kg.nurtelecom.storage.sharedpref.AppPreferences
