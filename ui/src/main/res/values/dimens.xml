@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="radius_5dp">5dp</dimen>
+    <dimen name="radius_0dp">0dp</dimen>
 
     <dimen name="text_40sp">40sp</dimen>
     <dimen name="text_32sp">32sp</dimen>
@@ -22,6 +23,7 @@
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="margin_5dp">5dp</dimen>
     <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_2dp">2dp</dimen>
     <dimen name="margin_0dp">0dp</dimen>
 
 

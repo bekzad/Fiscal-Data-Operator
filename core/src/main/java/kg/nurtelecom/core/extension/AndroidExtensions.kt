@@ -10,6 +10,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
 fun AppCompatActivity.replaceFragment(container: Int, fragment: Fragment, addToBack: Boolean = false, backStackTag: String? = null) {
@@ -27,6 +28,10 @@ fun AppCompatActivity.setToolbarTitle(text: String) {
 
 fun AppCompatActivity.setToolbarTitle(resId: Int) {
     this.supportActionBar?.setTitle(resId)
+}
+
+fun AppCompatActivity.getCurrentVisibleFragment() : Fragment{
+    return supportFragmentManager.fragments.last()
 }
 
 fun Date.formatForLocalDateTimeDefaults(): String {

@@ -23,19 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/card_title" />
 
-            <ImageView
-                android:id="@+id/develete_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_baseline_remove_circle_outline_24"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/card_content"
-                app:layout_constraintEnd_toStartOf="@id/card_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/card_title" />
-
         <TextView
             android:id="@+id/card_content"
             android:layout_width="wrap_content"

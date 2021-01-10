@@ -6,9 +6,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.core.activity.CoreActivity
+import kg.nurtelecom.core.extension.getCurrentVisibleFragment
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
-import kg.nurtelecom.ofd.ui.aboutapp.AboutAppFragment
+import kg.nurtelecom.core.extension.DrawerListener
+import kg.nurtelecom.ofd.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
@@ -78,11 +80,23 @@ class SellMainActivity :
     }
 
     private fun drawerListener(): DrawerLayout.DrawerListener {
-        return object : DrawerLayout.DrawerListener {
+        return object : DrawerListener() {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
             override fun onDrawerStateChanged(newState: Int) {}
-            override fun onDrawerClosed(drawerView: View) {}
-            override fun onDrawerOpened(drawerView: View) = setToolbarTitle(R.string.text_menu)
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                vb.tbSellMain.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+                when (getCurrentVisibleFragment()) {
+                    is HistoryFragment -> setToolbarTitle(R.string.history_title)
+                    is AboutAppFragment -> setToolbarTitle(R.string.info_about_app)
+                    is SellFragment -> setToolbarTitle(R.string.text_sale)
+                }
+            }
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+                setToolbarTitle(resources.getString(R.string.text_menu))
+                vb.tbSellMain.setNavigationIcon(R.drawable.ic_baseline_close_24)
+            }
         }
     }
 

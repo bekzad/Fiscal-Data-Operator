@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
+import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
@@ -36,7 +37,7 @@ class SellFragment :
     }
 
     private fun setupTaxView() {
-        vms.calculateTaxSum().observe(viewLifecycleOwner) {
+        vm.calculateTaxSum().observe(viewLifecycleOwner) {
             vb.icSumPay.setContent(it)
         }
     }
