@@ -62,8 +62,8 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         vm.productList.observe(viewLifecycleOwner, { product ->
             productAdapter.productList = product
         })
-        vm.taxSum.observe(viewLifecycleOwner) {
-            vb.icSumPay.setContent(it)
+        vm.taxSum.observe(viewLifecycleOwner) { taxSum ->
+            vb.icSumPay.setContent(taxSum)
         }
     }
 
@@ -87,7 +87,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     }
 
     companion object {
-        fun newInstance() = SellFragment()
+        fun newInstance(): SellFragment = SellFragment()
     }
 
     override fun onResume() {

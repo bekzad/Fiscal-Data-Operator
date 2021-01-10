@@ -4,13 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.DialogViewBinding
 
 
-class CustomDialog(context: Context, attributeSet: AttributeSet? = null) :
-    ConstraintLayout(context, attributeSet) {
+class CustomDialog(context: Context, attributeSet: AttributeSet? = null) : ConstraintLayout(context, attributeSet) {
 
     private val binding = DialogViewBinding.inflate(LayoutInflater.from(context), this, true)
 
@@ -31,17 +31,18 @@ class CustomDialog(context: Context, attributeSet: AttributeSet? = null) :
     private fun setupFiscalDialog(regime: String) {
         when (regime) {
             FISCAL_REGIME -> {
-                binding.apply {
-                    regimeTv.setText(R.string.fiscal_mode_title)
-                    regimeMessage.setText(R.string.fiscal_mode_dialog_content)
-                }
+                setupRegimeContent(R.string.fiscal_mode_title, R.string.fiscal_mode_dialog_content)
             }
             NON_FISCAL_REGIME -> {
-                binding.apply {
-                    regimeTv.setText(R.string.non_fiscal_mode_title)
-                    regimeMessage.setText(R.string.non_fiscal_mode_dialog_content)
-                }
+                setupRegimeContent(R.string.non_fiscal_mode_message, R.string.non_fiscal_mode_dialog_content)
             }
+        }
+    }
+
+    private fun setupRegimeContent(@StringRes text: Int, @StringRes content: Int) {
+        binding.apply {
+            regimeTv.setText(text)
+            regimeMessage.setText(content)
         }
     }
 
