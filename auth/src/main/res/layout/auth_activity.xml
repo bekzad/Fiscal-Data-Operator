@@ -72,8 +72,11 @@
             android:layout_marginLeft="@dimen/margin_16dp"
             android:layout_marginTop="@dimen/margin_16dp"
             android:layout_marginRight="@dimen/margin_16dp"
+            android:paddingTop="@dimen/margin_14dp"
+            android:paddingBottom="@dimen/margin_14dp"
             style="@style/GreenButtonStyle"
             android:text="@string/btn_login" />
+
     </LinearLayout>
 
 </RelativeLayout>

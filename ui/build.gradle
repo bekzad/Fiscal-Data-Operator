@@ -36,14 +36,10 @@ android {
 }
 
 dependencies {
-
-    implementation project(path: ':core')
-
     implementation libs.kotlin
     implementation libs.androidx.values()
     implementation libs.google.values()
     implementation libs.koin.values()
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation project(path: ':core')
     implementation project(path: ':data')
