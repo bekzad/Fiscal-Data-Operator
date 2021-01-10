@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.data.sell.fetchExpression
 import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.ProductListItemBinding
 import kg.nurtelecom.sell.utils.isNotZero
@@ -36,7 +37,7 @@ class ProductAdapter(private val itemClick: ProductItemClickListener) :
 
         fun bind(product: Product, position: Int) {
             binding.apply {
-                productCountTv.text = fetchProductExpression(product)
+                productCountTv.text = product.fetchExpression()
                 productSumTv.text = product.totalPrice.toString()
                 removeProductIv.setOnClickListener { itemClick.removeItem(position) }
             }
@@ -49,13 +50,17 @@ class ProductAdapter(private val itemClick: ProductItemClickListener) :
             val allowance =
                 if (product.allowance.isNotZero()) ("+ " + product.allowance) + "%" else
                     ""
+        }
 
         private fun isNotZero(value: BigDecimal?): Boolean {
             return value?.compareTo(BigDecimal.ZERO) != 0
         }
 
         companion object {
-            fun getInstance(parent: ViewGroup, itemClick: ProductItemClickListener): ProductViewHolder {
+            fun getInstance(
+                parent: ViewGroup,
+                itemClick: ProductItemClickListener
+            ): ProductViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ProductListItemBinding.inflate(layoutInflater, parent, false)
                 return ProductViewHolder(binding, itemClick)
