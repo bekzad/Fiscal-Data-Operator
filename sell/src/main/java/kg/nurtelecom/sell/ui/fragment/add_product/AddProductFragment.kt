@@ -3,9 +3,11 @@ package kg.nurtelecom.sell.ui.fragment.add_product
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.AddProductFragmentBinding
+import kg.nurtelecom.sell.ui.activity.SellMainViewModel
+import kg.nurtelecom.sell.ui.core.CoreFragment
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 
 class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {

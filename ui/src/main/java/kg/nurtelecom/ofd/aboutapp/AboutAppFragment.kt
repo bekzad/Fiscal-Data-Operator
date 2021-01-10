@@ -1,4 +1,4 @@
-package kg.nurtelecom.ofd.ui.aboutapp
+package kg.nurtelecom.ofd.aboutapp
 
 import androidx.appcompat.app.AppCompatActivity
 import kg.nurtelecom.core.extension.setToolbarTitle

@@ -29,7 +29,7 @@
             android:layout_marginLeft="@dimen/margin_44dp"
             android:layout_marginRight="@dimen/margin_44dp"
             android:layout_weight="1"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:text="@string/text_shift_closing" />
         <TextView
             android:id="@+id/sell_main_menu_tv_closing_description"
@@ -55,7 +55,7 @@
             android:layout_marginTop="@dimen/margin_25dp"
             android:layout_marginRight="@dimen/margin_16dp"
             android:background="@null"
-            android:textColor="@color/colorClickBlue"
+            android:textColor="@color/clickBlue"
             android:textSize="@dimen/text_14sp"
             android:text="@string/text_shift_cancel" />
 
@@ -68,7 +68,7 @@
             android:layout_marginTop="@dimen/margin_25dp"
             android:layout_marginRight="@dimen/margin_16dp"
             android:background="@null"
-            android:textColor="@color/colorRed"
+            android:textColor="@color/red"
             android:textSize="@dimen/text_14sp"
             android:text="@string/text_shift_close" />
     </LinearLayout>
