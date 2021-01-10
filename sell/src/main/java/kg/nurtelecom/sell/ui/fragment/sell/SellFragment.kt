@@ -23,19 +23,12 @@ import kg.nurtelecom.sell.utils.replaceFragment
 
 class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListener {
 
-    private lateinit var productAdapter: ProductAdapter
+    private val productAdapter: ProductAdapter = ProductAdapter(this)
 
     override val vm: SellMainViewModel by activityViewModels()
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         SellFragmentBinding.inflate(inflater, container, false)
-
-    private fun setupRV() {
-        vb.productRv.apply {
-            productAdapter = ProductAdapter(this@SellFragment)
-            adapter = productAdapter
-        }
-    }
 
     override fun setupViews() {
         setupRV()
