@@ -43,7 +43,7 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         AddProductFragmentBinding.inflate(inflater, container, false)
 
-    override fun navigateTo(allProducts: AllProducts) {
+    override fun navigateToPriceOutputFragment(allProducts: AllProducts) {
         parentActivity.addFragment(PriceOutputFragment.newInstance())
         vm.sendSelectedProduct(allProducts)
     }

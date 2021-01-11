@@ -33,6 +33,10 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     override fun setupViews() {
         navigateToAddFragment()
         navigateToPaymentMethod()
+        vb.productRv.adapter = productAdapter
+        vb.addProductButton.setOnClickListener {
+            parentActivity.addFragment(AddProductFragment.newInstance())
+        }
         setupDialog()
     }
 
@@ -58,7 +62,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         }
     }
 
-    override fun removeItem(position: Int) {
+    override fun removeProduct(position: Int) {
         vm.removeProductFromList(position)
         productAdapter.notifyDataSetChanged()
     }
