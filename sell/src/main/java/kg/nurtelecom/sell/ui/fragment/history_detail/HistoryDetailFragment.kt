@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.sell.R
-import kg.nurtelecom.sell.databinding.HistoryDetailFragmentBinding
+import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 
-class HistoryDetailFragment : CoreFragment<HistoryDetailFragmentBinding, HistoryViewModel>(HistoryViewModel::class) {
+class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, HistoryViewModel>(HistoryViewModel::class) {
 
     private var historyAdapter1: HistoryAdapter = HistoryAdapter()
 
@@ -29,7 +29,7 @@ class HistoryDetailFragment : CoreFragment<HistoryDetailFragmentBinding, History
 
     }
 
-    override fun getBinding() = HistoryDetailFragmentBinding.inflate(layoutInflater)
+    override fun getBinding() = ChecksHistoryDetailFragmentBinding.inflate(layoutInflater)
 
     companion object {
         fun newInstance(): HistoryDetailFragment {

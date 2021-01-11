@@ -7,10 +7,10 @@ import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.sell.R
-import kg.nurtelecom.sell.databinding.HistoryRecycleViewBinding
+import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import java.text.SimpleDateFormat
 
-class HistoryFragment : CoreFragment<HistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
+class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
 
@@ -45,7 +45,7 @@ class HistoryFragment : CoreFragment<HistoryRecycleViewBinding, HistoryViewModel
         })
     }
 
-    override fun getBinding() = HistoryRecycleViewBinding.inflate(layoutInflater)
+    override fun getBinding() = ChecksHistoryRecycleViewBinding.inflate(layoutInflater)
 
     companion object {
         fun newInstance(): HistoryFragment {
