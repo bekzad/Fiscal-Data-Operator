@@ -4,6 +4,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kg.nurtelecom.sell.R
+import java.math.BigDecimal
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -31,3 +32,7 @@ fun View.isVisible(keepBounds: Boolean): ReadWriteProperty<Any, Boolean> =
             visibility == View.VISIBLE
 
     }
+
+// Check whether a given BigDecimal value is a zero or not
+fun BigDecimal.isZero() = this.compareTo(BigDecimal.ZERO) == 0
+fun BigDecimal.isNotZero() = this.compareTo(BigDecimal.ZERO) != 0

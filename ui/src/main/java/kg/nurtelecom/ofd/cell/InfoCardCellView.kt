@@ -69,7 +69,8 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    fun fetchInputData(): BigDecimal? {
-        return vb.etContent.text.toString().toBigDecimalOrNull()
+    fun fetchInputData(): BigDecimal {
+        return if (vb.etContent.text.isNotEmpty()) vb.etContent.text.toString().toBigDecimal()
+        else BigDecimal.ZERO
     }
 }
