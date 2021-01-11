@@ -16,7 +16,7 @@ abstract class SellMainViewModel : CoreViewModel() {
 
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<BigDecimal>
-    abstract val selectProductData: MutableLiveData<AllProducts>
+    abstract val selectedProductData: MutableLiveData<AllProducts>
 
     abstract fun addNewProduct(product: Product)
 
@@ -26,6 +26,8 @@ abstract class SellMainViewModel : CoreViewModel() {
 
     // TODO: must be changed
     abstract val allProducts: MutableLiveData<MutableList<AllProducts>>
+
+    open fun clearSelectedProductValue() {}
 }
 
 
@@ -36,7 +38,7 @@ class SellMainViewModelImpl : SellMainViewModel() {
 
     override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
-    override val selectProductData: MutableLiveData<AllProducts> = MutableLiveData()
+    override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
@@ -65,7 +67,11 @@ class SellMainViewModelImpl : SellMainViewModel() {
     }
 
     override fun sendSelectedProduct(product: AllProducts) {
-        selectProductData.value = product
+        selectedProductData.value = product
+    }
+
+    override fun clearSelectedProductValue() {
+        selectedProductData.value = AllProducts("", BigDecimal.ZERO)
     }
 
     // TODO: must be changed
