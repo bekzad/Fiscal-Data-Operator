@@ -20,3 +20,4 @@ fun BigDecimal.isZero() = this.compareTo(BigDecimal.ZERO) == 0
 fun BigDecimal.isNotZero() = this.compareTo(BigDecimal.ZERO) != 0
 
 fun BigDecimal.roundUp() = this.setScale(2, RoundingMode.CEILING)
+val Fragment.parentActivity get() = activity as AppCompatActivity
