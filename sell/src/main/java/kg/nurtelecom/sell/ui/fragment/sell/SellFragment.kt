@@ -31,11 +31,8 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         SellFragmentBinding.inflate(inflater, container, false)
 
     override fun setupViews() {
-        setupRV()
-        setupTaxView()
         navigateToAddFragment()
         navigateToPaymentMethod()
-        subscribeToLiveData()
         setupDialog()
     }
 
@@ -44,14 +41,8 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         vb.modeDialog.hideDialog()
     }
 
-    // TODO: must be changed
-    private fun setupTaxView() {
-        vm.taxSum.observe(viewLifecycleOwner) {
-            vb.icSumPay.setContent(it)
-        }
-    }
-
-    private fun subscribeToLiveData() {
+    override fun subscribeToLiveData() {
+        super.subscribeToLiveData()
         vm.productList.observe(viewLifecycleOwner, { product ->
             productAdapter.productList = product
         })
