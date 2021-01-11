@@ -7,7 +7,7 @@ import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.sell.databinding.AllProductsItemListBinding
 
 interface NavigationHost {
-    fun navigateTo(allProducts: AllProducts)
+    fun navigateToPriceOutputFragment(allProducts: AllProducts)
 }
 
 class AllProductsAdapter(
@@ -25,16 +25,22 @@ class AllProductsAdapter(
 
     override fun getItemCount() = productList.size
 
-    class AllProductViewHolder (
+    class AllProductViewHolder(
         private val binding: AllProductsItemListBinding,
         private val itemClick: NavigationHost
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: AllProducts) {
             binding.apply {
-                productNameTv.text = product.productName
-                productPriceTv.text = product.productPrice.toString()
-                navigateIv.setOnClickListener { itemClick.navigateTo(product) }
+                cellView.apply {
+                    setTitle(product.productName)
+                    setSubTitle(product.productPrice.toString())
+                    setOnCellClickListener {
+                        it.setOnClickListener {
+                            itemClick.navigateToPriceOutputFragment(product)
+                        }
+                    }
+                }
             }
         }
 

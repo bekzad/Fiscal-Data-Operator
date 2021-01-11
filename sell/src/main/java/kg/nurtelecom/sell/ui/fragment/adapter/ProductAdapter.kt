@@ -39,7 +39,7 @@ class ProductAdapter(private val itemClick: ProductItemClickListener) :
             binding.apply {
                 productCountTv.text = product.fetchExpression()
                 productSumTv.text = product.totalPrice.toString()
-                removeProductIv.setOnClickListener { itemClick.removeItem(position) }
+                removeProductIv.setOnClickListener { itemClick.removeProduct(position) }
             }
         }
 
