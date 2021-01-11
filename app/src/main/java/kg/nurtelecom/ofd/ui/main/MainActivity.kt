@@ -9,6 +9,7 @@ import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.getCurrentVisibleFragment
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
+import kg.nurtelecom.core.menu.DrawerListener
 import kg.nurtelecom.ofd.R
 import kg.nurtelecom.ofd.databinding.ActivityMainBinding
 import kg.nurtelecom.ofd.databinding.SideMenuMainBinding
@@ -79,6 +80,11 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        replaceFragment(R.id.mainContainer, GreetingFragment.newInstance())
+    }
+
     override fun onBackPressed() {
         if (vb.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             vb.drawerLayout.closeDrawer(GravityCompat.START)
@@ -86,23 +92,4 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
             super.onBackPressed()
         }
     }
-}
-
-abstract class DrawerListener : DrawerLayout.DrawerListener {
-    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-
-    }
-
-    override fun onDrawerOpened(drawerView: View) {
-
-    }
-
-    override fun onDrawerClosed(drawerView: View) {
-
-    }
-
-    override fun onDrawerStateChanged(newState: Int) {
-
-    }
-
 }
