@@ -8,6 +8,7 @@ import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import androidx.lifecycle.observe
 import kg.nurtelecom.sell.R
+import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.SellFragmentBinding

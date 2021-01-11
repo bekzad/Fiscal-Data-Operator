@@ -3,6 +3,7 @@ package kg.nurtelecom.sell.ui.fragment.add_product
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.AddProductFragmentBinding
@@ -11,7 +12,6 @@ import kg.nurtelecom.sell.ui.fragment.adapter.AllProductsAdapter
 import kg.nurtelecom.sell.ui.fragment.adapter.NavigationHost
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 import kg.nurtelecom.sell.utils.addFragment
-import kg.nurtelecom.sell.utils.parentActivity
 
 
 class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), NavigationHost {

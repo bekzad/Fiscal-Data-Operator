@@ -3,6 +3,7 @@ package kg.nurtelecom.sell.ui.fragment.price_output
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
@@ -14,7 +15,6 @@ import kg.nurtelecom.sell.utils.isZero
 import kg.nurtelecom.sell.utils.replaceFragment
 import java.math.BigDecimal
 import kg.nurtelecom.sell.utils.addFragment
-import kg.nurtelecom.sell.utils.parentActivity
 import java.math.BigDecimal
 
 
@@ -32,7 +32,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     private fun sendProduct(product: Product) {
         vm.addNewProduct(product)
-        vm.clearSelectedProductValue()
+        vm.clearSelectedProduct()
     }
 
     private fun setupCustomEditText() {
