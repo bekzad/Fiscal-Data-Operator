@@ -27,7 +27,7 @@
             />
 
         <kg.nurtelecom.sell.ui.fragment.history.BookDetailsComponentView
-            android:id="@+id/bookDetailsView"
+            android:id="@+id/itemDetailsView"
             android:layout_width="match_parent"
             android:background="@color/black"
             android:layout_height="0dp"
