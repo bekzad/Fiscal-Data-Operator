@@ -3,7 +3,6 @@ package kg.nurtelecom.sell.ui.fragment.price_output
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import kg.nurtelecom.core.extension.text
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
@@ -28,7 +27,6 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     override fun setupViews() {
         setupCustomEditText()
-        subscribeSelectedProduct()
         vb.checkBtn.setOnClickListener { navigateToSellFragment() }
     }
 
@@ -52,7 +50,8 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         activity.replaceFragment(SellFragment.newInstance())
     }
 
-    private fun subscribeSelectedProduct() {
+    override fun subscribeToLiveData() {
+        super.subscribeToLiveData()
         vm.selectProductData.observe(viewLifecycleOwner, {
             vb.icProductPrice.setContent(it.productPrice)
         })

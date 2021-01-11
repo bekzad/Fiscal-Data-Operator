@@ -73,8 +73,4 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
         return if (vb.etContent.text.isNotEmpty()) vb.etContent.text.toString().toBigDecimal()
         else BigDecimal.ZERO
     }
-
-    fun fetchData(): String {
-        return vb.etContent.text.toString()
-    }
 }
