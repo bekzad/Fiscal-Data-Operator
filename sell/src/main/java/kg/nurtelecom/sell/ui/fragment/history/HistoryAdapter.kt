@@ -1,57 +1,51 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
-import android.util.Log
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kg.nurtelecom.core.extension.formatForLocalDateTimeDefaults
 import kg.nurtelecom.data.history.Content
-import kg.nurtelecom.ofd.buttons.ReceiptDetailView
-import java.text.SimpleDateFormat
+import kg.nurtelecom.sell.databinding.CheckHistoryListItemBinding
 
-class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ItemsViewHolder>() {
+class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var items = ArrayList<Content>()
+    private var itemHeaders: List<String> = listOf()
 
-    fun setListData(data: ArrayList<Content>) {
-        this.items = data
+    var itemData: Map<String, List<Content>> = emptyMap()
+        set(value) {
+            field = value
+            itemHeaders = itemData.keys.toList()
+            notifyDataSetChanged()
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
+        val viewBinding: CheckHistoryListItemBinding =
+            CheckHistoryListItemBinding.inflate(layoutInflater, parent, false)
+        return ItemViewHolder(viewBinding)
     }
 
-    fun getHeaderForCurrentPosition(position: Int) = if (position in items.indices) {
-        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(items[position].createdAt).formatForLocalDateTimeDefaults()
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (position >= 0 && position < itemHeaders.size) {
+            (holder as ItemViewHolder).bind(itemHeaders[position])
+        }
+    }
+
+    override fun getItemCount() = itemHeaders.size
+
+    fun getHeaderForCurrentPosition(position: Int) = if (position in itemHeaders.indices) {
+        itemHeaders[position]
     } else {
         ""
     }
 
-    class ItemsViewHolder(view: View): RecyclerView.ViewHolder(view){
-        private val receiptDetailView: ReceiptDetailView = view as ReceiptDetailView
+    inner class ItemViewHolder(private val viewBinding: CheckHistoryListItemBinding) :
+        RecyclerView.ViewHolder(viewBinding.root) {
 
-        fun getCustomView(item: Content): ReceiptDetailView {
-            itemView.setOnClickListener {
-                Log.d("ITEM", item.id.toString())
-//                val activity = v.context as AppCompatActivity
-//                activity.replaceFragment(
-//                    R.id.history_recycler_view,
-//                    HistoryDetailFragment.newInstance()
-//                )
+        fun bind(header: String) {
+            viewBinding.tvHeader.text = header
+            itemData[header]?.let { items ->
+                viewBinding.itemDetailsView.items = items
             }
-            return receiptDetailView
         }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
-        val itemView = ReceiptDetailView(parent.context, null)
-        itemView.layoutParams =  ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT)
-        return ItemsViewHolder(itemView)
-    }
-
-    override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
-        holder.getCustomView(items[position]).setReceipt(items[position])
-    }
-
-    override fun getItemCount(): Int {
-        return items.size
     }
 }
