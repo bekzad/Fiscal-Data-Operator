@@ -10,6 +10,7 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
 import kg.nurtelecom.sell.ui.fragment.adapter.Product
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
+import kg.nurtelecom.sell.utils.isZero
 import java.math.BigDecimal
 
 class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
@@ -23,7 +24,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     }
 
     private fun sendProduct(product: Product) {
-        if (product.price != null) vm.addNewProduct(product)
+        vm.addNewProduct(product)
     }
 
     private fun setupCustomEditText() {
@@ -46,24 +47,14 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     private fun fetchProductData(): Product {
         val product: Product
-        val zero = BigDecimal.ZERO
-        val price = vb.icProductPrice.fetchInputData() ?: return Product(null, zero, zero)
-        val count = vb.icProductCount.fetchInputData() ?: BigDecimal.ONE
-        val discountPercentage = vb.icProductDiscount.fetchInputData() ?: zero
-        val allowancePercentage = vb.icProductAllowance.fetchInputData() ?: zero
-
-        val totalPrice = price.multiply(count)
-        val hundred = BigDecimal("100.0")
-        val discount = totalPrice.multiply(discountPercentage).divide(hundred)
-        val allowance = totalPrice.multiply(allowancePercentage).divide(hundred)
-        val totalPriceWithDiscount = totalPrice.subtract(discount).add(allowance)
+        val countCanBeZero = vb.icProductCount.fetchInputData()
+        val count = if (countCanBeZero.isZero()) BigDecimal.ONE else countCanBeZero
 
         product = Product(
-            price = price,
+            price = vb.icProductPrice.fetchInputData(),
             count = count,
-            totalPrice = totalPriceWithDiscount,
-            discount = discountPercentage,
-            allowance = allowancePercentage
+            discount = vb.icProductDiscount.fetchInputData(),
+            allowance = vb.icProductAllowance.fetchInputData()
         )
         return product
     }
