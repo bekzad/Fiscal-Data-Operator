@@ -29,10 +29,10 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
     override fun setupViews() {
         vb.btnLogin.enable(false)
 
-//        vb.etLogin.addTextChangedListener {
-//            val (login, password, gsrKey) = editTextHandler()
-//            vb.btnLogin.enable(login.isNotEmpty() && password.isNotEmpty() && gsrKey.isNotEmpty())
-//        }
+        vb.etLogin.addTextChangedListener {
+            val (login, password, gsrKey) = editTextHandler()
+            vb.btnLogin.enable(login.isNotEmpty() && password.isNotEmpty() && gsrKey.isNotEmpty())
+        }
 
         vb.etPassword.addTextChangedListener {
             val (login, password, gsrKey) = editTextHandler()
