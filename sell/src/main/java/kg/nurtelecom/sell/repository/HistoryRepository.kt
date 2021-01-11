@@ -9,7 +9,7 @@ import kg.nurtelecom.storage.sharedpref.AppPreferences
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
-class SellRepository(
+class HistoryRepository(
     private val historyApi: HistoryApi,
     private val appPrefs: AppPreferences
 ) {

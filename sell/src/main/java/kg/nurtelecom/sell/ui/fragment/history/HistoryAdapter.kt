@@ -4,8 +4,10 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kg.nurtelecom.core.extension.formatForLocalDateTimeDefaults
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.ofd.buttons.ReceiptDetailView
+import java.text.SimpleDateFormat
 
 class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ItemsViewHolder>() {
 
@@ -16,7 +18,7 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ItemsViewHolder>() {
     }
 
     fun getHeaderForCurrentPosition(position: Int) = if (position in items.indices) {
-        items[position].createdAt
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(items[position].createdAt).formatForLocalDateTimeDefaults()
     } else {
         ""
     }
@@ -46,7 +48,7 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ItemsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
-        holder.getCustomView(items[position]).setReceipt(items[position]);
+        holder.getCustomView(items[position]).setReceipt(items[position])
     }
 
     override fun getItemCount(): Int {
