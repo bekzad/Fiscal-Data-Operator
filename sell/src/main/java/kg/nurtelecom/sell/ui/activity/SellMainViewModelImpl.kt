@@ -27,7 +27,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     // TODO: must be changed
     abstract val allProducts: MutableLiveData<MutableList<AllProducts>>
 
-    open fun clearSelectedProductValue() {}
+    open fun clearSelectedProduct() {}
 }
 
 
@@ -70,7 +70,7 @@ class SellMainViewModelImpl : SellMainViewModel() {
         selectedProductData.value = product
     }
 
-    override fun clearSelectedProductValue() {
+    override fun clearSelectedProduct() {
         selectedProductData.value = AllProducts("", BigDecimal.ZERO)
     }
 

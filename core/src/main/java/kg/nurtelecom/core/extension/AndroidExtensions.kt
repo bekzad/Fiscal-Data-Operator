@@ -73,3 +73,5 @@ inline fun <reified T : Activity> Context.startActivity(noinline extra: Intent.(
     intent.extra()
     startActivity(intent)
 }
+
+val Fragment.parentActivity get() = activity as AppCompatActivity
