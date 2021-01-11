@@ -13,12 +13,12 @@ import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.menu.DrawerListener
 import kg.nurtelecom.ofd.aboutapp.AboutAppFragment
 import kg.nurtelecom.core.extension.startActivity
-import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
 import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.ui.fragment.history.HistoryFragment
+import kg.nurtelecom.sell.utils.replaceFragment
 
 class SellMainActivity :
     CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
@@ -82,10 +82,7 @@ class SellMainActivity :
     }
     
     private fun navigateToSellFragment() {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.sell_container, SellFragment.newInstance())
-            .commit()
+        replaceFragment(SellFragment.newInstance())
     }
 
     private fun drawerListener(): DrawerLayout.DrawerListener {

@@ -35,7 +35,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         navigateToPaymentMethod()
         vb.productRv.adapter = productAdapter
         vb.addProductButton.setOnClickListener {
-            parentActivity.addFragment(AddProductFragment.newInstance())
+            parentActivity.addFragment(AddProductFragment.newInstance(), true)
         }
         setupDialog()
     }

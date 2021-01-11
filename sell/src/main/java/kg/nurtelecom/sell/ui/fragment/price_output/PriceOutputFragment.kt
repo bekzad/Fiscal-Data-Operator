@@ -13,8 +13,8 @@ import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.utils.isZero
 import kg.nurtelecom.sell.utils.replaceFragment
 import java.math.BigDecimal
+import kg.nurtelecom.sell.utils.addFragment
 import kg.nurtelecom.sell.utils.parentActivity
-import kg.nurtelecom.sell.utils.replaceFragment
 import java.math.BigDecimal
 
 
@@ -32,6 +32,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     private fun sendProduct(product: Product) {
         vm.addNewProduct(product)
+        vm.clearSelectedProductValue()
     }
 
     private fun setupCustomEditText() {
@@ -47,12 +48,12 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     private fun navigateToSellFragment() {
         sendProduct(fetchProductData())
-        activity.replaceFragment(SellFragment.newInstance())
+        parentActivity.addFragment(SellFragment.newInstance(), true)
     }
 
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
-        vm.selectProductData.observe(viewLifecycleOwner, {
+        vm.selectedProductData.observe(viewLifecycleOwner, {
             vb.icProductPrice.setContent(it.productPrice)
         })
     }
