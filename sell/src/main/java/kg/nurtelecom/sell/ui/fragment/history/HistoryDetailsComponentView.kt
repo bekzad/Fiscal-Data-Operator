@@ -12,7 +12,7 @@ import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.ofd.cell.ReceiptDetailView
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailsComponentViewBinding
 
-class BookDetailsComponentView : ConstraintLayout {
+class HistoryDetailsComponentView : ConstraintLayout {
 
     private lateinit var binding: ChecksHistoryDetailsComponentViewBinding
     private lateinit var adapter: ItemAdapter
