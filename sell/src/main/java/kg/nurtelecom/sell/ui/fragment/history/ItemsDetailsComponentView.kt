@@ -12,17 +12,17 @@ import kg.nurtelecom.core.extension.OperationType
 import kg.nurtelecom.core.extension.formatForLocalDateTimeDefaults
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
-import kg.nurtelecom.sell.databinding.ViewBookDetailsComponentBinding
+import kg.nurtelecom.sell.databinding.ViewChecksHistoryDetailsComponentBinding
 import kg.nurtelecom.ui.databinding.DetailViewBinding
 import java.text.SimpleDateFormat
 
 class BookDetailsComponentView : ConstraintLayout {
 
-    private lateinit var binding: ViewBookDetailsComponentBinding
+    private lateinit var binding: ViewChecksHistoryDetailsComponentBinding
     private lateinit var bookItemBinding: DetailViewBinding
-    private lateinit var adapter: BookAdapter
+    private lateinit var adapter: ItemAdapter
 
-    var books: List<Content> = emptyList()
+    var items: List<Content> = emptyList()
         set(value) {
             field = value
             onItemsUpdated()
@@ -45,8 +45,8 @@ class BookDetailsComponentView : ConstraintLayout {
     }
 
     private fun init(context: Context) {
-        binding = ViewBookDetailsComponentBinding.inflate(LayoutInflater.from(context), this, true)
-        adapter = BookAdapter(context)
+        binding = ViewChecksHistoryDetailsComponentBinding.inflate(LayoutInflater.from(context), this, true)
+        adapter = ItemAdapter(context)
         binding.bookDetailsList.adapter = adapter
     }
 
@@ -55,11 +55,11 @@ class BookDetailsComponentView : ConstraintLayout {
         binding.bookDetailsList.requestLayoutForChangedDataset()
     }
 
-    inner class BookAdapter(private val context: Context) : BaseAdapter() {
+    inner class ItemAdapter(private val context: Context) : BaseAdapter() {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
-            val book: Content = books[position]
+            val item: Content = items[position]
             var view: View? = convertView
 
             if (view == null) {
@@ -72,17 +72,17 @@ class BookDetailsComponentView : ConstraintLayout {
             }
 
             bookItemBinding.apply {
-                tvTitle.text = OperationType.valueOf(book.operationType).type
-                tvCounter.text = "#${book.indexNum}"
-                tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForLocalDateTimeDefaults()
-                tvAmount.text = "${String.format("%.2f", book.total).toDouble()} с"
+                tvTitle.text = OperationType.valueOf(item.operationType).type
+                tvCounter.text = "#${item.indexNum}"
+                tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(item.createdAt).formatForLocalDateTimeDefaults()
+                tvAmount.text = "${String.format("%.2f", item.total).toDouble()} с"
             }
 
             return bookItemBinding.root
         }
 
         override fun getItem(position: Int): Any {
-            return books[position]
+            return items[position]
         }
 
         override fun getItemId(position: Int): Long {
@@ -90,7 +90,7 @@ class BookDetailsComponentView : ConstraintLayout {
         }
 
         override fun getCount(): Int {
-            return books.size
+            return items.size
         }
 
         override fun isEnabled(position: Int): Boolean {

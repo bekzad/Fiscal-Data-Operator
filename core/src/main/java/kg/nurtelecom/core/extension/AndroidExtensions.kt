@@ -39,4 +39,9 @@ fun Date.formatForLocalDateTimeDefaults(): String {
     return sdf.format(this)
 }
 
+fun Date.formatForDecoratorDateTimeDefaults(): String {
+    val sdf = SimpleDateFormat("dd MM yyyy", Locale.getDefault())
+    return sdf.format(this)
+}
+
 fun LocalDateTime.formatForServerDateTimeDefaults() = format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"))

@@ -1,20 +1,16 @@
 package kg.nurtelecom.sell.ui.fragment.history_detail
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
-import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.HistoryDetailFragmentBinding
-import kg.nurtelecom.sell.databinding.HistoryRecycleViewBinding
-import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
+import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter1
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 
 class HistoryDetailFragment : CoreFragment<HistoryDetailFragmentBinding, HistoryViewModel>(HistoryViewModel::class) {
 
-    private var historyAdapter: HistoryAdapter = HistoryAdapter()
+    private var historyAdapter1: HistoryAdapter1 = HistoryAdapter1()
 
     override fun onResume() {
         super.onResume()
