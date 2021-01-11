@@ -28,7 +28,7 @@
             android:text="@string/text_date"
             />
 
-        <kg.nurtelecom.sell.ui.fragment.history.BookDetailsComponentView
+        <kg.nurtelecom.sell.ui.fragment.history.HistoryDetailsComponentView
             android:id="@+id/itemDetailsView"
             android:layout_width="match_parent"
             android:background="@color/black"
