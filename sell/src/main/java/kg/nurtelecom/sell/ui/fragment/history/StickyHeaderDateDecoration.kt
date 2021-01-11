@@ -9,7 +9,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.sell.databinding.StickyHeaderDateViewBinding
 
-class StickyHeaderDateDecoration(private val adapter: HistoryAdapter, root: View) :
+class StickyHeaderDateDecoration(private val adapter: HistoryAdapterFake, root: View) :
     RecyclerView.ItemDecoration() {
 
     private val headerBinding by lazy { StickyHeaderDateViewBinding.inflate(LayoutInflater.from(root.context)) }
