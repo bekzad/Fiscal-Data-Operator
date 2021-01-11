@@ -4,22 +4,25 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import kg.nurtelecom.data.enums.OperationType
+import kg.nurtelecom.core.extension.formatForLocalDateTimeDefaults
+import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.ui.databinding.DetailViewBinding
+import java.text.SimpleDateFormat
 
-class ReceiptDetailView(context: Context, attr: AttributeSet) : ConstraintLayout(context, attr) {
+class ReceiptDetailView(context: Context, attr: AttributeSet?) : ConstraintLayout(context, attr) {
 
     private val vb = DetailViewBinding.inflate(LayoutInflater.from(context), this, true)
 
-    fun setReceipt(saleType: String, counter: String, timestamp: String, amount: String) {
-        vb.tvTitle.text = saleType
-        vb.tvCounter.text = counter
-        vb.tvTimestamp.text = timestamp
-        vb.tvAmount.text = amount
+    fun setReceipt(content: Content) {
+        vb.tvTitle.text = OperationType.valueOf(content.operationType).type
+        vb.tvCounter.text = "#${content.indexNum}"
+        vb.tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(content.createdAt).formatForLocalDateTimeDefaults()
+        vb.tvAmount.text = "${String.format("%.2f", content.total).toDouble()} с"
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
         super.setOnClickListener(l)
         vb.rootLayout.setOnClickListener(l)
     }
-
 }

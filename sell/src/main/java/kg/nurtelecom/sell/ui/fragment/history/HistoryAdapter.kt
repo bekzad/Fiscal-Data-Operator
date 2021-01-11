@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.data.history.Content
-import kg.nurtelecom.sell.databinding.CheckHistoryListItemBinding
+import kg.nurtelecom.sell.databinding.ChecksHistoryListItemBinding
 
 class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -19,8 +19,8 @@ class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val viewBinding: CheckHistoryListItemBinding =
-            CheckHistoryListItemBinding.inflate(layoutInflater, parent, false)
+        val viewBinding: ChecksHistoryListItemBinding =
+            ChecksHistoryListItemBinding.inflate(layoutInflater, parent, false)
         return ItemViewHolder(viewBinding)
     }
 
@@ -32,13 +32,7 @@ class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = itemHeaders.size
 
-    fun getHeaderForCurrentPosition(position: Int) = if (position in itemHeaders.indices) {
-        itemHeaders[position]
-    } else {
-        ""
-    }
-
-    inner class ItemViewHolder(private val viewBinding: CheckHistoryListItemBinding) :
+    inner class ItemViewHolder(private val viewBinding: ChecksHistoryListItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
 
         fun bind(header: String) {

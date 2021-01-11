@@ -20,10 +20,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:layout_marginBottom="@dimen/margin_12dp"
             android:textSize="@dimen/text_16sp"
             android:textColor="@color/white"
             android:background="@color/black"
-            android:text="11 апреля 2020"
+            android:text="@string/text_date"
             />
 
         <kg.nurtelecom.sell.ui.fragment.history.BookDetailsComponentView
@@ -36,4 +38,3 @@
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
-
