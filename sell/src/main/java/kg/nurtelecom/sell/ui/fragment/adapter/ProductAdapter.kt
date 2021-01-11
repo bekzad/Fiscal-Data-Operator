@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.sell.databinding.ProductListItemBinding
-import java.math.BigDecimal
+import kg.nurtelecom.sell.utils.isNotZero
 
 class ProductAdapter(private val productList: List<Product>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
@@ -36,10 +36,10 @@ class ProductAdapter(private val productList: List<Product>) :
         private fun fetchProductExpression(product: Product): StringBuilder {
             val productExpressionLine = StringBuilder()
             val discount =
-                if (product.discount != null && isNotZero(product.discount)) (" + " + product.discount + "% ") else
+                if (product.discount.isNotZero()) (" - " + product.discount + "% ") else
                     ""
             val allowance =
-                if (product.allowance != null && isNotZero(product.allowance)) ("+ " + product.allowance) + "%" else
+                if (product.allowance.isNotZero()) ("+ " + product.allowance) + "%" else
                     ""
             productExpressionLine.apply {
                 append("${product.price} * ")
@@ -48,15 +48,6 @@ class ProductAdapter(private val productList: List<Product>) :
                 append(allowance)
             }
             return productExpressionLine
-        }
-
-        private fun isNotZero(value: BigDecimal): Boolean {
-            return value.compareTo(BigDecimal.ZERO) != 0
-        }
-        
-        fun compareToZero(value: Double): Boolean {
-            val bigValue = BigDecimal.valueOf(value)
-            return bigValue.compareTo(BigDecimal.ZERO) != 0
         }
     }
 }
