@@ -3,6 +3,7 @@ package kg.nurtelecom.sell.ui.fragment.price_output
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.text
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
@@ -36,8 +37,13 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     }
 
     private fun setupCustomEditText() {
-        vb.icProductPrice.fetchTextState {
-            if (it != null) vb.checkBtn.isEnabled = it.isNotEmpty()
+        vb.apply {
+            icProductPrice.fetchTextState {
+                if (it != null) vb.checkBtn.isEnabled = it.isNotEmpty()
+            }
+            icProductCount.fetchTextState {
+                vb.checkBtn.isEnabled = it?.isNotEmpty() ?: true
+            }
         }
     }
 
