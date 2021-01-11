@@ -41,9 +41,6 @@ class HistoryFragment : CoreFragment<HistoryRecycleViewBinding, HistoryViewModel
             if(it != null) {
                 val groupedItems = it.groupBy { book -> SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForDecoratorDateTimeDefaults() }
                 historyAdapter.itemData = groupedItems.toSortedMap()
-                vb.historyRecyclerView.addItemDecoration(
-                    StickyHeaderDateDecoration(historyAdapter, vb.root)
-                )
             }
         })
     }

@@ -13,13 +13,15 @@
     <string name="text_exit">ВЫХОД</string>
 
     <!--History-->
+    <string name="history_title">История</string>
     <string name="text_sale_type">Кассовый чек</string>
     <string name="text_counter">#123</string>
     <string name="text_timestamp">25/09/19 - 15:43</string>
     <string name="text_payment_amount">75.00 с</string>
     <string name="text_profile">Профиль</string>
+    <string name="text_date">11 апреля 2020</string>
 
-<!--    sell-->
+    <!--sell-->
     <string name="title_text">Сумма к оплате, сом:</string>
     <string name="content_text">0</string>
     <string name="next_icon_description">Next Icon</string>
@@ -42,9 +44,6 @@
     <string name="text_operations">Прочие операции</string>
     <string name="text_operations_list">Список операций за период</string>
     <string name="text_shift_closing_and_report">Закрытие смены и z-отчет</string>
-
-    <!--History-->
-    <string name="history_title">История</string>
 
     <!--Bottom Sheet Dialog-->
     <string name="text_shift_closing">Закрытие смены</string>

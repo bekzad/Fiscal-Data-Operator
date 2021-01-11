@@ -1,4 +1,4 @@
-package kg.nurtelecom.core.extension
+package kg.nurtelecom.data.enums
 
 enum class OperationType(val type: String) {
     SALE("Продажа"),
