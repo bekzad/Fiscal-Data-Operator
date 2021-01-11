@@ -15,8 +15,7 @@ class ScrollDisabledListView : ListView {
         context,
         attrs,
         defStyle
-    ) {
-    }
+    )
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val measuredHeight = MeasureSpec.makeMeasureSpec(
