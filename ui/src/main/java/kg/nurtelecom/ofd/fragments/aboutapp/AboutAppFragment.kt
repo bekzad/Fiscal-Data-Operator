@@ -1,7 +1,8 @@
-package kg.nurtelecom.ofd.ui.main.fragment.aboutapp
+package kg.nurtelecom.ofd.fragments.aboutapp
 
 import kg.nurtelecom.core.fragment.SimpleFragment
-import kg.nurtelecom.ofd.databinding.FragmentAboutAppBinding
+import kg.nurtelecom.ui.databinding.FragmentAboutAppBinding
+
 
 class AboutAppFragment : SimpleFragment<FragmentAboutAppBinding>() {
     override fun getBinding(): FragmentAboutAppBinding = FragmentAboutAppBinding.inflate(layoutInflater)
