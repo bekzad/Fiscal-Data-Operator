@@ -11,8 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clickable="false"
-        app:layout_constraintHeight_default="wrap"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/detail_view" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
