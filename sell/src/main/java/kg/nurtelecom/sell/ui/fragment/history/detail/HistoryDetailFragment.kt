@@ -1,4 +1,4 @@
-package kg.nurtelecom.sell.ui.fragment.history_detail
+package kg.nurtelecom.sell.ui.fragment.history.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
@@ -9,8 +9,6 @@ import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 
 class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, HistoryViewModel>(HistoryViewModel::class) {
-
-    private var historyAdapter1: HistoryAdapter = HistoryAdapter()
 
     override fun onResume() {
         super.onResume()
