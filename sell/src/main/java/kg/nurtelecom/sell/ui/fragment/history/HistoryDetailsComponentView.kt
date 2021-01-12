@@ -12,7 +12,8 @@ import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.ofd.cell.ReceiptDetailView
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailsComponentViewBinding
 
-class HistoryDetailsComponentView : ConstraintLayout {
+class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
+    ConstraintLayout(context, attrs) {
 
     private lateinit var binding: ChecksHistoryDetailsComponentViewBinding
     private lateinit var adapter: ItemAdapter
@@ -23,19 +24,7 @@ class HistoryDetailsComponentView : ConstraintLayout {
             onItemsUpdated()
         }
 
-    constructor(context: Context) : super(context) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
+    init {
         init(context)
     }
 
