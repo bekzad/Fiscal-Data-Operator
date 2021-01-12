@@ -18,6 +18,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     override val vm: SellMainViewModel by activityViewModels()
 
     override fun setupViews() {
+        setupCustomEditText()
         vb.checkBtn.setOnClickListener {
             navigate()
         }
@@ -28,10 +29,8 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     }
 
     private fun setupCustomEditText() {
-        vb.icProductPrice.apply {
-            fetchTextState {
-                vb.checkBtn.isEnabled = !it?.isEmpty()!!
-            }
+        vb.icProductPrice.fetchTextState {
+            if (it != null) vb.checkBtn.isEnabled = it.isNotEmpty()
         }
     }
 
