@@ -9,5 +9,5 @@ import org.koin.dsl.module
 val userKoin = module {
 
     viewModel<UserVM> { UserVMImpl(get()) }
-    single { UserRepository(get()) }
+    single { UserRepository(get(), get(), get()) }
 }

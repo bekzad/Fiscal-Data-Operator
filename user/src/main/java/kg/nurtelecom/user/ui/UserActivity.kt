@@ -10,6 +10,29 @@ import java.util.regex.Pattern
 
 class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
 
+
+    override fun subscribeToLiveData() {
+        super.subscribeToLiveData()
+        observeUserData()
+        validateOfTheIdentificationNumber ()
+    }
+
+    private fun observeUserData(){
+        vm.userData.observe(this, Observer {
+            vb.etSurname.setText(it.firstname)
+            vb.etName.setText(it.lastname)
+            vb.etMiddlename.setText(it.middlename)
+            vb.etPhone.setText(it.msisdn)
+            vb.etIdentification.setText(it.inn)
+        })
+    }
+
+    private fun userData(){
+        val (surname, name, middleName, phone, inn) = editTextHandler()
+        vm.updateUserData(surname, name, middleName, phone, inn)
+
+    }
+
     private fun editTextHandler(): Array<String> {
         val surname = text(vb.etSurname)
         val name = text(vb.etName)
@@ -32,22 +55,12 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
             val (surname, name, phone) = editTextHandler()
             vb.btnChange.enable(surname.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty())
         }
-    }
+        vb.etPhone.addTextChangedListener {
+            val (surname, name, phone) = editTextHandler()
+            vb.btnChange.enable(surname.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty()) // ? wtf
+        }
 
-    override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
-        observeUserData()
-        validateOfTheIdentificationNumber ()
-    }
-
-    private fun observeUserData(){
-        vm.userData.observe(this, Observer {
-            vb.etSurname.setText(it.firstname)
-            vb.etName.setText(it.lastname)
-            vb.etMiddlename.setText(it.middlename)
-            vb.etPhone.setText(it.msisdn)
-            vb.etIdentification.setText(it.inn)
-        })
+        vb.btnChange.setOnClickListener { userData() }
     }
 
     override fun getBinding() = ActivityUserBinding.inflate(layoutInflater)
@@ -71,4 +84,20 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
         }
     }
 }
+
+//fun isValidPassword(password: String?): Boolean {
+//
+//        val regex = ("^(?=.*[0-9])"
+//                + "(?=.*[a-z])(?=.*[A-Z])"
+//                + "(?=\\S+$).{6,16}$")
+//
+//        val p: Pattern = Pattern.compile(regex)
+//
+//        if (password == null) {
+//            return false
+//        }
+//
+//        val m: Matcher = p.matcher(password)
+//        return m.matches()
+//    }
 

@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:background="@color/lightBlack"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +24,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/lightBlack"
             android:gravity="center"
-            android:textColor="@color/grey"
-            android:textColorHint="@color/grey"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="@dimen/text_20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>

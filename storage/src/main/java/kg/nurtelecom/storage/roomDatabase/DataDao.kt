@@ -1,30 +1,25 @@
 package kg.nurtelecom.storage.roomdatabase
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import kg.nurtelecom.data.UserDetail
-
 
 @Dao
 interface DataDao {
 
     //запись в БД.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(userDetailModel: UserDetail)
+    fun insert(userDetail: UserDetail)
 
     //удаление
     @Delete
-    fun delete(userDetailModel: UserDetail)
+    fun delete(userDetail: UserDetail)
 
     //запрос
     @Query("SELECT * FROM user")
-    fun getAllData(): LiveData<List<UserDetail>>
+    fun getUserData(): UserDetail
 
     //обнов.
-    @Update
-    fun updateUserData(userDetailModel: UserDetail)
-
-
+     @Update
+     fun updateUserData(userDetail: UserDetail)
 
 }

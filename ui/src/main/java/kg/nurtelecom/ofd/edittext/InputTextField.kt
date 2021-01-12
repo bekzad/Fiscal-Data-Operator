@@ -14,9 +14,9 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
         InputTextFieldBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
-        setPasswordEditText(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
-        //setPasswordEditText(TextInputLayout.END_ICON_CLEAR_TEXT)
-        //setPasswordEditText(TextInputLayout.END_ICON_NONE)
+//        setPasswordEditText(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+//        setPasswordEditText(TextInputLayout.END_ICON_CLEAR_TEXT)
+        setPasswordEditText(TextInputLayout.END_ICON_NONE)
     }
 
     fun setInputType(type: Int) {
