@@ -34,6 +34,7 @@
     <string name="nav_close_drawer">close</string>
     <string name="text_menu">Меню</string>
     <string name="text_shift_opening">Открытие смены:</string>
+    <string name="text_date_opening">27.06.20 / 08:45 </string>
     <string name="text_sale">Продажа</string>
     <string name="text_return">Возврат</string>
     <string name="text_report">X - отчет</string>

@@ -23,9 +23,9 @@
         android:layout_marginLeft="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_2dp"
         android:layout_marginRight="@dimen/margin_16dp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_20sp"
-        android:text="27.06.20 / 08:45 "
+        android:text="@string/text_date_opening"
         />
 
     <Button
