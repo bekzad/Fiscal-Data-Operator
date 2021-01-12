@@ -34,7 +34,7 @@ class SellMainActivity :
 
     private fun setupNavDrawer() {
         val actionBarToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this,vb.drawerLayout, vb.tbSellMain,R.string.nav_open_drawer, R.string.nav_close_drawer )
-        actionBarToggle.drawerArrowDrawable.color = resources.getColor(R.color.colorWhite)
+        actionBarToggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
         vb.drawerLayout.addDrawerListener(actionBarToggle)
         setupDrawerListener()
         actionBarToggle.syncState()
