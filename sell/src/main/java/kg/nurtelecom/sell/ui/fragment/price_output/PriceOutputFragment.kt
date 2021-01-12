@@ -3,8 +3,8 @@ package kg.nurtelecom.sell.ui.fragment.price_output
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
@@ -15,6 +15,8 @@ import kg.nurtelecom.sell.utils.isZero
 import kg.nurtelecom.sell.utils.replaceFragment
 import java.math.BigDecimal
 import kg.nurtelecom.sell.utils.addFragment
+import kg.nurtelecom.sell.utils.clearBackStack
+import kg.nurtelecom.sell.utils.replaceFragment
 import java.math.BigDecimal
 
 
@@ -48,7 +50,8 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     private fun navigateToSellFragment() {
         sendProduct(fetchProductData())
-        parentActivity.addFragment(SellFragment.newInstance(), true)
+        replaceFragment(R.id.sell_container, SellFragment.newInstance())
+        clearBackStack()
     }
 
     override fun subscribeToLiveData() {

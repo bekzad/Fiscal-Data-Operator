@@ -1,17 +1,31 @@
 package kg.nurtelecom.sell.utils
 
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import kg.nurtelecom.sell.R
-import java.math.BigDecimal
-import java.math.RoundingMode
+import androidx.fragment.app.commit
 
+fun Fragment.replaceFragment(
+    @IdRes containerId: Int,
+    fragment: Fragment,
+    backStack: Boolean = false
+) {
+    requireActivity().supportFragmentManager.commit {
+        if (backStack) replace(containerId, fragment).addToBackStack(null)
+        else replace(containerId, fragment)
+    }
+}
 
-fun AppCompatActivity.replaceFragment(fragment: Fragment) {
-    this.supportFragmentManager.beginTransaction().apply {
-        addToBackStack(null)
-        replace(R.id.container, fragment)
-        commit()
+fun Fragment.addFragment(@IdRes containerId: Int, fragment: Fragment, backStack: Boolean = false) {
+    requireActivity().supportFragmentManager.commit {
+        if (backStack) add(containerId, fragment).addToBackStack(null)
+        else add(containerId, fragment)
+    }
+}
+
+fun Fragment.clearBackStack() {
+    val fm = requireActivity().supportFragmentManager
+    for (i in 0 until fm.backStackEntryCount) {
+        fm.popBackStack()
     }
 }
 
@@ -20,4 +34,3 @@ fun BigDecimal.isZero() = this.compareTo(BigDecimal.ZERO) == 0
 fun BigDecimal.isNotZero() = this.compareTo(BigDecimal.ZERO) != 0
 
 fun BigDecimal.roundUp() = this.setScale(2, RoundingMode.CEILING)
-val Fragment.parentActivity get() = activity as AppCompatActivity
