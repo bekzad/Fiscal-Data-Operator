@@ -24,19 +24,22 @@ import kg.nurtelecom.sell.utils.replaceFragment
 class SellMainActivity :
     CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun setupViews() {
         super.setupViews()
         setSupportActionBar(vb.tbSellMain)
         setupNavDrawer()
-        replaceFragment(R.id.sellMainContainer, SellFragment.newInstance())
+        replaceFragment(R.id.sell_container, SellFragment.newInstance())
     }
 
     private fun setupNavDrawer() {
-        val actionBarToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this,vb.drawerLayout, vb.tbSellMain,R.string.nav_open_drawer, R.string.nav_close_drawer )
+        val actionBarToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(
+            this,
+            vb.drawerLayout,
+            vb.tbSellMain,
+            R.string.nav_open_drawer,
+            R.string.nav_close_drawer
+        )
         actionBarToggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
         vb.drawerLayout.addDrawerListener(actionBarToggle)
         setupDrawerListener()
@@ -49,7 +52,7 @@ class SellMainActivity :
         val v = SideMenuSellMainBinding.bind(view)
         val bottomSheetFragment = BottomSheetFragment()
         v.sellMainMenuItemSale.setOnClickListener {
-            replaceFragment(R.id.sellMainContainer, SellFragment.newInstance(), true)
+            replaceFragment(R.id.sell_container, SellFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         v.sellMainMenuItemClose.setOnClickListener {
@@ -69,24 +72,17 @@ class SellMainActivity :
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         v.sellMainMenuItemHistory.setOnClickListener {
-            replaceFragment(R.id.sellMainContainer, HistoryFragment.newInstance(), true)
+            replaceFragment(R.id.sell_container, HistoryFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         v.sellMainMenuItemInformation.setOnClickListener {
-            replaceFragment(R.id.sellMainContainer, AboutAppFragment.newInstance(), true)
+            replaceFragment(R.id.sell_container, AboutAppFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         v.sellMainMenuItemOperations.setOnClickListener {
             // here place for replacing fragment
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-    }
-    
-    private fun navigateToSellFragment() {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.sell_container, SellFragment.newInstance())
-            .commit()
     }
 
     private fun drawerListener(): DrawerLayout.DrawerListener {
@@ -102,6 +98,7 @@ class SellMainActivity :
                     is SellFragment -> setToolbarTitle(R.string.text_sale)
                 }
             }
+
             override fun onDrawerOpened(drawerView: View) {
                 super.onDrawerOpened(drawerView)
                 setToolbarTitle(resources.getString(R.string.text_menu))
@@ -112,7 +109,7 @@ class SellMainActivity :
 
     override fun getBinding(): ActivitySellMainBinding =
         ActivitySellMainBinding.inflate(layoutInflater)
-        
+
     companion object {
         fun start(context: Context?) {
             context?.startActivity<SellMainActivity>()

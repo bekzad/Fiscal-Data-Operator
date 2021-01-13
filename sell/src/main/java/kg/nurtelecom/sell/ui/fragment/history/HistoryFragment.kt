@@ -1,9 +1,9 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
+import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.sell.R
@@ -16,7 +16,7 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).setToolbarTitle(R.string.history_title)
+        parentActivity.setToolbarTitle(R.string.history_title)
     }
 
     override fun setupViews() {

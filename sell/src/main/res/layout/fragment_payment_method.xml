@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="76dp"
+        android:layout_height="@dimen/size_76dp"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
@@ -20,11 +20,11 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_cash_payment"
             style="@style/BtnGreen"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="@dimen/size_0dp"
             android:layout_marginEnd="@dimen/margin_8dp"
             android:text="@string/payment_by_cash"
-            app:cornerRadius="4dp"
+            app:cornerRadius="@dimen/radius_4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +33,11 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_card_payment"
             style="@style/BtnWhite"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="@dimen/size_0dp"
             android:layout_marginStart="@dimen/margin_8dp"
             android:text="@string/payment_by_card"
-            app:cornerRadius="4dp"
+            app:cornerRadius="@dimen/radius_4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/vertical_guideline"

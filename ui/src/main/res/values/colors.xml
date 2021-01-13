@@ -40,4 +40,6 @@
 
     <color name="transparent">#00FFFFFF</color>
 
+    <color name="softBlack">#1D1D1E</color>
+
 </resources>
