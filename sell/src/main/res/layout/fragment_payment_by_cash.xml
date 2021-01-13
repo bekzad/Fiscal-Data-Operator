@@ -10,35 +10,35 @@
 
     <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_sum"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
-        app:title_text="@string/sum_pay"
-        app:is_editable="false"
         android:background="@color/green"
         android:textColor="@color/white"
+        app:is_editable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title_text="@string/amount_to_pay" />
 
     <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_received"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16dp"
-        app:title_text="@string/et_received"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ic_sum" />
+        app:layout_constraintTop_toBottomOf="@id/ic_sum"
+        app:title_text="@string/et_received" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_continue"
-        style="@style/btn_green"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
+        style="@style/BtnGreen"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
         android:enabled="false"
         android:text="@string/btn_continue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

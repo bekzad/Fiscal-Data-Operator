@@ -13,8 +13,6 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
-import kg.nurtelecom.sell.ui.core.CoreFragment
-import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.ui.custom.CustomDialog.Companion.FISCAL_REGIME
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
@@ -58,8 +56,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
 
     private fun navigateToAddFragment() {
         vb.addProductButton.setOnClickListener {
-            val activity = activity as AppCompatActivity
-            activity.replaceFragment(AddProductFragment.newInstance())
+            replaceFragment(R.id.sell_container, AddProductFragment.newInstance())
         }
     }
 
@@ -70,8 +67,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
 
     private fun navigateToPaymentMethod() {
         vb.icSumPay.setOnClickListener {
-            val activity = activity as AppCompatActivity
-            activity.replaceFragment(PaymentMethodFragment.newInstance())
+            replaceFragment(R.id.sell_container, PaymentMethodFragment.newInstance())
         }
     }
 

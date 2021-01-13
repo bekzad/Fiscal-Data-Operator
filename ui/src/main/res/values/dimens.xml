@@ -28,6 +28,7 @@
 
 
     <dimen name="size_75dp">75dp</dimen>
+    <dimen name="size_60dp">60dp</dimen>
     <dimen name="size_48dp">48dp</dimen>
     <dimen name="size_24dp">24dp</dimen>
     <dimen name="size_18dp">18dp</dimen>

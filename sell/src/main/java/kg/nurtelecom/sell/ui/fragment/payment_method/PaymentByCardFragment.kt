@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import kg.nurtelecom.sell.R
+import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCardBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
-import kg.nurtelecom.sell.ui.core.CoreFragment
 
 
 class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
@@ -24,13 +22,8 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        subscribeToLiveData()
-    }
-
-    private fun subscribeToLiveData() {
-        vm.calculateTaxSum().observe(viewLifecycleOwner) {sum ->
+    override fun subscribeToLiveData() {
+        vm.taxSum.observe(viewLifecycleOwner) {sum ->
             vb.icSumCard.setContent(sum)
             vb.icReceivedCard.setContent(sum)
         }

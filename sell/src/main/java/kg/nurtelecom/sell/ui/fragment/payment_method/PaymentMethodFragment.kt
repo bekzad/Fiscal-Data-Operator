@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.sell.R
+import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentMethodBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
-import kg.nurtelecom.sell.ui.core.CoreFragment
 import kg.nurtelecom.sell.utils.replaceFragment
 
 
@@ -17,18 +17,16 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
     override val vm: SellMainViewModel by activityViewModels()
 
     override fun setupViews() {
-        navigate()
+        setupNavigate()
     }
 
-    private fun navigate() {
+    private fun setupNavigate() {
         vb.btnCashPayment.setOnClickListener {
-            val activity = activity as AppCompatActivity
-            activity.replaceFragment(PaymentByCashFragment.newInstance())
+            replaceFragment(R.id.sell_container, PaymentByCashFragment.newInstance(), true)
         }
 
         vb.btnCardPayment.setOnClickListener {
-            val activity = activity as AppCompatActivity
-            activity.replaceFragment(PaymentByCardFragment.newInstance())
+            replaceFragment(R.id.sell_container, PaymentByCardFragment.newInstance(), true)
         }
     }
 
@@ -37,15 +35,16 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
         subscribeToLiveData()
     }
 
-    private fun subscribeToLiveData() {
-        vm.calculateTaxSum().observe(viewLifecycleOwner) {sum ->
+    override fun subscribeToLiveData() {
+        vm.taxSum.observe(viewLifecycleOwner) { sum ->
             vb.twPaymentAmount.text = sum.toString()
         }
     }
 
     override fun createViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?): FragmentPaymentMethodBinding {
+        container: ViewGroup?
+    ): FragmentPaymentMethodBinding {
         return FragmentPaymentMethodBinding.inflate(inflater, container, false)
     }
 

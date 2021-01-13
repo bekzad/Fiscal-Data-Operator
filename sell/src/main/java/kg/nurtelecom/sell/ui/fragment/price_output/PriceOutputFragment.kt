@@ -8,14 +8,9 @@ import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
-import kg.nurtelecom.sell.ui.core.CoreFragment
-import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
-import kg.nurtelecom.sell.utils.isZero
-import kg.nurtelecom.sell.utils.replaceFragment
-import java.math.BigDecimal
-import kg.nurtelecom.sell.utils.addFragment
 import kg.nurtelecom.sell.utils.clearBackStack
+import kg.nurtelecom.sell.utils.isZero
 import kg.nurtelecom.sell.utils.replaceFragment
 import java.math.BigDecimal
 
@@ -62,11 +57,10 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     }
 
     private fun fetchProductData(): Product {
-        val product: Product
         val countCanBeZero = vb.icProductCount.fetchInputData()
         val count = if (countCanBeZero.isZero()) BigDecimal.ONE else countCanBeZero
 
-        product = Product(
+        return Product(
             price = vb.icProductPrice.fetchInputData(),
             count = count,
             discount = vb.icProductDiscount.fetchInputData(),
