@@ -1,6 +1,6 @@
 package kg.nurtelecom.storage.storageKoin
 
-import kg.nurtelecom.storage.roomdatabase.RoomDB
+import kg.nurtelecom.storage.roomDatabase.RoomDB
 import kg.nurtelecom.storage.sharedpref.AppPreferences
 import org.koin.dsl.module
 
