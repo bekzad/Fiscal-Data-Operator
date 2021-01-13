@@ -8,8 +8,8 @@ import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCashBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
+import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
-import java.math.RoundingMode
 
 class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
 
@@ -37,7 +37,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
     private fun subscribeToLiveData() {
         val anotherTax = BigDecimal("1.01")
         vm.calculateTaxSum().observe(viewLifecycleOwner) {sum ->
-            vb.icSum.setContent(sum.multiply(anotherTax).setScale(2, RoundingMode.CEILING))
+            vb.icSum.setContent(sum.multiply(anotherTax).roundUp())
         }
     }
 
