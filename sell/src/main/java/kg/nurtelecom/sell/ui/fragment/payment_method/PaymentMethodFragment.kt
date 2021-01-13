@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
-import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.FragmentPaymentMethodBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
+import kg.nurtelecom.sell.utils.replaceFragment
 
 
 class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
@@ -23,22 +23,12 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
     private fun navigate() {
         vb.btnCashPayment.setOnClickListener {
             val activity = activity as AppCompatActivity
-            activity
-                .supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.container, PaymentByCashFragment.newInstance())
-                .commit()
+            activity.replaceFragment(PaymentByCashFragment.newInstance())
         }
 
         vb.btnCardPayment.setOnClickListener {
             val activity = activity as AppCompatActivity
-            activity
-                .supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.container, PaymentByCardFragment.newInstance())
-                .commit()
+            activity.replaceFragment(PaymentByCardFragment.newInstance())
         }
     }
 

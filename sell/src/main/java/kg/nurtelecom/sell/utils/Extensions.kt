@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kg.nurtelecom.sell.R
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 
 fun AppCompatActivity.replaceFragment(fragment: Fragment) {
-    val supportFragmentManager = supportFragmentManager
-    val transaction = supportFragmentManager.beginTransaction().apply {
+    this.supportFragmentManager.beginTransaction().apply {
         addToBackStack(null)
         replace(R.id.container, fragment)
         commit()
@@ -18,3 +18,5 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment) {
 // Check whether a given BigDecimal value is a zero or not
 fun BigDecimal.isZero() = this.compareTo(BigDecimal.ZERO) == 0
 fun BigDecimal.isNotZero() = this.compareTo(BigDecimal.ZERO) != 0
+
+fun BigDecimal.roundUp() = this.setScale(2, RoundingMode.CEILING)

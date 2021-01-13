@@ -14,6 +14,7 @@ import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
+import kg.nurtelecom.sell.utils.replaceFragment
 
 class SellFragment :
     CoreFragment<SellFragmentBinding>() {
@@ -32,9 +33,9 @@ class SellFragment :
     override fun setupViews() {
         setupRV(listOf())
         setupTaxView()
-        navigate()
+        navigateToAddFragment()
         navigateToPaymentMethod()
-        observeProduct()
+        subscribeToLiveData()
     }
 
     private fun setupTaxView() {
@@ -43,33 +44,23 @@ class SellFragment :
         }
     }
 
-    private fun observeProduct() {
+    private fun subscribeToLiveData() {
         vm.productList.observe(viewLifecycleOwner, { product ->
             setupRV(product)
         })
     }
 
-    private fun navigate() {
+    private fun navigateToAddFragment() {
         vb.addProductButton.setOnClickListener {
             val activity = activity as AppCompatActivity
-            activity
-                .supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.container, AddProductFragment.newInstance())
-                .commit()
+            activity.replaceFragment(AddProductFragment.newInstance())
         }
     }
 
     private fun navigateToPaymentMethod() {
         vb.icSumPay.setOnClickListener {
             val activity = activity as AppCompatActivity
-            activity
-                .supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.container, PaymentMethodFragment.newInstance())
-                .commit()
+            activity.replaceFragment(PaymentMethodFragment.newInstance())
         }
     }
 
