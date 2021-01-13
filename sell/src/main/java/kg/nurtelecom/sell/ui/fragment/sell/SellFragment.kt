@@ -3,12 +3,9 @@ package kg.nurtelecom.sell.ui.fragment.sell
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
+import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
-import androidx.lifecycle.observe
-import kg.nurtelecom.sell.R
-import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
@@ -71,13 +68,9 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         }
     }
 
-    companion object {
-        fun newInstance(): SellFragment = SellFragment()
-    }
-
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).setToolbarTitle(R.string.text_sale)
+        parentActivity.setToolbarTitle(R.string.text_sale)
     }
 
     companion object {
