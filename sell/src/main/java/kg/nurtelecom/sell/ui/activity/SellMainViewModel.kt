@@ -3,7 +3,7 @@ package kg.nurtelecom.sell.ui.activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.core.viewmodel.CoreViewModel
-import kg.nurtelecom.sell.ui.fragment.adapter.Product
+import kg.nurtelecom.data.sell.Product
 import java.math.BigDecimal
 import java.math.RoundingMode
 

@@ -1,4 +1,4 @@
-package kg.nurtelecom.sell.ui.fragment.adapter
+package kg.nurtelecom.data.sell
 
 import java.math.BigDecimal
 
