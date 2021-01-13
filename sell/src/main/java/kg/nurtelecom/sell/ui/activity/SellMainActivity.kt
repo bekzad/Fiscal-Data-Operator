@@ -24,7 +24,6 @@ import kg.nurtelecom.sell.utils.replaceFragment
 class SellMainActivity :
     CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
 
-
     override fun setupViews() {
         super.setupViews()
         setSupportActionBar(vb.tbSellMain)
