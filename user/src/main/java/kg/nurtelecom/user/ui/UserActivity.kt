@@ -30,7 +30,6 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
     private fun userData(){
         val (surname, name, middleName, phone, inn) = editTextHandler()
         vm.updateUserData(surname, name, middleName, phone, inn)
-
     }
 
     private fun editTextHandler(): Array<String> {
@@ -78,22 +77,4 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
             return true
         }
     }
-
 }
-
-//fun isValidPassword(password: String?): Boolean {
-//
-//        val regex = ("^(?=.*[0-9])"
-//                + "(?=.*[a-z])(?=.*[A-Z])"
-//                + "(?=\\S+$).{6,16}$")
-//
-//        val p: Pattern = Pattern.compile(regex)
-//
-//        if (password == null) {
-//            return false
-//        }
-//
-//        val m: Matcher = p.matcher(password)
-//        return m.matches()
-//    }
-

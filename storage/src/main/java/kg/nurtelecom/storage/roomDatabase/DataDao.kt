@@ -7,14 +7,15 @@ import kg.nurtelecom.data.UserDetail
 interface DataDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(userDetail: UserDetail)
+    suspend fun insert(userDetail: UserDetail)
 
     @Delete
-    fun delete(userDetail: UserDetail)
+    suspend fun delete(userDetail: UserDetail)
 
     @Query("SELECT * FROM user")
-    fun getUserData(): UserDetail
+    suspend fun getUserProfile(): UserDetail
 
      @Update
-     fun updateUserData(userDetail: UserDetail)
+     suspend fun updateUserProfile(userDetail: UserDetail)
+
 }

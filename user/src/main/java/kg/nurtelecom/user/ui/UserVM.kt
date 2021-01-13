@@ -22,15 +22,16 @@ class UserVMImpl(private val repository: UserRepository): UserVM(){
 
 
     override fun updateUserData(surname: String, name: String, middleName: String , phone: String, inn: String) {
-        safeCall {
-            repository.updateUserData(surname, name, middleName, phone, inn)
+        safeUICall {
+            val answer = repository.updateApiUserProfile(surname, name, middleName, phone, inn)
+            repository.updateLocalUserProfile(answer.result)
+            fetchUserData()
         }
     }
 
     override fun fetchUserData(){
         viewModelScope.launch(Dispatchers.IO){
-            userData.postValue(repository.fetchUserData())
-
+            userData.postValue(repository.fetchLocalUserProfile())
         }
     }
 }
