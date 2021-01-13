@@ -12,6 +12,7 @@ import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.menu.DrawerListener
 import kg.nurtelecom.ofd.R
 import kg.nurtelecom.ofd.databinding.ActivityMainBinding
+import kg.nurtelecom.ofd.databinding.SideMenuMainBinding
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.ofd.ui.main.fragment.greeting.GreetingFragment
 
@@ -38,7 +39,7 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
     private fun setupDrawerListener() {
         vb.drawerLayout.addDrawerListener(drawerListener())
         val view = vb.navView.getHeaderView(0)
-        val menuView = SideMenuMainдBinding.bind(view)
+        val menuView = SideMenuMainBinding.bind(view)
         menuView.mainMenuItemAppInfo.setOnClickListener {
             if (getCurrentVisibleFragment() !is AboutAppFragment) {
                 replaceFragment(R.id.mainContainer, AboutAppFragment.newInstance(), true)
