@@ -68,6 +68,8 @@ fun ListView.requestLayoutForChangedDataset() {
     }
 }
 
+val Fragment.parentActivity get() = (activity as AppCompatActivity)
+
 inline fun <reified T : Activity> Context.startActivity(noinline extra: Intent.() -> Unit = {}) {
     val intent = Intent(this, T::class.java)
     intent.extra()

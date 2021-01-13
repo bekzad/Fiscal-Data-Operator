@@ -9,9 +9,10 @@
     <ListView
         android:id="@+id/checksHistoryDetailsList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/size_0dp"
         android:clickable="false"
         android:divider="@color/grey"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/detail_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
