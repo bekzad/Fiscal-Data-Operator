@@ -10,7 +10,6 @@ import java.util.regex.Pattern
 
 class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
 
-
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
         observeUserData()
@@ -57,7 +56,7 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
         }
         vb.etPhone.addTextChangedListener {
             val (surname, name, phone) = editTextHandler()
-            vb.btnChange.enable(surname.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty()) // ? wtf
+            vb.btnChange.enable(surname.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty())
         }
 
         vb.btnChange.setOnClickListener { userData() }

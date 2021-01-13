@@ -17,5 +17,4 @@ interface DataDao {
 
      @Update
      suspend fun updateUserProfile(userDetail: UserDetail)
-
 }

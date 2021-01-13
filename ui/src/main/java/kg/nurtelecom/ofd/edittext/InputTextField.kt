@@ -15,8 +15,7 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
         InputTextFieldBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
-//        setPasswordEditText(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
-//        setPasswordEditText(TextInputLayout.END_ICON_CLEAR_TEXT)
+
         setPasswordEditText(TextInputLayout.END_ICON_NONE)
     }
 
@@ -37,9 +36,8 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
     }
 
     fun checkingTheField() {
-        if (binding.etInputText.length() == 0) {
+        if (binding.etInputText.text.toString().isEmpty()) {
             error("empty field")
-
         }
     }
 }
