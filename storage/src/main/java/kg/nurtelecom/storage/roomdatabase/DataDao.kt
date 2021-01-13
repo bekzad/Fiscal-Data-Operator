@@ -1,10 +1,10 @@
-package kg.nurtelecom.storage.roomdatabase
+package kg.nurtelecom.storage.roomDatabase
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import kg.nurtelecom.data.UserDetail
-import kg.nurtelecom.data.history.Content
+
 
 @Dao
 interface DataDao {
@@ -22,6 +22,9 @@ interface DataDao {
     fun getAllData(): LiveData<List<UserDetail>>
 
     //обнов.
-     @Update
-     fun updateUserData(userDetailModel: UserDetail)
+    @Update
+    fun updateUserData(userDetailModel: UserDetail)
+
+
+
 }
