@@ -80,11 +80,6 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        replaceFragment(R.id.mainContainer, GreetingFragment.newInstance())
-    }
-
     override fun onBackPressed() {
         if (vb.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             vb.drawerLayout.closeDrawer(GravityCompat.START)
