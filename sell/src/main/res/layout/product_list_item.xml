@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:text="@string/position_with_n"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toEndOf="@id/remove_product_iv"
