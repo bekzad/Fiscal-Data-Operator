@@ -1,4 +1,4 @@
-package kg.nurtelecom.core.extension
+package kg.nurtelecom.core.menu
 
 import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
