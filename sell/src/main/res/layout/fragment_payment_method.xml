@@ -19,31 +19,42 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_cash_payment"
-            style="@style/btn_green"
-            android:layout_width="160dp"
+            style="@style/BtnGreen"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/margin_8dp"
             android:text="@string/payment_by_cash"
             app:cornerRadius="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/vertical_guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_card_payment"
-            style="@style/btn_white"
-            android:layout_width="160dp"
+            style="@style/BtnWhite"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_8dp"
             android:text="@string/payment_by_card"
             app:cornerRadius="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/vertical_guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tw_to_be_paid"
-        style="@style/normal_size_white_text"
+        style="@style/NormalSizeWhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
@@ -54,7 +65,7 @@
 
     <TextView
         android:id="@+id/tw_payment_amount"
-        style="@style/style_tw_payment_amount"
+        style="@style/StyleTwPaymentAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

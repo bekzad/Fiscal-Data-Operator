@@ -34,7 +34,7 @@
         android:id="@+id/regime_ok_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="@dimen/size_60dp"
         android:layout_marginEnd="@dimen/margin_36dp"
         android:layout_marginBottom="@dimen/margin_16dp"
         android:text="@android:string/ok"

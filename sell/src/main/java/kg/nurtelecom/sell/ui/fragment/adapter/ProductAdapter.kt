@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.data.sell.Product
-import kg.nurtelecom.data.sell.fetchExpression
 import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.ProductListItemBinding
 import kg.nurtelecom.sell.utils.isNotZero
-import kg.nurtelecom.data.sell.Product
 
 class ProductAdapter(private val itemClick: ProductItemClickListener) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
@@ -37,23 +35,28 @@ class ProductAdapter(private val itemClick: ProductItemClickListener) :
 
         fun bind(product: Product, position: Int) {
             binding.apply {
-                productCountTv.text = product.fetchExpression()
+                productCountTv.text = fetchProductExpression(product)
                 productSumTv.text = product.totalPrice.toString()
                 removeProductIv.setOnClickListener { itemClick.removeProduct(position) }
             }
         }
 
         private fun fetchProductExpression(product: Product): StringBuilder {
+            val productExpressionLine = StringBuilder()
             val discount =
-                if (product.discount.isNotZero()) (" - " + product.discount + "% ") else
+                if (product.discount.isNotZero()) (" - ${product.discount}% ") else
                     ""
             val allowance =
-                if (product.allowance.isNotZero()) ("+ " + product.allowance) + "%" else
+                if (product.allowance.isNotZero()) ("+ ${product.allowance}%") else
                     ""
-        }
-
-        private fun isNotZero(value: BigDecimal?): Boolean {
-            return value?.compareTo(BigDecimal.ZERO) != 0
+            productExpressionLine.apply {
+                append("${product.price} * ")
+                append("${product.count.toInt()}")
+                append(discount)
+                append(allowance)
+                trimEnd()
+            }
+            return productExpressionLine
         }
 
         companion object {

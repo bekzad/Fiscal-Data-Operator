@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCashBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
-import kg.nurtelecom.sell.ui.core.CoreFragment
 import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 
@@ -29,14 +29,9 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        subscribeToLiveData()
-    }
-
-    private fun subscribeToLiveData() {
+    override fun subscribeToLiveData() {
         val anotherTax = BigDecimal("1.01")
-        vm.calculateTaxSum().observe(viewLifecycleOwner) {sum ->
+        vm.taxSum.observe(viewLifecycleOwner) {sum ->
             vb.icSum.setContent(sum.multiply(anotherTax).roundUp())
         }
     }

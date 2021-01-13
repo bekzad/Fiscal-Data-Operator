@@ -3,99 +3,66 @@
 
     <style name="SellModeDialogTitle">
         <item name="android:textSize">@dimen/text_20sp</item>
-        <item name="android:textColor">#DE000000</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="SellModeDialogContent">
         <item name="android:textSize">@dimen/text_16sp</item>
-        <item name="android:textColor">#8A000000</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="SellModeDialogTitleFiscal" parent="SellModeDialogTitle">
-        <item name="android:text">@string/fiscal_regime_title</item>
+        <item name="android:text">@string/fiscal_mode_title</item>
     </style>
 
     <style name="SellModeDialogTitleNonFiscal" parent="SellModeDialogTitle">
-        <item name="android:text">@string/non_fiscal_regime_title</item>
+        <item name="android:text">@string/non_fiscal_mode_title</item>
     </style>
 
     <style name="SellModeDialogContentFiscal" parent="SellModeDialogContent">
-        <item name="android:text">@string/fiscal_regime_content</item>
+        <item name="android:text">@string/fiscal_mode_dialog_content</item>
     </style>
 
     <style name="SellModeDialogContentNonFiscal" parent="SellModeDialogContent">
-        <item name="android:text">@string/non_fiscal_regime_content</item>
+        <item name="android:text">@string/non_fiscal_mode_dialog_content</item>
     </style>
 
     <style name="SellModeDialogButton">
         <item name="android:text">@android:string/ok</item>
         <item name="android:textSize">@dimen/text_14sp</item>
-        <item name="android:textColor">#009688</item>
+        <item name="android:textColor">@color/clickBlue</item>
     </style>
 
-    <style name="SellButton">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">@dimen/text_14sp</item>
-    </style>
-
-    <style name="SellGreenButton" parent="SellButton">
-        <item name="background">@drawable/greenbackground</item>
-    </style>
-
-    <style name="SellBlackButton" parent="SellButton">
-        <item name="background">@drawable/secondary</item>
-    </style>
-
-    <style name="SellEditText">
-        <item name="background">@null</item>
-        <item name="android:textSize">@dimen/text_40sp</item>
-    </style>
-
-    <style name="SellDiscountEditText" parent="SellEditText">
-        <item name="android:textColor">@color/sell_discount</item>
-        <item name="android:hint">@string/zero</item>
-        <item name="hintTextColor">@color/sell_discount</item>
-    </style>
-
-    <style name="SellAllowanceEditText" parent="SellEditText">
-        <item name="android:textColor">@color/sell_allowance</item>
-        <item name="android:hint">@string/zero</item>
-        <item name="hintTextColor">@color/sell_allowance</item>
-    </style>
-
-<!--    Payment method-->
-    <style name="normal_size_text">
+    <!--    Payment method-->
+    <style name="NormalSizeText">
         <item name="android:textSize">@dimen/text_16sp</item>
     </style>
 
-    <style name="normal_size_black_text" parent="normal_size_text">
+    <style name="NormalSizeBlackText" parent="NormalSizeText">
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="normal_size_white_text" parent="normal_size_text">
+    <style name="NormalSizeWhiteText" parent="NormalSizeText">
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="btn_core" parent="normal_size_text">
-        <item name="android:insetTop">0dp</item>
-        <item name="android:insetBottom">0dp</item>
+    <style name="BtnCore" parent="NormalSizeText">
+        <item name="android:insetTop">@dimen/margin_0dp</item>
+        <item name="android:insetBottom">@dimen/margin_0dp</item>
     </style>
 
-    <style name="btn_green" parent="btn_core" >
+    <style name="BtnGreen" parent="BtnCore">
         <item name="android:textColor">@color/white</item>
         <item name="android:backgroundTint">@color/green</item>
     </style>
 
-    <style name="btn_white" parent="btn_core">
+    <style name="BtnWhite" parent="BtnCore">
         <item name="android:textColor">@color/black</item>
         <item name="android:backgroundTint">@color/white</item>
     </style>
 
-    <style name="style_tw_payment_amount" >
+    <style name="StyleTwPaymentAmount">
         <item name="android:textSize">@dimen/text_40sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
-<!--    Payment method-->
-
-    <dimen name="text_14sp">14sp</dimen>
 </resources>

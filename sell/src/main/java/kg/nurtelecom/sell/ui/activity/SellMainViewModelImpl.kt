@@ -2,14 +2,10 @@ package kg.nurtelecom.sell.ui.activity
 
 import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.core.viewmodel.CoreViewModel
+import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
-import java.math.RoundingMode
-import kg.nurtelecom.data.sell.AllProducts
-import kg.nurtelecom.data.sell.Product
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 
 abstract class SellMainViewModel : CoreViewModel() {
@@ -58,7 +54,7 @@ class SellMainViewModelImpl : SellMainViewModel() {
             taxSum = taxSum.add(totalPrice).add(tax)
         }
 
-        return MutableLiveData(taxSum.roundUp())
+        return taxSum.roundUp()
     }
 
     override fun removeProductFromList(position: Int) {
