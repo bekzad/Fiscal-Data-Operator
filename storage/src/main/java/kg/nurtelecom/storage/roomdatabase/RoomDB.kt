@@ -1,13 +1,12 @@
-package kg.nurtelecom.storage.roomdatabase
+package kg.nurtelecom.storage.roomDatabase
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import kg.nurtelecom.data.UserDetail
-import kg.nurtelecom.data.history.Content
 
-@Database(entities = [UserDetail::class], version = 2)
+@Database(entities = [UserDetail::class], version = 1)
 abstract class RoomDB : RoomDatabase() {
 
     abstract fun getDataDao(): DataDao
@@ -21,7 +20,7 @@ abstract class RoomDB : RoomDatabase() {
                     context.applicationContext,
                     RoomDB::class.java,
                     DB_NAME
-                ).fallbackToDestructiveMigration().build()
+                ).build()
             }
             return instance!!
         }
