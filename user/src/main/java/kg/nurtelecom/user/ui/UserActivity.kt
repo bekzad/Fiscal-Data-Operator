@@ -45,6 +45,7 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
     override fun setupViews() {
         super.setupViews()
         vm.fetchUserData()
+        setTitle("Профиль")
 
         vb.etSurname.addTextChangedListener {
             val (surname, name, phone) = editTextHandler()
@@ -77,12 +78,7 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
             return true
         }
     }
-      companion object {
 
-        fun newInstance(): UserActivity{
-            return UserActivity()
-        }
-    }
 }
 
 //fun isValidPassword(password: String?): Boolean {

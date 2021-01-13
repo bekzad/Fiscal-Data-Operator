@@ -18,7 +18,6 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.spalsh.SplashActivity">
         <activity android:name="kg.nurtelecom.user.ui.UserActivity">
-
         </activity>
         <activity android:name="kg.nurtelecom.sell.ui.activity.SellMainActivity"></activity>
     </application>
