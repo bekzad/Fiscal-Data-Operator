@@ -21,7 +21,6 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
 
     override fun setupViews() {
         vm.allProducts.value?.let { setupRV(it) }
-        subscribeToAllProducts()
         vb.productNotFromListButton.setOnClickListener {
             replaceFragment(R.id.sell_container, PriceOutputFragment.newInstance(), true)
         }
@@ -34,7 +33,8 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
         }
     }
 
-    private fun subscribeToAllProducts() {
+    override fun subscribeToLiveData() {
+        super.subscribeToLiveData()
         vm.allProducts.observe(viewLifecycleOwner, {
             allProductsAdapter.notifyItemInserted(it.lastIndex)
         })

@@ -3,6 +3,8 @@ package kg.nurtelecom.sell.utils
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 fun Fragment.replaceFragment(
     @IdRes containerId: Int,
