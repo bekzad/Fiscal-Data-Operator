@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
-import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.core.CoreFragment
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.utils.isZero
+import kg.nurtelecom.sell.utils.replaceFragment
 import java.math.BigDecimal
 
 class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
@@ -37,11 +37,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     private fun navigate() {
         val activity = activity as AppCompatActivity
         sendProduct(fetchProductData())
-        activity
-            .supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, SellFragment.newInstance())
-            .commit()
+        activity.replaceFragment(SellFragment.newInstance())
     }
 
     private fun fetchProductData(): Product {
