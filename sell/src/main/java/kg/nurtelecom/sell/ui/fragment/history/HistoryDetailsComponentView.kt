@@ -59,7 +59,7 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
             }
             itemView?.setReceipt(item)
             itemView?.setOnClickListener{
-                val checkId = bundleOf("check_id" to item.id)
+                val checkId = bundleOf(CHECK_ID to item.id)
                 activity.replaceFragment(R.id.sell_container, HistoryDetailFragment.newInstance(), checkId)
             }
             return itemView
@@ -80,5 +80,9 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
         override fun isEnabled(position: Int): Boolean {
             return false
         }
+    }
+
+    companion object {
+        const val CHECK_ID: String = "check_id"
     }
 }
