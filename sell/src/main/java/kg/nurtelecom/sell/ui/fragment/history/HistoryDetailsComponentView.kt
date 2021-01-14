@@ -62,9 +62,8 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
             itemView?.setOnClickListener{
                 val checkId = bundleOf(CHECK_ID to item.id)
                 activity.replaceFragmentWithArgs<HistoryDetailFragment>(R.id.sell_container) {
-                    bundleOf(CHECK_ID to item.id, "some" to 919)
+                    checkId
                 }
-                //activity.replaceFragment(R.id.sell_container, HistoryDetailFragment.newInstance(), checkId)
             }
             return itemView
         }

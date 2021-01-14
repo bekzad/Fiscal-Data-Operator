@@ -84,9 +84,9 @@ inline fun <reified T : Activity> Context.startActivity(noinline extra: Intent.(
     startActivity(intent)
 }
 
-inline fun <reified T: Fragment> AppCompatActivity.replaceFragmentWithArgs(@IdRes containerId: Int, noinline args: Bundle?.() -> Bundle) {
+inline fun <reified T: Fragment> AppCompatActivity.replaceFragmentWithArgs(@IdRes containerId: Int, noinline args: Bundle?.() -> Bundle? = { bundleOf() }) {
     supportFragmentManager.commit {
         val arguments = Bundle().args()
-        replace(containerId, T::class.java, arguments, null)
+        replace(containerId, T::class.java, arguments)
     }
 }
