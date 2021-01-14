@@ -13,12 +13,8 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
 
-    override fun onResume() {
-        super.onResume()
-        parentActivity.setToolbarTitle(R.string.history_title)
-    }
-
     override fun setupViews() {
+        parentActivity.setToolbarTitle(R.string.history_title)
         initRecyclerView()
         vm.fetchChecksHistory()
     }

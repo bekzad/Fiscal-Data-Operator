@@ -7,16 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.constraintlayout.widget.ConstraintLayout
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.requestLayoutForChangedDataset
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.ofd.cell.ReceiptDetailView
+import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailsComponentViewBinding
+import kg.nurtelecom.sell.ui.activity.SellMainActivity
+import kg.nurtelecom.sell.ui.fragment.history.detail.HistoryDetailFragment
 
 class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
     ConstraintLayout(context, attrs) {
 
-    private lateinit var binding: ChecksHistoryDetailsComponentViewBinding
-    private lateinit var adapter: ItemAdapter
+    private var binding: ChecksHistoryDetailsComponentViewBinding =
+        ChecksHistoryDetailsComponentViewBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            true
+        )
+
+    private var adapter: ItemAdapter = ItemAdapter()
 
     var items: List<Content> = emptyList()
         set(value) {
@@ -25,12 +35,6 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
         }
 
     init {
-        init(context)
-    }
-
-    private fun init(context: Context) {
-        binding = ChecksHistoryDetailsComponentViewBinding.inflate(LayoutInflater.from(context), this, true)
-        adapter = ItemAdapter(context)
         binding.checksHistoryDetailsList.adapter = adapter
     }
 
@@ -39,19 +43,28 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
         binding.checksHistoryDetailsList.requestLayoutForChangedDataset()
     }
 
-    inner class ItemAdapter(private val context: Context) : BaseAdapter() {
+    inner class ItemAdapter : BaseAdapter() {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
+            val activity = context as SellMainActivity
             val item: Content = items[position]
             val itemView = parent?.let { ReceiptDetailView(it.context, null) }
             if (itemView != null) {
                 itemView.layoutParams =  ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT)
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
             }
-
             itemView?.setReceipt(item)
+            itemView?.setOnClickListener{
+
+                activity.replaceFragment(
+                    R.id.sell_container,
+                    HistoryDetailFragment.newInstance(),
+                    true
+                )
+            }
             return itemView
         }
 

@@ -25,5 +25,4 @@ abstract class CoreFragment<VB : ViewBinding, VM : CoreViewModel>(vmClass: KClas
             }
         })
     }
-
 }
