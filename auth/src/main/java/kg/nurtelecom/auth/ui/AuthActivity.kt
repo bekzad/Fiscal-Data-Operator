@@ -1,11 +1,8 @@
 package kg.nurtelecom.auth.ui
 
-import android.util.Log
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import kg.nurtelecom.auth.databinding.AuthActivityBinding
 import kg.nurtelecom.core.activity.CoreActivity
-import kg.nurtelecom.core.extension.getTrimmedText
 import kg.nurtelecom.core.extension.enable
 
 class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewModel::class) {
@@ -16,9 +13,9 @@ class AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewMo
     }
 
     private fun editTextHandler(): Array<String> {
-        val login = vb.etLogin.getTrimmedText()
-        val password = vb.etPassword.getTrimmedText()
-        val gsrKey = vb.etGsrKey.getTrimmedText()
+        val login = vb.etLogin.getText().trim()
+        val password = vb.etPassword.getText().trim()
+        val gsrKey = vb.etGsrKey.getText().trim()
         return arrayOf(login, password, gsrKey)
     }
 

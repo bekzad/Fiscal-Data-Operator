@@ -12,12 +12,14 @@
         android:orientation="vertical"
         android:layout_centerInParent="true">
 
-        <EditText
+        <kg.nurtelecom.ofd.edittext.EditTextField
             android:id="@+id/et_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16dp"
-            app:hint_text="@string/ed_login" />
+            app:hint_text="@string/ed_login"
+            android:inputType="text"
+            />
 
         <kg.nurtelecom.ofd.edittext.EditTextField
             android:id="@+id/et_password"
