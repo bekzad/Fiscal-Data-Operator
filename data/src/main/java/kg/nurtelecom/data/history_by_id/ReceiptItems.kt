@@ -9,14 +9,14 @@ data class ReceiptItems (
 	val productUnitPrice : Int,
 	val productUnitMeasure : String,
 	val productNdsType : Int,
-	val productNdsAmount : Int,
-	val productNspType : Int,
-	val productNspAmount : Int,
+	val productNdsAmount : Double,
+	val productNspType : Double,
+	val productNspAmount : Double,
 	val productMarkType : String,
 	val productMarkCode : String,
-	val discount : Int,
-	val charge : Int,
-	val subtotal : Int,
-	val total : Int,
-	val itemIndex : Int
+	val discount : Double,
+	val charge : Double,
+	val subtotal : Double,
+	val total : Double,
+	val itemIndex : Double
 )

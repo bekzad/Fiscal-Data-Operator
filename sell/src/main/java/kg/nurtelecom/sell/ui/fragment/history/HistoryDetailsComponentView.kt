@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
+import androidx.fragment.app.commit
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.requestLayoutForChangedDataset
 import kg.nurtelecom.data.history.Content
@@ -60,14 +62,12 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
             itemView?.setReceipt(item)
             itemView?.setOnClickListener{
 
-                val arguments = Bundle()
-                arguments.putInt("key", item.id)
+                val arguments = bundleOf("some_id" to item.id)
+                println("${item.id} ID")
 
-                activity.replaceFragment(
-                    R.id.sell_container,
-                    HistoryDetailFragment.newInstance(),
-                    arguments
-                )
+                activity.supportFragmentManager.commit {
+                    replace(R.id.sell_container, HistoryDetailFragment::class.java, arguments)
+                }
             }
             return itemView
         }
