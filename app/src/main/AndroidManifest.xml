@@ -12,14 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OFDApp">
-        <activity
-            android:name="kg.nurtelecom.auth.ui.AuthActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.spalsh.SplashActivity">
-        <activity android:name="kg.nurtelecom.user.ui.UserActivity">
+        <activity android:name="kg.nurtelecom.user.ui.UserActivity"/>
+        <activity android:name="kg.nurtelecom.auth.ui.AuthActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:name="kg.nurtelecom.ofd.ui.main.MainActivity" />
+        <activity android:name=".ui.spalsh.SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name="kg.nurtelecom.sell.ui.activity.SellMainActivity"></activity>
+        <activity android:name="kg.nurtelecom.sell.ui.activity.SellMainActivity">
+
+        </activity>
     </application>
 
 </manifest>
