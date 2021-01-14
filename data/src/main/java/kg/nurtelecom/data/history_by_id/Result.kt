@@ -2,7 +2,7 @@ package kg.nurtelecom.data.history_by_id
 
 data class Result (
 	val taxSalesPointName : String,
-	val inn : Int,
+	val inn : String,
 	val cashRegisterId : Int,
 	val gnsRegNum : Int,
 	val cashRegisterName : String,
