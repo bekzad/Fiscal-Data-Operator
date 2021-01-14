@@ -10,24 +10,18 @@ import kg.nurtelecom.ui.databinding.MainToolbarBinding
 class MainToolbar(context: Context, attr: AttributeSet) : Toolbar(context, attr) {
     val vb = MainToolbarBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private var title: String
-
     init {
         context.theme.obtainStyledAttributes(attr, R.styleable.ToolbarView, 0, 0).apply {
-            title = getString(R.styleable.ToolbarView_title).toString()
-            vb.tbTitle.text = title
+            vb.toolbar.title = getString(R.styleable.ToolbarView_title).toString()
             recycle()
         }
-
     }
 
-
     override fun setTitle(title: CharSequence?) {
-        this.title = title as String
-        vb.tbTitle.text = title
+        vb.toolbar.title = title
     }
 
     override fun setTitle(resId: Int) {
-        setTitle(context.getString(resId))
+        vb.toolbar.setTitle(resId)
     }
 }

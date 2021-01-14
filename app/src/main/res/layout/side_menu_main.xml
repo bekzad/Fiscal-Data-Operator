@@ -7,16 +7,59 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:clickable="false"
     android:focusable="false">
-    <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/main_menu_item_main"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/main_greeting"
-        app:subTitle="@string/startWork" />
-    <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/main_menu_item_app_info"
+        app:cardCornerRadius="@dimen/radius_4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <kg.nurtelecom.ofd.cell.CellView
+                android:id="@+id/main_menu_item_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/main_greeting"
+                app:subTitle="@string/startWork" />
+            <kg.nurtelecom.ofd.cell.CellView
+                android:id="@+id/main_menu_item_app_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/info"
+                app:subTitle="@string/info_about_app"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_test_x_report"
+        style="@style/BlueButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/info"
-        app:subTitle="@string/info_about_app"/>
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:insetTop="@dimen/margin_0dp"
+        android:insetBottom="@dimen/margin_0dp"
+        android:padding="@dimen/margin_16dp"
+        android:text="@string/test_print_x_report" />
+
+    <Button
+        android:id="@+id/btn_test_z_report"
+        style="@style/OrangeButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:insetTop="@dimen/margin_0dp"
+        android:insetBottom="@dimen/margin_0dp"
+        android:padding="@dimen/margin_16dp"
+        android:text="@string/test_print_z_report" />
+
+    <Button
+        android:id="@+id/btn_test"
+        style="@style/DashedBorderButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:insetTop="@dimen/margin_0dp"
+        android:insetBottom="@dimen/margin_0dp"
+        android:padding="@dimen/margin_16dp"
+        android:text="@string/test_empty" />
 </LinearLayout>
