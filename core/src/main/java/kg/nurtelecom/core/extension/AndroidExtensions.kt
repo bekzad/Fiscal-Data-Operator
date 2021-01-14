@@ -3,11 +3,13 @@ package kg.nurtelecom.core.extension
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -20,6 +22,12 @@ fun AppCompatActivity.replaceFragment(container: Int, fragment: Fragment, addToB
         supportFragmentManager.beginTransaction().replace(container, fragment).addToBackStack(backStackTag).commit()
     else
         supportFragmentManager.beginTransaction().replace(container, fragment).commit()
+}
+
+fun AppCompatActivity.replaceFragment(container: Int, fragment: Fragment, args: Bundle? = null) {
+    supportFragmentManager.commit {
+        replace(container, fragment::class.java, args)
+    }
 }
 
 fun EditText.getTrimmedText() = text.toString().trim()
