@@ -1,6 +1,7 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
 import android.content.Context
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +28,6 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
         )
 
     private var adapter: ItemAdapter = ItemAdapter()
-
     var items: List<Content> = emptyList()
         set(value) {
             field = value
@@ -55,14 +55,18 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
+
             }
             itemView?.setReceipt(item)
             itemView?.setOnClickListener{
 
+                val arguments = Bundle()
+                arguments.putInt("key", item.id)
+
                 activity.replaceFragment(
                     R.id.sell_container,
                     HistoryDetailFragment.newInstance(),
-                    true
+                    arguments
                 )
             }
             return itemView

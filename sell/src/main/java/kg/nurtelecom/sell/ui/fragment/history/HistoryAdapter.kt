@@ -39,6 +39,7 @@ class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             viewBinding.tvHeader.text = header
             itemData[header]?.let { items ->
                 viewBinding.itemDetailsView.items = items
+                viewBinding.root
             }
         }
     }
