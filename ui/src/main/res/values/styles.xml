@@ -147,4 +147,9 @@
         <item name="android:background">@drawable/bg_dashed_border</item>
     </style>
 
+    <style name="BaseEditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintEnabled">false</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
+    </style>
+
 </resources>

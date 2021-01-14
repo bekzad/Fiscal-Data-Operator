@@ -17,34 +17,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
+        <kg.nurtelecom.ofd.edittext.EditTextField
+            android:inputType="text"
             android:id="@+id/et_login"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_48dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16dp"
-            android:background="@color/lightBlack"
-            android:gravity="center"
-            android:hint="@string/ed_login" />
+            app:hint_text="@string/ed_login" />
 
-        <EditText
+        <kg.nurtelecom.ofd.edittext.EditTextField
             android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_48dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16dp"
-            android:background="@color/lightBlack"
-            android:gravity="center"
-            android:hint="@string/ed_password"
-            android:inputType="textPassword" />
+            app:hint_text="@string/ed_password"
+            android:inputType="textPassword"
+             />
 
-        <EditText
+        <kg.nurtelecom.ofd.edittext.EditTextField
             android:id="@+id/et_gsr_key"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_48dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16dp"
-            android:background="@color/lightBlack"
-            android:gravity="center"
-            android:hint="@string/ed_gsr_key"
-            android:inputType="number" />
+            app:hint_text="@string/ed_gsr_key"
+            android:inputType="number"/>
 
         <LinearLayout
             android:layout_width="match_parent"
