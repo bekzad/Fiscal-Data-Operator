@@ -29,5 +29,6 @@
     <string name="position_with_n">Позиция №</string>
     <string name="position">Позиция</string>
     <string name="payment_method">Метод оплаты</string>
+    <string name="cash_check_number">Кассовый чек №%d</string>
 
 </resources>
