@@ -22,9 +22,18 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         PriceOutputFragmentBinding.inflate(inflater, container, false)
 
+    override fun setupToolbar(): Int = R.string.price_entry
+
     override fun setupViews() {
         setupCustomEditText()
         vb.checkBtn.setOnClickListener { navigateToSellFragment() }
+    }
+
+    override fun subscribeToLiveData() {
+        super.subscribeToLiveData()
+        vm.selectedProductData.observe(viewLifecycleOwner, {
+            vb.icProductPrice.setContent(it.productPrice)
+        })
     }
 
     private fun sendProduct(product: Product) {
@@ -47,13 +56,6 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         sendProduct(fetchProductData())
         replaceFragment(R.id.sell_container, SellFragment.newInstance())
         clearBackStack()
-    }
-
-    override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
-        vm.selectedProductData.observe(viewLifecycleOwner, {
-            vb.icProductPrice.setContent(it.productPrice)
-        })
     }
 
     private fun fetchProductData(): Product {

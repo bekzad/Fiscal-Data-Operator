@@ -3,8 +3,6 @@ package kg.nurtelecom.sell.ui.fragment.sell
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import kg.nurtelecom.core.extension.parentActivity
-import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ProductItemClickListener
@@ -26,19 +24,12 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         SellFragmentBinding.inflate(inflater, container, false)
 
-    override fun setupViews() {
-        navigateToAddFragment()
-        navigateToPaymentMethod()
-        vb.productRv.adapter = productAdapter
-        vb.addProductButton.setOnClickListener {
-            replaceFragment(R.id.sell_container, AddProductFragment.newInstance(), true)
-        }
-        setupDialog()
-    }
+    override fun setupToolbar(): Int = R.string.text_sale
 
-    private fun setupDialog() {
-        vb.modeDialog.setupDialog(FISCAL_REGIME)
-        vb.modeDialog.hideDialog()
+    override fun setupViews() {
+        vb.productRv.adapter = productAdapter
+        setupDialog()
+        setupNavigation()
     }
 
     override fun subscribeToLiveData() {
@@ -51,26 +42,24 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         }
     }
 
-    private fun navigateToAddFragment() {
-        vb.addProductButton.setOnClickListener {
-            replaceFragment(R.id.sell_container, AddProductFragment.newInstance())
-        }
-    }
-
     override fun removeProduct(position: Int) {
         vm.removeProductFromList(position)
         productAdapter.notifyDataSetChanged()
     }
 
-    private fun navigateToPaymentMethod() {
-        vb.icSumPay.setOnClickListener {
-            replaceFragment(R.id.sell_container, PaymentMethodFragment.newInstance())
-        }
+    private fun setupDialog() {
+        vb.modeDialog.setupDialog(FISCAL_REGIME)
+        vb.modeDialog.hideDialog()
     }
 
-    override fun onResume() {
-        super.onResume()
-        parentActivity.setToolbarTitle(R.string.text_sale)
+    private fun setupNavigation() {
+        vb.icSumPay.setOnClickListener {
+            replaceFragment(R.id.sell_container, PaymentMethodFragment.newInstance(), true)
+        }
+
+        vb.addProductButton.setOnClickListener {
+            replaceFragment(R.id.sell_container, AddProductFragment.newInstance(), true)
+        }
     }
 
     companion object {
