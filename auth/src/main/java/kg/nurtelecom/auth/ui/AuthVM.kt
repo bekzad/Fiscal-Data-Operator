@@ -3,6 +3,7 @@ package kg.nurtelecom.auth.ui
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.auth.repository.AuthRepository
 import kg.nurtelecom.core.CoreEvent
+import kotlinx.coroutines.Dispatchers
 
 abstract class AuthViewModel : CoreViewModel() {
     abstract fun login(username: String, password: String, gsrKey: String, isFiscalRegime: Boolean)
@@ -19,7 +20,7 @@ class AuthViewModelImpl (private val authRepository: AuthRepository) : AuthViewM
     }
 
     private suspend fun fetchUserData() {
-        safeUICall {
+        safeCall(Dispatchers.IO) {
             authRepository.fetchUserData()
         }
     }

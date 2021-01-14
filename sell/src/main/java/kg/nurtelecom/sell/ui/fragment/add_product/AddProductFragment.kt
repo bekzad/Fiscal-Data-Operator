@@ -36,7 +36,6 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
         })
     }
 
-
     override fun navigateToPriceOutputFragment(allProducts: AllProducts) {
         replaceFragment(R.id.sell_container, PriceOutputFragment.newInstance(), true)
         vm.sendSelectedProduct(allProducts)

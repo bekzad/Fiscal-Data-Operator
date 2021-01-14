@@ -9,7 +9,6 @@ import androidx.viewbinding.ViewBinding
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.viewmodel.CoreViewModel
-import kg.nurtelecom.sell.R
 
 
 abstract class CoreFragment<VB: ViewBinding> : Fragment() {
