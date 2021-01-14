@@ -25,7 +25,6 @@
 
         <EditText
             android:id="@+id/et_content"
-            android:focusable="false"
             style="@style/CardCellValueTextStyle"
             android:layout_width="0dp"
             android:layout_marginTop="5dp"

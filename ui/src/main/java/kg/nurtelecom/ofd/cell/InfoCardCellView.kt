@@ -16,7 +16,7 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
     MaterialCardView(context, attrs) {
 
     private val vb = InfoCardCellViewBinding.inflate(LayoutInflater.from(context), this, true)
-    private var mDisableChildrenTouchEvents: Boolean = true
+    private var mDisableChildrenTouchEvents: Boolean = false
 
     init {
         initViewStyle(attrs)
@@ -47,9 +47,9 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
                     // Set edit text
                     val editable = getBoolean(R.styleable.InfoCardCellView_is_editable, true)
                     vb.etContent.setTextColor(txtColor)
-//                    if (!editable) {
-//                        vb.etContent.inputType = InputType.TYPE_NULL
-//                    }
+                    if (!editable) {
+                        mDisableChildrenTouchEvents = true
+                    }
 
                     // Set the next icon
                     val addNextIcon = getBoolean(R.styleable.InfoCardCellView_add_next_icon, false)
@@ -86,7 +86,4 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
         return mDisableChildrenTouchEvents
     }
 
-    fun setDisableChildrenTouchEvents(flag: Boolean) {
-        mDisableChildrenTouchEvents = flag
-    }
 }
