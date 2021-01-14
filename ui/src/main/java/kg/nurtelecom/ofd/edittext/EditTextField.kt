@@ -3,7 +3,6 @@ package kg.nurtelecom.ofd.edittext
 import android.content.Context
 import android.text.InputType
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputLayout
@@ -20,7 +19,7 @@ class EditTextField(context: Context, attr: AttributeSet) : TextInputLayout(cont
             0, 0
         ).apply {
             try {
-                setInputType(getInt(R.styleable.EditTextField_textInputType, 0))
+                setInputType(getInt(R.styleable.EditTextField_android_inputType, InputType.TYPE_CLASS_TEXT))
                 setHint(getString(R.styleable.EditTextField_hint_text))
                 setText(getString(R.styleable.EditTextField_text))
                 setErrorMessage(getString(R.styleable.EditTextField_error_text))
@@ -32,17 +31,11 @@ class EditTextField(context: Context, attr: AttributeSet) : TextInputLayout(cont
     }
 
     private fun setInputType(type: Int) {
-        when (type) {
-            0 -> {
-                vb.textField.inputType = InputType.TYPE_CLASS_TEXT
-            }
-            1 -> {
-                vb.textField.inputType = InputType.TYPE_CLASS_NUMBER
-            }
-            2 -> {
-                vb.textFieldLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                vb.textField.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-            }
+        vb.textField.inputType = type
+        if (type == (InputType.TYPE_TEXT_VARIATION_PASSWORD + 1)) {
+            vb.textFieldLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+        } else {
+            vb.textFieldLayout.endIconMode = TextInputLayout.END_ICON_NONE
         }
     }
 
@@ -63,7 +56,7 @@ class EditTextField(context: Context, attr: AttributeSet) : TextInputLayout(cont
     }
 
     fun getText(): String {
-        return  vb.textField.text.toString()
+        return vb.textField.text.toString()
     }
 
     fun setTextChangedListener(listener: () -> Unit) {
