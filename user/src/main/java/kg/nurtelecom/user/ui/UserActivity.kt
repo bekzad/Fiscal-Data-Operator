@@ -13,10 +13,9 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
         observeUserData()
-        validateOfTheIdentificationNumber ()
     }
 
-    private fun observeUserData(){
+    private fun observeUserData() {
         vm.userData.observe(this, Observer {
             vb.etSurname.setText(it.firstname)
             vb.etName.setText(it.lastname)
@@ -26,7 +25,7 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
         })
     }
 
-    private fun userData(){
+    private fun userData() {
         val (surname, name, middleName, phone, inn) = editTextHandler()
         vm.updateUserData(surname, name, middleName, phone, inn)
     }
@@ -43,7 +42,7 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
     override fun setupViews() {
         super.setupViews()
         vm.fetchUserData()
-        setTitle("Профиль")
+        title = "Профиль"
 
         vb.etSurname.addTextChangedListener {
             val (surname, name, phone) = editTextHandler()
@@ -59,20 +58,28 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
             vb.btnChange.enable(surname.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty())
         }
 
-        vb.btnChange.setOnClickListener { userData() }
+        vb.btnChange.setOnClickListener {
+            userData()
+
+        }
+
+        vb.etIdentification.addTextChangedListener {
+            validateOfTheIdentificationNumber()
+        }
     }
 
     override fun getBinding() = ActivityUserBinding.inflate(layoutInflater)
 
-    private fun validateOfTheIdentificationNumber (): Boolean {
+    private fun validateOfTheIdentificationNumber(): Boolean {
+
         val ID_PATTERN =
             Pattern.compile("^(1|2)(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])(19|20)\\d\\d\\d\\d\\d\\d\\d\$")
         val identificationNumberInput = vb.etIdentification.text.toString().trim()
         if (!ID_PATTERN.matcher(identificationNumberInput).matches()) {
             vb.etIdentification.error = "The ID number is not correct"
             return false
-        }else{
-            vb.etIdentification.error =  null
+        } else {
+            vb.etIdentification.error = null
             return true
         }
     }

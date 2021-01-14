@@ -1,6 +1,7 @@
 package kg.nurtelecom.ofd.edittext
 
 import android.content.Context
+import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -39,5 +40,8 @@ class InputTextField (context: Context, attr: AttributeSet) : ConstraintLayout(c
         if (binding.etInputText.text.toString().isEmpty()) {
             error("empty field")
         }
+    }
+    fun setText(text: String) {
+        binding.etInputText.text = text as Editable
     }
 }
