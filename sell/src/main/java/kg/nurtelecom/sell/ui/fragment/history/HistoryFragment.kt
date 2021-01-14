@@ -1,6 +1,5 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.core.extension.parentActivity
@@ -37,7 +36,7 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
     }
 
     private fun observeCheckHistory() {
-        vm.checksHistoryData.observe(this, Observer {
+        vm.checksHistoryData.observe(this, {
             if(it != null) {
                 val groupedItems = it.groupBy { book -> SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForDecoratorDateTimeDefaults() }
                 historyAdapter.itemData = groupedItems.toSortedMap()

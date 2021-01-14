@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.viewmodel.CoreViewModel
+import kg.nurtelecom.sell.R
 
 
 abstract class CoreFragment<VB: ViewBinding> : Fragment() {
@@ -15,6 +18,11 @@ abstract class CoreFragment<VB: ViewBinding> : Fragment() {
     protected val vb get() = _vb!!
 
     abstract val vm: CoreViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        parentActivity.setToolbarTitle(setupToolbar())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,13 +33,15 @@ abstract class CoreFragment<VB: ViewBinding> : Fragment() {
         return vb.root
     }
 
+    protected abstract fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         subscribeToLiveData()
     }
 
-    protected abstract fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+    abstract fun setupToolbar(): Int
 
     open fun setupViews() {}
 

@@ -28,5 +28,6 @@
     <string name="product_not_from_list">Товар не из списка</string>
     <string name="position_with_n">Позиция №</string>
     <string name="position">Позиция</string>
+    <string name="payment_method">Метод оплаты</string>
 
 </resources>

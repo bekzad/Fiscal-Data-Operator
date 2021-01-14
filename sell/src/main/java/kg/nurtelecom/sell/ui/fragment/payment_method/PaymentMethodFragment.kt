@@ -1,8 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.payment_method
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.sell.R
@@ -16,8 +14,23 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
 
     override val vm: SellMainViewModel by activityViewModels()
 
+    override fun createViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentPaymentMethodBinding {
+        return FragmentPaymentMethodBinding.inflate(inflater, container, false)
+    }
+
+    override fun setupToolbar(): Int = R.string.payment_method
+
     override fun setupViews() {
         setupNavigate()
+    }
+
+    override fun subscribeToLiveData() {
+        vm.taxSum.observe(viewLifecycleOwner) { sum ->
+            vb.twPaymentAmount.text = sum.toString()
+        }
     }
 
     private fun setupNavigate() {
@@ -28,24 +41,6 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
         vb.btnCardPayment.setOnClickListener {
             replaceFragment(R.id.sell_container, PaymentByCardFragment.newInstance(), true)
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        subscribeToLiveData()
-    }
-
-    override fun subscribeToLiveData() {
-        vm.taxSum.observe(viewLifecycleOwner) { sum ->
-            vb.twPaymentAmount.text = sum.toString()
-        }
-    }
-
-    override fun createViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentPaymentMethodBinding {
-        return FragmentPaymentMethodBinding.inflate(inflater, container, false)
     }
 
     companion object {

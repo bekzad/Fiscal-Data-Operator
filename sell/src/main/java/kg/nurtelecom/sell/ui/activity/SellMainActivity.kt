@@ -1,7 +1,6 @@
 package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
-import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -10,19 +9,26 @@ import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.getCurrentVisibleFragment
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
+import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.core.menu.DrawerListener
 import kg.nurtelecom.ofd.aboutapp.AboutAppFragment
-import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
+import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
-import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.ui.fragment.history.HistoryFragment
-import kg.nurtelecom.sell.utils.replaceFragment
+import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentByCardFragment
+import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentByCashFragment
+import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
+import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
+import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 
 class SellMainActivity :
     CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
+
+    override fun getBinding(): ActivitySellMainBinding =
+        ActivitySellMainBinding.inflate(layoutInflater)
 
     override fun setupViews() {
         super.setupViews()
@@ -32,7 +38,7 @@ class SellMainActivity :
     }
 
     private fun setupNavDrawer() {
-        val actionBarToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(
+        val actionBarToggle = ActionBarDrawerToggle(
             this,
             vb.drawerLayout,
             vb.tbSellMain,
@@ -95,6 +101,10 @@ class SellMainActivity :
                     is HistoryFragment -> setToolbarTitle(R.string.history_title)
                     is AboutAppFragment -> setToolbarTitle(R.string.info_about_app)
                     is SellFragment -> setToolbarTitle(R.string.text_sale)
+                    is AddProductFragment -> setToolbarTitle(R.string.product_selection)
+                    is PriceOutputFragment -> setToolbarTitle(R.string.price_entry)
+                    is PaymentMethodFragment, is PaymentByCardFragment,
+                    is PaymentByCashFragment -> setToolbarTitle(R.string.payment_method)
                 }
             }
 
@@ -105,9 +115,6 @@ class SellMainActivity :
             }
         }
     }
-
-    override fun getBinding(): ActivitySellMainBinding =
-        ActivitySellMainBinding.inflate(layoutInflater)
 
     companion object {
         fun start(context: Context?) {

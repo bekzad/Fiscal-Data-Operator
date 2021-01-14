@@ -19,18 +19,14 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
     private lateinit var allProductsAdapter: AllProductsAdapter
     override val vm: SellMainViewModel by activityViewModels()
 
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        AddProductFragmentBinding.inflate(inflater, container, false)
+
+    override fun setupToolbar(): Int = R.string.product_selection
+
     override fun setupViews() {
         vm.allProducts.value?.let { setupRV(it) }
-        vb.productNotFromListButton.setOnClickListener {
-            replaceFragment(R.id.sell_container, PriceOutputFragment.newInstance(), true)
-        }
-    }
-
-    private fun setupRV(allProducts: MutableList<AllProducts>) {
-        vb.allProductsRv.apply {
-            allProductsAdapter = AllProductsAdapter(allProducts, this@AddProductFragment)
-            adapter = allProductsAdapter
-        }
+        setupNavigation()
     }
 
     override fun subscribeToLiveData() {
@@ -40,12 +36,23 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
         })
     }
 
-    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        AddProductFragmentBinding.inflate(inflater, container, false)
 
     override fun navigateToPriceOutputFragment(allProducts: AllProducts) {
         replaceFragment(R.id.sell_container, PriceOutputFragment.newInstance(), true)
         vm.sendSelectedProduct(allProducts)
+    }
+
+    private fun setupRV(allProducts: MutableList<AllProducts>) {
+        vb.allProductsRv.apply {
+            allProductsAdapter = AllProductsAdapter(allProducts, this@AddProductFragment)
+            adapter = allProductsAdapter
+        }
+    }
+
+    private fun setupNavigation() {
+        vb.productNotFromListButton.setOnClickListener {
+            replaceFragment(R.id.sell_container, PriceOutputFragment.newInstance(), true)
+        }
     }
 
     companion object {

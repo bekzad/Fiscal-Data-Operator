@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kg.nurtelecom.core.R
 
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
