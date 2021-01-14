@@ -1,22 +1,16 @@
 package kg.nurtelecom.sell.ui.fragment.history.detail
 
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
-import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 
 class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, HistoryViewModel>(HistoryViewModel::class) {
 
     override fun setupViews() {
-        val someInt = requireArguments().getInt("some_id")
+        val someInt = requireArguments().getInt("check_id")
         vm.fetchDetailCheckHistory(someInt)
     }
 
