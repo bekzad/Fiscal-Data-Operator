@@ -7,9 +7,12 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import kg.nurtelecom.core.R
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -79,4 +82,11 @@ inline fun <reified T : Activity> Context.startActivity(noinline extra: Intent.(
     val intent = Intent(this, T::class.java)
     intent.extra()
     startActivity(intent)
+}
+
+inline fun <reified T: Fragment> AppCompatActivity.replaceFragmentWithArgs(@IdRes containerId: Int, noinline args: Bundle?.() -> Bundle) {
+    supportFragmentManager.commit {
+        val arguments = Bundle().args()
+        replace(containerId, T::class.java, arguments, null)
+    }
 }
