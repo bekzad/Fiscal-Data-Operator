@@ -1,6 +1,5 @@
 package kg.nurtelecom.sell.ui.fragment.history.detail
 
-import android.util.Log
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
@@ -18,13 +17,7 @@ class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, H
 
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
-        observeCheckHistory()
-    }
-
-    // TODO("change fun name to subscribe")
-    private fun observeCheckHistory() {
         vm.detailCheckHistory.observe(viewLifecycleOwner) {
-            Log.d("it", it.toString())
             parentActivity.setToolbarTitle("Кассовый чек №${it.receipt.id}")
         }
     }
