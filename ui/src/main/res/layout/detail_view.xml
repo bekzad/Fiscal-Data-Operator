@@ -5,9 +5,7 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="@dimen/margin_14dp"
-    android:paddingBottom="@dimen/margin_4dp"
-    android:paddingEnd="@dimen/margin_8dp">
+    android:paddingEnd="@dimen/margin_16dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/detail"
@@ -31,6 +29,7 @@
                 android:id="@+id/iv_detail_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_14dp"
                 android:src="@drawable/ic_green_check"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +39,7 @@
                 style="@style/HistoryItemTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_12dp"
+                android:layout_marginStart="@dimen/margin_14dp"
                 android:text="@string/text_sale_type"
                 app:layout_constraintStart_toEndOf="@id/iv_detail_icon"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,8 +59,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_timestamp"
+                android:layout_marginBottom="@dimen/margin_4dp"
                 app:layout_constraintStart_toStartOf="@id/tv_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_counter" />
+                app:layout_constraintTop_toBottomOf="@id/tv_counter"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_amount"
@@ -69,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_payment_amount"
+                android:layout_marginEnd="@dimen/margin_8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
