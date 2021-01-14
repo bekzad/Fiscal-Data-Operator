@@ -30,8 +30,6 @@ fun AppCompatActivity.replaceFragment(container: Int, fragment: Fragment, args: 
     }
 }
 
-fun EditText.getTrimmedText() = text.toString().trim()
-
 fun AppCompatActivity.setToolbarTitle(text: String) {
     this.supportActionBar?.setTitle(text)
 }
