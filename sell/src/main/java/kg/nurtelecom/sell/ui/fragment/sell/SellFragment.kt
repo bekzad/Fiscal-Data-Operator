@@ -3,6 +3,8 @@ package kg.nurtelecom.sell.ui.fragment.sell
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ProductItemClickListener
@@ -12,7 +14,6 @@ import kg.nurtelecom.sell.ui.custom.CustomDialog.Companion.FISCAL_REGIME
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
-import kg.nurtelecom.sell.utils.replaceFragment
 
 
 class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListener {
@@ -54,11 +55,11 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
 
     private fun setupNavigation() {
         vb.icSumPay.setOnClickListener {
-            replaceFragment(R.id.sell_container, PaymentMethodFragment.newInstance(), true)
+            parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container, true)
         }
 
         vb.addProductButton.setOnClickListener {
-            replaceFragment(R.id.sell_container, AddProductFragment.newInstance(), true)
+            parentActivity.replaceFragment<AddProductFragment>(R.id.sell_container, true)
         }
     }
 

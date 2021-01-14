@@ -31,12 +31,6 @@ fun AppCompatActivity.replaceFragment(
         supportFragmentManager.beginTransaction().replace(container, fragment).commit()
 }
 
-fun AppCompatActivity.replaceFragment(container: Int, fragment: Fragment, args: Bundle?) {
-    supportFragmentManager.commit {
-        replace(container, fragment::class.java, args)
-    }
-}
-
 fun AppCompatActivity.setToolbarTitle(text: String) {
     this.supportActionBar?.setTitle(text)
 }

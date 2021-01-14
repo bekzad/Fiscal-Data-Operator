@@ -3,11 +3,12 @@ package kg.nurtelecom.sell.ui.fragment.payment_method
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentMethodBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
-import kg.nurtelecom.sell.utils.replaceFragment
 
 
 class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
@@ -35,11 +36,11 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
 
     private fun setupNavigate() {
         vb.btnCashPayment.setOnClickListener {
-            replaceFragment(R.id.sell_container, PaymentByCashFragment.newInstance(), true)
+            parentActivity.replaceFragment<PaymentByCashFragment>(R.id.sell_container, true)
         }
 
         vb.btnCardPayment.setOnClickListener {
-            replaceFragment(R.id.sell_container, PaymentByCardFragment.newInstance(), true)
+            parentActivity.replaceFragment<PaymentByCardFragment>(R.id.sell_container, true)
         }
     }
 

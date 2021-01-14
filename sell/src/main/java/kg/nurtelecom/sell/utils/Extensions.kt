@@ -6,28 +6,11 @@ import androidx.fragment.app.commit
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-fun Fragment.replaceFragment(
-    @IdRes containerId: Int,
-    fragment: Fragment,
-    backStack: Boolean = false
-) {
-    requireActivity().supportFragmentManager.commit {
-        if (backStack) replace(containerId, fragment).addToBackStack(null)
-        else replace(containerId, fragment)
-    }
-}
 
 fun Fragment.addFragment(@IdRes containerId: Int, fragment: Fragment, backStack: Boolean = false) {
     requireActivity().supportFragmentManager.commit {
         if (backStack) add(containerId, fragment).addToBackStack(null)
         else add(containerId, fragment)
-    }
-}
-
-fun Fragment.clearBackStack() {
-    val fm = requireActivity().supportFragmentManager
-    for (i in 0 until fm.backStackEntryCount) {
-        fm.popBackStack()
     }
 }
 
