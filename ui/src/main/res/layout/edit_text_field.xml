@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout android:id="@+id/textFieldLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/BaseEditTextStyle"
+    app:boxBackgroundColor="@color/lightBlack"
+    app:helperTextTextColor="@color/textWhite"
+    app:endIconTint="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+        android:textColor="@color/textWhite"
+        android:textColorHint="@color/grey"
+        android:textAlignment="center"
+        android:id="@+id/textField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_20sp"/>
+
+</com.google.android.material.textfield.TextInputLayout>

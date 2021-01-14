@@ -29,4 +29,16 @@
         <attr name="hint_text" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="EditTextField">
+        <attr name="textInputType" format="enum">
+            <enum name="text" value="0"/>
+            <enum name="number" value="1"/>
+            <enum name="password" value="2"/>
+        </attr>
+        <attr name="hint_text"/>
+        <attr name="text" format="string"/>
+        <attr name="error_text" format="string"/>
+        <attr name="message_text" format="string" />
+    </declare-styleable>
+
 </resources>
