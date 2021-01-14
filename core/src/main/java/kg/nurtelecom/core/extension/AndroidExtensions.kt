@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.annotation.IdRes
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import kg.nurtelecom.core.R
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -20,9 +18,15 @@ import java.util.*
 
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
-fun AppCompatActivity.replaceFragment(container: Int, fragment: Fragment, addToBack: Boolean = false, backStackTag: String? = null) {
+fun AppCompatActivity.replaceFragment(
+    container: Int,
+    fragment: Fragment,
+    addToBack: Boolean = false,
+    backStackTag: String? = null
+) {
     if (addToBack)
-        supportFragmentManager.beginTransaction().replace(container, fragment).addToBackStack(backStackTag).commit()
+        supportFragmentManager.beginTransaction().replace(container, fragment)
+            .addToBackStack(backStackTag).commit()
     else
         supportFragmentManager.beginTransaction().replace(container, fragment).commit()
 }
@@ -41,7 +45,7 @@ fun AppCompatActivity.setToolbarTitle(resId: Int) {
     this.supportActionBar?.setTitle(resId)
 }
 
-fun AppCompatActivity.getCurrentVisibleFragment() : Fragment{
+fun AppCompatActivity.getCurrentVisibleFragment(): Fragment {
     return supportFragmentManager.fragments.last()
 }
 
@@ -55,7 +59,8 @@ fun Date.formatForDecoratorDateTimeDefaults(): String {
     return sdf.format(this)
 }
 
-fun LocalDateTime.formatForServerDateTimeDefaults() = format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"))
+fun LocalDateTime.formatForServerDateTimeDefaults() =
+    format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"))
 
 fun ListView.requestLayoutForChangedDataset() {
     val listAdapter = this.adapter
@@ -84,9 +89,17 @@ inline fun <reified T : Activity> Context.startActivity(noinline extra: Intent.(
     startActivity(intent)
 }
 
-inline fun <reified T: Fragment> AppCompatActivity.replaceFragmentWithArgs(@IdRes containerId: Int, noinline args: Bundle?.() -> Bundle? = { bundleOf() }) {
+inline fun <reified T : Fragment> AppCompatActivity.replaceFragment(
+    @IdRes containerId: Int,
+    backStack: Boolean = false,
+    noinline args: Bundle?.() -> Bundle? = { bundleOf() }
+) {
     supportFragmentManager.commit {
         val arguments = Bundle().args()
+        if (backStack) {
+            replace(containerId, T::class.java, arguments).addToBackStack(null)
+            return
+        }
         replace(containerId, T::class.java, arguments)
     }
 }

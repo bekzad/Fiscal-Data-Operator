@@ -9,7 +9,6 @@ import android.widget.BaseAdapter
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.core.extension.replaceFragmentWithArgs
 import kg.nurtelecom.core.extension.requestLayoutForChangedDataset
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.ofd.cell.ReceiptDetailView
@@ -56,12 +55,12 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
-
             }
+
             itemView?.setReceipt(item)
-            itemView?.setOnClickListener{
+            itemView?.setOnClickListener {
                 val checkId = bundleOf(CHECK_ID to item.id)
-                activity.replaceFragmentWithArgs<HistoryDetailFragment>(R.id.sell_container) {
+                activity.replaceFragment<HistoryDetailFragment>(R.id.sell_container) {
                     checkId
                 }
             }
