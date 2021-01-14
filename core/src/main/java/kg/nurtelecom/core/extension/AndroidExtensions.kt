@@ -24,7 +24,7 @@ fun AppCompatActivity.replaceFragment(container: Int, fragment: Fragment, addToB
         supportFragmentManager.beginTransaction().replace(container, fragment).commit()
 }
 
-fun AppCompatActivity.replaceFragment(container: Int, fragment: Fragment, args: Bundle? = null) {
+fun AppCompatActivity.replaceFragment(container: Int, fragment: Fragment, args: Bundle?) {
     supportFragmentManager.commit {
         replace(container, fragment::class.java, args)
     }

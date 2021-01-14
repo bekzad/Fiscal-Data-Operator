@@ -15,6 +15,6 @@ interface HistoryApi {
     @POST("receipt/history/{id}/")
     suspend fun fetchCheckHistoryById(
         @Header("Authorization") token: String,
-        @Path("id") id: Long
+        @Path("id") id: Int
     ): HistoryResultById
 }
