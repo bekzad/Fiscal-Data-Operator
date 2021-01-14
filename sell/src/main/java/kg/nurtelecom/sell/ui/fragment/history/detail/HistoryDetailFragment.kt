@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.history.detail
 
+import android.os.Bundle
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
@@ -12,6 +13,12 @@ class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, H
     override fun onResume() {
         super.onResume()
         parentActivity.setToolbarTitle(R.string.history_title)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val historyId = savedInstanceState?.getInt("key")
+        println("History id: $historyId")
     }
 
     override fun setupViews() {}
