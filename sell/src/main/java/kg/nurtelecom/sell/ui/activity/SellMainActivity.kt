@@ -11,7 +11,7 @@ import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.core.menu.DrawerListener
-import kg.nurtelecom.ofd.aboutapp.AboutAppFragment
+import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
