@@ -3,6 +3,7 @@ package kg.nurtelecom.sell.ui.fragment.history.detail
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
+import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryDetailsComponentView.Companion.CHECK_ID
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
@@ -19,7 +20,7 @@ class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, H
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
         vm.detailCheckHistory.observe(viewLifecycleOwner) {
-            parentActivity.setToolbarTitle("Кассовый чек №${it.receipt.id}")
+            parentActivity.setToolbarTitle(getString(R.string.cash_check_number, it.receipt.id))
         }
     }
 
