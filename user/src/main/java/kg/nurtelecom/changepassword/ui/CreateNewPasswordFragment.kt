@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.changepassword.core.CoreFragment
+import kg.nurtelecom.user.R
 
 import kg.nurtelecom.user.databinding.FragmentCreateNewPasswordBinding
 import java.util.regex.Matcher
@@ -32,19 +33,12 @@ class CreateNewPasswordFragment : CoreFragment<FragmentCreateNewPasswordBinding>
     }
 
 
-
-    private fun subscribeToLiveData() {
-        vm.currentPassword.observe(viewLifecycleOwner, {
-
-        })
-    }
-
     private fun changePassword() {
         vb.changePasswordBtn.setOnClickListener {
             vm.changePassword(
                 vm.currentPassword.value.toString(),
-                vb.etNewPassword.text.toString(),
-                vb.repeatNewPasswordEt.text.toString()
+                vb.etNewPassword.getText(),
+                vb.repeatNewPasswordEt.getText()
             )
         }
     }
@@ -59,7 +53,6 @@ class CreateNewPasswordFragment : CoreFragment<FragmentCreateNewPasswordBinding>
     override fun setupViews() {
         super.setupViews()
         changePassword()
-        subscribeToLiveData()
     }
     companion object {
         fun newInstance() = CreateNewPasswordFragment()

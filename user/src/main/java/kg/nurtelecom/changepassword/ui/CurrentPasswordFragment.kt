@@ -27,7 +27,7 @@ class CurrentPasswordFragment : CoreFragment<FragmentCurrentPasswordBinding>() {
 
     override fun setupViews() {
         vb.nextBtn.setOnClickListener {
-            vm.saveCurrentPassword(vb.currentPasswordEt.text.toString())
+            vm.saveCurrentPassword(vb.currentPasswordEt.getText())
             navigateToCreateNewPasswordFragment()
         }
     }
