@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "user")
 data class UserDetail (
-    @PrimaryKey val id : Int,
+    @PrimaryKey val id : Long?,
     val msisdn : String,
     val firstname : String,
     val lastname : String,
-    val middlename : String,
-    val inn : String
+    val middlename : String?,
+    val inn : String?
 )
