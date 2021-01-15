@@ -28,8 +28,7 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
         super.setupViews()
         vb.btnInvalidate.setOnClickListener { vm.logout() }
         vb.cellChangePassword.setOnClickListener {
-            val intent = Intent(activity,ChangePasswordActivity::class.java)
-            startActivity(intent)
+          ChangePasswordActivity.start(requireContext())
         }
         vb.cellFiscalMode.setOnClickListener {
             SellMainActivity.start(requireContext())

@@ -1,9 +1,11 @@
 package kg.nurtelecom.changepassword.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
+import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.user.R
 import kg.nurtelecom.user.R.*
 import kg.nurtelecom.user.databinding.ActivityChangePasswordBinding
@@ -35,4 +37,10 @@ class ChangePasswordActivity : CoreActivity<ActivityChangePasswordBinding,Change
             .commit()
     }
 
+
+    companion object {
+        fun start(context: Context?) {
+            context?.startActivity<ChangePasswordActivity>()
+        }
+    }
 }
