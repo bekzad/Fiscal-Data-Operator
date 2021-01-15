@@ -1,11 +1,9 @@
 package kg.nurtelecom.user.ui
 
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.setToolbarTitle
-import kg.nurtelecom.core.extension.text
 import kg.nurtelecom.user.R
 import kg.nurtelecom.user.databinding.ActivityUserBinding
 import java.util.regex.Pattern
@@ -65,8 +63,7 @@ class UserActivity : CoreActivity<ActivityUserBinding, UserVM>(UserVM::class) {
             vb.btnChange.enable(surname.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty())
         }
 
-        vb.btnChange.setOnClickListener {
-            userData()
+        vb.btnChange.setOnClickListener { userData()
 
         }
 
