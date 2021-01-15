@@ -1,19 +1,30 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
-import kg.nurtelecom.core.extension.parentActivity
-import kg.nurtelecom.core.extension.setToolbarTitle
-import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.sell.R
+import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import java.text.SimpleDateFormat
 
-class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
+class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding>() {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
 
+    override val vm: HistoryViewModel by activityViewModels()
+
+    override fun createViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): ChecksHistoryRecycleViewBinding {
+        return ChecksHistoryRecycleViewBinding.inflate(layoutInflater)
+    }
+
+    override fun setupToolbar(): Int  = R.string.history_title
+
     override fun setupViews() {
-        parentActivity.setToolbarTitle(R.string.history_title)
         initRecyclerView()
         vm.fetchChecksHistory()
     }
@@ -35,9 +46,6 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
             }
         })
     }
-
-    override fun getBinding() = ChecksHistoryRecycleViewBinding.inflate(layoutInflater)
-
     companion object {
         fun newInstance(): HistoryFragment {
             return HistoryFragment()

@@ -14,6 +14,7 @@ import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.ofd.cell.ReceiptDetailView
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailsComponentViewBinding
+import kg.nurtelecom.sell.ui.activity.HistoryActivity
 import kg.nurtelecom.sell.ui.activity.SellMainActivity
 import kg.nurtelecom.sell.ui.fragment.history.detail.HistoryDetailFragment
 
@@ -47,7 +48,7 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
-            val activity = context as SellMainActivity
+            val activity = context as HistoryActivity
             val item: Content = items[position]
             val itemView = parent?.let { ReceiptDetailView(it.context, null) }
             if (itemView != null) {

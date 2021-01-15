@@ -85,7 +85,7 @@ inline fun <reified T : Activity> Context.startActivity(noinline extra: Intent.(
 
 inline fun <reified T : Fragment> AppCompatActivity.replaceFragment(
     @IdRes containerId: Int,
-    backStack: Boolean = false,
+    backStack: Boolean = true,
     noinline args: Bundle?.() -> Bundle? = { bundleOf() }
 ) {
     supportFragmentManager.commit {
