@@ -53,18 +53,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/tw_to_be_paid"
+        android:id="@+id/tv_to_be_paid"
         style="@style/NormalSizeWhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="@dimen/margin_36dp"
         android:text="@string/tw_to_be_paid"
-        app:layout_constraintBottom_toTopOf="@+id/tw_payment_amount"
+        app:layout_constraintBottom_toTopOf="@+id/tv_payment_amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tw_payment_amount"
+        android:id="@+id/tv_payment_amount"
         style="@style/StyleTwPaymentAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

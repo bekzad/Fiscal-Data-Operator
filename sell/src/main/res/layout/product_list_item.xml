@@ -7,7 +7,7 @@
     android:background="@android:color/black">
 
     <ImageView
-        android:id="@+id/remove_product_iv"
+        android:id="@+id/iv_remove_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_16dp"
@@ -19,29 +19,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/product_position_tv"
+        android:id="@+id/tv_product_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_8dp"
         android:text="@string/position_with_n"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@id/remove_product_iv"
+        app:layout_constraintStart_toEndOf="@id/iv_remove_product"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/product_count_tv"
+        android:id="@+id/tv_product_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_8dp"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/product_position_tv"
+        app:layout_constraintStart_toStartOf="@id/tv_product_position"
         tools:text="100 * 2" />
 
     <TextView
-        android:id="@+id/product_sum_tv"
+        android:id="@+id/tv_product_sum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16dp"

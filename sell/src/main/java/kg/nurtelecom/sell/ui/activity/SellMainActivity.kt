@@ -56,35 +56,35 @@ class SellMainActivity :
         val view = vb.navView.getHeaderView(0)
         val v = SideMenuSellMainBinding.bind(view)
         val bottomSheetFragment = BottomSheetFragment()
-        v.sellMainMenuItemSale.setOnClickListener {
+        v.btnMenuItemSale.setOnClickListener {
             replaceFragment(R.id.sell_container, SellFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.sellMainMenuItemClose.setOnClickListener {
+        v.btnMenuItemClose.setOnClickListener {
             bottomSheetFragment.show(supportFragmentManager, "BottomSheetFragment")
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.sellMainMenuItemReturn.setOnClickListener {
+        v.btnMenuItemReturn.setOnClickListener {
             // here place for replacing fragment
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.sellMainMenuItemGreeting.setOnClickListener {
+        v.btnMenuItemGreeting.setOnClickListener {
             vb.drawerLayout.closeDrawer(GravityCompat.START)
             finish()
         }
-        v.sellMainMenuItemReport.setOnClickListener {
+        v.btnMenuItemReport.setOnClickListener {
             // here place for replacing fragment
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.sellMainMenuItemHistory.setOnClickListener {
+        v.btnMenuItemHistory.setOnClickListener {
             replaceFragment(R.id.sell_container, HistoryFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.sellMainMenuItemInformation.setOnClickListener {
+        v.btnMenuItemInformation.setOnClickListener {
             replaceFragment(R.id.sell_container, AboutAppFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.sellMainMenuItemOperations.setOnClickListener {
+        v.btnMenuItemOperations.setOnClickListener {
             // here place for replacing fragment
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }

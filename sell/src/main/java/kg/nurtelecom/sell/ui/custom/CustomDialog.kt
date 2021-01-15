@@ -23,7 +23,7 @@ class CustomDialog(context: Context, attributeSet: AttributeSet? = null) : Const
     }
 
     fun hideDialog() {
-        binding.regimeOkButton.setOnClickListener {
+        binding.tvRegimeOk.setOnClickListener {
             binding.root.visibility = View.GONE
         }
     }
@@ -41,8 +41,8 @@ class CustomDialog(context: Context, attributeSet: AttributeSet? = null) : Const
 
     private fun setupRegimeContent(@StringRes text: Int, @StringRes content: Int) {
         binding.apply {
-            regimeTv.setText(text)
-            regimeMessage.setText(content)
+            tvRegime.setText(text)
+            tvRegimeMessage.setText(content)
         }
     }
 

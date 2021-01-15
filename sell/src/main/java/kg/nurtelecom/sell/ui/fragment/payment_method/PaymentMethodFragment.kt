@@ -30,7 +30,7 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding>() {
 
     override fun subscribeToLiveData() {
         vm.taxSum.observe(viewLifecycleOwner) { sum ->
-            vb.twPaymentAmount.text = sum.toString()
+            vb.tvPaymentAmount.text = sum.toString()
         }
     }
 

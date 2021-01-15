@@ -35,12 +35,12 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
         }
 
     init {
-        binding.checksHistoryDetailsList.adapter = adapter
+        binding.lvChecksHistoryDetails.adapter = adapter
     }
 
     private fun onItemsUpdated() {
         adapter.notifyDataSetChanged()
-        binding.checksHistoryDetailsList.requestLayoutForChangedDataset()
+        binding.lvChecksHistoryDetails.requestLayoutForChangedDataset()
     }
 
     inner class ItemAdapter : BaseAdapter() {

@@ -15,7 +15,6 @@ import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 
-
 class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListener {
 
     private val productAdapter: ProductAdapter = ProductAdapter(this)
@@ -28,7 +27,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     override fun setupToolbar(): Int = R.string.text_sale
 
     override fun setupViews() {
-        vb.productRv.adapter = productAdapter
+        vb.rvProduct.adapter = productAdapter
         setupDialog()
         setupNavigation()
     }
@@ -58,7 +57,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
             parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container, true)
         }
 
-        vb.addProductButton.setOnClickListener {
+        vb.btnAddProduct.setOnClickListener {
             parentActivity.replaceFragment<AddProductFragment>(R.id.sell_container, true)
         }
     }

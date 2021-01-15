@@ -1,6 +1,5 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
-import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
@@ -20,10 +19,7 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
     }
 
     private fun initRecyclerView() {
-        vb.historyRecyclerView.apply {
-            vb.historyRecyclerView.layoutManager = LinearLayoutManager(activity)
-            vb.historyRecyclerView.adapter = historyAdapter
-        }
+        vb.rvHistory.adapter = historyAdapter
     }
 
     override fun subscribeToLiveData() {

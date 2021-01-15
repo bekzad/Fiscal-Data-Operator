@@ -90,10 +90,7 @@ inline fun <reified T : Fragment> AppCompatActivity.replaceFragment(
 ) {
     supportFragmentManager.commit {
         val arguments = Bundle().args()
-        if (backStack) {
-            replace(containerId, T::class.java, arguments).addToBackStack(null)
-            return
-        }
-        replace(containerId, T::class.java, arguments)
+        if (backStack) replace(containerId, T::class.java, arguments).addToBackStack(null)
+        else replace(containerId, T::class.java, arguments)
     }
 }

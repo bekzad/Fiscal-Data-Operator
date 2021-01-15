@@ -20,7 +20,6 @@ abstract class CoreFragment<VB: ViewBinding> : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parentActivity.setToolbarTitle(setupToolbar())
     }
 
     override fun onCreateView(
@@ -36,6 +35,7 @@ abstract class CoreFragment<VB: ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        parentActivity.setToolbarTitle(setupToolbar())
         setupViews()
         subscribeToLiveData()
     }
