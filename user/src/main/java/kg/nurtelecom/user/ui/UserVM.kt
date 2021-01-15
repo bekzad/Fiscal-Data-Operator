@@ -19,7 +19,7 @@ class UserVMImpl(private val repository: UserRepository): UserVM(){
     override var  userData: MutableLiveData<UserDetail> = MutableLiveData()
 
     override fun updateUserData(surname: String, name: String, middleName: String , phone: String, inn: String) {
-        safeUICall {
+        safeCall (Dispatchers.IO){
             val answer = repository.updateApiUserProfile(surname, name, middleName, phone, inn)
             repository.updateLocalUserProfile(answer.result)
             fetchUserData()
