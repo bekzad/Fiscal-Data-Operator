@@ -3,6 +3,7 @@ package kg.nurtelecom.changepassword.ui
 import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.changepassword.repository.ChangePasswordRepository
 import kg.nurtelecom.core.viewmodel.CoreViewModel
+import kotlinx.coroutines.Dispatchers
 
 abstract class ChangePasswordViewModel : CoreViewModel() {
     abstract fun saveCurrentPassword(password: String)
@@ -29,7 +30,7 @@ class ChangePasswordViewModelImpl(private val changePasswordRepository: ChangePa
         newPassword: String,
         confirmPassword: String
     ) {
-        safeUICall {
+        safeCall(Dispatchers.IO) {
             val result = changePasswordRepository.changePassword(
                 currentPassword,
                 newPassword,
