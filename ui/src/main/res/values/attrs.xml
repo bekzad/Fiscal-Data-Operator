@@ -18,7 +18,7 @@
         <attr name="subTitle"/>
         <attr name="showArrowIcon" format="boolean"/>
     </declare-styleable>
-        
+
     <declare-styleable name="InfoCardCellView">
         <attr name="android:background" />
         <attr name="android:textColor" />

@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
     tools:context=".ui.fragment.add_product.AddProductFragment">
 
     <Button
         android:id="@+id/product_not_from_list_button"
+        style="@style/DashedBorderButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Товар не из списка"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:text="@string/product_not_from_list"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/all_products_rv"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="@dimen/margin_0dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/product_not_from_list_button"
+        tools:listitem="@layout/all_products_item_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

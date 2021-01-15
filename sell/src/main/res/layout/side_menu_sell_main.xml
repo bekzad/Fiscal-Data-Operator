@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false"
+    android:focusable="false"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:text="@string/text_shift_opening"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/text_14sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_2dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:text="@string/text_date_opening"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_20sp" />
+
+    <Button
+        android:id="@+id/sell_main_menu_item_sale"
+        style="@style/GreenButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:paddingTop="@dimen/margin_14dp"
+        android:paddingBottom="@dimen/margin_14dp"
+        android:text="@string/text_sale" />
+
+    <Button
+        android:id="@+id/sell_main_menu_item_return"
+        style="@style/OrangeButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:paddingTop="@dimen/margin_14dp"
+        android:paddingBottom="@dimen/margin_14dp"
+        android:text="@string/text_return" />
+
+    <kg.nurtelecom.ofd.cell.CellView
+        android:id="@+id/sell_main_menu_item_greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        app:showArrowIcon="true"
+        app:title="@string/main_greeting" />
+
+    <kg.nurtelecom.ofd.cell.CellView
+        android:id="@+id/sell_main_menu_item_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        app:showArrowIcon="true"
+        app:subTitle="@string/text_interim_report"
+        app:title="@string/text_report" />
+
+    <kg.nurtelecom.ofd.cell.CellView
+        android:id="@+id/sell_main_menu_item_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        app:showArrowIcon="true"
+        app:subTitle="@string/text_history_list"
+        app:title="@string/text_history" />
+
+    <kg.nurtelecom.ofd.cell.CellView
+        android:id="@+id/sell_main_menu_item_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        app:showArrowIcon="true"
+        app:title="@string/text_information" />
+
+    <kg.nurtelecom.ofd.cell.CellView
+        android:id="@+id/sell_main_menu_item_operations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        app:showArrowIcon="true"
+        app:subTitle="@string/text_operations_list"
+        app:title="@string/text_operations" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sell_main_menu_item_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_24dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:background="@null"
+        android:text="@string/text_shift_closing_and_report"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_14sp" />
+
+</LinearLayout>

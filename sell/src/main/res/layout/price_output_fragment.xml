@@ -11,9 +11,9 @@
         android:id="@+id/position_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Позиция"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:text="@string/position"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,27 +22,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
-        app:title_text="@string/price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/position_tv"
-        app:layout_constraintTop_toBottomOf="@id/position_tv"/>
+        app:layout_constraintTop_toBottomOf="@id/position_tv"
+        app:title_text="@string/price" />
 
     <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_product_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:title_text="@string/count"
+        android:layout_marginTop="@dimen/margin_8dp"
         app:hint_text="1"
         app:layout_constraintEnd_toEndOf="@id/ic_product_price"
         app:layout_constraintStart_toStartOf="@id/ic_product_price"
-        app:layout_constraintTop_toBottomOf="@id/ic_product_price"/>
+        app:layout_constraintTop_toBottomOf="@id/ic_product_price"
+        app:title_text="@string/count" />
 
     <LinearLayout
         android:id="@+id/group_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,36 +52,36 @@
             android:id="@+id/ic_product_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="@dimen/margin_4dp"
             android:layout_weight="1"
             android:textColor="@color/green"
-            app:title_text="@string/discount"
-            app:layout_constraintStart_toStartOf="@id/ic_product_count"
             app:layout_constraintEnd_toStartOf="@+id/ic_product_count"
-            app:layout_constraintTop_toBottomOf="@id/ic_product_count"/>
+            app:layout_constraintStart_toStartOf="@id/ic_product_count"
+            app:layout_constraintTop_toBottomOf="@id/ic_product_count"
+            app:title_text="@string/discount" />
 
         <kg.nurtelecom.ofd.cell.InfoCardCellView
             android:id="@+id/ic_product_allowance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="@dimen/margin_4dp"
             android:layout_weight="1"
             android:textColor="@color/red"
-            app:title_text="@string/allowance"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_product_count"/>
+            app:layout_constraintTop_toBottomOf="@id/ic_product_count"
+            app:title_text="@string/allowance" />
     </LinearLayout>
 
     <Button
         android:id="@+id/check_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:layout_marginBottom="@dimen/margin_16dp"
         android:backgroundTint="@color/green"
-        android:enabled="true"
-        android:text="В ЧЕК"
+        android:enabled="false"
+        android:text="@string/in_check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -9,43 +9,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
-
-        <ProgressBar
-            android:id="@+id/progressbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <kg.nurtelecom.ofd.edittext.EditTextField
-            android:inputType="text"
             android:id="@+id/et_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:inputType="text"
             app:hint_text="@string/ed_login" />
 
         <kg.nurtelecom.ofd.edittext.EditTextField
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16dp"
-            app:hint_text="@string/ed_password"
+            android:layout_marginTop="@dimen/margin_8dp"
             android:inputType="textPassword"
-             />
+            app:hint_text="@string/ed_password" />
 
         <kg.nurtelecom.ofd.edittext.EditTextField
             android:id="@+id/et_gsr_key"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16dp"
-            app:hint_text="@string/ed_gsr_key"
-            android:inputType="number"/>
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:inputType="number"
+            app:hint_text="@string/ed_gsr_key" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
             android:orientation="horizontal">
 
             <TextView
@@ -53,12 +47,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_16dp"
-                android:textColor="@color/white"
                 android:text="@string/tv_regime"
-                android:textSize="@dimen/text_16sp"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_16sp" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switch1"
+                android:id="@+id/switch_fiscal_regime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/margin_16dp"
@@ -68,13 +62,16 @@
 
         <Button
             android:id="@+id/btn_login"
+            style="@style/GreenButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_16dp"
-            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
             android:layout_marginRight="@dimen/margin_16dp"
-            style="@style/GreenButtonStyle"
+            android:paddingTop="@dimen/margin_14dp"
+            android:paddingBottom="@dimen/margin_14dp"
             android:text="@string/btn_login" />
+
     </LinearLayout>
 
 </RelativeLayout>

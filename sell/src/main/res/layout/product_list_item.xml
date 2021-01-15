@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/black"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@android:color/black">
 
     <ImageView
         android:id="@+id/remove_product_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/margin_16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_remove_circle_outline_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="16dp"
-        android:src="@drawable/abc_vector_test" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/product_position_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Позиция №"
-        app:layout_constraintStart_toEndOf="@id/remove_product_iv"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:text="@string/position_with_n"
         android:textColor="@android:color/white"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp" />
+        app:layout_constraintStart_toEndOf="@id/remove_product_iv"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/product_count_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/product_position_tv"
+        android:layout_marginBottom="@dimen/margin_8dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        android:textSize="16sp"
-        tools:text="100 * 2"
-        android:textColor="@android:color/white" />
+        app:layout_constraintStart_toStartOf="@id/product_position_tv"
+        tools:text="100 * 2" />
 
     <TextView
         android:id="@+id/product_sum_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="200"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp" />
+        tools:text="200" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

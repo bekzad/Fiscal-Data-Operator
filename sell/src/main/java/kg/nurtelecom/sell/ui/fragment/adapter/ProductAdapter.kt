@@ -3,51 +3,71 @@ package kg.nurtelecom.sell.ui.fragment.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.ProductListItemBinding
+import kg.nurtelecom.sell.utils.isNotZero
 
-class ProductAdapter(private var productList: List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(private val itemClick: ProductItemClickListener) :
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    inner class ProductViewHolder(private val binding: ProductListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    var productList: List<Product> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
-        fun bind(product: Product) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder =
+        ProductViewHolder.getInstance(parent, itemClick)
+
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        if (position in productList.indices) {
+            holder.bind(productList[position], position)
+        }
+    }
+
+    override fun getItemCount(): Int = productList.size
+
+    class ProductViewHolder(
+        private val binding: ProductListItemBinding,
+        private val itemClick: ProductItemClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(product: Product, position: Int) {
             binding.apply {
                 productCountTv.text = fetchProductExpression(product)
                 productSumTv.text = product.totalPrice.toString()
+                removeProductIv.setOnClickListener { itemClick.removeProduct(position) }
             }
         }
 
         private fun fetchProductExpression(product: Product): StringBuilder {
             val productExpressionLine = StringBuilder()
             val discount =
-                if (product.discount != null) (" + " + product.discount) + "% " else
+                if (product.discount.isNotZero()) (" - ${product.discount}% ") else
                     ""
             val allowance =
-                if (product.allowance != null) ("+ " + product.allowance) + "%" else
+                if (product.allowance.isNotZero()) ("+ ${product.allowance}%") else
                     ""
             productExpressionLine.apply {
                 append("${product.price} * ")
                 append("${product.count.toInt()}")
                 append(discount)
                 append(allowance)
+                trimEnd()
             }
             return productExpressionLine
         }
 
-    } // RecyclerViewHolder
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val binding =
-            ProductListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProductViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val product = productList[position]
-        holder.bind(product)
-    }
-
-    override fun getItemCount(): Int {
-        return productList.size
+        companion object {
+            fun getInstance(
+                parent: ViewGroup,
+                itemClick: ProductItemClickListener
+            ): ProductViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ProductListItemBinding.inflate(layoutInflater, parent, false)
+                return ProductViewHolder(binding, itemClick)
+            }
+        }
     }
 }

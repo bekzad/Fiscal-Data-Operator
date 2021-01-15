@@ -2,7 +2,7 @@ package kg.nurtelecom.auth.repository
 
 import kg.nurtelecom.data.AccessToken
 import kg.nurtelecom.network.data.api.AuthorizationApi
-import kg.nurtelecom.storage.roomDatabase.DataDao
+import kg.nurtelecom.storage.roomdatabase.DataDao
 import kg.nurtelecom.storage.sharedpref.AppPreferences
 
 class AuthRepository(
@@ -10,14 +10,16 @@ class AuthRepository(
     private val appPrefs: AppPreferences,
     private val dataDao: DataDao
 ) {
-
-    fun isSigning() = appPrefs.token.isNotEmpty()
-
-    suspend fun fetchAccessToken(login: String, password: String, gsrKey: String) : AccessToken {
+    suspend fun fetchAccessToken(login: String, password: String, gsrKey: String, isFiscalRegime: Boolean) : AccessToken {
         val response = authApi.fetchAccessToken(login, password, gsrKey)
         saveToken(response.access_token)
         saveRefreshToken(response.refresh_token)
+        saveFiscalRegime(isFiscalRegime)
         return response
+    }
+
+    private fun saveFiscalRegime(fiscalRegime: Boolean) {
+        appPrefs.fiscalRegime = fiscalRegime
     }
 
     private fun saveToken(token: String) {

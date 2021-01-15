@@ -1,53 +1,61 @@
 package kg.nurtelecom.sell.ui.fragment.add_product
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.sell.R
-import kg.nurtelecom.sell.core.INavigation
+import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.AddProductFragmentBinding
+import kg.nurtelecom.sell.ui.activity.SellMainViewModel
+import kg.nurtelecom.sell.ui.fragment.adapter.AllProductsAdapter
+import kg.nurtelecom.sell.ui.fragment.adapter.NavigationHost
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 
-class AddProductFragment : Fragment()
-    /*CoreFragment<AddProductFragmentBinding, SellMainViewModel>(SellMainViewModel::class)*/,
-    INavigation {
 
-    companion object {
-        fun newInstance() = AddProductFragment()
+class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), NavigationHost {
+
+    private lateinit var allProductsAdapter: AllProductsAdapter
+    override val vm: SellMainViewModel by activityViewModels()
+
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        AddProductFragmentBinding.inflate(inflater, container, false)
+
+    override fun setupToolbar(): Int = R.string.product_selection
+
+    override fun setupViews() {
+        vm.allProducts.value?.let { setupRV(it) }
+        setupNavigation()
     }
 
-    private lateinit var vb: AddProductFragmentBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        vb = AddProductFragmentBinding.inflate(inflater, container, false)
-        setupViews()
-        return vb.root
+    override fun subscribeToLiveData() {
+        super.subscribeToLiveData()
+        vm.allProducts.observe(viewLifecycleOwner, {
+            allProductsAdapter.notifyItemInserted(it.lastIndex)
+        })
     }
 
-    private fun setupViews() {
-        vb.productNotFromListButton.setOnClickListener {
-            navigate()
+    override fun navigateToPriceOutputFragment(allProducts: AllProducts) {
+        parentActivity.replaceFragment<PriceOutputFragment>(R.id.sell_container, true)
+        vm.sendSelectedProduct(allProducts)
+    }
+
+    private fun setupRV(allProducts: MutableList<AllProducts>) {
+        vb.allProductsRv.apply {
+            allProductsAdapter = AllProductsAdapter(allProducts, this@AddProductFragment)
+            adapter = allProductsAdapter
         }
     }
 
-    override fun navigate() {
-        val activity = activity as AppCompatActivity
-        activity.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, PriceOutputFragment.newInstance())
-            .addToBackStack(null)
-            .commit()
+    private fun setupNavigation() {
+        vb.productNotFromListButton.setOnClickListener {
+            parentActivity.replaceFragment<PriceOutputFragment>(R.id.sell_container, true)
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        println("onDestroyView() !")
+    companion object {
+        fun newInstance() = AddProductFragment()
     }
 }

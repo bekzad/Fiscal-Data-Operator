@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:padding="@dimen/margin_16dp"
+    tools:context=".ui.fragment.payment_method.PaymentByCashFragment">
+
+    <kg.nurtelecom.ofd.cell.InfoCardCellView
+        android:id="@+id/ic_sum"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:textColor="@color/white"
+        app:is_editable="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title_text="@string/amount_to_pay" />
+
+    <kg.nurtelecom.ofd.cell.InfoCardCellView
+        android:id="@+id/ic_received"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ic_sum"
+        app:title_text="@string/et_received" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_continue"
+        style="@style/BtnGreen"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/btn_continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

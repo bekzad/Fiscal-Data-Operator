@@ -1,4 +1,4 @@
-package kg.nurtelecom.storage.roomDatabase
+package kg.nurtelecom.storage.roomdatabase
 
 import android.content.Context
 import androidx.room.Database
@@ -20,7 +20,7 @@ abstract class RoomDB : RoomDatabase() {
                     context.applicationContext,
                     RoomDB::class.java,
                     DB_NAME
-                ).build()
+                ).fallbackToDestructiveMigration().build()
             }
             return instance!!
         }

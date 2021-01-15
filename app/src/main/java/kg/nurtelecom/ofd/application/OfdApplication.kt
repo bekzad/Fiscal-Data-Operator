@@ -1,7 +1,7 @@
 package kg.nurtelecom.ofd.application
 
 import android.app.Application
-import com.teamx.storage.storageKoin.storageKoin
+import kg.nurtelecom.storage.storageKoin.storageKoin
 import kg.nurtelecom.auth.koin.authKoin
 import kg.nurtelecom.network.koin.networkKoin
 import kg.nurtelecom.ofd.koin.appKoin

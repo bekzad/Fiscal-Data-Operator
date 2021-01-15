@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root_layout">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingEnd="@dimen/margin_16dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/margin_8dp"
+        app:cardBackgroundColor="@color/darkGrey"
+        app:cardCornerRadius="@dimen/radius_0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/darkGrey"
         tools:ignore="RtlSymmetry">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/margin_12dp"
-            android:paddingBottom="@dimen/margin_4dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/margin_12dp">
 
             <ImageView
                 android:id="@+id/iv_detail_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_4dp"
-                android:src="@drawable/ic_baseline_check_circle_24"
+                android:layout_marginStart="@dimen/margin_14dp"
+                android:src="@drawable/ic_green_check"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_title"
+                style="@style/HistoryItemTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_32dp"
+                android:layout_marginStart="@dimen/margin_14dp"
                 android:text="@string/text_sale_type"
-                style="@style/HistoryItemTitleTextStyle"
-                app:layout_constraintLeft_toRightOf="@id/iv_detail_icon"
-                app:layout_constraintStart_toStartOf="@id/iv_detail_icon"
+                app:layout_constraintStart_toEndOf="@id/iv_detail_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -49,31 +49,30 @@
                 style="@style/HistoryItemSecondaryTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_36dp"
                 android:text="@string/text_counter"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
             <TextView
                 android:id="@+id/tv_timestamp"
+                style="@style/HistoryItemSecondaryTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_36dp"
                 android:text="@string/text_timestamp"
-                style="@style/HistoryItemSecondaryTextStyle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_counter" />
+                android:layout_marginBottom="@dimen/margin_4dp"
+                app:layout_constraintStart_toStartOf="@id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_counter"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_amount"
+                style="@style/HistoryItemTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_16dp"
                 android:text="@string/text_payment_amount"
-                style="@style/HistoryItemTitleTextStyle"
+                android:layout_marginEnd="@dimen/margin_8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SellModeDialogTitle">
+        <item name="android:textSize">@dimen/text_20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SellModeDialogContent">
+        <item name="android:textSize">@dimen/text_16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SellModeDialogTitleFiscal" parent="SellModeDialogTitle">
+        <item name="android:text">@string/fiscal_mode_title</item>
+    </style>
+
+    <style name="SellModeDialogTitleNonFiscal" parent="SellModeDialogTitle">
+        <item name="android:text">@string/non_fiscal_mode_title</item>
+    </style>
+
+    <style name="SellModeDialogContentFiscal" parent="SellModeDialogContent">
+        <item name="android:text">@string/fiscal_mode_dialog_content</item>
+    </style>
+
+    <style name="SellModeDialogContentNonFiscal" parent="SellModeDialogContent">
+        <item name="android:text">@string/non_fiscal_mode_dialog_content</item>
+    </style>
+
+    <style name="SellModeDialogButton">
+        <item name="android:text">@android:string/ok</item>
+        <item name="android:textSize">@dimen/text_14sp</item>
+        <item name="android:textColor">@color/clickBlue</item>
+    </style>
+
+    <!--    Payment method-->
+    <style name="NormalSizeText">
+        <item name="android:textSize">@dimen/text_16sp</item>
+    </style>
+
+    <style name="NormalSizeBlackText" parent="NormalSizeText">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="NormalSizeWhiteText" parent="NormalSizeText">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="BtnCore" parent="NormalSizeText">
+        <item name="android:insetTop">@dimen/margin_0dp</item>
+        <item name="android:insetBottom">@dimen/margin_0dp</item>
+    </style>
+
+    <style name="BtnGreen" parent="BtnCore">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/green</item>
+    </style>
+
+    <style name="BtnWhite" parent="BtnCore">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
+
+    <style name="StyleTwPaymentAmount">
+        <item name="android:textSize">@dimen/text_40sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>
