@@ -24,6 +24,12 @@ class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding>()
         super.subscribeToLiveData()
         vm.detailCheckHistory.observe(viewLifecycleOwner) {
             parentActivity.setToolbarTitle(getString(R.string.cash_check_number, it.receipt.id))
+            vb.fieldOne.setHint(it.taxSalesPointName)
+            vb.fieldTwo.setHint(it.inn)
+            vb.fieldThree.setHint(it.gnsRegNum.toString())
+            vb.fieldFour.setHint(it.cashRegisterName)
+            vb.fieldFive.setHint(it.cashRegisterVersion)
+            vb.fieldSix.setHint(it.taxAccountingMethodName)
         }
     }
 
