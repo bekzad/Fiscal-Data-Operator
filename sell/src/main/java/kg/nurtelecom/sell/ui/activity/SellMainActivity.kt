@@ -78,6 +78,7 @@ class SellMainActivity :
         }
         v.btnMenuItemHistory.setOnClickListener {
             HistoryActivity.start(this)
+            finishAndRemoveTask()
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         v.btnMenuItemInformation.setOnClickListener {
@@ -98,7 +99,6 @@ class SellMainActivity :
                 super.onDrawerClosed(drawerView)
                 vb.tbSellMain.setNavigationIcon(R.drawable.ic_baseline_menu_24)
                 when (getCurrentVisibleFragment()) {
-                    is HistoryFragment -> setToolbarTitle(R.string.history_title)
                     is AboutAppFragment -> setToolbarTitle(R.string.info_about_app)
                     is SellFragment -> setToolbarTitle(R.string.text_sale)
                     is AddProductFragment -> setToolbarTitle(R.string.product_selection)
