@@ -54,38 +54,38 @@ class SellMainActivity :
     private fun setupDrawerListener() {
         vb.drawerLayout.addDrawerListener(drawerListener())
         val view = vb.navView.getHeaderView(0)
-        val v = SideMenuSellMainBinding.bind(view)
+        val sideMenu = SideMenuSellMainBinding.bind(view)
         val bottomSheetFragment = BottomSheetFragment()
-        v.btnMenuItemSale.setOnClickListener {
+        sideMenu.btnMenuItemSale.setOnClickListener {
             replaceFragment(R.id.sell_container, SellFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.btnMenuItemClose.setOnClickListener {
+        sideMenu.btnMenuItemClose.setOnClickListener {
             bottomSheetFragment.show(supportFragmentManager, "BottomSheetFragment")
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.btnMenuItemReturn.setOnClickListener {
+        sideMenu.btnMenuItemReturn.setOnClickListener {
             // here place for replacing fragment
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.btnMenuItemGreeting.setOnClickListener {
+        sideMenu.btnMenuItemGreeting.setOnClickListener {
             vb.drawerLayout.closeDrawer(GravityCompat.START)
             finish()
         }
-        v.btnMenuItemReport.setOnClickListener {
+        sideMenu.btnMenuItemReport.setOnClickListener {
             // here place for replacing fragment
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.btnMenuItemHistory.setOnClickListener {
+        sideMenu.btnMenuItemHistory.setOnClickListener {
             HistoryActivity.start(this)
             finishAndRemoveTask()
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.btnMenuItemInformation.setOnClickListener {
+        sideMenu.btnMenuItemInformation.setOnClickListener {
             replaceFragment(R.id.sell_container, AboutAppFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
-        v.btnMenuItemOperations.setOnClickListener {
+        sideMenu.btnMenuItemOperations.setOnClickListener {
             // here place for replacing fragment
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
