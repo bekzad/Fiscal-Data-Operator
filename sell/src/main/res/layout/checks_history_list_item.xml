@@ -28,7 +28,7 @@
             android:textSize="@dimen/text_16sp" />
 
         <kg.nurtelecom.sell.ui.fragment.history.HistoryDetailsComponentView
-            android:id="@+id/itemDetailsView"
+            android:id="@+id/lv_item_detail_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

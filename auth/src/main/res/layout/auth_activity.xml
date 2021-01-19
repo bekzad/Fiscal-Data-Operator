@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <kg.nurtelecom.ofd.edittext.EditTextField
             android:id="@+id/et_login"
@@ -46,7 +47,7 @@
                 android:id="@+id/tv_regime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16dp"
+                android:layout_marginStart="@dimen/margin_16dp"
                 android:text="@string/tv_regime"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_16sp" />

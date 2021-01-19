@@ -9,32 +9,32 @@ import kg.nurtelecom.sell.databinding.BottomSheetFragmentBinding
 
 class BottomSheetFragment : BottomSheetDialogFragment(){
 
-    private var bottomSheetFragmentBinding: BottomSheetFragmentBinding? = null
+    private var _bottomSheetFragmentBinding: BottomSheetFragmentBinding? = null
+    private val bottomSheetFragmentBinding get() = _bottomSheetFragmentBinding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        bottomSheetFragmentBinding = BottomSheetFragmentBinding.inflate(inflater, container, false)
-        return bottomSheetFragmentBinding!!.root
+        _bottomSheetFragmentBinding = BottomSheetFragmentBinding.inflate(inflater, container, false)
+        return bottomSheetFragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = BottomSheetFragmentBinding.bind(view)
-        bottomSheetFragmentBinding = binding
 
-        bottomSheetFragmentBinding!!.sellMainMenuItemClose.setOnClickListener {
+        bottomSheetFragmentBinding.tvMenuItemClose.setOnClickListener {
             // here place for replacing fragment
         }
-        bottomSheetFragmentBinding!!.sellMainMenuItemCancel.setOnClickListener {
+        bottomSheetFragmentBinding.btnMenuItemCancel.setOnClickListener {
             dismiss()
         }
     }
 
     override fun onDestroyView() {
-        bottomSheetFragmentBinding = null
+        _bottomSheetFragmentBinding = null
         super.onDestroyView()
     }
 }

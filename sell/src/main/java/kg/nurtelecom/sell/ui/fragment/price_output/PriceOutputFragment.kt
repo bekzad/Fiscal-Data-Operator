@@ -26,7 +26,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     override fun setupViews() {
         setupCustomEditText()
-        vb.checkBtn.setOnClickListener { navigateToSellFragment() }
+        vb.btnCheck.setOnClickListener { navigateToSellFragment() }
     }
 
     override fun subscribeToLiveData() {
@@ -44,10 +44,10 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     private fun setupCustomEditText() {
         vb.apply {
             icProductPrice.fetchTextState {
-                if (it != null) vb.checkBtn.isEnabled = it.isNotEmpty()
+                if (it != null) vb.btnCheck.isEnabled = it.isNotEmpty()
             }
             icProductCount.fetchTextState {
-                vb.checkBtn.isEnabled = it?.isNotEmpty() ?: true
+                vb.btnCheck.isEnabled = it?.isNotEmpty() ?: true
             }
         }
     }

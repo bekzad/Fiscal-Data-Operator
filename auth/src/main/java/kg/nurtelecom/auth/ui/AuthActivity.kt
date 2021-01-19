@@ -1,6 +1,5 @@
 package kg.nurtelecom.auth.ui
 
-import androidx.lifecycle.Observer
 import kg.nurtelecom.auth.databinding.AuthActivityBinding
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.enable
@@ -50,7 +49,7 @@ class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewM
     }
 
     private fun observeAuthorization() {
-        vm.event.observe(this, Observer {
+        vm.event.observe(this, {
             when (it) {
                 is AuthUser -> {
                     setResult(AUTH_RESULT)

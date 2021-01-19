@@ -10,7 +10,6 @@ import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 
-
 abstract class CoreFragment<VB: ViewBinding> : Fragment() {
 
     private var _vb: VB? = null
@@ -20,7 +19,6 @@ abstract class CoreFragment<VB: ViewBinding> : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parentActivity.setToolbarTitle(setupToolbar())
     }
 
     override fun onCreateView(
@@ -36,6 +34,7 @@ abstract class CoreFragment<VB: ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        parentActivity.setToolbarTitle(setupToolbar())
         setupViews()
         subscribeToLiveData()
     }

@@ -29,7 +29,7 @@
         android:textSize="@dimen/text_20sp" />
 
     <Button
-        android:id="@+id/sell_main_menu_item_sale"
+        android:id="@+id/btn_menu_item_sale"
         style="@style/GreenButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:text="@string/text_sale" />
 
     <Button
-        android:id="@+id/sell_main_menu_item_return"
+        android:id="@+id/btn_menu_item_return"
         style="@style/OrangeButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
         android:text="@string/text_return" />
 
     <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/sell_main_menu_item_greeting"
+        android:id="@+id/btn_menu_item_greeting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_16dp"
@@ -63,7 +63,7 @@
         app:title="@string/main_greeting" />
 
     <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/sell_main_menu_item_report"
+        android:id="@+id/btn_menu_item_report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_16dp"
@@ -74,7 +74,7 @@
         app:title="@string/text_report" />
 
     <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/sell_main_menu_item_history"
+        android:id="@+id/btn_menu_item_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_16dp"
@@ -84,7 +84,7 @@
         app:title="@string/text_history" />
 
     <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/sell_main_menu_item_information"
+        android:id="@+id/btn_menu_item_information"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_16dp"
@@ -94,7 +94,7 @@
         app:title="@string/text_information" />
 
     <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/sell_main_menu_item_operations"
+        android:id="@+id/btn_menu_item_operations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_16dp"
@@ -106,7 +106,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sell_main_menu_item_close"
+        android:id="@+id/btn_menu_item_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_16dp"

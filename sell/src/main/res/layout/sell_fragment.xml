@@ -28,7 +28,7 @@
 
 
         <TextView
-            android:id="@+id/added_products_tv"
+            android:id="@+id/tv_added_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16dp"
@@ -39,17 +39,17 @@
             app:layout_constraintTop_toBottomOf="@id/ic_sum_pay" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/product_rv"
+            android:id="@+id/rv_product"
             android:layout_width="@dimen/margin_0dp"
             android:layout_height="@dimen/margin_0dp"
             android:layout_marginTop="@dimen/margin_8dp"
             android:layout_marginBottom="@dimen/margin_16dp"
             android:padding="@dimen/margin_8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/add_product_button"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add_product"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/added_products_tv"
+            app:layout_constraintTop_toBottomOf="@id/tv_added_products"
             tools:listitem="@layout/product_list_item" />
 
         <kg.nurtelecom.sell.ui.custom.CustomDialog
@@ -65,7 +65,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/add_product_button"
+            android:id="@+id/btn_add_product"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_0dp"
             android:backgroundTint="@color/green"

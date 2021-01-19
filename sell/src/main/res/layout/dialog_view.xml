@@ -8,7 +8,7 @@
     android:background="@drawable/dialog_background">
 
     <TextView
-        android:id="@+id/regime_tv"
+        android:id="@+id/tv_regime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_24dp"
@@ -19,7 +19,7 @@
         tools:text="Фискальный режим" />
 
     <TextView
-        android:id="@+id/regime_message"
+        android:id="@+id/tv_regime_message"
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_24dp"
@@ -27,11 +27,11 @@
         android:layout_marginEnd="@dimen/size_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/regime_tv"
+        app:layout_constraintTop_toBottomOf="@id/tv_regime"
         tools:text="Это основной режим осуществления торговой деятельности. Все данные отправляются в ОФД." />
 
     <TextView
-        android:id="@+id/regime_ok_button"
+        android:id="@+id/tv_regime_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_60dp"
@@ -41,6 +41,6 @@
         android:textColor="@color/clickBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/regime_message" />
+        app:layout_constraintTop_toBottomOf="@id/tv_regime_message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
