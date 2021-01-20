@@ -1,6 +1,11 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
-import android.view.*
+import android.graphics.Color
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.ViewGroup
+import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.activityViewModels
@@ -29,24 +34,18 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding>() {
         inflater.inflate(R.menu.sell_menu, menu)
         val search = menu.findItem(R.id.ic_search)
         val searchView = MenuItemCompat.getActionView(search) as SearchView
+        searchView.queryHint = getString(R.string.text_search)
+        val editText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        editText.setTextColor(Color.WHITE)
+        editText.setHintTextColor(Color.WHITE)
         search(searchView)
     }
 
     private fun search(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
-            }
-
+            override fun onQueryTextSubmit(query: String): Boolean = false
             override fun onQueryTextChange(newText: String): Boolean {
-                try {
-                    historyAdapter.filter.filter(newText)
-                    val groupedItems = historyAdapter.mFilteredList?.groupBy { book -> SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForDecoratorDateTimeDefaults() }
-                    if (groupedItems != null) {
-                        historyAdapter.itemData = groupedItems.toSortedMap()
-                    }
-                } catch (e: Exception) {
-                }
+                historyAdapter.filter.filter(newText)
                 return true
             }
         })
@@ -71,8 +70,10 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding>() {
 
     private fun observeCheckHistory() {
         vm.checksHistoryData.observe(this, {
-            if(it != null) {
-                val groupedItems = it.groupBy { book -> SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForDecoratorDateTimeDefaults() }
+            if (it != null) {
+                val groupedItems = it.groupBy { book ->
+                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForDecoratorDateTimeDefaults()
+                }
                 historyAdapter.itemData = groupedItems.toSortedMap()
                 historyAdapter.setListData(it as ArrayList<Content>)
                 historyAdapter.notifyDataSetChanged()

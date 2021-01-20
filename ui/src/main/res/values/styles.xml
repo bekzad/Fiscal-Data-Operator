@@ -155,4 +155,8 @@
         <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
     </style>
 
+    <style name="ToolbarColoredBackArrow">
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
 </resources>
