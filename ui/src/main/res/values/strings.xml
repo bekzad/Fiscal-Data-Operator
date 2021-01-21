@@ -20,6 +20,7 @@
     <string name="text_payment_amount">75.00 с</string>
     <string name="text_profile">Профиль</string>
     <string name="text_date">11 апреля 2020</string>
+    <string name="text_search">Поиск</string>
 
     <!--sell-->
     <string name="title_text">Сумма к оплате, сом:</string>
