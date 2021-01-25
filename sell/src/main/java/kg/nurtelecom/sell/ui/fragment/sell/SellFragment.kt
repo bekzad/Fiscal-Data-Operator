@@ -47,7 +47,6 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     }
 
     private fun setupRegime() {
-        println("REGIME IS ${vm.regimeState}")
         vb.dvRegime.setupDialog(vm.regimeState)
         vb.dvRegime.hideDialog()
     }
