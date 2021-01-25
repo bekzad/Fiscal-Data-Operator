@@ -23,15 +23,41 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_sell_main"
         tools:openDrawer="end">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/sell_container"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mc_regime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/blue">
+
+                <TextView
+                    android:id="@+id/tv_regime_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="@dimen/margin_16dp"
+                    android:text="@string/non_fiscal_mode_message"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_16sp"
+                    app:drawableStartCompat="@drawable/ic_alert_triangle" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/sell_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/mc_regime" />
+
+        </RelativeLayout>
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"

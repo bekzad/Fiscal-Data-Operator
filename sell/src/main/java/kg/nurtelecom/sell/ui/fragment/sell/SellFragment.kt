@@ -10,7 +10,6 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
-import kg.nurtelecom.sell.ui.custom.CustomDialog.Companion.FISCAL_REGIME
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
@@ -28,7 +27,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
 
     override fun setupViews() {
         vb.rvProduct.adapter = productAdapter
-        setupDialog()
+        setupRegime()
         setupNavigation()
     }
 
@@ -47,9 +46,10 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         productAdapter.notifyDataSetChanged()
     }
 
-    private fun setupDialog() {
-        vb.modeDialog.setupDialog(FISCAL_REGIME)
-        vb.modeDialog.hideDialog()
+    private fun setupRegime() {
+        println("REGIME IS ${vm.regimeState}")
+        vb.dvRegime.setupDialog(vm.regimeState)
+        vb.dvRegime.hideDialog()
     }
 
     private fun setupNavigation() {

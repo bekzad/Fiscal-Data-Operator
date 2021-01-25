@@ -1,16 +1,26 @@
 package kg.nurtelecom.sell.utils
 
+import android.os.Bundle
+import android.view.View
+import android.view.View.GONE
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 
-fun Fragment.addFragment(@IdRes containerId: Int, fragment: Fragment, backStack: Boolean = false) {
-    requireActivity().supportFragmentManager.commit {
-        if (backStack) add(containerId, fragment).addToBackStack(null)
-        else add(containerId, fragment)
+inline fun <reified T : Fragment> AppCompatActivity.addMFragment(
+    @IdRes containerId: Int,
+    backStack: Boolean = true,
+    noinline args: Bundle?.() -> Bundle? = { bundleOf() }
+) {
+    supportFragmentManager.commit {
+        val arguments = Bundle().args()
+        if (backStack) add(containerId, T::class.java, arguments).addToBackStack(null)
+        else add(containerId, T::class.java, arguments)
     }
 }
 

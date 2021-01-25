@@ -3,28 +3,28 @@ package kg.nurtelecom.sell.ui.custom
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.DialogViewBinding
 
 
-class CustomDialog(context: Context, attributeSet: AttributeSet? = null) : ConstraintLayout(context, attributeSet) {
+class CustomDialog(context: Context, attributeSet: AttributeSet? = null) :
+    ConstraintLayout(context, attributeSet) {
 
     private val binding = DialogViewBinding.inflate(LayoutInflater.from(context), this, true)
 
-    fun setupDialog(regime: String) {
-        when (regime) {
-            FISCAL_REGIME -> setupFiscalDialog(FISCAL_REGIME)
-            NON_FISCAL_REGIME -> setupFiscalDialog(NON_FISCAL_REGIME)
-            else -> return
+    fun setupDialog(whichRegime: Boolean) {
+        when (whichRegime) {
+            true -> setupFiscalDialog(NON_FISCAL_REGIME)
+            false -> setupFiscalDialog(FISCAL_REGIME)
         }
     }
 
     fun hideDialog() {
         binding.tvRegimeOk.setOnClickListener {
-            binding.root.visibility = View.GONE
+            binding.root.visible(false)
         }
     }
 
@@ -34,7 +34,10 @@ class CustomDialog(context: Context, attributeSet: AttributeSet? = null) : Const
                 setupRegimeContent(R.string.fiscal_mode_title, R.string.fiscal_mode_dialog_content)
             }
             NON_FISCAL_REGIME -> {
-                setupRegimeContent(R.string.non_fiscal_mode_message, R.string.non_fiscal_mode_dialog_content)
+                setupRegimeContent(
+                    R.string.non_fiscal_mode_message,
+                    R.string.non_fiscal_mode_dialog_content
+                )
             }
         }
     }
@@ -47,7 +50,7 @@ class CustomDialog(context: Context, attributeSet: AttributeSet? = null) : Const
     }
 
     companion object {
-        const val FISCAL_REGIME: String = "fiscal"
-        const val NON_FISCAL_REGIME: String = "nonFiscal"
+        private const val FISCAL_REGIME: String = "fiscal"
+        private const val NON_FISCAL_REGIME: String = "nonFiscal"
     }
 }

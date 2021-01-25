@@ -22,7 +22,7 @@
     <string name="allowance">Надбавка %</string>
     <string name="in_check">В чек</string>
     <string name="price_som">Цена, сом:</string>
-    <string name="non_fiscal_mode_message">Нефискальный режим. Его можно отключить в боковом меню.</string>
+    <string name="non_fiscal_mode_message">Нефискальный режим.</string>
     <string name="alert_icon_description">Alert icon</string>
     <string name="count">Count</string>
     <string name="product_not_from_list">Товар не из списка</string>

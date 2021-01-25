@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 
@@ -14,6 +15,8 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<AllProducts>
 
+    open val regimeState: Boolean = false
+
     abstract fun addNewProduct(product: Product)
 
     abstract fun removeProductFromList(position: Int)
@@ -23,11 +26,11 @@ abstract class SellMainViewModel : CoreViewModel() {
     // TODO: must be changed
     abstract val allProducts: MutableLiveData<MutableList<AllProducts>>
 
-    open fun clearSelectedProduct() {}
+    abstract fun clearSelectedProduct()
 }
 
 
-class SellMainViewModelImpl : SellMainViewModel() {
+class SellMainViewModelImpl(private val repository: SellRepository) : SellMainViewModel() {
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
@@ -35,6 +38,9 @@ class SellMainViewModelImpl : SellMainViewModel() {
     override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
     override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
+
+    override val regimeState: Boolean
+        get() = repository.fetchRegime()
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
@@ -72,8 +78,8 @@ class SellMainViewModelImpl : SellMainViewModel() {
 
     // TODO: must be changed
     private val mockedAllProducts = mutableListOf(
-        AllProducts("Test product name1", BigDecimal("25.00")),
-        AllProducts("Test product name2", BigDecimal("45.00"))
+        AllProducts("Мыло со вкусом солнца", BigDecimal("25.00")),
+        AllProducts("Воздух без воздуха", BigDecimal("45.00"))
     )
 
     override val allProducts: MutableLiveData<MutableList<AllProducts>> =
