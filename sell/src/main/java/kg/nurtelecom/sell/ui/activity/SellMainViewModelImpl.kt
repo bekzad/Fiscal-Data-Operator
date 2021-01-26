@@ -80,7 +80,7 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
     }
 
     override fun clearSelectedProduct() {
-        selectedProductData.value = AllProducts("", BigDecimal.ZERO)
+        selectedProductData.value = null
     }
 
     // TODO: must be changed

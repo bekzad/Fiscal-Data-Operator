@@ -11,6 +11,7 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
+import kg.nurtelecom.sell.utils.hideKeyboard
 import kg.nurtelecom.sell.utils.isZero
 import java.math.BigDecimal
 
@@ -58,6 +59,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     private fun navigateToSellFragment() {
         sendProduct(fetchProductData())
         parentActivity.replaceFragment<SellFragment>(R.id.sell_container, true)
+        parentActivity.hideKeyboard()
     }
 
     private fun fetchProductData(): Product {

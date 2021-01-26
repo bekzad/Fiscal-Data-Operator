@@ -1,6 +1,9 @@
 package kg.nurtelecom.sell.utils
 
+import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -19,6 +22,20 @@ inline fun <reified T : Fragment> AppCompatActivity.addMFragment(
         val arguments = Bundle().args()
         if (backStack) add(containerId, T::class.java, arguments).addToBackStack(null)
         else add(containerId, T::class.java, arguments)
+    }
+}
+
+fun View.disable() {
+    isClickable = false
+    isFocusable = false
+    isLongClickable = false
+}
+
+fun AppCompatActivity.hideKeyboard() {
+    val view = currentFocus
+    if (view != null) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
 

@@ -13,6 +13,7 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
+import kg.nurtelecom.sell.utils.disable
 
 class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListener {
 
@@ -41,11 +42,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         vm.isProductEmpty.observe(viewLifecycleOwner) { state ->
             vb.icSumPay.changeEditText(state)
             if (state) {
-                vb.icSumPay.apply {
-                    isClickable = false
-                    isFocusable = false
-                    isLongClickable = false
-                }
+                vb.icSumPay.disable()
             }
         }
     }
