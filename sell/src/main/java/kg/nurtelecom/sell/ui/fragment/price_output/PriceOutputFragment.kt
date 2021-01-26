@@ -25,14 +25,15 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     override fun setupToolbar(): Int = R.string.price_entry
 
     override fun setupViews() {
-        setupCustomEditText()
+        setupEditText()
         vb.btnCheck.setOnClickListener { navigateToSellFragment() }
     }
 
     override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
-        vm.selectedProductData.observe(viewLifecycleOwner, {
-            vb.icProductPrice.setContent(it.productPrice)
+        vm.selectedProductData.observe(viewLifecycleOwner, { product ->
+            if (product != null) {
+                vb.icProductPrice.setContent(product.productPrice)
+            }
         })
     }
 
@@ -41,7 +42,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         vm.clearSelectedProduct()
     }
 
-    private fun setupCustomEditText() {
+    private fun setupEditText() {
         vb.apply {
             icProductPrice.fetchTextState {
                 if (it != null) vb.btnCheck.isEnabled = it.isNotEmpty()
