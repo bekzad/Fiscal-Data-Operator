@@ -31,8 +31,10 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
 
     override fun subscribeToLiveData() {
         vm.selectedProductData.observe(viewLifecycleOwner, { product ->
-            if (product != null) {
-                vb.icProductPrice.setContent(product.productPrice)
+            if (vm.selectedProductData.value != null) {
+                if (product != null) {
+                    vb.icProductPrice.setContent(product.productPrice)
+                }
             }
         })
     }

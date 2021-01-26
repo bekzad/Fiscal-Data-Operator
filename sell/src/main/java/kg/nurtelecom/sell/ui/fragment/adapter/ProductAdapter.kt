@@ -51,7 +51,7 @@ class ProductAdapter(private val itemClick: ProductItemClickListener) :
                     ""
             productExpressionLine.apply {
                 append("${product.price} * ")
-                append("${product.count.toInt()}")
+                append("${product.count}")
                 append(discount)
                 append(allowance)
                 trimEnd()

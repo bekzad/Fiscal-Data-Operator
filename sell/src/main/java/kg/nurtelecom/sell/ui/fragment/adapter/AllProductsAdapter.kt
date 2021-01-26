@@ -36,9 +36,7 @@ class AllProductsAdapter(
                     setTitle(product.productName)
                     setSubTitle(product.productPrice.toString())
                     setOnCellClickListener {
-                        it.setOnClickListener {
-                            itemClick.navigateToPriceOutputFragment(product)
-                        }
+                        itemClick.navigateToPriceOutputFragment(product)
                     }
                 }
             }

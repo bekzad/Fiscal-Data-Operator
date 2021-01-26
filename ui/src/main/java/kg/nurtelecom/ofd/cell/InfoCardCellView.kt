@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.card.MaterialCardView
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.ui.R
 import kg.nurtelecom.ui.databinding.InfoCardCellViewBinding
 import java.math.BigDecimal
@@ -80,6 +81,23 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
     fun fetchInputData(): BigDecimal {
         return if (vb.etContent.text.isNotEmpty()) vb.etContent.text.toString().toBigDecimal()
         else BigDecimal.ZERO
+    }
+
+    fun changeEditText(state: Boolean) {
+        when (state) {
+            false -> {
+                vb.mcvRoot.setCardBackgroundColor(resources.getColor(R.color.green))
+                vb.ivNextIcon.visible(true)
+                vb.etContent.setTextColor(Color.WHITE)
+                vb.tvTitle.setTextColor(Color.WHITE)
+            }
+            true -> {
+                vb.mcvRoot.setCardBackgroundColor(Color.WHITE)
+                vb.ivNextIcon.visible(false)
+                vb.etContent.setTextColor(Color.BLACK)
+                vb.tvTitle.setTextColor(Color.BLACK)
+            }
+        }
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {

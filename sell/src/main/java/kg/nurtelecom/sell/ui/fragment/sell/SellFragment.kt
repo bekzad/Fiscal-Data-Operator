@@ -38,6 +38,9 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         vm.taxSum.observe(viewLifecycleOwner) { taxSum ->
             vb.icSumPay.setContent(taxSum)
         }
+        vm.isProductEmpty.observe(viewLifecycleOwner) { state ->
+            vb.icSumPay.changeEditText(state)
+        }
     }
 
     override fun removeProduct(position: Int) {

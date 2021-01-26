@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.activity
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.sell.AllProducts
@@ -14,6 +15,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<AllProducts>
+    abstract var isProductEmpty: MutableLiveData<Boolean>
 
     open val regimeState: Boolean = false
 
@@ -39,12 +41,15 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
 
     override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
 
+    override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
+
     override val regimeState: Boolean
         get() = repository.fetchRegime()
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
         taxSum.value = calculateTaxSum()
+        isProductEmpty.value = false
     }
 
     private fun calculateTaxSum(): BigDecimal {
@@ -66,6 +71,9 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
     override fun removeProductFromList(position: Int) {
         productList.value?.removeAt(position)
         taxSum.value = calculateTaxSum()
+        if (productList.value.isNullOrEmpty()) {
+            isProductEmpty.value = true
+        }
     }
 
     override fun sendSelectedProduct(product: AllProducts) {
