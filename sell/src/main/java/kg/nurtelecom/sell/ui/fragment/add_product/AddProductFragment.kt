@@ -1,7 +1,14 @@
 package kg.nurtelecom.sell.ui.fragment.add_product
 
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Filterable
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
@@ -26,20 +33,41 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
     override fun setupToolbar(): Int = R.string.product_selection
 
     override fun setupViews() {
+        setHasOptionsMenu(true)
         vm.allProducts.value?.let { setupRV(it) }
         setupNavigation()
     }
 
     override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
-        vm.allProducts.observe(viewLifecycleOwner, {
-            allProductsAdapter.notifyItemInserted(it.lastIndex)
+        vm.allProducts.observe(viewLifecycleOwner, { product ->
+            allProductsAdapter.notifyItemInserted(product.lastIndex)
         })
     }
 
     override fun navigateToPriceOutputFragment(allProducts: AllProducts) {
-        parentActivity.replaceFragment<PriceOutputFragment>(R.id.sell_container, true)
+        parentActivity.replaceFragment<PriceOutputFragment>(R.id.sell_container)
         vm.sendSelectedProduct(allProducts)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.sell_menu, menu)
+        val search = menu.findItem(R.id.ic_search)
+        val searchView = MenuItemCompat.getActionView(search) as SearchView
+        searchView.queryHint = getString(R.string.text_search)
+        val editText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        editText.setTextColor(Color.WHITE)
+        editText.setHintTextColor(Color.WHITE)
+    }
+
+    private fun searchProduct(searchView: SearchView) {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean = false
+            override fun onQueryTextChange(newText: String): Boolean {
+                //allProductsAdapter.filter.filter(newText)
+                return true
+            }
+        })
     }
 
     private fun setupRV(allProducts: MutableList<AllProducts>) {
@@ -51,7 +79,7 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
 
     private fun setupNavigation() {
         vb.productNotFromListButton.setOnClickListener {
-            parentActivity.replaceFragment<PriceOutputFragment>(R.id.sell_container, true)
+            parentActivity.replaceFragment<PriceOutputFragment>(R.id.sell_container)
         }
     }
 

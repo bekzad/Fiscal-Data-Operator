@@ -17,10 +17,6 @@ abstract class CoreFragment<VB: ViewBinding> : Fragment() {
 
     abstract val vm: CoreViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

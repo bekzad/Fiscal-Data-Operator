@@ -1,8 +1,6 @@
 package kg.nurtelecom.sell.utils
 
 import android.os.Bundle
-import android.view.View
-import android.view.View.GONE
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf

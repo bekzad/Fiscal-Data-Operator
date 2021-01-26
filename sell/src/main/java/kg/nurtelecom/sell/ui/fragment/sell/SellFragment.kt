@@ -32,7 +32,6 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     }
 
     override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
         vm.productList.observe(viewLifecycleOwner, { product ->
             productAdapter.productList = product
         })
@@ -62,6 +61,6 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     }
 
     companion object {
-        fun newInstance() = SellFragment()
+        fun newInstance(): SellFragment = SellFragment()
     }
 }
