@@ -1,13 +1,11 @@
 package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
-import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.*
-import kg.nurtelecom.core.menu.DrawerListener
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
@@ -20,17 +18,24 @@ import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.utils.addMFragment
+import kg.nurtelecom.sell.utils.drawerClosed
+import kg.nurtelecom.sell.utils.drawerOpened
+import kg.nurtelecom.sell.utils.setupActionBarDrawerToggle
 
 class SellMainActivity :
     CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var toolbar: Toolbar
 
     override fun getBinding(): ActivitySellMainBinding =
         ActivitySellMainBinding.inflate(layoutInflater)
 
     override fun setupViews() {
-        super.setupViews()
+        drawerLayout = vb.drawerLayout
+        toolbar = vb.tbSellMain
         setupRegime()
-        setSupportActionBar(vb.tbSellMain)
+        setSupportActionBar(toolbar)
         setupNavDrawer()
         addMFragment<SellFragment>(R.id.sell_container)
     }
@@ -40,78 +45,71 @@ class SellMainActivity :
     }
 
     private fun setupNavDrawer() {
-        val actionBarToggle = ActionBarDrawerToggle(
-            this,
-            vb.drawerLayout,
-            vb.tbSellMain,
-            R.string.nav_open_drawer,
-            R.string.nav_close_drawer
-        )
-        actionBarToggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
-        vb.drawerLayout.addDrawerListener(actionBarToggle)
-        setupDrawerListener()
-        actionBarToggle.syncState()
+        drawerLayout.setupActionBarDrawerToggle(this, toolbar, ::setupNavigationItem)
+
+        drawerLayout.drawerClosed {
+            toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+            handleToolbarChanges()
+        }
+        drawerLayout.drawerOpened {
+            setToolbarTitle(resources.getString(R.string.text_menu))
+            toolbar.setNavigationIcon(R.drawable.ic_baseline_close_24)
+        }
     }
 
-    private fun setupDrawerListener() {
-        vb.drawerLayout.addDrawerListener(drawerListener())
+    private fun setupNavigationItem() {
         val view = vb.navView.getHeaderView(0)
         val sideMenu = SideMenuSellMainBinding.bind(view)
         val bottomSheetFragment = BottomSheetFragment()
+
         sideMenu.btnMenuItemSale.setOnClickListener {
+            drawerLayout.closeDrawer(GravityCompat.START)
             replaceFragment<SellFragment>(R.id.sell_container)
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         sideMenu.btnMenuItemClose.setOnClickListener {
+            drawerLayout.closeDrawer(GravityCompat.START)
             bottomSheetFragment.show(supportFragmentManager, "BottomSheetFragment")
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         sideMenu.btnMenuItemReturn.setOnClickListener {
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            drawerLayout.closeDrawer(GravityCompat.START)
         }
         sideMenu.btnMenuItemGreeting.setOnClickListener {
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            drawerLayout.closeDrawer(GravityCompat.START)
             finish()
         }
         sideMenu.btnMenuItemReport.setOnClickListener {
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            drawerLayout.closeDrawer(GravityCompat.START)
         }
         sideMenu.btnMenuItemHistory.setOnClickListener {
+            drawerLayout.closeDrawer(GravityCompat.START)
             HistoryActivity.start(this)
             finishAndRemoveTask()
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         sideMenu.btnMenuItemInformation.setOnClickListener {
-            replaceFragment(R.id.sell_container, AboutAppFragment.newInstance(), true)
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            replaceFragment<AboutAppFragment>(R.id.sell_container)
         }
         sideMenu.btnMenuItemOperations.setOnClickListener {
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            drawerLayout.closeDrawer(GravityCompat.START)
         }
     }
 
-    private fun drawerListener(): DrawerLayout.DrawerListener {
-        return object : DrawerListener() {
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
-            override fun onDrawerStateChanged(newState: Int) {}
-            override fun onDrawerClosed(drawerView: View) {
-                super.onDrawerClosed(drawerView)
-                vb.tbSellMain.setNavigationIcon(R.drawable.ic_baseline_menu_24)
-                when (getCurrentVisibleFragment()) {
-                    is AboutAppFragment -> setToolbarTitle(R.string.info_about_app)
-                    is SellFragment -> setToolbarTitle(R.string.text_sale)
-                    is AddProductFragment -> setToolbarTitle(R.string.product_selection)
-                    is PriceOutputFragment -> setToolbarTitle(R.string.price_entry)
-                    is PaymentMethodFragment, is PaymentByCardFragment,
-                    is PaymentByCashFragment -> setToolbarTitle(R.string.payment_method)
-                }
-            }
+    private fun handleToolbarChanges() {
+        when (getCurrentVisibleFragment()) {
+            is AboutAppFragment -> setToolbarTitle(R.string.info_about_app)
+            is SellFragment -> setToolbarTitle(R.string.text_sale)
+            is AddProductFragment -> setToolbarTitle(R.string.product_selection)
+            is PriceOutputFragment -> setToolbarTitle(R.string.price_entry)
+            is PaymentMethodFragment, is PaymentByCardFragment,
+            is PaymentByCashFragment -> setToolbarTitle(R.string.payment_method)
+        }
+    }
 
-            override fun onDrawerOpened(drawerView: View) {
-                super.onDrawerOpened(drawerView)
-                setToolbarTitle(resources.getString(R.string.text_menu))
-                vb.tbSellMain.setNavigationIcon(R.drawable.ic_baseline_close_24)
-            }
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 
