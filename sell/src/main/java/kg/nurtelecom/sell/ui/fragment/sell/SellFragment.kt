@@ -40,6 +40,13 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         }
         vm.isProductEmpty.observe(viewLifecycleOwner) { state ->
             vb.icSumPay.changeEditText(state)
+            if (state) {
+                vb.icSumPay.apply {
+                    isClickable = false
+                    isFocusable = false
+                    isLongClickable = false
+                }
+            }
         }
     }
 
