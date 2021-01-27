@@ -29,7 +29,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         return when (vm.operationType) {
             OperationType.SALE.type -> R.string.text_sale
             OperationType.POSTPAY.type -> R.string.text_credit
-            else -> R.string.text_app_name
+            else -> R.string.text_sale
         }
     }
 
