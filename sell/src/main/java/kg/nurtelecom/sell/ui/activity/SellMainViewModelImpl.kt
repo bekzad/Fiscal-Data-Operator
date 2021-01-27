@@ -4,8 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.data.sell.Result
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.utils.roundUp
+import kotlinx.coroutines.Dispatchers
 import java.math.BigDecimal
 
 
@@ -16,6 +18,8 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val selectedProductData: MutableLiveData<AllProducts>
     abstract var isProductEmpty: MutableLiveData<Boolean>
 
+    abstract val productCategory: MutableLiveData<List<Result>>
+
     open val regimeState: Boolean = false
 
     abstract fun addNewProduct(product: Product)
@@ -23,6 +27,8 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun removeProductFromList(position: Int)
 
     abstract fun sendSelectedProduct(product: AllProducts)
+
+    abstract fun fetchProductCategory()
 
     // TODO: must be changed
     abstract val allProducts: MutableLiveData<MutableList<AllProducts>>
@@ -42,13 +48,26 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
 
     override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
 
-    override val regimeState: Boolean
-        get() = repository.fetchRegime()
+    override val regimeState: Boolean = repository.fetchRegime
+
+    override val productCategory: MutableLiveData<List<Result>> = MutableLiveData()
+
+    init {
+        fetchProductCategory()
+    }
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
         taxSum.value = calculateTaxSum()
         isProductEmpty.value = false
+    }
+
+    override fun fetchProductCategory() {
+        if (!repository.fetchRegime) {
+            safeCall(Dispatchers.IO) {
+                productCategory.postValue(repository.fetchProductCategory())
+            }
+        }
     }
 
     private fun calculateTaxSum(): BigDecimal {

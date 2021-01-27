@@ -30,12 +30,6 @@ inline fun <reified T : Fragment> AppCompatActivity.addMFragment(
     }
 }
 
-fun View.disable() {
-    isClickable = false
-    isFocusable = false
-    isLongClickable = false
-}
-
 fun AppCompatActivity.hideKeyboard() {
     val view = currentFocus
     if (view != null) {

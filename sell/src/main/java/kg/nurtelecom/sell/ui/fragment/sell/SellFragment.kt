@@ -13,7 +13,6 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
-import kg.nurtelecom.sell.utils.disable
 
 class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListener {
 
@@ -42,9 +41,16 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         vm.isProductEmpty.observe(viewLifecycleOwner) { state ->
             vb.icSumPay.changeEditText(state)
             if (state) {
-                vb.icSumPay.disable()
+                vb.icSumPay.apply {
+                    isClickable = false
+                    isFocusable = false
+                    isLongClickable = false
+                }
             }
         }
+        vm.productCategory.observe(viewLifecycleOwner, { productCategory ->
+            println(productCategory.toList())
+        })
     }
 
     override fun removeProduct(position: Int) {
@@ -59,11 +65,11 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
 
     private fun setupNavigation() {
         vb.icSumPay.setOnClickListener {
-            parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container, true)
+            parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
         }
 
         vb.btnAddProduct.setOnClickListener {
-            parentActivity.replaceFragment<AddProductFragment>(R.id.sell_container, true)
+            parentActivity.replaceFragment<AddProductFragment>(R.id.sell_container)
         }
     }
 
