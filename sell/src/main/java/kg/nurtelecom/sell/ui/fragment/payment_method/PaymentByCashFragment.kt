@@ -25,9 +25,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
     override fun setupViews() {
         super.setupViews()
 
-        if (vm.operationType == OperationType.POSTPAY.type) {
-            vb.btnContinue.text = getString(R.string.text_no_deposit)
-        }
+        setBtnTitles()
 
         vb.btnContinue.setOnClickListener {
             navigateToPrintCheck()
@@ -35,7 +33,14 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
 
         vb.icReceived.apply {
             fetchTextState {
-                if (it != null) vb.btnContinue.isEnabled = it.isNotEmpty()
+                if (it != null) {
+                    vb.btnContinue.isEnabled = it.isNotEmpty()
+                    if (it.isNotEmpty()) {
+                        vb.btnContinue.text = getString(R.string.btn_continue)
+                    } else {
+                        setBtnTitles()
+                    }
+                }
             }
         }
     }
@@ -44,6 +49,13 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
         val anotherTax = BigDecimal("1.01")
         vm.taxSum.observe(viewLifecycleOwner) { sum ->
             vb.icSum.setContent(sum.multiply(anotherTax).roundUp())
+        }
+    }
+
+    private fun setBtnTitles() {
+        when (vm.operationType) {
+            OperationType.SALE.type -> vb.btnContinue.text = getString(R.string.btn_continue)
+            OperationType.POSTPAY.type -> vb.btnContinue.text = getString(R.string.text_no_deposit)
         }
     }
 

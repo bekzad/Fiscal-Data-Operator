@@ -8,6 +8,7 @@ import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCardBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
+import java.math.BigDecimal
 
 
 class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
@@ -24,9 +25,7 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
     override fun setupViews() {
         super.setupViews()
 
-        if (vm.operationType == OperationType.POSTPAY.type) {
-            vb.btnContinueCard.text = getString(R.string.text_no_deposit)
-        }
+        setupButtons()
 
         vb.btnContinueCard.setOnClickListener {
             navigateToPrintCheck()
@@ -36,7 +35,31 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
     override fun subscribeToLiveData() {
         vm.taxSum.observe(viewLifecycleOwner) { sum ->
             vb.icSumCard.setContent(sum)
-            vb.icReceivedCard.setContent(sum)
+        }
+    }
+
+    private fun setupButtons() {
+        when (vm.operationType) {
+            OperationType.SALE.type -> {
+                vb.btnContinueCard.text = getString(R.string.btn_continue)
+                vb.icReceivedCard.setContent(vm.taxSum.value ?: BigDecimal.ZERO)
+            }
+            OperationType.POSTPAY.type -> {
+                setupCreditMode()
+            }
+        }
+    }
+
+    private fun setupCreditMode() {
+        vb.btnContinueCard.text = getString(R.string.text_no_deposit)
+        vb.icReceivedCard.setIsEditable(true)
+        vb.icReceivedCard.eraseContent()
+        vb.icReceivedCard.fetchTextState {
+            if (!it.isNullOrEmpty()) {
+                vb.btnContinueCard.text = getString(R.string.btn_continue)
+            } else {
+                vb.btnContinueCard.text = getString(R.string.text_no_deposit)
+            }
         }
     }
 

@@ -71,6 +71,10 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
         vb.etContent.setText(value.toString())
     }
 
+    fun eraseContent() {
+        vb.etContent.setText("")
+    }
+
     fun fetchTextState(action: (text: CharSequence?) -> Unit) {
         vb.etContent.doOnTextChanged { text, _, _, _ ->
             action(text)
@@ -80,6 +84,10 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
     fun fetchInputData(): BigDecimal {
         return if (vb.etContent.text.isNotEmpty()) vb.etContent.text.toString().toBigDecimal()
         else BigDecimal.ZERO
+    }
+
+    fun setIsEditable(value: Boolean) {
+        mDisableChildrenTouchEvents = !value
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
