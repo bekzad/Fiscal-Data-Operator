@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ProductItemClickListener
@@ -24,7 +25,13 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         SellFragmentBinding.inflate(inflater, container, false)
 
-    override fun setupToolbar(): Int = R.string.text_sale
+    override fun setupToolbar(): Int {
+        return when (vm.operationType) {
+            OperationType.SALE.type -> R.string.text_sale
+            OperationType.POSTPAY.type -> R.string.text_credit
+            else -> R.string.text_app_name
+        }
+    }
 
     override fun setupViews() {
         vb.rvProduct.adapter = productAdapter

@@ -1,6 +1,7 @@
 package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -11,6 +12,7 @@ import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.core.menu.DrawerListener
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
@@ -34,6 +36,7 @@ class SellMainActivity :
         super.setupViews()
         setSupportActionBar(vb.tbSellMain)
         setupNavDrawer()
+        vm.operationType = intent?.getStringExtra("operationType") ?: OperationType.SALE.type
         replaceFragment(R.id.sell_container, SellFragment.newInstance())
     }
 
@@ -58,6 +61,7 @@ class SellMainActivity :
         val bottomSheetFragment = BottomSheetFragment()
         sideMenu.btnMenuItemSale.setOnClickListener {
             replaceFragment(R.id.sell_container, SellFragment.newInstance(), true)
+            vm.operationType = OperationType.SALE.type
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         sideMenu.btnMenuItemClose.setOnClickListener {
@@ -119,6 +123,12 @@ class SellMainActivity :
     companion object {
         fun start(context: Context?) {
             context?.startActivity<SellMainActivity>()
+        }
+
+        fun start(context: Context?, operationType: OperationType) {
+            context?.startActivity<SellMainActivity> {
+                this.putExtra("operationType", operationType.type)
+            }
         }
     }
 }

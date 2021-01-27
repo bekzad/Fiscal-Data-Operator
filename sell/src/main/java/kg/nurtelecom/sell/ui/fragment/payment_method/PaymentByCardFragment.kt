@@ -3,6 +3,7 @@ package kg.nurtelecom.sell.ui.fragment.payment_method
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCardBinding
@@ -22,6 +23,10 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
 
     override fun setupViews() {
         super.setupViews()
+
+        if (vm.operationType == OperationType.POSTPAY.type) {
+            vb.btnContinueCard.text = getString(R.string.text_no_deposit)
+        }
 
         vb.btnContinueCard.setOnClickListener {
             navigateToPrintCheck()
