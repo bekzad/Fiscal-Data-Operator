@@ -29,10 +29,8 @@ class ProductCategoryAdapter :
                     val mList = ArrayList<ProductsItem>()
                     for (i in list) {
                         mList.add(ProductsItem.Header(i.productCatalog.name))
-                    }
-                    list.forEach {
-                        it.products.forEach { product ->
-                            mList.add(ProductsItem.ProductItem(product))
+                        for (v in i.products) {
+                            mList.add(ProductsItem.ProductItem(v))
                         }
                     }
                     mList
@@ -126,11 +124,11 @@ class ProductCategoryDiffCallback : DiffUtil.ItemCallback<ProductsItem>() {
 
 sealed class ProductsItem {
     data class ProductItem(val product: Products) : ProductsItem() {
-        override val id: Long = Long.MIN_VALUE
+        override val id: Long = product.id
     }
 
     data class Header(val name: String) : ProductsItem() {
-        override val id: Long = Long.MIN_VALUE
+        override val id: Long = name.hashCode().toLong()
     }
 
     abstract val id: Long

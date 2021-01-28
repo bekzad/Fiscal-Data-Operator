@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.sell.AllProducts
-import kg.nurtelecom.data.sell.Result
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.AddProductFragmentBinding

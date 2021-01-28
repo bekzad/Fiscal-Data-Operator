@@ -2,9 +2,7 @@ package kg.nurtelecom.sell.ui.activity
 
 import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.core.viewmodel.CoreViewModel
-import kg.nurtelecom.data.sell.AllProducts
-import kg.nurtelecom.data.sell.Product
-import kg.nurtelecom.data.sell.Result
+import kg.nurtelecom.data.sell.*
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +45,7 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
 
     override val regimeState: Boolean = repository.fetchRegime
 
-    override val productCategory: MutableLiveData<List<Result>> = MutableLiveData()
+    override val productCategory: MutableLiveData<List<Result>> = MutableLiveData(listOf())
 
     init {
         fetchProductCategory()

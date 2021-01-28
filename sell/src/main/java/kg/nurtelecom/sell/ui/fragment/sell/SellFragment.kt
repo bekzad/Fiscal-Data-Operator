@@ -48,9 +48,6 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
                 }
             }
         }
-        vm.productCategory.observe(viewLifecycleOwner, { productCategory ->
-            println(productCategory.toList())
-        })
     }
 
     override fun removeProduct(position: Int) {

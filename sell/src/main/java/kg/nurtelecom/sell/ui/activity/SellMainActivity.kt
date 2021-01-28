@@ -37,7 +37,7 @@ class SellMainActivity :
         setupRegime()
         setSupportActionBar(toolbar)
         setupNavDrawer()
-        addMFragment<SellFragment>(R.id.sell_container)
+        addMFragment<SellFragment>(R.id.sell_container, false)
     }
 
     private fun setupRegime() {
