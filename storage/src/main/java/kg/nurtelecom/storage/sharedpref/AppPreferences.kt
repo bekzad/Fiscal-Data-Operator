@@ -13,10 +13,12 @@ class AppPreferences(context: Context) : BasePreferences(context) {
     var token: String by PreferenceDelegate(sharedPreference, Keys.ACCESS_TOKEN, "")
     var refreshToken: String by PreferenceDelegate(sharedPreference, Keys.REFRESH_TOKEN, "")
     var fiscalRegime: Boolean by PreferenceDelegate(sharedPreference, Keys.FISCAL_REGIME, false)
+    var secureKey: String by PreferenceDelegate(sharedPreference, Keys.SECURE_KEY, "")
 
     object Keys {
         const val ACCESS_TOKEN = "ACCESS_TOKEN"
         const val REFRESH_TOKEN = "REFRESH_TOKEN"
         const val FISCAL_REGIME = "FISCAL_REGIME"
+        const val SECURE_KEY = "SECURE_KEY"
     }
 }

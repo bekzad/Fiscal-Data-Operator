@@ -1,40 +1,34 @@
 package kg.nurtelecom.sell.ui.fragment.bottom_sheet
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import android.util.Log
+import kg.nurtelecom.core.fragment.CoreBottomSheetFragment
+import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.databinding.BottomSheetFragmentBinding
-
-class BottomSheetFragment : BottomSheetDialogFragment(){
-
-    private var _bottomSheetFragmentBinding: BottomSheetFragmentBinding? = null
-    private val bottomSheetFragmentBinding get() = _bottomSheetFragmentBinding!!
+import kg.nurtelecom.sell.ui.fragment.report.SessionViewModel
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _bottomSheetFragmentBinding = BottomSheetFragmentBinding.inflate(inflater, container, false)
-        return bottomSheetFragmentBinding.root
-    }
+class BottomSheetFragment : CoreBottomSheetFragment<BottomSheetFragmentBinding, SessionViewModel>(SessionViewModel::class) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        bottomSheetFragmentBinding.tvMenuItemClose.setOnClickListener {
-            // here place for replacing fragment
+    override fun setupViews() {
+        vb.tvMenuItemClose.setOnClickListener {
+            vm.closeSession()
         }
-        bottomSheetFragmentBinding.btnMenuItemCancel.setOnClickListener {
+        vb.btnMenuItemCancel.setOnClickListener {
             dismiss()
         }
     }
 
-    override fun onDestroyView() {
-        _bottomSheetFragmentBinding = null
-        super.onDestroyView()
+    override fun subscribeToLiveData() {
+        super.subscribeToLiveData()
+        vm.sessionReportData.observe(this, {
+            when(it) {
+                is ReportDetailed -> {
+                    dismiss()
+                    activity?.finish()
+                }
+            }
+        })
     }
+
+    override fun getBinding() = BottomSheetFragmentBinding.inflate(layoutInflater)
 }
