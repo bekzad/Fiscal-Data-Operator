@@ -48,8 +48,8 @@ class SellMainActivity :
         drawerLayout.setupActionBarDrawerToggle(this, toolbar, ::setupNavigationItem)
 
         drawerLayout.drawerClosed {
-            toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
             handleToolbarChanges()
+            toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
         }
         drawerLayout.drawerOpened {
             setToolbarTitle(resources.getString(R.string.text_menu))

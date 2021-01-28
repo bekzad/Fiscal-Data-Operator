@@ -30,9 +30,6 @@ abstract class SellMainViewModel : CoreViewModel() {
 
     abstract fun fetchProductCategory()
 
-    // TODO: must be changed
-    abstract val allProducts: MutableLiveData<MutableList<AllProducts>>
-
     abstract fun clearSelectedProduct()
 }
 
@@ -101,14 +98,4 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
     override fun clearSelectedProduct() {
         selectedProductData.value = null
     }
-
-    // TODO: must be changed
-    private val mockedAllProducts = mutableListOf(
-        AllProducts("Мыло со вкусом солнца", BigDecimal("25.00")),
-        AllProducts("Воздух без воздуха", BigDecimal("45.00"))
-    )
-
-    override val allProducts: MutableLiveData<MutableList<AllProducts>> =
-        MutableLiveData(mockedAllProducts)
-
 }

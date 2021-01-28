@@ -6,25 +6,26 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Filterable
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.sell.AllProducts
+import kg.nurtelecom.data.sell.Result
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.AddProductFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
-import kg.nurtelecom.sell.ui.fragment.adapter.AllProductsAdapter
 import kg.nurtelecom.sell.ui.fragment.adapter.NavigationHost
+import kg.nurtelecom.sell.ui.fragment.adapter.ProductCategoryAdapter
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 
 
 class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), NavigationHost {
 
-    private lateinit var allProductsAdapter: AllProductsAdapter
+    private val allProductsAdapter: ProductCategoryAdapter = ProductCategoryAdapter()
     override val vm: SellMainViewModel by activityViewModels()
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
@@ -34,13 +35,14 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
 
     override fun setupViews() {
         setHasOptionsMenu(true)
-        vm.allProducts.value?.let { setupRV(it) }
         setupNavigation()
+        vb.allProductsRv.adapter = allProductsAdapter
+        vb.allProductsRv.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun subscribeToLiveData() {
-        vm.allProducts.observe(viewLifecycleOwner, { product ->
-            allProductsAdapter.notifyItemInserted(product.lastIndex)
+        vm.productCategory.observe(viewLifecycleOwner, { product ->
+            allProductsAdapter.addHeaderAndSubmitList(product)
         })
     }
 
@@ -60,6 +62,7 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
         editText.setHintTextColor(Color.WHITE)
     }
 
+    // TODO("Move into VM")
     private fun searchProduct(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean = false
@@ -68,13 +71,6 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
                 return true
             }
         })
-    }
-
-    private fun setupRV(allProducts: MutableList<AllProducts>) {
-        vb.allProductsRv.apply {
-            allProductsAdapter = AllProductsAdapter(allProducts, this@AddProductFragment)
-            adapter = allProductsAdapter
-        }
     }
 
     private fun setupNavigation() {
