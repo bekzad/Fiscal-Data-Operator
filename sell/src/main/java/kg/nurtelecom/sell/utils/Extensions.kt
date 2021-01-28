@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
@@ -55,6 +56,32 @@ inline fun DrawerLayout.setupActionBarDrawerToggle(
     actionBarToggle.syncState()
     action()
 }
+
+inline fun SearchView.setupQueryTextListener(
+    crossinline doOnQueryTextSubmit: (query: String) -> Boolean = { false },
+    crossinline doOnQueryTextChange: (newText: String) -> Boolean = { true }
+): SearchView.OnQueryTextListener {
+    val listener = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String): Boolean {
+            return doOnQueryTextSubmit.invoke(query)
+        }
+
+        override fun onQueryTextChange(newText: String): Boolean {
+            return doOnQueryTextChange(newText)
+        }
+    }
+    setOnQueryTextListener(listener)
+
+    return listener
+}
+
+inline fun SearchView.doOnQueryTextSubmit(
+    crossinline action: (query: String) -> Boolean
+) = setupQueryTextListener(doOnQueryTextSubmit = action)
+
+inline fun SearchView.doOnQueryTextChange(
+    crossinline action: (newText: String) -> Boolean
+) = setupQueryTextListener(doOnQueryTextChange = action)
 
 inline fun DrawerLayout.setupDrawerListener(
     crossinline drawerSlide: (drawerView: View, slideOffset: Float) -> Unit = { _, _ -> },

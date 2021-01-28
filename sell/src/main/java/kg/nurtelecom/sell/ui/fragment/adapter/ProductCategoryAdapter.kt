@@ -6,8 +6,8 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import kg.nurtelecom.data.sell.CatalogResult
 import kg.nurtelecom.data.sell.Products
-import kg.nurtelecom.data.sell.Result
 import kg.nurtelecom.sell.databinding.ProductCategoryHeaderBinding
 import kg.nurtelecom.sell.databinding.ProductCategoryItemBinding
 import kg.nurtelecom.sell.utils.roundUp
@@ -21,25 +21,41 @@ class ProductCategoryAdapter :
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
-    fun addHeaderAndSubmitList(list: List<Result>?) {
+    fun addHeaderAndSubmitList(list: List<CatalogResult>?, sortedList: List<Products>? = null) {
         adapterScope.launch {
-            val items = when (list) {
-                null -> listOf(ProductsItem.Header(""))
-                else -> {
-                    val mList = ArrayList<ProductsItem>()
-                    for (i in list) {
-                        mList.add(ProductsItem.Header(i.productCatalog.name))
-                        for (v in i.products) {
-                            mList.add(ProductsItem.ProductItem(v))
+            if (!sortedList.isNullOrEmpty()) {
+                submitSortedList(sortedList)
+            } else {
+                val items = when (list) {
+                    null -> listOf(ProductsItem.Header(""))
+                    else -> {
+                        val mList = ArrayList<ProductsItem>()
+                        for (i in list) {
+                            mList.add(ProductsItem.Header(i.productCatalog.name))
+                            for (v in i.products) {
+                                mList.add(ProductsItem.ProductItem(v))
+                            }
                         }
+                        mList
                     }
-                    mList
                 }
-            }
-            withContext(Dispatchers.Main) {
-                submitList(items)
+                submitProduct(items)
             }
         }
+    }
+
+    private suspend fun submitProduct(items: List<ProductsItem>?) {
+        withContext(Dispatchers.Main) {
+            submitList(items)
+        }
+    }
+
+    private suspend fun submitSortedList(sortedList: List<Products>) {
+        val mList = ArrayList<ProductsItem>()
+        for (i in sortedList) {
+            mList.add(ProductsItem.ProductItem(i))
+        }
+        submitProduct(mList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -83,7 +99,8 @@ class ProductsViewHolder(private val binding: ProductCategoryItemBinding) :
         binding.apply {
             tvProductName.text = product.name
             val formattedPrice = "${product.price.roundUp()} <u>с</u>"
-            tvProductPrice.text = HtmlCompat.fromHtml(formattedPrice, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            tvProductPrice.text =
+                HtmlCompat.fromHtml(formattedPrice, HtmlCompat.FROM_HTML_MODE_LEGACY)
         }
     }
 

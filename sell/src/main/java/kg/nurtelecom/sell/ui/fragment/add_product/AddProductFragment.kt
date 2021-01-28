@@ -1,13 +1,11 @@
 package kg.nurtelecom.sell.ui.fragment.add_product
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.ViewGroup
-import android.widget.EditText
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.parentActivity
@@ -17,14 +15,14 @@ import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.AddProductFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
-import kg.nurtelecom.sell.ui.fragment.adapter.NavigationHost
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductCategoryAdapter
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
+import kg.nurtelecom.sell.utils.doOnQueryTextChange
 
 
-class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), NavigationHost {
+class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
 
-    private val allProductsAdapter: ProductCategoryAdapter = ProductCategoryAdapter()
+    private val catalogAdapter: ProductCategoryAdapter = ProductCategoryAdapter()
     override val vm: SellMainViewModel by activityViewModels()
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
@@ -35,41 +33,38 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
     override fun setupViews() {
         setHasOptionsMenu(true)
         setupNavigation()
-        vb.allProductsRv.adapter = allProductsAdapter
+        vb.allProductsRv.adapter = catalogAdapter
         vb.allProductsRv.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun subscribeToLiveData() {
         vm.productCategory.observe(viewLifecycleOwner, { product ->
-            allProductsAdapter.addHeaderAndSubmitList(product)
+            catalogAdapter.addHeaderAndSubmitList(product)
         })
+        vm.filteredProducts?.observe(viewLifecycleOwner) { sortedProducts ->
+            catalogAdapter.addHeaderAndSubmitList(null, sortedList = sortedProducts)
+        }
     }
 
-    override fun navigateToPriceOutputFragment(allProducts: AllProducts) {
+    private fun navigateToPriceOutputFragment(allProducts: AllProducts) {
         parentActivity.replaceFragment<PriceOutputFragment>(R.id.sell_container)
         vm.sendSelectedProduct(allProducts)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.sell_menu, menu)
         val search = menu.findItem(R.id.ic_search)
-        val searchView = MenuItemCompat.getActionView(search) as SearchView
+        val searchView: SearchView = search.actionView as SearchView
+        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
         searchView.queryHint = getString(R.string.text_search)
-        val editText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
-        editText.setTextColor(Color.WHITE)
-        editText.setHintTextColor(Color.WHITE)
+        searchProduct(searchView)
     }
 
-    // TODO("Move into VM")
     private fun searchProduct(searchView: SearchView) {
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean = false
-            override fun onQueryTextChange(newText: String): Boolean {
-                //allProductsAdapter.filter.filter(newText)
-                return true
-            }
-        })
+        searchView.doOnQueryTextChange { query ->
+            vm.searchProduct(query)
+            true
+        }
     }
 
     private fun setupNavigation() {
@@ -79,6 +74,6 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>(), Navigation
     }
 
     companion object {
-        fun newInstance() = AddProductFragment()
+        fun newInstance(): AddProductFragment = AddProductFragment()
     }
 }

@@ -16,9 +16,9 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val selectedProductData: MutableLiveData<AllProducts>
     abstract var isProductEmpty: MutableLiveData<Boolean>
 
-    abstract val productCategory: MutableLiveData<List<Result>>
+    abstract val productCategory: MutableLiveData<List<CatalogResult>>
 
-    open val regimeState: Boolean = false
+    abstract val regimeState: Boolean
 
     abstract fun addNewProduct(product: Product)
 
@@ -29,6 +29,10 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun fetchProductCategory()
 
     abstract fun clearSelectedProduct()
+
+    abstract fun searchProduct(name: String)
+
+    open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 }
 
 
@@ -45,7 +49,7 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
 
     override val regimeState: Boolean = repository.fetchRegime
 
-    override val productCategory: MutableLiveData<List<Result>> = MutableLiveData(listOf())
+    override val productCategory: MutableLiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
     init {
         fetchProductCategory()
@@ -95,5 +99,20 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
 
     override fun clearSelectedProduct() {
         selectedProductData.value = null
+    }
+
+    override fun searchProduct(name: String) {
+        val searchList = mutableListOf<Products>()
+        productCategory.value?.let { list ->
+            list.forEach { catalog ->
+                catalog.products.forEach {
+                    searchList.add(it)
+                }
+            }
+            val filteredList = searchList.filter {
+                it.name.contains(name, true)
+            }
+            filteredProducts?.value = filteredList
+        }
     }
 }
