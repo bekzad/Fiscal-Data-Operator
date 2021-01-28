@@ -16,9 +16,9 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val selectedProductData: MutableLiveData<AllProducts>
     abstract var isProductEmpty: MutableLiveData<Boolean>
 
-    abstract val productCategory: MutableLiveData<List<CatalogResult>>
+    abstract val productCatalog: MutableLiveData<List<CatalogResult>>
 
-    abstract val regimeState: Boolean
+    abstract val isRegimeNonFiscal: Boolean
 
     abstract fun addNewProduct(product: Product)
 
@@ -26,7 +26,7 @@ abstract class SellMainViewModel : CoreViewModel() {
 
     abstract fun sendSelectedProduct(product: AllProducts)
 
-    abstract fun fetchProductCategory()
+    abstract fun fetchProductCatalog()
 
     abstract fun clearSelectedProduct()
 
@@ -47,12 +47,12 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
 
     override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
 
-    override val regimeState: Boolean = repository.fetchRegime
+    override val isRegimeNonFiscal: Boolean = repository.fetchRegime
 
-    override val productCategory: MutableLiveData<List<CatalogResult>> = MutableLiveData(listOf())
+    override val productCatalog: MutableLiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
     init {
-        fetchProductCategory()
+        fetchProductCatalog()
     }
 
     override fun addNewProduct(product: Product) {
@@ -61,10 +61,10 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
         isProductEmpty.value = false
     }
 
-    override fun fetchProductCategory() {
+    override fun fetchProductCatalog() {
         if (!repository.fetchRegime) {
             safeCall(Dispatchers.IO) {
-                productCategory.postValue(repository.fetchProductCategory())
+                productCatalog.postValue(repository.fetchProductCategory())
             }
         }
     }
@@ -103,7 +103,7 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
 
     override fun searchProduct(name: String) {
         val searchList = mutableListOf<Products>()
-        productCategory.value?.let { list ->
+        productCatalog.value?.let { list ->
             list.forEach { catalog ->
                 catalog.products.forEach {
                     searchList.add(it)

@@ -41,15 +41,15 @@ class SellMainActivity :
     }
 
     private fun setupRegime() {
-        vb.mcRegime.visible(vm.regimeState)
+        vb.mcRegime.visible(vm.isRegimeNonFiscal)
     }
 
     private fun setupNavDrawer() {
-        drawerLayout.setupActionBarDrawerToggle(this, toolbar, ::setupNavigationItem)
+        drawerLayout.setupActionBarDrawerToggle(this, toolbar, ::setupNavigationListener)
 
         drawerLayout.drawerClosed {
-            handleToolbarChanges()
             toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+            handleToolbarChanges()
         }
         drawerLayout.drawerOpened {
             setToolbarTitle(resources.getString(R.string.text_menu))
@@ -57,31 +57,31 @@ class SellMainActivity :
         }
     }
 
-    private fun setupNavigationItem() {
+    private fun setupNavigationListener() {
         val view = vb.navView.getHeaderView(0)
         val sideMenu = SideMenuSellMainBinding.bind(view)
         val bottomSheetFragment = BottomSheetFragment()
 
         sideMenu.btnMenuItemSale.setOnClickListener {
-            drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
             replaceFragment<SellFragment>(R.id.sell_container)
         }
         sideMenu.btnMenuItemClose.setOnClickListener {
-            drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
             bottomSheetFragment.show(supportFragmentManager, "BottomSheetFragment")
         }
         sideMenu.btnMenuItemReturn.setOnClickListener {
-            drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
         }
         sideMenu.btnMenuItemGreeting.setOnClickListener {
-            drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
             finish()
         }
         sideMenu.btnMenuItemReport.setOnClickListener {
-            drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
         }
         sideMenu.btnMenuItemHistory.setOnClickListener {
-            drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
             HistoryActivity.start(this)
             finishAndRemoveTask()
         }
@@ -103,6 +103,10 @@ class SellMainActivity :
             is PaymentMethodFragment, is PaymentByCardFragment,
             is PaymentByCashFragment -> setToolbarTitle(R.string.payment_method)
         }
+    }
+
+    private fun closeNavDrawer() {
+        drawerLayout.closeDrawer(GravityCompat.START)
     }
 
     override fun onBackPressed() {

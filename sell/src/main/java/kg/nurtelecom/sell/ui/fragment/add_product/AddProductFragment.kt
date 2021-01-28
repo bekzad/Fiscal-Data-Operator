@@ -38,7 +38,7 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
     }
 
     override fun subscribeToLiveData() {
-        vm.productCategory.observe(viewLifecycleOwner, { product ->
+        vm.productCatalog.observe(viewLifecycleOwner, { product ->
             catalogAdapter.addHeaderAndSubmitList(product)
         })
         vm.filteredProducts?.observe(viewLifecycleOwner) { sortedProducts ->

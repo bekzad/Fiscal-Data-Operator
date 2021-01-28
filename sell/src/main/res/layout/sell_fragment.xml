@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title_text="Сумма к оплате, сом:" />
+        app:title_text="@string/amount_to_pay" />
 
     <TextView
         android:id="@+id/tv_added_products"
