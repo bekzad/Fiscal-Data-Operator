@@ -36,8 +36,16 @@ class SellMainActivity :
         super.setupViews()
         setSupportActionBar(vb.tbSellMain)
         setupNavDrawer()
-        vm.operationType = intent?.getStringExtra("operationType") ?: OperationType.SALE.type
+        setupOperationType()
         replaceFragment(R.id.sell_container, SellFragment.newInstance())
+    }
+
+    private fun setupOperationType() {
+        vm.operationType = when(intent?.getStringExtra("operationType")) {
+            OperationType.SALE.type -> OperationType.SALE
+            OperationType.POSTPAY.type -> OperationType.POSTPAY
+            else -> OperationType.SALE
+        }
     }
 
     private fun setupNavDrawer() {
@@ -61,7 +69,7 @@ class SellMainActivity :
         val bottomSheetFragment = BottomSheetFragment()
         sideMenu.btnMenuItemSale.setOnClickListener {
             replaceFragment(R.id.sell_container, SellFragment.newInstance(), true)
-            vm.operationType = OperationType.SALE.type
+            vm.operationType = OperationType.SALE
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         sideMenu.btnMenuItemClose.setOnClickListener {

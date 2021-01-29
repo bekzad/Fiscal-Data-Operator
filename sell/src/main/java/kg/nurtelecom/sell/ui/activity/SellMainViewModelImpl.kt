@@ -14,7 +14,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<AllProducts>
-    abstract var operationType: String
+    abstract var operationType: OperationType
 
     abstract fun addNewProduct(product: Product)
 
@@ -38,7 +38,7 @@ class SellMainViewModelImpl : SellMainViewModel() {
 
     override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
 
-    override var operationType: String = OperationType.SALE.type
+    override var operationType: OperationType = OperationType.SALE
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)

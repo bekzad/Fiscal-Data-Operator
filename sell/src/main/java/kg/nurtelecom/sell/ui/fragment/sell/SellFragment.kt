@@ -27,8 +27,8 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
 
     override fun setupToolbar(): Int {
         return when (vm.operationType) {
-            OperationType.SALE.type -> R.string.text_sale
-            OperationType.POSTPAY.type -> R.string.text_credit
+            OperationType.SALE -> R.string.text_sale
+            OperationType.POSTPAY -> R.string.text_credit
             else -> R.string.text_sale
         }
     }

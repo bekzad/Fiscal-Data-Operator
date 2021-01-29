@@ -54,8 +54,8 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
 
     private fun setBtnTitles() {
         when (vm.operationType) {
-            OperationType.SALE.type -> vb.btnContinue.text = getString(R.string.btn_continue)
-            OperationType.POSTPAY.type -> vb.btnContinue.text = getString(R.string.text_no_deposit)
+            OperationType.SALE -> vb.btnContinue.text = getString(R.string.btn_continue)
+            OperationType.POSTPAY -> vb.btnContinue.text = getString(R.string.text_no_deposit)
         }
     }
 

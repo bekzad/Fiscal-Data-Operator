@@ -40,11 +40,11 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
 
     private fun setupButtons() {
         when (vm.operationType) {
-            OperationType.SALE.type -> {
+            OperationType.SALE -> {
                 vb.btnContinueCard.text = getString(R.string.btn_continue)
                 vb.icReceivedCard.setContent(vm.taxSum.value ?: BigDecimal.ZERO)
             }
-            OperationType.POSTPAY.type -> {
+            OperationType.POSTPAY -> {
                 setupCreditMode()
             }
         }
