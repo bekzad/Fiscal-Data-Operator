@@ -29,6 +29,7 @@
     <string name="delete_icon">Delete Icon</string>
     <string name="price">Цена, сом</string>
     <string name="zero">0</string>
+    <string name="title_credit_list">Список кредитов</string>
 
     <!--Side menu sell-->
     <string name="nav_open_drawer">open</string>
