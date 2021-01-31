@@ -24,7 +24,7 @@ class ProductCategoryAdapter :
     fun addHeaderAndSubmitList(list: List<CatalogResult>?, sortedList: List<Products>? = null) {
         adapterScope.launch {
             if (!sortedList.isNullOrEmpty()) {
-                submitSortedList(sortedList)
+                submitSortedProducts(sortedList)
             } else {
                 val items = when (list) {
                     null -> listOf(ProductsItem.Header(""))
@@ -39,23 +39,23 @@ class ProductCategoryAdapter :
                         mList
                     }
                 }
-                submitProduct(items)
+                submitProducts(items)
             }
         }
     }
 
-    private suspend fun submitProduct(items: List<ProductsItem>?) {
+    private suspend fun submitProducts(items: List<ProductsItem>?) {
         withContext(Dispatchers.Main) {
             submitList(items)
         }
     }
 
-    private suspend fun submitSortedList(sortedList: List<Products>) {
+    private suspend fun submitSortedProducts(sortedList: List<Products>) {
         val mList = ArrayList<ProductsItem>()
         for (i in sortedList) {
             mList.add(ProductsItem.ProductItem(i))
         }
-        submitProduct(mList)
+        submitProducts(mList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

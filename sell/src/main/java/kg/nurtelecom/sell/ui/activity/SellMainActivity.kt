@@ -18,8 +18,8 @@ import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.utils.addMFragment
-import kg.nurtelecom.sell.utils.drawerClosed
-import kg.nurtelecom.sell.utils.drawerOpened
+import kg.nurtelecom.sell.utils.doOnDrawerClosed
+import kg.nurtelecom.sell.utils.doOnDrawerOpened
 import kg.nurtelecom.sell.utils.setupActionBarDrawerToggle
 
 class SellMainActivity :
@@ -47,11 +47,11 @@ class SellMainActivity :
     private fun setupNavDrawer() {
         drawerLayout.setupActionBarDrawerToggle(this, toolbar, ::setupNavigationListener)
 
-        drawerLayout.drawerClosed {
+        drawerLayout.doOnDrawerClosed {
             toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
             handleToolbarChanges()
         }
-        drawerLayout.drawerOpened {
+        drawerLayout.doOnDrawerOpened {
             setToolbarTitle(resources.getString(R.string.text_menu))
             toolbar.setNavigationIcon(R.drawable.ic_baseline_close_24)
         }

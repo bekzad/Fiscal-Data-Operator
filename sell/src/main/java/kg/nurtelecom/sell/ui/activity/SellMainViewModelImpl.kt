@@ -2,7 +2,10 @@ package kg.nurtelecom.sell.ui.activity
 
 import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.core.viewmodel.CoreViewModel
-import kg.nurtelecom.data.sell.*
+import kg.nurtelecom.data.sell.AllProducts
+import kg.nurtelecom.data.sell.CatalogResult
+import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.data.sell.Products
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +25,7 @@ abstract class SellMainViewModel : CoreViewModel() {
 
     abstract fun addNewProduct(product: Product)
 
-    abstract fun removeProductFromList(position: Int)
+    abstract fun removeProduct(position: Int)
 
     abstract fun sendSelectedProduct(product: AllProducts)
 
@@ -85,7 +88,7 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
         return taxSum.roundUp()
     }
 
-    override fun removeProductFromList(position: Int) {
+    override fun removeProduct(position: Int) {
         productList.value?.removeAt(position)
         taxSum.value = calculateTaxSum()
         if (productList.value.isNullOrEmpty()) {
@@ -105,12 +108,12 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
         val searchList = mutableListOf<Products>()
         productCatalog.value?.let { list ->
             list.forEach { catalog ->
-                catalog.products.forEach {
-                    searchList.add(it)
+                catalog.products.forEach { product ->
+                    searchList.add(product)
                 }
             }
-            val filteredList = searchList.filter {
-                it.name.contains(name, true)
+            val filteredList = searchList.filter { products ->
+                products.name.contains(name, true)
             }
             filteredProducts?.value = filteredList
         }

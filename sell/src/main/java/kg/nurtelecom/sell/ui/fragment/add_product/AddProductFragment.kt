@@ -1,9 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.add_product
 
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
@@ -17,7 +14,9 @@ import kg.nurtelecom.sell.databinding.AddProductFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductCategoryAdapter
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
+import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
+import kg.nurtelecom.sell.utils.doOnQueryTextSubmit
 
 
 class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
@@ -58,6 +57,10 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
         searchView.imeOptions = EditorInfo.IME_ACTION_DONE
         searchView.queryHint = getString(R.string.text_search)
         searchProduct(searchView)
+        search.doOnMenuItemCollapse {
+            catalogAdapter.addHeaderAndSubmitList(vm.productCatalog.value)
+            true
+        }
     }
 
     private fun searchProduct(searchView: SearchView) {
