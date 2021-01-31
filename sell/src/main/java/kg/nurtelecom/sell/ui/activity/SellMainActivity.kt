@@ -11,6 +11,7 @@ import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
+import kg.nurtelecom.sell.databinding.SideMenuOtherOperationsBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
 import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment

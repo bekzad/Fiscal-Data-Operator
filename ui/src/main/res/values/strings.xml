@@ -16,7 +16,7 @@
     <string name="history_title">История</string>
     <string name="text_sale_type">Кассовый чек</string>
     <string name="text_counter">#123</string>
-    <string name="text_timestamp">25/09/19 - 15:43</string>
+    <string name="text_timestamp">25/09/19 – 15:43</string>
     <string name="text_payment_amount">75.00 с</string>
     <string name="text_profile">Профиль</string>
     <string name="text_date">11 апреля 2020</string>
@@ -46,6 +46,21 @@
     <string name="text_operations">Прочие операции</string>
     <string name="text_operations_list">Список операций за период</string>
     <string name="text_shift_closing_and_report">Закрытие смены и z-отчет</string>
+
+    <!--Side menu other operations-->
+    <string name="text_purchase">Покупка</string>
+    <string name="text_return_purchase">Возврат покупки</string>
+    <string name="text_prepayment">Предоплата</string>
+    <string name="text_refund_prepayment">Возврат предоплаты</string>
+    <string name="text_credit">Кредит</string>
+    <string name="text_close_credit">Закрытие кредита</string>
+    <string name="text_repayment_credit">Возврат кредита</string>
+    <string name="text_deposit_and_payment_cashbox">Внесение и выплаты из кассы</string>
+    <string name="text_deposit_and_payment">Внесение и выплаты</string>
+    <string name="text_change_cashbox">Изменение суммы в кассе</string>
+    <string name="text_history_deposits_payments">История внесений и выплат</string>
+    <string name="text_fiscal_report">Фискальный отчет</string>
+    <string name="text_period_report">Отчет за период</string>
 
     <!--Bottom Sheet Dialog-->
     <string name="text_shift_closing">Закрытие смены</string>
