@@ -12,8 +12,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
@@ -53,8 +51,12 @@ fun Date.formatForDecoratorDateTimeDefaults(): String {
     return sdf.format(this)
 }
 
-fun LocalDateTime.formatForServerDateTimeDefaults() =
-    format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"))
+fun Date.subtractDays(amount: Int): Date {
+    val c = Calendar.getInstance()
+    c.time = this
+    c.add(Calendar.DATE, -amount)
+    return c.time
+}
 
 fun ListView.requestLayoutForChangedDataset() {
     val listAdapter = this.adapter

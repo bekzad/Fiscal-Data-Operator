@@ -22,7 +22,7 @@ interface AuthorizationApi {
     @POST("invalidate")
     suspend fun logout(@Header("token") token: String): LogoutResult
 
-    @POST("get-secure-key?invalidate_existing=false")
+    @POST("get-secure-key?invalidate_existing=true")
     suspend fun openSession(
         @Header("Authorization") token: String, @Header("session_uuid") session_uuid: String
     ): OpenSession
