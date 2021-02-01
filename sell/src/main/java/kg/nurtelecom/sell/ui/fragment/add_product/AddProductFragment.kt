@@ -1,10 +1,12 @@
 package kg.nurtelecom.sell.ui.fragment.add_product
 
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.sell.AllProducts
@@ -16,7 +18,6 @@ import kg.nurtelecom.sell.ui.fragment.adapter.ProductCategoryAdapter
 import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
 import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
-import kg.nurtelecom.sell.utils.doOnQueryTextSubmit
 
 
 class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
@@ -31,9 +32,12 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
 
     override fun setupViews() {
         setHasOptionsMenu(true)
+        setupRV()
         setupNavigation()
+    }
+
+    private fun setupRV() {
         vb.allProductsRv.adapter = catalogAdapter
-        vb.allProductsRv.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun subscribeToLiveData() {
@@ -58,7 +62,7 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
         searchView.queryHint = getString(R.string.text_search)
         searchProduct(searchView)
         search.doOnMenuItemCollapse {
-            catalogAdapter.addHeaderAndSubmitList(vm.productCatalog.value)
+            catalogAdapter.addHeaderAndSubmitList(vm.productCatalog.value, null)
             true
         }
     }
