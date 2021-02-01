@@ -62,6 +62,10 @@
     <string name="text_fiscal_report">Фискальный отчет</string>
     <string name="text_period_report">Отчет за период</string>
 
+    <!--Reports-->
+    <string name="text_x_report">X-отчет</string>
+    <string name="text_print_check">Печать чека</string>
+
     <!--Bottom Sheet Dialog-->
     <string name="text_shift_closing">Закрытие смены</string>
     <string name="text_shift_close">Закрыть смену</string>

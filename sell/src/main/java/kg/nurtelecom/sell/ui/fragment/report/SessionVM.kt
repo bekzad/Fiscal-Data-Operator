@@ -1,6 +1,5 @@
 package kg.nurtelecom.sell.ui.fragment.report
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.z_report.ReportDetailed

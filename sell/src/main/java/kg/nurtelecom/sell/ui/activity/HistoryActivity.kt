@@ -18,6 +18,7 @@ import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
 import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
 import kg.nurtelecom.sell.ui.fragment.history.HistoryFragment
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.ui.fragment.report.XReportFragment
 
 class HistoryActivity :
     CoreActivity<ActivityHistoryBinding, HistoryViewModel>(HistoryViewModel::class) {
@@ -68,7 +69,7 @@ class HistoryActivity :
             finish()
         }
         sideMenu.btnMenuItemReport.setOnClickListener {
-            // here place for replacing fragment
+            replaceFragment(R.id.sell_container, XReportFragment.newInstance(), true)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         sideMenu.btnMenuItemHistory.setOnClickListener {
@@ -80,6 +81,7 @@ class HistoryActivity :
         }
         sideMenu.btnMenuItemOperations.setOnClickListener {
             // here place for replacing fragment
+            OtherOperationsActivity.start(this)
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
     }
