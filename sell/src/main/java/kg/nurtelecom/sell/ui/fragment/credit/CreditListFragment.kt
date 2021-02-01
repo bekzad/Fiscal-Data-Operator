@@ -9,13 +9,16 @@ import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
+import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.CreditListFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.core.CoreFragment
+import java.text.SimpleDateFormat
 
 
-class CreditListFragment : CoreFragment<CreditListFragmentBinding>(){
+class CreditListFragment : CoreFragment<CreditListFragmentBinding>() {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
 
@@ -28,6 +31,8 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding>(){
 
     override fun setupViews() {
         super.setupViews()
+        initRecyclerView()
+        vm.fetchCreditList()
     }
 
     override fun createViewBinding(
@@ -59,13 +64,30 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding>(){
         })
     }
 
-//    private fun initRecyclerView() {
+    private fun initRecyclerView() {
 //        vb.lvCreditList.adapter = historyAdapter
-//    }
+    }
 
-    private fun observeCreditList(){
+    private fun observeCreditList() {
+        vm.creditListData.observe(this, {
+            if (it != null) {
+                val groupedItems = it.groupBy { book ->
+                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt)
+                        .formatForDecoratorDateTimeDefaults()
+                }
+                historyAdapter.itemData = groupedItems.toSortedMap()
+                historyAdapter.setListData(it as ArrayList<Content>)
+                historyAdapter.notifyDataSetChanged()
+            }
+        })
 
     }
 
     override fun setupToolbar(): Int = R.string.title_credit_list
+
+    companion object {
+        fun newInstance(): CreditListFragment {
+            return CreditListFragment()
+        }
+    }
 }
