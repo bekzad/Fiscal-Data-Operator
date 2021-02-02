@@ -37,7 +37,10 @@ class SellMainActivity :
         setSupportActionBar(vb.tbSellMain)
         setupNavDrawer()
         setupOperationType()
-        replaceFragment(R.id.sell_container, SellFragment.newInstance())
+        if (vm.operationType == OperationType.PREPAY)
+            replaceFragment(R.id.sell_container, PaymentMethodFragment.newInstance())
+        else
+            replaceFragment(R.id.sell_container, SellFragment.newInstance())
     }
 
     private fun setupOperationType() {

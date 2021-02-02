@@ -74,7 +74,7 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
     }
 
     private fun startPrepay() {
-        parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
+        parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container, false)
     }
 
     companion object {
