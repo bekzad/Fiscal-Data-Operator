@@ -39,9 +39,6 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
             val intent = Intent(activity, UserActivity::class.java)
             startActivity(intent)
         }
-        vb.btnTempCredit.setOnClickListener {
-            SellMainActivity.start(requireContext(), OperationType.PREPAY)
-        }
     }
 
     override fun subscribeToLiveData() {
