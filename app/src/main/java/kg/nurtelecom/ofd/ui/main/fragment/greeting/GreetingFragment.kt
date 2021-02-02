@@ -40,7 +40,7 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
             startActivity(intent)
         }
         vb.btnTempCredit.setOnClickListener {
-            SellMainActivity.start(requireContext(), OperationType.POSTPAY)
+            SellMainActivity.start(requireContext(), OperationType.PREPAY)
         }
     }
 

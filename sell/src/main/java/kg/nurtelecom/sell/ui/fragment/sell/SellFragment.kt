@@ -29,6 +29,10 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         return when (vm.operationType) {
             OperationType.SALE -> R.string.text_sale
             OperationType.POSTPAY -> R.string.text_credit
+            OperationType.PREPAY -> {
+                startPrepay()
+                R.string.prepay
+            }
             else -> R.string.text_sale
         }
     }
@@ -67,6 +71,10 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         vb.btnAddProduct.setOnClickListener {
             parentActivity.replaceFragment<AddProductFragment>(R.id.sell_container, true)
         }
+    }
+
+    private fun startPrepay() {
+        parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
     }
 
     companion object {

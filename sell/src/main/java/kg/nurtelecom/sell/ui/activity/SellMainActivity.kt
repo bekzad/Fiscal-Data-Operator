@@ -44,6 +44,7 @@ class SellMainActivity :
         vm.operationType = when(intent?.getStringExtra("operationType")) {
             OperationType.SALE.type -> OperationType.SALE
             OperationType.POSTPAY.type -> OperationType.POSTPAY
+            OperationType.PREPAY.type -> OperationType.PREPAY
             else -> OperationType.SALE
         }
     }

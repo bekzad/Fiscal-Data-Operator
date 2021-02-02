@@ -3,6 +3,8 @@ package kg.nurtelecom.sell.ui.fragment.payment_method
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.enable
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
@@ -26,7 +28,6 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
         super.setupViews()
 
         setupButtons()
-
         vb.btnContinueCard.setOnClickListener {
             navigateToPrintCheck()
         }
@@ -47,19 +48,36 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
             OperationType.POSTPAY -> {
                 setupCreditMode()
             }
+            OperationType.PREPAY -> {
+                setupPrepayMode()
+            }
         }
     }
 
     private fun setupCreditMode() {
         vb.btnContinueCard.text = getString(R.string.text_no_deposit)
-        vb.icReceivedCard.setIsEditable(true)
-        vb.icReceivedCard.eraseContent()
+        vb.icReceivedCard.apply {
+            setIsEditable(true)
+            eraseContent()
+        }
         vb.icReceivedCard.fetchTextState {
             if (!it.isNullOrEmpty()) {
                 vb.btnContinueCard.text = getString(R.string.btn_continue)
             } else {
                 vb.btnContinueCard.text = getString(R.string.text_no_deposit)
             }
+        }
+    }
+
+    private fun setupPrepayMode() {
+        vb.icSumCard.visible(false)
+        vb.icReceivedCard.apply {
+            setIsEditable(true)
+            eraseContent()
+        }
+        vb.btnContinueCard.enable(false)
+        vb.icReceivedCard.fetchTextState {
+            vb.btnContinueCard.enable(!it.isNullOrEmpty())
         }
     }
 

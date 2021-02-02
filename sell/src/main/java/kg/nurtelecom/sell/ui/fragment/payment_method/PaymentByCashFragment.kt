@@ -3,6 +3,8 @@ package kg.nurtelecom.sell.ui.fragment.payment_method
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.enable
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
@@ -25,7 +27,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
     override fun setupViews() {
         super.setupViews()
 
-        setBtnTitles()
+        setupPaymentMode()
 
         vb.btnContinue.setOnClickListener {
             navigateToPrintCheck()
@@ -34,11 +36,11 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
         vb.icReceived.apply {
             fetchTextState {
                 if (it != null) {
-                    vb.btnContinue.isEnabled = it.isNotEmpty()
+                    vb.btnContinue.enable(it.isNotEmpty())
                     if (it.isNotEmpty()) {
                         vb.btnContinue.text = getString(R.string.btn_continue)
                     } else {
-                        setBtnTitles()
+                        setupButtons()
                     }
                 }
             }
@@ -52,11 +54,22 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
         }
     }
 
-    private fun setBtnTitles() {
+    private fun setupButtons() {
         when (vm.operationType) {
-            OperationType.SALE -> vb.btnContinue.text = getString(R.string.btn_continue)
+            OperationType.SALE -> vb.btnContinue.text = getString(R.string.no_back_money)
             OperationType.POSTPAY -> vb.btnContinue.text = getString(R.string.text_no_deposit)
+            OperationType.PREPAY -> vb.btnContinue.text = getString(R.string.btn_continue)
         }
+    }
+
+    private fun setupPaymentMode() {
+        when (vm.operationType) {
+            OperationType.PREPAY -> {
+                vb.icSum.visible(false)
+                vb.btnContinue.enable(false)
+            }
+        }
+        setupButtons()
     }
 
     private fun navigateToPrintCheck() {
