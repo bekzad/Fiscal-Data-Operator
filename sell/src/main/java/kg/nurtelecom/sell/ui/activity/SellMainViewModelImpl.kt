@@ -2,15 +2,19 @@ package kg.nurtelecom.sell.ui.activity
 
 import androidx.lifecycle.MutableLiveData
 import kg.nurtelecom.core.viewmodel.CoreViewModel
+import kg.nurtelecom.data.history.Content
+import kg.nurtelecom.data.history_by_id.Result
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.CatalogResult
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.data.sell.Products
 import kg.nurtelecom.sell.repository.SellRepository
+import kg.nurtelecom.data.z_report.ReportDetailed
+import kg.nurtelecom.sell.repository.HistoryRepository
+import kg.nurtelecom.sell.repository.SessionRepository
 import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.Dispatchers
 import java.math.BigDecimal
-
 
 abstract class SellMainViewModel : CoreViewModel() {
 
@@ -40,6 +44,22 @@ abstract class SellMainViewModel : CoreViewModel() {
 
 
 class SellMainViewModelImpl(private val repository: SellRepository) : SellMainViewModel() {
+    open fun clearSelectedProduct() {}
+
+    // Checks History
+    abstract var checksHistoryData: MutableLiveData<List<Content>>
+    abstract var detailCheckHistory: MutableLiveData<Result>
+    abstract fun fetchChecksHistory()
+    abstract fun fetchDetailCheckHistory(id: Int)
+
+    // Session
+    abstract var sessionReportData: MutableLiveData<ReportDetailed>
+    abstract fun fetchReportSession()
+    abstract fun closeSession()
+}
+
+
+class SellMainViewModelImpl(private val historyRepository: HistoryRepository, private val sessionRepository: SessionRepository) : SellMainViewModel() {
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
@@ -116,6 +136,43 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
                 products.name.contains(name, true)
             }
             filteredProducts?.value = filteredList
+
+    private val mockedAllProducts = mutableListOf(
+        AllProducts("Test product name1", BigDecimal("25.00")),
+        AllProducts("Test product name2", BigDecimal("45.00"))
+    )
+
+    override val allProducts: MutableLiveData<MutableList<AllProducts>> =
+        MutableLiveData(mockedAllProducts)
+
+    // Checks History
+    override var  checksHistoryData: MutableLiveData<List<Content>> = MutableLiveData()
+    override var  detailCheckHistory: MutableLiveData<Result> = MutableLiveData()
+
+    override fun fetchChecksHistory() {
+        safeCall(Dispatchers.IO) {
+            checksHistoryData.postValue(historyRepository.fetchChecksHistory())
+        }
+    }
+
+    override fun fetchDetailCheckHistory(id: Int) {
+        safeCall(Dispatchers.IO) {
+            detailCheckHistory.postValue(historyRepository.fetchDetailCheckHistory(id))
+        }
+    }
+
+    // Session
+    override var  sessionReportData: MutableLiveData<ReportDetailed> = MutableLiveData()
+
+    override fun fetchReportSession() {
+        safeCall(Dispatchers.IO) {
+            sessionReportData.postValue(sessionRepository.fetchReportSession())
+        }
+    }
+
+    override fun closeSession() {
+        safeCall(Dispatchers.IO) {
+            sessionReportData.postValue(sessionRepository.closeSession())
         }
     }
 }

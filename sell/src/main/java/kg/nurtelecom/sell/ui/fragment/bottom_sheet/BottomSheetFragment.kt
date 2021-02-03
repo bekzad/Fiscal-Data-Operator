@@ -3,9 +3,9 @@ package kg.nurtelecom.sell.ui.fragment.bottom_sheet
 import kg.nurtelecom.core.fragment.CoreBottomSheetFragment
 import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.databinding.BottomSheetFragmentBinding
-import kg.nurtelecom.sell.ui.fragment.report.SessionViewModel
+import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 
-class BottomSheetFragment : CoreBottomSheetFragment<BottomSheetFragmentBinding, SessionViewModel>(SessionViewModel::class) {
+class BottomSheetFragment : CoreBottomSheetFragment<BottomSheetFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     override fun setupViews() {
         vb.tvMenuItemClose.setOnClickListener {

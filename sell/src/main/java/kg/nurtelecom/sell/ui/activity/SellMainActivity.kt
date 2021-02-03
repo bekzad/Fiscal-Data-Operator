@@ -74,8 +74,7 @@ class SellMainActivity :
         }
         sideMenu.btnMenuItemHistory.setOnClickListener {
             closeNavDrawer()
-            HistoryActivity.start(this)
-            finishAndRemoveTask()
+            replaceFragment(R.id.sell_container, HistoryFragment.newInstance())
         }
         sideMenu.btnMenuItemInformation.setOnClickListener {
             closeNavDrawer()
@@ -83,6 +82,7 @@ class SellMainActivity :
         }
         sideMenu.btnMenuItemOperations.setOnClickListener {
             closeNavDrawer()
+            replaceFragment(R.id.sell_container, OtherOperationsFragment.newInstance(), true)
         }
     }
 

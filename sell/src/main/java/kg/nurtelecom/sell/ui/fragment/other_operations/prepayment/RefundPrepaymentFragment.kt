@@ -1,4 +1,4 @@
-package kg.nurtelecom.sell.ui.fragment.history
+package kg.nurtelecom.sell.ui.fragment.other_operations.prepayment
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -8,15 +8,17 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
+import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
+import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import java.text.SimpleDateFormat
 
-class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
+class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding>() {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
 
@@ -71,18 +73,19 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
     private fun observeCheckHistory() {
         vm.checksHistoryData.observe(this, {
             if (it != null) {
-                val groupedItems = it.groupBy { book ->
+                val filteredItems = it.filter { item -> item.operationType == "PREPAY" }
+                val groupedItems = filteredItems.groupBy { book ->
                     SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForDecoratorDateTimeDefaults()
                 }
                 historyAdapter.itemData = groupedItems.toSortedMap()
-                historyAdapter.setListData(it as ArrayList<Content>)
+                historyAdapter.setListData(filteredItems as ArrayList<Content>)
                 historyAdapter.notifyDataSetChanged()
             }
         })
     }
     companion object {
-        fun newInstance(): HistoryFragment {
-            return HistoryFragment()
+        fun newInstance(): RefundPrepaymentFragment {
+            return RefundPrepaymentFragment()
         }
     }
 }
