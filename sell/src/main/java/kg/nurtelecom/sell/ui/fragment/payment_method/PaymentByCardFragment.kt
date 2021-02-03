@@ -2,16 +2,14 @@ package kg.nurtelecom.sell.ui.fragment.payment_method
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCardBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 
 
-class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding>() {
+class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding, SellMainViewModel>() {
 
-    override val vm: SellMainViewModel by activityViewModels()
 
     override fun createViewBinding(
         inflater: LayoutInflater,

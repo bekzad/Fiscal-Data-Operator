@@ -5,17 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.createViewModelLazy
 import androidx.viewbinding.ViewBinding
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.viewmodel.CoreViewModel
+import kotlin.reflect.KClass
 
-abstract class CoreFragment<VB: ViewBinding> : Fragment() {
+abstract class CoreFragment<VB : ViewBinding, VM : CoreViewModel>(kClass: KClass<VM>) :
+    Fragment() {
 
     private var _vb: VB? = null
     protected val vb get() = _vb!!
 
-    abstract val vm: CoreViewModel
+    protected val vm: VM by createViewModelLazy(
+        kClass,
+        { requireActivity().viewModelStore }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,

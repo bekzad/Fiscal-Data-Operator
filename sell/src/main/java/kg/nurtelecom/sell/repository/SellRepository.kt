@@ -6,7 +6,7 @@ import kg.nurtelecom.storage.sharedpref.AppPreferences
 
 class SellRepository(private val appPrefs: AppPreferences, private val api: ProductApi) {
 
-    val fetchRegime: Boolean get() = appPrefs.fiscalRegime
+    val isNonFiscalRegime: Boolean get() = appPrefs.fiscalRegime
 
     suspend fun fetchProductCategory(): List<CatalogResult> {
         return api.fetchProductCatalog("Bearer ${appPrefs.token}").result

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
@@ -16,11 +15,9 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import java.text.SimpleDateFormat
 
-class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding>() {
+class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
-
-    override val vm: HistoryViewModel by activityViewModels()
 
     override fun createViewBinding(
         inflater: LayoutInflater,

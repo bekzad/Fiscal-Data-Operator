@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.sell.R
 
@@ -43,7 +44,7 @@ fun DrawerLayout.setupActionBarDrawerToggle(
         R.string.nav_open_drawer,
         R.string.nav_close_drawer
     )
-    actionBarToggle.drawerArrowDrawable.color = context.resources.getColor(R.color.white)
+    actionBarToggle.drawerArrowDrawable.color = ContextCompat.getColor(activity ,R.color.white)
     addDrawerListener(actionBarToggle)
     actionBarToggle.syncState()
 }

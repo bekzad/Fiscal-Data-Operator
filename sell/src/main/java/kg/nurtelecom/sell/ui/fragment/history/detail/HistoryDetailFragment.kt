@@ -2,7 +2,6 @@ package kg.nurtelecom.sell.ui.fragment.history.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
@@ -11,9 +10,7 @@ import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryDetailsComponentView.Companion.CHECK_ID
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 
-class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding>() {
-
-    override val vm: HistoryViewModel by activityViewModels()
+class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, HistoryViewModel>() {
 
     override fun setupViews() {
         val someInt = requireArguments().getInt(CHECK_ID)

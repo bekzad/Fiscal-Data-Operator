@@ -2,7 +2,6 @@ package kg.nurtelecom.sell.ui.fragment.price_output
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.sell.Product
@@ -16,9 +15,7 @@ import kg.nurtelecom.sell.utils.isZero
 import java.math.BigDecimal
 
 
-class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
-
-    override val vm: SellMainViewModel by activityViewModels()
+class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding, SellMainViewModel>() {
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         PriceOutputFragmentBinding.inflate(inflater, container, false)

@@ -44,13 +44,13 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
 
-    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
+    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData()
 
     override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
 
     override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
 
-    override val isRegimeNonFiscal: Boolean = repository.fetchRegime
+    override val isRegimeNonFiscal: Boolean = repository.isNonFiscalRegime
 
     override val productCatalog: MutableLiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
@@ -65,7 +65,7 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
     }
 
     override fun fetchProductCatalog() {
-        if (!repository.fetchRegime) {
+        if (!repository.isNonFiscalRegime) {
             safeCall(Dispatchers.IO) {
                 productCatalog.postValue(repository.fetchProductCategory())
             }

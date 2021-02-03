@@ -1,9 +1,6 @@
 package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -32,7 +29,7 @@ class HistoryActivity :
         super.setupViews()
         setSupportActionBar(vb.tbHistory)
         setupNavDrawer()
-        replaceFragment(R.id.sell_container, HistoryFragment.newInstance())
+        replaceFragment<HistoryFragment>(R.id.sell_container, false)
     }
 
     private fun setupNavDrawer() {

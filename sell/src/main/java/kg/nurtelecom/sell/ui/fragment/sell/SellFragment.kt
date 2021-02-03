@@ -2,7 +2,6 @@ package kg.nurtelecom.sell.ui.fragment.sell
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.sell.R
@@ -14,11 +13,9 @@ import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 
-class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListener {
+class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMainViewModel::class), ProductItemClickListener {
 
     private val productAdapter: ProductAdapter = ProductAdapter(this)
-
-    override val vm: SellMainViewModel by activityViewModels()
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         SellFragmentBinding.inflate(inflater, container, false)
@@ -40,13 +37,6 @@ class SellFragment : CoreFragment<SellFragmentBinding>(), ProductItemClickListen
         }
         vm.isProductEmpty.observe(viewLifecycleOwner) { state ->
             vb.icSumPay.changeEditText(state)
-            if (state) {
-                vb.icSumPay.apply {
-                    isClickable = false
-                    isFocusable = false
-                    isLongClickable = false
-                }
-            }
         }
     }
 

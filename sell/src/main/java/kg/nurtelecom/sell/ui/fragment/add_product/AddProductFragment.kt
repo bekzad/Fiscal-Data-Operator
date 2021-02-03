@@ -6,7 +6,6 @@ import android.view.MenuInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.sell.AllProducts
@@ -20,10 +19,9 @@ import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 
 
-class AddProductFragment : CoreFragment<AddProductFragmentBinding>() {
+class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewModel>() {
 
     private val catalogAdapter: ProductCategoryAdapter = ProductCategoryAdapter()
-    override val vm: SellMainViewModel by activityViewModels()
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         AddProductFragmentBinding.inflate(inflater, container, false)

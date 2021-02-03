@@ -1,6 +1,7 @@
 package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.core.activity.CoreActivity
@@ -19,15 +20,17 @@ class SellMainActivity :
     CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var toolbar: Toolbar
 
     override fun getBinding(): ActivitySellMainBinding =
         ActivitySellMainBinding.inflate(layoutInflater)
 
     override fun setupViews() {
-        setSupportActionBar(vb.tbSellMain)
+        toolbar = vb.tbSellMain
+        setSupportActionBar(toolbar)
         setupDrawerLayout()
         setupRegime()
-        vb.tbSellMain.setNavigationOnClickListener {
+        toolbar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
         replaceFragment<SellFragment>(R.id.sell_container, false)
@@ -51,7 +54,6 @@ class SellMainActivity :
         sideMenu.btnDrawerClose.setOnClickListener {
             closeNavDrawer()
         }
-
         sideMenu.btnMenuItemSale.setOnClickListener {
             closeNavDrawer()
             replaceFragment<SellFragment>(R.id.sell_container)
