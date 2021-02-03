@@ -1,28 +1,24 @@
 package kg.nurtelecom.sell.ui.fragment.credit
 
 import android.graphics.Color
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.setToolbarTitle
+import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.CreditListFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
-import kg.nurtelecom.sell.core.CoreFragment
 import java.text.SimpleDateFormat
 
-
-class CreditListFragment : CoreFragment<CreditListFragmentBinding>() {
+class CreditListFragment : CoreFragment<CreditListFragmentBinding, CreditListVM>(CreditListVM::class) {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
-
-    override val vm: CreditListVM by activityViewModels()
 
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
@@ -32,14 +28,8 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding>() {
     override fun setupViews() {
         super.setupViews()
         initRecyclerView()
-        vm.fetchCreditList()
-    }
-
-    override fun createViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): CreditListFragmentBinding {
-        return CreditListFragmentBinding.inflate(layoutInflater)
+        vm.fetchChecksHistory()
+        parentActivity.setToolbarTitle(setupToolbar())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -65,14 +55,16 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding>() {
     }
 
     private fun initRecyclerView() {
-//        vb.lvCreditList.adapter = historyAdapter
+        vb.lvCreditList.adapter = historyAdapter
     }
 
     private fun observeCreditList() {
         vm.creditListData.observe(this, {
             if (it != null) {
-                val groupedItems = it.groupBy { book ->
-                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt)
+                val creditList = it.filter { item -> item.operationType == "POSTPAY" }
+                historyAdapter.setListData(creditList as ArrayList<Content>)
+                val groupedItems = creditList.groupBy { item ->
+                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(item.createdAt)
                         .formatForDecoratorDateTimeDefaults()
                 }
                 historyAdapter.itemData = groupedItems.toSortedMap()
@@ -80,14 +72,15 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding>() {
                 historyAdapter.notifyDataSetChanged()
             }
         })
-
     }
-
-    override fun setupToolbar(): Int = R.string.title_credit_list
+    fun setupToolbar(): Int = R.string.title_credit_list
 
     companion object {
         fun newInstance(): CreditListFragment {
             return CreditListFragment()
         }
+    }
+    override fun getBinding(): CreditListFragmentBinding {
+        return CreditListFragmentBinding.inflate(layoutInflater)
     }
 }

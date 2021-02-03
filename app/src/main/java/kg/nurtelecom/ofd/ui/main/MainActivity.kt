@@ -15,6 +15,7 @@ import kg.nurtelecom.ofd.databinding.ActivityMainBinding
 import kg.nurtelecom.ofd.databinding.SideMenuMainBinding
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.ofd.ui.main.fragment.greeting.GreetingFragment
+import kg.nurtelecom.sell.ui.fragment.credit.CreditListFragment
 
 class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
 
@@ -41,7 +42,7 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
         val menuView = SideMenuMainBinding.bind(view)
         menuView.mainMenuItemAppInfo.setOnClickListener {
             if (getCurrentVisibleFragment() !is AboutAppFragment) {
-                replaceFragment(R.id.mainContainer, AboutAppFragment.newInstance(), true)
+                replaceFragment(R.id.mainContainer, CreditListFragment.newInstance(), true) //AboutAppFragment
             }
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }

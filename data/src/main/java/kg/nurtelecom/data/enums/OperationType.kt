@@ -8,7 +8,7 @@ enum class OperationType(val type: String) {
     RETURN_BUY("Возврат покупки"),
     PREPAY_CLOSE("Закрытие предоплаты (аванса)"),
     RETURN_PREPAY("Возврат предоплаты (аванса)"),
-    POSTPAY("Пост оплата (кредит)"),
+    POSTPAY("Кредит"),
     POSTPAY_CLOSE("Закрытие пост оплаты (кредита)"),
     RETURN_POSTPAY("Возврат пост оплаты (кредита)");
 }

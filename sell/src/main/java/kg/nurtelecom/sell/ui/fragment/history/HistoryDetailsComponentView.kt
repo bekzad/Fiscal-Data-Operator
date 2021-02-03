@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import kg.nurtelecom.core.extension.replaceFragment
@@ -48,7 +49,7 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
-            val activity = context as HistoryActivity
+            val activity = context as AppCompatActivity
             val item: Content = items[position]
             val itemView = parent?.let { ReceiptDetailView(it.context, null) }
             if (itemView != null) {
