@@ -8,7 +8,7 @@ import kg.nurtelecom.sell.databinding.FragmentPaymentByCardBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 
 
-class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding, SellMainViewModel>() {
+class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding, SellMainViewModel>(SellMainViewModel::class) {
 
 
     override fun createViewBinding(

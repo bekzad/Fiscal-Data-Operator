@@ -9,7 +9,7 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 
-class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMainViewModel>() {
+class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     override fun createViewBinding(
         inflater: LayoutInflater,

@@ -15,7 +15,7 @@ import kg.nurtelecom.sell.utils.isZero
 import java.math.BigDecimal
 
 
-class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding, SellMainViewModel>() {
+class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         PriceOutputFragmentBinding.inflate(inflater, container, false)

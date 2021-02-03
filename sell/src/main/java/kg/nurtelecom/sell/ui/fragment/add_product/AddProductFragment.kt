@@ -19,7 +19,7 @@ import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 
 
-class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewModel>() {
+class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     private val catalogAdapter: ProductCategoryAdapter = ProductCategoryAdapter()
 
