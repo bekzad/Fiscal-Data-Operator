@@ -8,8 +8,7 @@
 
     <string name="fiscal_mode_title">Фискальный режим</string>
     <string name="non_fiscal_mode_title">Не фискальный режим</string>
-    <string name="fiscal_mode_dialog_content">Это основной режим осуществления торговой деятельности. Все данные
-отправляются в ОФД.</string>
+    <string name="fiscal_mode_dialog_content">Это основной режим осуществления торговой деятельности. Все данные отправляются в ОФД.</string>
     <string name="non_fiscal_mode_dialog_content">Нужен для обучения сотрудников, данные не передаются в ОФД.</string>
     <string name="sale">Продажа</string>
     <string name="amount_to_pay">Сумма к оплате, сом:</string>
@@ -30,5 +29,6 @@
     <string name="position">Позиция</string>
     <string name="payment_method">Метод оплаты</string>
     <string name="cash_check_number">Кассовый чек №%d</string>
+    <string name="menu">Меню</string>
 
 </resources>

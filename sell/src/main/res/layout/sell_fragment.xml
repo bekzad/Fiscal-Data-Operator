@@ -48,7 +48,7 @@
         android:id="@+id/dv_regime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size_40dp"
+        android:layout_marginHorizontal="@dimen/size_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

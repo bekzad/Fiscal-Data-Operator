@@ -1,11 +1,10 @@
 package kg.nurtelecom.sell.utils
 
-import android.app.Activity
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.sell.R
 
@@ -35,22 +34,18 @@ inline fun MenuItem.doOnMenuItemCollapse(
     crossinline action: (menu: MenuItem?) -> Boolean
 ) = setupItemActionExpandListener(doOnItemCollapse = action)
 
-inline fun DrawerLayout.setupActionBarDrawerToggle(
-    activity: Activity,
-    toolbar: Toolbar,
-    action: () -> Unit = {}
+fun DrawerLayout.setupActionBarDrawerToggle(
+    activity: AppCompatActivity
 ) {
     val actionBarToggle = ActionBarDrawerToggle(
         activity,
         this,
-        toolbar,
         R.string.nav_open_drawer,
         R.string.nav_close_drawer
     )
-    actionBarToggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
+    actionBarToggle.drawerArrowDrawable.color = context.resources.getColor(R.color.white)
     addDrawerListener(actionBarToggle)
     actionBarToggle.syncState()
-    action()
 }
 
 inline fun SearchView.setupQueryTextListener(
