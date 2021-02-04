@@ -3,21 +3,24 @@ package kg.nurtelecom.sell.ui.fragment.other_operations
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
-import kg.nurtelecom.sell.databinding.SideMenuOtherOperationsBinding
+import kg.nurtelecom.sell.databinding.OtherOperationsFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.other_operations.prepayment.RefundPrepaymentFragment
+import kg.nurtelecom.sell.ui.fragment.report.XReportFragment
 
-class OtherOperationsFragment : CoreFragment<SideMenuOtherOperationsBinding>() {
+class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding>() {
 
     override val vm: SellMainViewModel by activityViewModels()
 
     override fun createViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): SideMenuOtherOperationsBinding {
-        return SideMenuOtherOperationsBinding.inflate(layoutInflater)
+    ): OtherOperationsFragmentBinding {
+        return OtherOperationsFragmentBinding.inflate(layoutInflater)
     }
 
     override fun setupToolbar(): Int  = R.string.history_title
@@ -28,11 +31,32 @@ class OtherOperationsFragment : CoreFragment<SideMenuOtherOperationsBinding>() {
 
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
+        vb.btnMenuItemPurchase.setOnClickListener{
+            // here place for replacing fragment
+        }
+        vb.btnMenuItemReturnPurchase.setOnClickListener{
+            // here place for replacing fragment
+        }
         vb.btnMenuItemRefundPrepayment.setOnClickListener {
-            activity?.supportFragmentManager
-                ?.beginTransaction()?.replace(R.id.sell_container, RefundPrepaymentFragment.newInstance())
-                ?.addToBackStack(null)
-                ?.commit()
+            parentActivity.replaceFragment(R.id.sell_container, RefundPrepaymentFragment.newInstance(), true)
+        }
+        vb.btnMenuItemCredit.setOnClickListener{
+            // here place for replacing fragment
+        }
+        vb.btnMenuItemCloseCredit.setOnClickListener{
+            // here place for replacing fragment
+        }
+        vb.btnMenuItemRepaymentCredit.setOnClickListener{
+            // here place for replacing fragment
+        }
+        vb.btnMenuItemDepositAndPayment.setOnClickListener{
+            // here place for replacing fragment
+        }
+        vb.btnMenuItemHistoryDepositsPayments.setOnClickListener{
+            // here place for replacing fragment
+        }
+        vb.btnMenuItemFiscalReport.setOnClickListener{
+            // here place for replacing fragment
         }
     }
 

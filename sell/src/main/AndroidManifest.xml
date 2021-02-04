@@ -3,9 +3,7 @@
     package="kg.nurtelecom.sell">
 
     <application>
-        <activity android:name=".ui.activity.HistoryActivity"></activity>
         <activity android:name=".ui.activity.SellMainActivity"></activity>
-        <activity android:name=".ui.activity.OtherOperationsActivity"></activity>
     </application>
 
 </manifest>
