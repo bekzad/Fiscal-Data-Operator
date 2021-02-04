@@ -64,6 +64,7 @@ class SellMainActivity :
         }
         sideMenu.btnMenuItemReturn.setOnClickListener {
             closeNavDrawer()
+            replaceFragment(R.id.sell_container, RefundFragment.newInstance(), true)
         }
         sideMenu.btnMenuItemGreeting.setOnClickListener {
             closeNavDrawer()

@@ -10,7 +10,6 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.OtherOperationsFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.other_operations.prepayment.RefundPrepaymentFragment
-import kg.nurtelecom.sell.ui.fragment.report.XReportFragment
 
 class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding>() {
 
@@ -38,7 +37,7 @@ class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding>() {
             // here place for replacing fragment
         }
         vb.btnMenuItemRefundPrepayment.setOnClickListener {
-            parentActivity.replaceFragment(R.id.sell_container, RefundPrepaymentFragment.newInstance(), true)
+            parentActivity.replaceFragment<RefundPrepaymentFragment>(R.id.sell_container)
         }
         vb.btnMenuItemCredit.setOnClickListener{
             // here place for replacing fragment
