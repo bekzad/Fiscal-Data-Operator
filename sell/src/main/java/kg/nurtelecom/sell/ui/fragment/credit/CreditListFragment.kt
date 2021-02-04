@@ -21,12 +21,10 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, CreditListVM>
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
 
     override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
         observeCreditList()
     }
 
     override fun setupViews() {
-        super.setupViews()
         initRecyclerView()
         vm.fetchChecksHistory()
         parentActivity.setToolbarTitle(setupToolbar())
@@ -75,12 +73,12 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, CreditListVM>
     }
     fun setupToolbar(): Int = R.string.title_credit_list
 
+    override fun getBinding(): CreditListFragmentBinding {
+        return CreditListFragmentBinding.inflate(layoutInflater)
+    }
     companion object {
         fun newInstance(): CreditListFragment {
             return CreditListFragment()
         }
-    }
-    override fun getBinding(): CreditListFragmentBinding {
-        return CreditListFragmentBinding.inflate(layoutInflater)
     }
 }

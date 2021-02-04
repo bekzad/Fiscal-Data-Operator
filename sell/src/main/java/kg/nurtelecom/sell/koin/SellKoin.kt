@@ -14,5 +14,5 @@ val sellKoin = module {
     viewModel<HistoryViewModel> { HistoryViewModelImpl(get()) }
     single { HistoryRepository(get(), get()) }
     viewModel<SellMainViewModel> { SellMainViewModelImpl() }
-    viewModel <CreditListVM>{ CreditListVMImpl(get()) }
+    viewModel <CreditListVM> { CreditListVMImpl(get()) }
 }
