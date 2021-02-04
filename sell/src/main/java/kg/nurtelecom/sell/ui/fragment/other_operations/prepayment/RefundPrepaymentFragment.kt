@@ -53,7 +53,7 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding>()
         })
     }
 
-    override fun setupToolbar(): Int  = R.string.history_title
+    override fun setupToolbar(): Int  = R.string.text_refund_prepayment
 
     override fun setupViews() {
         setHasOptionsMenu(true)
