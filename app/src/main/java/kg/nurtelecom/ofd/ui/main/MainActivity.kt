@@ -42,7 +42,7 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
         val menuView = SideMenuMainBinding.bind(view)
         menuView.mainMenuItemAppInfo.setOnClickListener {
             if (getCurrentVisibleFragment() !is AboutAppFragment) {
-                replaceFragment(R.id.mainContainer, CreditListFragment.newInstance(), true) //AboutAppFragment
+                replaceFragment(R.id.mainContainer, AboutAppFragment.newInstance(), true)
             }
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }

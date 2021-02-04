@@ -71,11 +71,13 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, CreditListVM>
             }
         })
     }
+
     fun setupToolbar(): Int = R.string.title_credit_list
 
     override fun getBinding(): CreditListFragmentBinding {
         return CreditListFragmentBinding.inflate(layoutInflater)
     }
+
     companion object {
         fun newInstance(): CreditListFragment {
             return CreditListFragment()
