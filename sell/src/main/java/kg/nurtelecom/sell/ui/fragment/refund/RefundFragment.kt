@@ -68,7 +68,7 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, SellMainVie
     }
 
     private fun observeCheckHistory() {
-        vm.checksHistoryData.observe(this, {
+        vm.checksHistoryData.observe(viewLifecycleOwner, {
             if (it != null) {
                 val groupedItems = it.groupBy { book ->
                     SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForDecoratorDateTimeDefaults()

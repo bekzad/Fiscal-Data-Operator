@@ -37,7 +37,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     fun subscribeToLiveData() {
-        vm.sessionReportData.observe(this, {
+        vm.sessionReportData.observe(viewLifecycleOwner, {
             when(it) {
                 is ReportDetailed -> {
                     dismiss()

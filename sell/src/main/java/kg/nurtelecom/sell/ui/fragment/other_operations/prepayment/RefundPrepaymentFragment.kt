@@ -68,7 +68,7 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, S
     }
 
     private fun observeCheckHistory() {
-        vm.checksHistoryData.observe(this, {
+        vm.checksHistoryData.observe(viewLifecycleOwner, {
             if (it != null) {
                 val filteredItems = it.filter { item -> item.operationType == "PREPAY" }
                 val groupedItems = filteredItems.groupBy { book ->

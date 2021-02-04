@@ -18,13 +18,11 @@ class XReportFragment: CoreFragment<XReportFragmentBinding, SellMainViewModel>(S
     override fun setupToolbar(): Int  = R.string.text_x_report
 
     override fun setupViews() {
-        super.setupViews()
         vm.fetchReportSession()
     }
 
     override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
-        vm.sessionReportData.observe(this, {})
+        vm.sessionReportData.observe(viewLifecycleOwner, {})
     }
 
     companion object {
