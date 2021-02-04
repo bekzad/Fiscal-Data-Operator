@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.databinding.BottomSheetFragmentBinding
@@ -44,5 +45,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 }
             }
         })
+    }
+
+    companion object {
+        fun newInstance(supportFragmentManager: FragmentManager) {
+            return BottomSheetFragment().show(supportFragmentManager, "BottomSheetFragment")
+        }
     }
 }

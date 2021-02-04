@@ -60,7 +60,7 @@ class SellMainActivity :
         }
         sideMenu.btnMenuItemClose.setOnClickListener {
             closeNavDrawer()
-            bottomSheetFragment.show(supportFragmentManager, "BottomSheetFragment")
+            BottomSheetFragment.newInstance(supportFragmentManager)
         }
         sideMenu.btnMenuItemReturn.setOnClickListener {
             closeNavDrawer()
