@@ -66,7 +66,6 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding>()
     }
 
     override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
         observeCheckHistory()
     }
 

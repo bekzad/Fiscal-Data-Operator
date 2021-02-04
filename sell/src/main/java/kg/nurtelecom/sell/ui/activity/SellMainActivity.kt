@@ -64,26 +64,27 @@ class SellMainActivity :
         }
         sideMenu.btnMenuItemReturn.setOnClickListener {
             closeNavDrawer()
-            replaceFragment(R.id.sell_container, RefundFragment.newInstance(), true)
+            replaceFragment<RefundFragment>(R.id.sell_container, true)
         }
         sideMenu.btnMenuItemGreeting.setOnClickListener {
             closeNavDrawer()
             finish()
         }
         sideMenu.btnMenuItemReport.setOnClickListener {
+            replaceFragment<XReportFragment>(R.id.sell_container, true)
             closeNavDrawer()
         }
         sideMenu.btnMenuItemHistory.setOnClickListener {
+            replaceFragment<HistoryFragment>(R.id.sell_container, true)
             closeNavDrawer()
-            replaceFragment(R.id.sell_container, HistoryFragment.newInstance())
         }
         sideMenu.btnMenuItemInformation.setOnClickListener {
+            replaceFragment<AboutAppFragment>(R.id.sell_container, true)
             closeNavDrawer()
-            replaceFragment<AboutAppFragment>(R.id.sell_container)
         }
         sideMenu.btnMenuItemOperations.setOnClickListener {
+            replaceFragment<OtherOperationsFragment>(R.id.sell_container, true)
             closeNavDrawer()
-            replaceFragment(R.id.sell_container, OtherOperationsFragment.newInstance(), true)
         }
     }
 

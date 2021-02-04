@@ -29,9 +29,7 @@ class XReportFragment: CoreFragment<XReportFragmentBinding>() {
 
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
-        vm.sessionReportData.observe(this, {
-            Log.d("Session Report", it.toString())
-        })
+        vm.sessionReportData.observe(this, {})
     }
 
     companion object {

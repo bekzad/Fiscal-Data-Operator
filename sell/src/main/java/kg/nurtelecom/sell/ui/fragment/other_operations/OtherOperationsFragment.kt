@@ -29,7 +29,6 @@ class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding>() {
     }
 
     override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
         vb.btnMenuItemPurchase.setOnClickListener{
             // here place for replacing fragment
         }

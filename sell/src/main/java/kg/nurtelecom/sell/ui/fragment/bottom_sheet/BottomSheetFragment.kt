@@ -16,8 +16,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private val vm: SellMainViewModel by viewModel()
     private val vb: BottomSheetFragmentBinding by lazy { BottomSheetFragmentBinding.inflate(layoutInflater) }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         subscribeToLiveData()
     }
 
