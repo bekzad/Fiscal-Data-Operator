@@ -21,22 +21,22 @@ class ProductCategoryAdapter :
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
-    fun addHeaderAndSubmitList(list: List<CatalogResult>?, sortedList: List<Products>? = null) {
+    fun addHeaderAndSubmitList(catalog: List<CatalogResult>?, sortedList: List<Products>? = null) {
         adapterScope.launch {
             if (!sortedList.isNullOrEmpty()) {
                 submitSortedProducts(sortedList)
             } else {
-                val items = when (list) {
+                val items = when (catalog) {
                     null -> listOf(ProductsItem.Header(""))
                     else -> {
-                        val mList = ArrayList<ProductsItem>()
-                        for (i in list) {
-                            mList.add(ProductsItem.Header(i.productCatalog.name))
+                        val products = ArrayList<ProductsItem>()
+                        for (i in catalog) {
+                            products.add(ProductsItem.Header(i.productCatalog.name))
                             for (v in i.products) {
-                                mList.add(ProductsItem.ProductItem(v))
+                                products.add(ProductsItem.ProductItem(v))
                             }
                         }
-                        mList
+                        products
                     }
                 }
                 submitProducts(items)
