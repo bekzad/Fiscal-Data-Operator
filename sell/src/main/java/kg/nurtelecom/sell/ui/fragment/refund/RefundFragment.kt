@@ -15,9 +15,10 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
+import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 import java.text.SimpleDateFormat
 
-class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, SellMainViewModel>(SellMainViewModel::class) {
+class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
 

@@ -32,12 +32,6 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun searchProduct(name: String)
     open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 
-    // Checks History
-    abstract var checksHistoryData: MutableLiveData<List<Content>>
-    abstract var detailCheckHistory: MutableLiveData<Result>
-    abstract fun fetchChecksHistory()
-    abstract fun fetchDetailCheckHistory(id: Int)
-
     // Session
     abstract var sessionReportData: MutableLiveData<ReportDetailed>
     abstract fun fetchReportSession()
@@ -126,22 +120,6 @@ class SellMainViewModelImpl(
                 products.name.contains(name, true)
             }
             filteredProducts?.value = filteredList
-        }
-    }
-
-    // Checks History
-    override var checksHistoryData: MutableLiveData<List<Content>> = MutableLiveData()
-    override var detailCheckHistory: MutableLiveData<Result> = MutableLiveData()
-
-    override fun fetchChecksHistory() {
-        safeCall(Dispatchers.IO) {
-            checksHistoryData.postValue(historyRepository.fetchChecksHistory())
-        }
-    }
-
-    override fun fetchDetailCheckHistory(id: Int) {
-        safeCall(Dispatchers.IO) {
-            detailCheckHistory.postValue(historyRepository.fetchDetailCheckHistory(id))
         }
     }
 

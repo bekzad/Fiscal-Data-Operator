@@ -11,12 +11,11 @@ import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
-import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, SellMainViewModel>(SellMainViewModel::class) {
+class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
 

@@ -7,11 +7,11 @@ import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
-import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.history.HistoryDetailsComponentView.Companion.CHECK_ID
+import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 
 class HistoryDetailFragment :
-    CoreFragment<ChecksHistoryDetailFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
+    CoreFragment<ChecksHistoryDetailFragmentBinding, HistoryViewModel>(HistoryViewModel::class) {
 
     override fun createViewBinding(
         inflater: LayoutInflater,
