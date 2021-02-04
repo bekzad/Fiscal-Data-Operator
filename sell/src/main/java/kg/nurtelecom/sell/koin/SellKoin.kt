@@ -5,6 +5,8 @@ import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.activity.SellMainViewModelImpl
+import kg.nurtelecom.sell.ui.fragment.report.XReportViewModel
+import kg.nurtelecom.sell.ui.fragment.report.XReportViewModelImpl
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -13,4 +15,5 @@ val sellKoin = module {
     single { SellRepository(get(), get()) }
     single { SessionRepository(get(), get()) }
     viewModel<SellMainViewModel> { SellMainViewModelImpl(get(), get(), get()) }
+    viewModel<XReportViewModel> { XReportViewModelImpl() }
 }

@@ -10,6 +10,8 @@ import androidx.viewbinding.ViewBinding
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.viewmodel.CoreViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.reflect.KClass
 
 abstract class CoreFragment<VB : ViewBinding, VM : CoreViewModel>(kClass: KClass<VM>) :
@@ -18,10 +20,9 @@ abstract class CoreFragment<VB : ViewBinding, VM : CoreViewModel>(kClass: KClass
     private var _vb: VB? = null
     protected val vb get() = _vb!!
 
-    protected val vm: VM by createViewModelLazy(
-        kClass,
-        { requireActivity().viewModelStore }
-    )
+    protected val vm: VM by sharedViewModel(clazz = kClass)
+
+    //protected val xVm: VM by viewModel(clazz = kClass)
 
     override fun onCreateView(
         inflater: LayoutInflater,
