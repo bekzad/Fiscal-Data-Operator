@@ -40,11 +40,6 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun searchProduct(name: String)
 
     open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
-}
-
-
-class SellMainViewModelImpl(private val repository: SellRepository) : SellMainViewModel() {
-    open fun clearSelectedProduct() {}
 
     // Checks History
     abstract var checksHistoryData: MutableLiveData<List<Content>>
@@ -58,8 +53,7 @@ class SellMainViewModelImpl(private val repository: SellRepository) : SellMainVi
     abstract fun closeSession()
 }
 
-
-class SellMainViewModelImpl(private val historyRepository: HistoryRepository, private val sessionRepository: SessionRepository) : SellMainViewModel() {
+class SellMainViewModelImpl(private val historyRepository: HistoryRepository, private val sessionRepository: SessionRepository, private val sellRepository: SellRepository) : SellMainViewModel() {
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
@@ -70,7 +64,7 @@ class SellMainViewModelImpl(private val historyRepository: HistoryRepository, pr
 
     override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
 
-    override val isRegimeNonFiscal: Boolean = repository.isNonFiscalRegime
+    override val isRegimeNonFiscal: Boolean = sellRepository.isNonFiscalRegime
 
     override val productCatalog: MutableLiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
@@ -85,9 +79,9 @@ class SellMainViewModelImpl(private val historyRepository: HistoryRepository, pr
     }
 
     override fun fetchProductCatalog() {
-        if (!repository.isNonFiscalRegime) {
+        if (!sellRepository.isNonFiscalRegime) {
             safeCall(Dispatchers.IO) {
-                productCatalog.postValue(repository.fetchProductCategory())
+                productCatalog.postValue(sellRepository.fetchProductCategory())
             }
         }
     }
@@ -136,14 +130,8 @@ class SellMainViewModelImpl(private val historyRepository: HistoryRepository, pr
                 products.name.contains(name, true)
             }
             filteredProducts?.value = filteredList
-
-    private val mockedAllProducts = mutableListOf(
-        AllProducts("Test product name1", BigDecimal("25.00")),
-        AllProducts("Test product name2", BigDecimal("45.00"))
-    )
-
-    override val allProducts: MutableLiveData<MutableList<AllProducts>> =
-        MutableLiveData(mockedAllProducts)
+        }
+    }
 
     // Checks History
     override var  checksHistoryData: MutableLiveData<List<Content>> = MutableLiveData()

@@ -10,9 +10,7 @@ import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.history.HistoryDetailsComponentView.Companion.CHECK_ID
 
-class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding>() {
-
-    override val vm: SellMainViewModel by activityViewModels()
+class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     override fun setupViews() {
         val someInt = requireArguments().getInt(CHECK_ID)

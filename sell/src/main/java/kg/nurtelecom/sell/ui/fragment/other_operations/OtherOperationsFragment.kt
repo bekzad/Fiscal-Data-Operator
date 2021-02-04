@@ -11,9 +11,7 @@ import kg.nurtelecom.sell.databinding.OtherOperationsFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.other_operations.prepayment.RefundPrepaymentFragment
 
-class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding>() {
-
-    override val vm: SellMainViewModel by activityViewModels()
+class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     override fun createViewBinding(
         inflater: LayoutInflater,

@@ -16,11 +16,9 @@ import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import java.text.SimpleDateFormat
 
-class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
+class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter()
-
-    override val vm: SellMainViewModel by activityViewModels()
 
     override fun createViewBinding(
         inflater: LayoutInflater,

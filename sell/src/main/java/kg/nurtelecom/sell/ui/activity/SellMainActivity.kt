@@ -13,6 +13,10 @@ import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
 import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
+import kg.nurtelecom.sell.ui.fragment.history.HistoryFragment
+import kg.nurtelecom.sell.ui.fragment.other_operations.OtherOperationsFragment
+import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment
+import kg.nurtelecom.sell.ui.fragment.report.XReportFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.utils.setupActionBarDrawerToggle
 
@@ -49,7 +53,6 @@ class SellMainActivity :
     private fun setupNavigationListener() {
         val headerView = vb.navView.inflateHeaderView(R.layout.side_menu_sell_main)
         val sideMenu = SideMenuSellMainBinding.bind(headerView)
-        val bottomSheetFragment = BottomSheetFragment()
 
         sideMenu.btnDrawerClose.setOnClickListener {
             closeNavDrawer()
@@ -64,26 +67,26 @@ class SellMainActivity :
         }
         sideMenu.btnMenuItemReturn.setOnClickListener {
             closeNavDrawer()
-            replaceFragment<RefundFragment>(R.id.sell_container, true)
+            replaceFragment<RefundFragment>(R.id.sell_container)
         }
         sideMenu.btnMenuItemGreeting.setOnClickListener {
             closeNavDrawer()
             finish()
         }
         sideMenu.btnMenuItemReport.setOnClickListener {
-            replaceFragment<XReportFragment>(R.id.sell_container, true)
+            replaceFragment<XReportFragment>(R.id.sell_container)
             closeNavDrawer()
         }
         sideMenu.btnMenuItemHistory.setOnClickListener {
-            replaceFragment<HistoryFragment>(R.id.sell_container, true)
+            replaceFragment<HistoryFragment>(R.id.sell_container)
             closeNavDrawer()
         }
         sideMenu.btnMenuItemInformation.setOnClickListener {
-            replaceFragment<AboutAppFragment>(R.id.sell_container, true)
+            replaceFragment<AboutAppFragment>(R.id.sell_container)
             closeNavDrawer()
         }
         sideMenu.btnMenuItemOperations.setOnClickListener {
-            replaceFragment<OtherOperationsFragment>(R.id.sell_container, true)
+            replaceFragment<OtherOperationsFragment>(R.id.sell_container)
             closeNavDrawer()
         }
     }
