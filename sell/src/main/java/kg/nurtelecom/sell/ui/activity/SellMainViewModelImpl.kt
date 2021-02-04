@@ -57,8 +57,7 @@ class SellMainViewModelImpl(
 
     override val productCatalog: MutableLiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
-    init {
-        println("INIT SELLMAINVM")
+    init
         fetchProductCatalog()
     }
 
