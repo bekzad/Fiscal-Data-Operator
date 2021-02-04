@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
@@ -27,6 +26,18 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, S
         container: ViewGroup?
     ): ChecksHistoryRecycleViewBinding {
         return ChecksHistoryRecycleViewBinding.inflate(layoutInflater)
+    }
+
+    override fun setupToolbar(): Int  = R.string.text_refund_prepayment
+
+    override fun setupViews() {
+        setHasOptionsMenu(true)
+        initRecyclerView()
+        vm.fetchChecksHistory()
+    }
+
+    override fun subscribeToLiveData() {
+        observeCheckHistory()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -51,20 +62,8 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, S
         })
     }
 
-    override fun setupToolbar(): Int  = R.string.text_refund_prepayment
-
-    override fun setupViews() {
-        setHasOptionsMenu(true)
-        initRecyclerView()
-        vm.fetchChecksHistory()
-    }
-
     private fun initRecyclerView() {
         vb.rvHistory.adapter = historyAdapter
-    }
-
-    override fun subscribeToLiveData() {
-        observeCheckHistory()
     }
 
     private fun observeCheckHistory() {
@@ -80,6 +79,7 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, S
             }
         })
     }
+
     companion object {
         fun newInstance(): RefundPrepaymentFragment {
             return RefundPrepaymentFragment()

@@ -19,13 +19,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeToLiveData()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
         showsDialog = true
         vb.tvMenuItemClose.setOnClickListener {
             vm.closeSession()
@@ -33,6 +26,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         vb.btnMenuItemCancel.setOnClickListener {
             dismiss()
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         return vb.root
     }
 

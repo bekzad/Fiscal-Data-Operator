@@ -19,8 +19,6 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     override fun setupToolbar(): Int = R.string.payment_method
 
     override fun setupViews() {
-        super.setupViews()
-
         vb.btnContinue.setOnClickListener {
             navigateToPrintCheck()
         }

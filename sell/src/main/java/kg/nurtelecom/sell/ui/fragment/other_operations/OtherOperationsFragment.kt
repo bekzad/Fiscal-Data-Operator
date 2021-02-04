@@ -24,9 +24,6 @@ class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, Sel
 
     override fun setupViews() {
         setHasOptionsMenu(true)
-    }
-
-    override fun subscribeToLiveData() {
         vb.btnMenuItemPurchase.setOnClickListener{
             // here place for replacing fragment
         }

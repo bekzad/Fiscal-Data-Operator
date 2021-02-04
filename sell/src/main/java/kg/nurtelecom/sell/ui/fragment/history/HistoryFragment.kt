@@ -1,15 +1,11 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import androidx.appcompat.widget.SearchView
-import androidx.collection.arrayMapOf
-import androidx.core.view.MenuItemCompat
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
@@ -19,7 +15,6 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, SellMainViewModel>(SellMainViewModel::class) {
 
@@ -42,13 +37,6 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, SellMainVi
         search(searchView)
     }
 
-    private fun search(searchView: SearchView) {
-        searchView.doOnQueryTextChange { newText ->
-            historyAdapter.filter.filter(newText)
-            true
-        }
-    }
-
     override fun setupToolbar(): Int  = R.string.history_title
 
     override fun setupViews() {
@@ -57,12 +45,19 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, SellMainVi
         vm.fetchChecksHistory()
     }
 
-    private fun initRecyclerView() {
-        vb.rvHistory.adapter = historyAdapter
-    }
-
     override fun subscribeToLiveData() {
         observeCheckHistory()
+    }
+
+    private fun search(searchView: SearchView) {
+        searchView.doOnQueryTextChange { newText ->
+            historyAdapter.filter.filter(newText)
+            true
+        }
+    }
+
+    private fun initRecyclerView() {
+        vb.rvHistory.adapter = historyAdapter
     }
 
     private fun observeCheckHistory() {

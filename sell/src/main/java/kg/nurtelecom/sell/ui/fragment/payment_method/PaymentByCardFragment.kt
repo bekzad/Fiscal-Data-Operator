@@ -10,7 +10,6 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 
 class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding, SellMainViewModel>(SellMainViewModel::class) {
 
-
     override fun createViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -19,8 +18,6 @@ class PaymentByCardFragment : CoreFragment<FragmentPaymentByCardBinding, SellMai
     override fun setupToolbar(): Int = R.string.payment_method
 
     override fun setupViews() {
-        super.setupViews()
-
         vb.btnContinueCard.setOnClickListener {
             navigateToPrintCheck()
         }

@@ -22,23 +22,14 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<AllProducts>
     abstract var isProductEmpty: MutableLiveData<Boolean>
-
     abstract val productCatalog: MutableLiveData<List<CatalogResult>>
-
     abstract val isRegimeNonFiscal: Boolean
-
     abstract fun addNewProduct(product: Product)
-
     abstract fun removeProduct(position: Int)
-
     abstract fun sendSelectedProduct(product: AllProducts)
-
     abstract fun fetchProductCatalog()
-
     abstract fun clearSelectedProduct()
-
     abstract fun searchProduct(name: String)
-
     open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 
     // Checks History
@@ -53,7 +44,11 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun closeSession()
 }
 
-class SellMainViewModelImpl(private val historyRepository: HistoryRepository, private val sessionRepository: SessionRepository, private val sellRepository: SellRepository) : SellMainViewModel() {
+class SellMainViewModelImpl(
+    private val historyRepository: HistoryRepository,
+    private val sessionRepository: SessionRepository,
+    private val sellRepository: SellRepository
+) : SellMainViewModel() {
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
@@ -134,8 +129,8 @@ class SellMainViewModelImpl(private val historyRepository: HistoryRepository, pr
     }
 
     // Checks History
-    override var  checksHistoryData: MutableLiveData<List<Content>> = MutableLiveData()
-    override var  detailCheckHistory: MutableLiveData<Result> = MutableLiveData()
+    override var checksHistoryData: MutableLiveData<List<Content>> = MutableLiveData()
+    override var detailCheckHistory: MutableLiveData<Result> = MutableLiveData()
 
     override fun fetchChecksHistory() {
         safeCall(Dispatchers.IO) {
@@ -150,7 +145,7 @@ class SellMainViewModelImpl(private val historyRepository: HistoryRepository, pr
     }
 
     // Session
-    override var  sessionReportData: MutableLiveData<ReportDetailed> = MutableLiveData()
+    override var sessionReportData: MutableLiveData<ReportDetailed> = MutableLiveData()
 
     override fun fetchReportSession() {
         safeCall(Dispatchers.IO) {

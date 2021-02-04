@@ -10,7 +10,17 @@ import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.history.HistoryDetailsComponentView.Companion.CHECK_ID
 
-class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
+class HistoryDetailFragment :
+    CoreFragment<ChecksHistoryDetailFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
+
+    override fun createViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): ChecksHistoryDetailFragmentBinding {
+        return ChecksHistoryDetailFragmentBinding.inflate(layoutInflater)
+    }
+
+    override fun setupToolbar(): Int = R.string.history_title
 
     override fun setupViews() {
         val someInt = requireArguments().getInt(CHECK_ID)
@@ -18,7 +28,6 @@ class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, S
     }
 
     override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
         vm.detailCheckHistory.observe(viewLifecycleOwner) {
             parentActivity.setToolbarTitle(getString(R.string.cash_check_number, it.receipt.id))
             vb.fieldOne.setHint(it.taxSalesPointName)
@@ -35,13 +44,4 @@ class HistoryDetailFragment : CoreFragment<ChecksHistoryDetailFragmentBinding, S
             return HistoryDetailFragment()
         }
     }
-
-    override fun createViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): ChecksHistoryDetailFragmentBinding {
-        return ChecksHistoryDetailFragmentBinding.inflate(layoutInflater)
-    }
-
-    override fun setupToolbar(): Int = R.string.history_title
 }

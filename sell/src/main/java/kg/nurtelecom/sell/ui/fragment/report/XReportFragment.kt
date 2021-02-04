@@ -8,6 +8,7 @@ import kg.nurtelecom.sell.databinding.XReportFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 
 class XReportFragment: CoreFragment<XReportFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
+
     override fun createViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
