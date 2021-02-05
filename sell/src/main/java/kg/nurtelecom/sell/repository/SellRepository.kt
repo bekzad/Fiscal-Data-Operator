@@ -1,10 +1,10 @@
 package kg.nurtelecom.sell.repository
 
 import kg.nurtelecom.data.sell.CatalogResult
-import kg.nurtelecom.network.data.api.ProductApi
+import kg.nurtelecom.network.data.api.SellApi
 import kg.nurtelecom.storage.sharedpref.AppPreferences
 
-class SellRepository(private val appPrefs: AppPreferences, private val api: ProductApi) {
+class SellRepository(private val appPrefs: AppPreferences, private val api: SellApi) {
 
     val isNonFiscalRegime: Boolean get() = appPrefs.fiscalRegime
 

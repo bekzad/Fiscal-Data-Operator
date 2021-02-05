@@ -4,7 +4,7 @@ import kg.nurtelecom.network.BuildConfig
 import kg.nurtelecom.network.UnsafeOkHttpClient
 import kg.nurtelecom.network.data.api.AuthorizationApi
 import kg.nurtelecom.network.data.api.HistoryApi
-import kg.nurtelecom.network.data.api.ProductApi
+import kg.nurtelecom.network.data.api.SellApi
 import kg.nurtelecom.network.data.api.ReportsApi
 import kg.nurtelecom.network.data.api.UserApi
 import okhttp3.OkHttpClient
@@ -20,7 +20,7 @@ val networkKoin = module {
     single { get<Retrofit>().create(AuthorizationApi::class.java) }
     single { get<Retrofit>().create(HistoryApi::class.java) }
     single { get<Retrofit>().create(UserApi::class.java) }
-    single { get<Retrofit>().create(ProductApi::class.java) }
+    single { get<Retrofit>().create(SellApi::class.java) }
     single { get<Retrofit>().create(ReportsApi::class.java) }
 }
 
