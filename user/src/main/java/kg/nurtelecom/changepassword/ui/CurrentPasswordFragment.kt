@@ -30,7 +30,7 @@ class CurrentPasswordFragment : CoreFragment<FragmentCurrentPasswordBinding>() {
 
     private fun navigateToCreateNewPasswordFragment() {
         val activity = activity as AppCompatActivity
-        activity.replaceFragment(R.id.container_main,CreateNewPasswordFragment.newInstance())
+        activity.replaceFragment<CreateNewPasswordFragment>(R.id.container_main)
     }
 
     companion object {

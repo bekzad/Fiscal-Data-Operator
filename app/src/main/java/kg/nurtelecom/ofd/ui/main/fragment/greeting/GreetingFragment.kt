@@ -1,13 +1,11 @@
 package kg.nurtelecom.ofd.ui.main.fragment.greeting
 
 import android.content.Intent
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import kg.nurtelecom.changepassword.ui.ChangePasswordActivity
+import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.extension.snackbar
 import kg.nurtelecom.core.fragment.CoreFragment
-import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.R
 import kg.nurtelecom.ofd.databinding.FragmentGreetingBinding
 import kg.nurtelecom.ofd.ui.spalsh.SplashActivity
@@ -18,7 +16,7 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).setToolbarTitle(R.string.main_greeting)
+        parentActivity.setToolbarTitle(R.string.main_greeting)
     }
 
     override fun getBinding(): FragmentGreetingBinding {

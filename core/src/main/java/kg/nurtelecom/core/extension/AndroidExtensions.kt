@@ -16,19 +16,6 @@ import java.util.*
 
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
-fun AppCompatActivity.replaceFragment(
-    container: Int,
-    fragment: Fragment,
-    addToBack: Boolean = false,
-    backStackTag: String? = null
-) {
-    if (addToBack)
-        supportFragmentManager.beginTransaction().replace(container, fragment)
-            .addToBackStack(backStackTag).commit()
-    else
-        supportFragmentManager.beginTransaction().replace(container, fragment).commit()
-}
-
 fun AppCompatActivity.setToolbarTitle(text: String) {
     this.supportActionBar?.setTitle(text)
 }

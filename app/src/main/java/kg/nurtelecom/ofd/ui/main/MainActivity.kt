@@ -15,7 +15,6 @@ import kg.nurtelecom.ofd.databinding.ActivityMainBinding
 import kg.nurtelecom.ofd.databinding.SideMenuMainBinding
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.ofd.ui.main.fragment.greeting.GreetingFragment
-import kg.nurtelecom.sell.ui.fragment.credit.CreditListFragment
 
 class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
 
@@ -25,7 +24,7 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
         super.setupViews()
         setSupportActionBar(vb.tbMain)
         setupNavDrawer()
-        replaceFragment(R.id.mainContainer, GreetingFragment.newInstance())
+        replaceFragment<GreetingFragment>(R.id.mainContainer, false)
     }
 
     private fun setupNavDrawer() {
@@ -42,13 +41,13 @@ class MainActivity : CoreActivity<ActivityMainBinding, MainVM>(MainVM::class) {
         val menuView = SideMenuMainBinding.bind(view)
         menuView.mainMenuItemAppInfo.setOnClickListener {
             if (getCurrentVisibleFragment() !is AboutAppFragment) {
-                replaceFragment(R.id.mainContainer, AboutAppFragment.newInstance(), true)
+                replaceFragment<AboutAppFragment>(R.id.mainContainer)
             }
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
         menuView.mainMenuItemMain.setOnClickListener {
             if (getCurrentVisibleFragment() !is GreetingFragment) {
-                replaceFragment(R.id.mainContainer, GreetingFragment.newInstance())
+                replaceFragment<GreetingFragment>(R.id.mainContainer)
             }
             vb.drawerLayout.closeDrawer(GravityCompat.START)
         }
