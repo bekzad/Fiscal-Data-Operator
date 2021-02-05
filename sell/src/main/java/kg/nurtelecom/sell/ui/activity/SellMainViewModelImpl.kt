@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.CatalogResult
 import kg.nurtelecom.data.sell.Product
@@ -27,6 +28,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val isRegimeNonFiscal: Boolean
     abstract val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>>
     abstract val fetchReceiptResultString: MutableLiveData<Response<String>>
+    abstract var operationType: OperationType
 
     abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
@@ -65,6 +67,7 @@ class SellMainViewModelImpl(private val historyRepository: HistoryRepository,
     }
     override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> = MutableLiveData()
     override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
+    override var operationType: OperationType = OperationType.SALE
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)

@@ -2,12 +2,17 @@ package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
 import androidx.appcompat.widget.Toolbar
+import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.core.extension.visible
+import kg.nurtelecom.core.menu.DrawerListener
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
@@ -44,6 +49,20 @@ class SellMainActivity :
         drawerLayout = vb.drawerLayout
         drawerLayout.setupActionBarDrawerToggle(this)
         setupNavigationListener()
+        setSupportActionBar(vb.tbSellMain)
+        setupOperationType()
+        if (vm.operationType == OperationType.PREPAY)
+            replaceFragment<PaymentMethodFragment>(R.id.sell_container)
+        else
+            replaceFragment<SellFragment>(R.id.sell_container)
+    }
+
+    private fun setupOperationType() {
+        vm.operationType = when(intent?.getStringExtra("operationType")) {
+            OperationType.POSTPAY.type -> OperationType.POSTPAY
+            OperationType.PREPAY.type -> OperationType.PREPAY
+            else -> OperationType.SALE
+        }
     }
 
     private fun setupRegime() {
@@ -60,6 +79,7 @@ class SellMainActivity :
         sideMenu.btnMenuItemSale.setOnClickListener {
             closeNavDrawer()
             replaceFragment<SellFragment>(R.id.sell_container)
+            vm.operationType = OperationType.SALE
         }
         sideMenu.btnMenuItemClose.setOnClickListener {
             closeNavDrawer()
@@ -106,6 +126,12 @@ class SellMainActivity :
     companion object {
         fun start(context: Context?) {
             context?.startActivity<SellMainActivity>()
+        }
+
+        fun start(context: Context?, operationType: OperationType) {
+            context?.startActivity<SellMainActivity> {
+                this.putExtra("operationType", operationType.type)
+            }
         }
     }
 }

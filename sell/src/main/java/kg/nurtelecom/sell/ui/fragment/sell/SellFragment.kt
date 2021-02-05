@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ProductItemClickListener
@@ -20,7 +21,17 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         SellFragmentBinding.inflate(inflater, container, false)
 
-    override fun setupToolbar(): Int = R.string.text_sale
+    override fun setupToolbar(): Int {
+        return when (vm.operationType) {
+            OperationType.SALE -> R.string.text_sale
+            OperationType.POSTPAY -> R.string.text_credit
+            OperationType.PREPAY -> {
+                startPrepay()
+                R.string.prepay
+            }
+            else -> R.string.text_sale
+        }
+    }
 
     override fun setupViews() {
         vb.rvProduct.adapter = productAdapter
@@ -58,6 +69,10 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
         vb.btnAddProduct.setOnClickListener {
             parentActivity.replaceFragment<AddProductFragment>(R.id.sell_container)
         }
+    }
+
+    private fun startPrepay() {
+        parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container, false)
     }
 
     companion object {

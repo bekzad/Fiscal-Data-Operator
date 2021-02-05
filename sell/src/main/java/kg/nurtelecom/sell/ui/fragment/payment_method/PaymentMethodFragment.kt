@@ -2,8 +2,13 @@ package kg.nurtelecom.sell.ui.fragment.payment_method
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.core.extension.setToolbarTitle
+import kg.nurtelecom.core.extension.visible
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentMethodBinding
@@ -23,6 +28,7 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding, SellMai
 
     override fun setupViews() {
         setupNavigate()
+        setupPaymentMode()
     }
 
     override fun subscribeToLiveData() {
@@ -38,6 +44,15 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding, SellMai
 
         vb.btnCardPayment.setOnClickListener {
             parentActivity.replaceFragment<PaymentByCardFragment>(R.id.sell_container, true)
+        }
+    }
+
+    private fun setupPaymentMode() {
+        when (vm.operationType) {
+            OperationType.PREPAY -> {
+                vb.tvPaymentAmount.visible(false)
+                vb.tvToBePaid.visible(false)
+            }
         }
     }
 

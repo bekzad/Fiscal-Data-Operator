@@ -11,6 +11,9 @@ import kg.nurtelecom.data.enums.PaymentType
 import kg.nurtelecom.data.receipt.request.FetchReceiptRequest
 import kg.nurtelecom.data.receipt.request.ReceiptItemRequest
 import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.core.extension.enable
+import kg.nurtelecom.core.extension.visible
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCashBinding
@@ -33,6 +36,8 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     override fun setupViews() {
         // We are changing the value in viewModel before continuing
         // NSP is added to the value of taxSum
+        setupPaymentMode()
+
         vb.btnContinue.setOnClickListener {
             vm.taxSum.value = sumWithNSP
             navigateToSaveReceipt()
@@ -87,6 +92,28 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
         val jsonString = gson.toJson(fetchReceiptRequest)
 
         vm.fetchReceipt(jsonString)
+    }
+    
+    private fun setupButtons() {
+        when (vm.operationType) {
+            OperationType.SALE -> vb.btnContinue.text = getString(R.string.no_back_money)
+            OperationType.POSTPAY -> vb.btnContinue.text = getString(R.string.text_no_deposit)
+            OperationType.PREPAY -> vb.btnContinue.text = getString(R.string.btn_continue)
+        }
+    }
+
+    private fun setupPaymentMode() {
+        when (vm.operationType) {
+            OperationType.PREPAY -> {
+                vb.icSum.visible(false)
+                vb.btnContinue.enable(false)
+            }
+        }
+        setupButtons()
+    }
+
+    private fun navigateToPrintCheck() {
+        // TO DO inflates the print check fragment
     }
 
     companion object {

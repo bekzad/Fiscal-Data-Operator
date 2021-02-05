@@ -7,6 +7,7 @@ import kg.nurtelecom.changepassword.ui.ChangePasswordActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.extension.snackbar
 import kg.nurtelecom.core.fragment.CoreFragment
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.R
 import kg.nurtelecom.ofd.databinding.FragmentGreetingBinding
 import kg.nurtelecom.ofd.ui.spalsh.SplashActivity

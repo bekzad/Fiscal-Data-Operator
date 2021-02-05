@@ -4,6 +4,7 @@
     <string name="payment_by_card">Оплата Картой</string>
     <string name="tw_to_be_paid">Итого к оплате</string>
     <string name="btn_continue">Далее</string>
+    <string name="no_back_money">Без сдачи</string>
     <string name="et_received">Принято у клиента, сом:</string>
 
     <string name="fiscal_mode_title">Фискальный режим</string>
@@ -37,5 +38,6 @@
     <string name="change">Сдача:</string>
     <string name="new_sale">Новая Продажа</string>
     <string name="fail_to_print">НЕ УДАЛОСЬ РАСПЕЧАТАТЬ ЧЕК?</string>
+    <string name="prepay">Предоплата</string>
 
 </resources>

@@ -75,6 +75,10 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
     fun setHint(hint: BigDecimal) {
         vb.etContent.hint = hint.toString()
     }
+    
+    fun eraseContent() {
+        vb.etContent.setText("")
+    }
 
     fun fetchTextState(action: (text: CharSequence?) -> Unit) {
         vb.etContent.doOnTextChanged { text, _, _, _ ->
@@ -102,6 +106,10 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
                 vb.tvTitle.setTextColor(Color.BLACK)
             }
         }
+    }
+    
+    fun setIsEditable(value: Boolean) {
+        mDisableChildrenTouchEvents = !value
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
