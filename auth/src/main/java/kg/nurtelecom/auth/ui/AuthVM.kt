@@ -16,12 +16,19 @@ class AuthViewModelImpl (private val authRepository: AuthRepository) : AuthViewM
             val result = authRepository.fetchAccessToken(username, password, gsrKey, isFiscalRegime)
             event.postValue(AuthUser(result.access_token))
             fetchUserData()
+            fetchSecureKey()
         }
     }
 
     private suspend fun fetchUserData() {
         safeCall(Dispatchers.IO) {
             authRepository.fetchUserData()
+        }
+    }
+
+    private suspend fun fetchSecureKey() {
+        safeCall(Dispatchers.IO) {
+            authRepository.fetchSecureKey()
         }
     }
 }

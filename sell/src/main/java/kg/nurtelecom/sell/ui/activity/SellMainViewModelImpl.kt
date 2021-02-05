@@ -1,9 +1,11 @@
 package kg.nurtelecom.sell.ui.activity
 
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.data.history_by_id.Result
+import kg.nurtelecom.data.receipt.result.FetchReceiptResult
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.CatalogResult
 import kg.nurtelecom.data.sell.Product
@@ -14,6 +16,8 @@ import kg.nurtelecom.sell.repository.HistoryRepository
 import kg.nurtelecom.sell.repository.SessionRepository
 import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.Dispatchers
+import kg.nurtelecom.sell.repository.SellRepository
+import retrofit2.Response
 import java.math.BigDecimal
 
 abstract class SellMainViewModel : CoreViewModel() {
@@ -24,6 +28,10 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract var isProductEmpty: MutableLiveData<Boolean>
     abstract val productCatalog: MutableLiveData<List<CatalogResult>>
     abstract val isRegimeNonFiscal: Boolean
+    abstract val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>>
+    abstract val fetchReceiptResultString: MutableLiveData<Response<String>>
+
+    abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
     abstract fun removeProduct(position: Int)
     abstract fun sendSelectedProduct(product: AllProducts)
@@ -38,11 +46,9 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun closeSession()
 }
 
-class SellMainViewModelImpl(
-    private val historyRepository: HistoryRepository,
+class SellMainViewModelImpl(private val historyRepository: HistoryRepository,
     private val sessionRepository: SessionRepository,
-    private val sellRepository: SellRepository
-) : SellMainViewModel() {
+    private val sellRepository: SellRepository) : SellMainViewModel() {
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
@@ -60,6 +66,8 @@ class SellMainViewModelImpl(
     init {
         fetchProductCatalog()
     }
+    override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> = MutableLiveData()
+    override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
@@ -119,6 +127,19 @@ class SellMainViewModelImpl(
                 products.name.contains(name, true)
             }
             filteredProducts?.value = filteredList
+        }
+    }
+    override fun fetchReceipt(fetchReceiptRequest: String) {
+        safeCall(Dispatchers.IO) {
+            val response = repository.fetchReceipt(fetchReceiptRequest)
+            fetchReceiptResultString.postValue(response)
+
+            val gson = Gson()
+            val jsonBody = response.body() ?: ""
+            val jsonString = """${jsonBody}"""
+//
+//            val fetchReceiptResult = gson.fromJson(jsonString, FetchReceiptResult::java)
+//            fetchReceiptResult.postValue()
         }
     }
 

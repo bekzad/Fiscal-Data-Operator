@@ -30,5 +30,12 @@
     <string name="payment_method">Метод оплаты</string>
     <string name="cash_check_number">Кассовый чек №%d</string>
     <string name="menu">Меню</string>
+    <string name="print_check">Печать чека</string>
+    <string name="without_change">Без сдачи</string>
+    <string name="pay_cash">Оплатить Наличными</string>
+    <string name="print_cashier_check">Печать кассового чека</string>
+    <string name="change">Сдача:</string>
+    <string name="new_sale">Новая Продажа</string>
+    <string name="fail_to_print">НЕ УДАЛОСЬ РАСПЕЧАТАТЬ ЧЕК?</string>
 
 </resources>

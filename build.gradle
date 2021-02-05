@@ -42,6 +42,7 @@ buildscript {
                     'retrofit': "com.squareup.retrofit2:retrofit:$vers.retrofit",
                     'okhttp'  : "com.squareup.okhttp3:okhttp:$vers.okhttp_version",
                     'gson'    : "com.squareup.retrofit2:converter-gson:$vers.retrofit",
+                    'scalars' : "com.squareup.retrofit2:converter-scalars:$vers.retrofit",
                     'logging' : "com.squareup.okhttp3:logging-interceptor:$vers.okhttp_version"
             ],
             'room'          :[
