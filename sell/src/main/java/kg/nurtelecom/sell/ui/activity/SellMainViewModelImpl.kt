@@ -3,20 +3,17 @@ package kg.nurtelecom.sell.ui.activity
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import kg.nurtelecom.core.viewmodel.CoreViewModel
-import kg.nurtelecom.data.history.Content
-import kg.nurtelecom.data.history_by_id.Result
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.CatalogResult
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.data.sell.Products
-import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.repository.HistoryRepository
+import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
 import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.Dispatchers
-import kg.nurtelecom.sell.repository.SellRepository
 import retrofit2.Response
 import java.math.BigDecimal
 
@@ -131,7 +128,7 @@ class SellMainViewModelImpl(private val historyRepository: HistoryRepository,
     }
     override fun fetchReceipt(fetchReceiptRequest: String) {
         safeCall(Dispatchers.IO) {
-            val response = repository.fetchReceipt(fetchReceiptRequest)
+            val response = sellRepository.fetchReceipt(fetchReceiptRequest)
             fetchReceiptResultString.postValue(response)
 
             val gson = Gson()

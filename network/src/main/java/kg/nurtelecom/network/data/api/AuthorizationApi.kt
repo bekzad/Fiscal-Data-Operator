@@ -19,13 +19,6 @@ interface AuthorizationApi {
         @Header("Authorization") token: String
     ): UserResult
 
-    @POST("get-secure-key")
-    suspend fun fetchSecureKey(
-        @Header("Authorization") token: String,
-        @Header("session_uuid") uuid: String,
-        @Query("invalidate_existing") invalidate_existing: Boolean
-    ): SecureKey
-
     @Headers("Authorization: Basic ZGV2OkZndkRlNHZkITM={token}")
     @POST("invalidate")
     suspend fun logout(@Header("token") token: String): LogoutResult

@@ -10,9 +10,7 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentSaveReceiptBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 
-class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding>() {
-
-    override val vm: SellMainViewModel by activityViewModels()
+class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     override fun createViewBinding(
         inflater: LayoutInflater,

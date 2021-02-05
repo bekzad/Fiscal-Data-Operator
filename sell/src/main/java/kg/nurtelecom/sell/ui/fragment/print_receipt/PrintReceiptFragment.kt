@@ -11,9 +11,7 @@ import kg.nurtelecom.sell.databinding.FragmentPrintReceiptBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 
-class PrintReceiptFragment : CoreFragment<FragmentPrintReceiptBinding>() {
-
-    override val vm: SellMainViewModel by activityViewModels()
+class PrintReceiptFragment : CoreFragment<FragmentPrintReceiptBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -23,8 +21,6 @@ class PrintReceiptFragment : CoreFragment<FragmentPrintReceiptBinding>() {
     override fun setupToolbar(): Int = R.string.print_check
 
     override fun setupViews() {
-        super.setupViews()
-
         vb.btnNewSale.setOnClickListener {
             navigateToSellFragment()
         }
