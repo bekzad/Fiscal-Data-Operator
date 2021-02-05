@@ -3,14 +3,13 @@ package kg.nurtelecom.sell.ui.activity
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import kg.nurtelecom.core.viewmodel.CoreViewModel
-import kg.nurtelecom.data.receipt.result.FetchReceiptResult
 import kg.nurtelecom.data.enums.OperationType
+import kg.nurtelecom.data.receipt.result.FetchReceiptResult
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.CatalogResult
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.data.sell.Products
 import kg.nurtelecom.data.z_report.ReportDetailed
-import kg.nurtelecom.sell.repository.HistoryRepository
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
 import kg.nurtelecom.sell.utils.roundUp
@@ -45,8 +44,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun closeSession()
 }
 
-class SellMainViewModelImpl(private val historyRepository: HistoryRepository,
-    private val sessionRepository: SessionRepository,
+class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
     private val sellRepository: SellRepository) : SellMainViewModel() {
 
     override val productList: MutableLiveData<MutableList<Product>> =
@@ -65,6 +63,7 @@ class SellMainViewModelImpl(private val historyRepository: HistoryRepository,
     init {
         fetchProductCatalog()
     }
+
     override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> = MutableLiveData()
     override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
     override var operationType: OperationType = OperationType.SALE
