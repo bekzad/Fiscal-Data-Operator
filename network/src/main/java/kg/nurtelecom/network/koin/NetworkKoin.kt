@@ -24,6 +24,7 @@ val networkKoin = module {
     single { get<Retrofit>().create(HistoryApi::class.java) }
     single { get<Retrofit>().create(UserApi::class.java) }
     single { get<Retrofit>().create(ReportsApi::class.java) }
+    single { get<Retrofit>().create(ProductApi::class.java) }
     single { get<Retrofit>(named("encryptedRetrofit")).create(SellApi::class.java) }
 }
 
