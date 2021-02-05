@@ -29,6 +29,7 @@
     <string name="delete_icon">Delete Icon</string>
     <string name="price">Цена, сом</string>
     <string name="zero">0</string>
+    <string name="title_credit_list">Список кредитов</string>
 
     <!--Side menu sell-->
     <string name="nav_open_drawer">open</string>
@@ -72,4 +73,13 @@
     <string name="text_shift_close">Закрыть смену</string>
     <string name="text_shift_cancel">Отмена</string>
     <string name="text_shift_closing_description">Просле закрытия смены будет сформирован и отправлен Z отчет (отчет конца смены). Начать смену можно будет на следующий день.</string>
+
+    <!--user-->
+    <string name="surname">Фамилия</string>
+    <string name="name">Имя</string>
+    <string name="middleName">Отчество</string>
+    <string name="phoneNumber">+996</string>
+    <string name="inn">ИНН</string>
+    <string name="changing_user_data">Изменение данных</string>
+
 </resources>

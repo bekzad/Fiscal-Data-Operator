@@ -47,6 +47,7 @@ dependencies {
     implementation libs.google.values()
     implementation libs.network.values()
     implementation libs.koin.values()
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()
