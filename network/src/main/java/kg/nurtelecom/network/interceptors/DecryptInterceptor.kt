@@ -20,7 +20,9 @@ class DecryptInterceptor(private val appPrefs: AppPreferences) : Interceptor {
         val responseString = response.body!!.string()
 
         var decryptedString = ""
-        decryptedString = encryption.decrypt(responseString)
+        if (response.code != 401) {
+            decryptedString = encryption.decrypt(responseString)
+        }
 
         newResponse.body(decryptedString.toResponseBody(contentType.toMediaTypeOrNull()))
         return newResponse.build()

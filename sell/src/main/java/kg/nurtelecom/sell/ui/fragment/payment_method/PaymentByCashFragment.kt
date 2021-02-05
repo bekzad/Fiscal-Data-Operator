@@ -22,7 +22,7 @@ import java.math.BigDecimal
 
 class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMainViewModel>(SellMainViewModel::class) {
 
-    private lateinit var sumWithNSP: BigDecimal
+    private var sumWithNSP: BigDecimal = BigDecimal.ZERO
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -109,10 +109,6 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
             }
         }
         setupButtons()
-    }
-
-    private fun navigateToPrintCheck() {
-        // TO DO inflates the print check fragment
     }
 
     companion object {

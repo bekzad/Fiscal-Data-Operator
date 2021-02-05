@@ -14,8 +14,11 @@ package kg.nurtelecom.network.interceptors
  * */
 
 import android.util.Base64
+import android.util.Log
 import kg.nurtelecom.storage.sharedpref.AppPreferences
+import java.lang.IllegalArgumentException
 import javax.crypto.Cipher
+import javax.crypto.IllegalBlockSizeException
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.PBEKeySpec
@@ -52,7 +55,6 @@ internal class Encryption (private val appPrefs: AppPreferences) {
     }
 
     fun decrypt(dataToDecrypt: String): String {
-        val decryptedBytes: ByteArray
 
         // Getting the key values
         val iv = Keys().iv
@@ -70,7 +72,13 @@ internal class Encryption (private val appPrefs: AppPreferences) {
         val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
         val ivSpec = IvParameterSpec(iv)
         cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec)
-        decryptedBytes = cipher.doFinal(dataToDecryptBytes)
+
+        var decryptedBytes: ByteArray = byteArrayOf()
+        try {
+            decryptedBytes = cipher.doFinal(dataToDecryptBytes)
+        } catch (e: IllegalBlockSizeException) {
+            Log.e("DecodeException", "IllegalBlockSizeException: The data is not encrypted")
+        }
 
         // Convert decrypted bytes into Base64 String
         val decryptedString = String(decryptedBytes, Charsets.UTF_8)
