@@ -6,36 +6,47 @@
     android:layout_height="match_parent"
     android:background="@android:color/black"
     android:padding="@dimen/margin_16dp"
-    tools:context=".ui.fragment.payment_method.PaymentByCashFragment">
+    tools:context=".ui.fragment.print_receipt.SaveReceiptFragment">
 
-    <kg.nurtelecom.ofd.cell.InfoCardCellView
-        android:id="@+id/ic_sum"
+    <TextView
+        android:id="@+id/tv_headers"
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:textColor="@color/white"
-        app:is_editable="false"
+        android:background="@color/white"
+        android:hint="Headers"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title_text="@string/amount_to_pay" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <kg.nurtelecom.ofd.cell.InfoCardCellView
-        android:id="@+id/ic_received"
+    <TextView
+        android:id="@+id/tv_code"
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
+        android:background="@color/white"
+        android:hint="Code"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ic_sum"
-        app:title_text="@string/et_received" />
+        app:layout_constraintTop_toBottomOf="@id/tv_headers" />
+
+    <TextView
+        android:id="@+id/tv_cashier_check"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="Body"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_code" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_continue"
+        android:id="@+id/btn_print_check"
         style="@style/BtnGreen"
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
-        android:text="@string/without_change"
+        android:text="@string/print_check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

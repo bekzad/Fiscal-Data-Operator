@@ -59,7 +59,7 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
 
                     // Set the hint
                     val hint = getString(R.styleable.InfoCardCellView_hint_text) ?: "0"
-                    vb.etContent.setHint(hint)
+                    vb.etContent.hint = hint
 
                 } finally {
                     recycle()
@@ -69,6 +69,10 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
 
     fun setContent(value: BigDecimal) {
         vb.etContent.setText(value.toString())
+    }
+
+    fun setHint(hint: BigDecimal) {
+        vb.etContent.hint = hint.toString()
     }
 
     fun fetchTextState(action: (text: CharSequence?) -> Unit) {

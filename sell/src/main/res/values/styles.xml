@@ -65,4 +65,17 @@
         <item name="android:textSize">@dimen/text_40sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="NormalSizeYellowText" parent="NormalSizeText">
+        <item name="android:textColor">@color/changeYellow</item>
+    </style>
+
+    <style name="NormalSizeBlueText" parent="NormalSizeText">
+        <item name="android:textColor">@color/clickBlue</item>
+    </style>
+
+    <style name="StyleChangeAmount">
+        <item name="android:textSize">@dimen/text_40sp</item>
+        <item name="android:textColor">@color/changeYellow</item>
+    </style>
 </resources>

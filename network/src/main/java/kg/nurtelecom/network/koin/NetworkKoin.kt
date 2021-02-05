@@ -2,22 +2,28 @@ package kg.nurtelecom.network.koin
 
 import kg.nurtelecom.network.BuildConfig
 import kg.nurtelecom.network.UnsafeOkHttpClient
-import kg.nurtelecom.network.data.api.AuthorizationApi
-import kg.nurtelecom.network.data.api.HistoryApi
-import kg.nurtelecom.network.data.api.UserApi
+import kg.nurtelecom.network.data.api.*
+import kg.nurtelecom.network.interceptors.DecryptInterceptor
+import kg.nurtelecom.network.interceptors.EncryptInterceptor
+import kg.nurtelecom.storage.sharedpref.AppPreferences
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 val networkKoin = module {
 
     single { provideOkHttp() }
     single { provideRetrofit(get()) }
+    single(named("encryptedOkHttp")) { provideOkHttpEncrypted(get()) }
+    single(named("encryptedRetrofit")) { provideEncryptedRetrofit(get(named("encryptedOkHttp"))) }
     single { get<Retrofit>().create(AuthorizationApi::class.java) }
     single { get<Retrofit>().create(HistoryApi::class.java) }
     single { get<Retrofit>().create(UserApi::class.java) }
+    single { get<Retrofit>(named("encryptedRetrofit")).create(SellApi::class.java) }
 }
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
@@ -32,5 +38,23 @@ fun provideOkHttp(): OkHttpClient {
     val builder = UnsafeOkHttpClient.getUnsafeOkHttpClient()
     if (BuildConfig.DEBUG)
         builder.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+    return builder.build()
+}
+
+fun provideEncryptedRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
+        .client(okHttpClient)
+        .baseUrl(BuildConfig.URL)
+        .addConverterFactory(ScalarsConverterFactory.create())
+        .build()
+}
+
+fun provideOkHttpEncrypted(appPrefs: AppPreferences): OkHttpClient {
+    val builder = UnsafeOkHttpClient.getUnsafeOkHttpClient()
+    if (BuildConfig.DEBUG)
+        builder
+            .addInterceptor(EncryptInterceptor(appPrefs))
+            .addInterceptor(DecryptInterceptor(appPrefs))
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
     return builder.build()
 }

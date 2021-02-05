@@ -1,10 +1,15 @@
 package kg.nurtelecom.sell.ui.activity
 
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import kg.nurtelecom.core.viewmodel.CoreViewModel
+import kg.nurtelecom.data.receipt.result.FetchReceiptResult
 import kg.nurtelecom.data.sell.AllProducts
 import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.utils.roundUp
+import kotlinx.coroutines.Dispatchers
+import retrofit2.Response
 import java.math.BigDecimal
 
 
@@ -13,12 +18,16 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<AllProducts>
+    abstract val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>>
+    abstract val fetchReceiptResultString: MutableLiveData<Response<String>>
 
     abstract fun addNewProduct(product: Product)
 
     abstract fun removeProductFromList(position: Int)
 
     abstract fun sendSelectedProduct(product: AllProducts)
+
+    abstract fun fetchReceipt(fetchReceiptRequest: String)
 
     // TODO: must be changed
     abstract val allProducts: MutableLiveData<MutableList<AllProducts>>
@@ -27,7 +36,7 @@ abstract class SellMainViewModel : CoreViewModel() {
 }
 
 
-class SellMainViewModelImpl : SellMainViewModel() {
+class SellMainViewModelImpl(val repository: SellRepository) : SellMainViewModel() {
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
@@ -35,6 +44,9 @@ class SellMainViewModelImpl : SellMainViewModel() {
     override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
     override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
+
+    override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> = MutableLiveData()
+    override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
@@ -68,6 +80,20 @@ class SellMainViewModelImpl : SellMainViewModel() {
 
     override fun clearSelectedProduct() {
         selectedProductData.value = AllProducts("", BigDecimal.ZERO)
+    }
+
+    override fun fetchReceipt(fetchReceiptRequest: String) {
+        safeCall(Dispatchers.IO) {
+            val response = repository.fetchReceipt(fetchReceiptRequest)
+            fetchReceiptResultString.postValue(response)
+
+            val gson = Gson()
+            val jsonBody = response.body() ?: ""
+            val jsonString = """${jsonBody}"""
+//
+//            val fetchReceiptResult = gson.fromJson(jsonString, FetchReceiptResult::java)
+//            fetchReceiptResult.postValue()
+        }
     }
 
     // TODO: must be changed

@@ -34,4 +34,11 @@ class AuthRepository(
         val user = authApi.fetchUserData("Bearer ${appPrefs.token}")
         dataDao.insert(user.result.user.userDetail)
     }
+
+    suspend fun fetchSecureKey() {
+        val response = authApi.fetchSecureKey("Bearer ${appPrefs.token}",
+                                            appPrefs.token,
+                                            true)
+        appPrefs.secureKey = response.result
+    }
 }

@@ -2,6 +2,7 @@ package kg.nurtelecom.network.data.api
 
 import kg.nurtelecom.data.AccessToken
 import kg.nurtelecom.data.LogoutResult
+import kg.nurtelecom.data.SecureKey
 import kg.nurtelecom.data.UserResult
 import retrofit2.http.*
 
@@ -16,6 +17,13 @@ interface AuthorizationApi {
     suspend fun fetchUserData(
         @Header("Authorization") token: String
     ): UserResult
+
+    @POST("get-secure-key")
+    suspend fun fetchSecureKey(
+        @Header("Authorization") token: String,
+        @Header("session_uuid") uuid: String,
+        @Query("invalidate_existing") invalidate_existing: Boolean
+    ): SecureKey
 
     @Headers("Authorization: Basic ZGV2OkZndkRlNHZkITM={token}")
     @POST("invalidate")
