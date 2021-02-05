@@ -44,12 +44,10 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding>() {
 
         vb.icReceived.apply {
             fetchTextState {
-                if (it != null) {
-                    if (it.isNotEmpty()) {
-                        vb.btnContinue.text = getString(R.string.pay_cash)
-                    } else {
-                        vb.btnContinue.text = getString(R.string.without_change)
-                    }
+                if (it.isNullOrEmpty()) {
+                    vb.btnContinue.text = getString(R.string.without_change)
+                } else {
+                    vb.btnContinue.text = getString(R.string.pay_cash)
                 }
             }
         }

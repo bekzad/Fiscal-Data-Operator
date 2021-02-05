@@ -51,10 +51,11 @@ fun provideEncryptedRetrofit(okHttpClient: OkHttpClient): Retrofit {
 
 fun provideOkHttpEncrypted(appPrefs: AppPreferences): OkHttpClient {
     val builder = UnsafeOkHttpClient.getUnsafeOkHttpClient()
+    builder
+        .addInterceptor(EncryptInterceptor(appPrefs))
+        .addInterceptor(DecryptInterceptor(appPrefs))
     if (BuildConfig.DEBUG)
         builder
-            .addInterceptor(EncryptInterceptor(appPrefs))
-            .addInterceptor(DecryptInterceptor(appPrefs))
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
     return builder.build()
 }
