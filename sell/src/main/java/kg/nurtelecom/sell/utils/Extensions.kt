@@ -12,7 +12,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 
-inline fun <reified T : Fragment> AppCompatActivity.addMFragment(
+inline fun <reified T : Fragment> AppCompatActivity.customAddFragment(
     @IdRes containerId: Int,
     backStack: Boolean = true,
     noinline args: Bundle?.() -> Bundle? = { bundleOf() }
