@@ -20,6 +20,7 @@ import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
 import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
 import kg.nurtelecom.sell.ui.fragment.history.HistoryFragment
 import kg.nurtelecom.sell.ui.fragment.other_operations.OtherOperationsFragment
+import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment
 import kg.nurtelecom.sell.ui.fragment.report.XReportFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment

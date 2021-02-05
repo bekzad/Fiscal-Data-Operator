@@ -54,7 +54,6 @@
     <string name="text_return_purchase">Возврат покупки</string>
     <string name="text_prepayment">Предоплата</string>
     <string name="text_refund_prepayment">Возврат предоплаты</string>
-    <string name="text_credit">Кредит</string>
     <string name="text_close_credit">Закрытие кредита</string>
     <string name="text_repayment_credit">Возврат кредита</string>
     <string name="text_deposit_and_payment_cashbox">Внесение и выплаты из кассы</string>

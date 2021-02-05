@@ -2,18 +2,16 @@ package kg.nurtelecom.sell.ui.fragment.payment_method
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import com.google.gson.Gson
+import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.enums.PaymentType
 import kg.nurtelecom.data.receipt.request.FetchReceiptRequest
 import kg.nurtelecom.data.receipt.request.ReceiptItemRequest
 import kg.nurtelecom.data.sell.Product
-import kg.nurtelecom.core.extension.enable
-import kg.nurtelecom.core.extension.visible
-import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCashBinding
