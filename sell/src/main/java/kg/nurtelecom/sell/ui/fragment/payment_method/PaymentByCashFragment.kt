@@ -46,8 +46,10 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
             fetchTextState {
                 if (it.isNullOrEmpty()) {
                     vb.btnContinue.text = getString(R.string.without_change)
+                    setupButtons()
                 } else {
                     vb.btnContinue.text = getString(R.string.pay_cash)
+                    vb.btnContinue.enable(true)
                 }
             }
         }
@@ -94,7 +96,6 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     
     private fun setupButtons() {
         when (vm.operationType) {
-            OperationType.SALE -> vb.btnContinue.text = getString(R.string.no_back_money)
             OperationType.POSTPAY -> vb.btnContinue.text = getString(R.string.text_no_deposit)
             OperationType.PREPAY -> vb.btnContinue.text = getString(R.string.btn_continue)
         }

@@ -5,12 +5,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.OtherOperationsFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.credit.CreditListFragment
 import kg.nurtelecom.sell.ui.fragment.other_operations.prepayment.RefundPrepaymentFragment
+import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
+import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 
 class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
 
@@ -35,7 +38,8 @@ class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, Sel
             parentActivity.replaceFragment<RefundPrepaymentFragment>(R.id.sell_container)
         }
         vb.btnMenuItemCredit.setOnClickListener{
-            // here place for replacing fragment
+            vm.operationType = OperationType.POSTPAY
+            parentActivity.replaceFragment<SellFragment>(R.id.sell_container)
         }
         vb.btnMenuItemCloseCredit.setOnClickListener{
             parentActivity.replaceFragment<CreditListFragment>(R.id.sell_container)
@@ -51,6 +55,10 @@ class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, Sel
         }
         vb.btnMenuItemFiscalReport.setOnClickListener{
             // here place for replacing fragment
+        }
+        vb.btnMenuItemPrepayment.setOnClickListener {
+            vm.operationType = OperationType.PREPAY
+            parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
         }
     }
 
