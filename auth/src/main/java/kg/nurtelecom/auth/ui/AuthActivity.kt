@@ -61,11 +61,11 @@ class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewM
 
     override fun getBinding() = AuthActivityBinding.inflate(layoutInflater)
 
-    companion object {
-        const val AUTH_RESULT = 1
-    }
-
     override fun onBackPressed() {
         return
+    }
+
+    companion object {
+        const val AUTH_RESULT = 1
     }
 }

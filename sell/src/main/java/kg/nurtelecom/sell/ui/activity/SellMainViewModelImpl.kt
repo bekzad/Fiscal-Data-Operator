@@ -128,6 +128,7 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
             filteredProducts?.value = filteredList
         }
     }
+
     override fun fetchReceipt(fetchReceiptRequest: String) {
         safeCall(Dispatchers.IO) {
             val response = sellRepository.fetchReceipt(fetchReceiptRequest)

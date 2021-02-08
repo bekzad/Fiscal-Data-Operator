@@ -2,7 +2,6 @@ package kg.nurtelecom.network.data.api
 
 import kg.nurtelecom.data.AccessToken
 import kg.nurtelecom.data.LogoutResult
-import kg.nurtelecom.data.SecureKey
 import kg.nurtelecom.data.UserResult
 import kg.nurtelecom.data.session.OpenSession
 import retrofit2.http.*
