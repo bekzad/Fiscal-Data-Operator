@@ -23,7 +23,7 @@ data class Receipt (
     val checkCode: String, // Update
     val indexNum: Long, // счетчик чеков: последний для этого ККМ + 1
     val rollBackReceiptNum: String, // Update
-    val createdAt: LocalDateTime,
+    val createdAt: String, // Should be LocalDateTime
     val shiftId: Long, // id смены
     val receiptItems: List<ReceiptItemResult>, // позиции чека
 )
