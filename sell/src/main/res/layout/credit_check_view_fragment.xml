@@ -61,7 +61,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_check_return"
+        android:id="@+id/btn_close_credit"
         style="@style/OrangeButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

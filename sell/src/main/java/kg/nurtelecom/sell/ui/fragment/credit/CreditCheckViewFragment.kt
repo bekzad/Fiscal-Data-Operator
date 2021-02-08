@@ -1,11 +1,13 @@
 package kg.nurtelecom.sell.ui.fragment.credit
 
 import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.CreditCheckViewFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryDetailsComponentView
+import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 
 class CreditCheckViewFragment : CoreFragment<CreditCheckViewFragmentBinding, CreditCheckViewFragmentVM>(CreditCheckViewFragmentVM::class) {
 
@@ -23,6 +25,9 @@ class CreditCheckViewFragment : CoreFragment<CreditCheckViewFragmentBinding, Cre
     override fun setupViews() {
         val someInt = requireArguments().getInt(HistoryDetailsComponentView.CHECK_ID)
         vm.fetchDetailCheckHistory(someInt)
+        vb.btnCloseCredit.setOnClickListener {
+            parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
+        }
     }
     override fun getBinding(): CreditCheckViewFragmentBinding {
         return CreditCheckViewFragmentBinding.inflate(layoutInflater)
