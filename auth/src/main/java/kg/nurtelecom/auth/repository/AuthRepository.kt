@@ -15,6 +15,7 @@ class AuthRepository(
         saveToken(response.access_token)
         saveRefreshToken(response.refresh_token)
         saveFiscalRegime(isFiscalRegime)
+        fetchSecureKey(authApi.openSession("Bearer ${appPrefs.token}", appPrefs.token).result)
         return response
     }
 
@@ -33,5 +34,9 @@ class AuthRepository(
     suspend fun fetchUserData() {
         val user = authApi.fetchUserData("Bearer ${appPrefs.token}")
         dataDao.insert(user.result.user.userDetail)
+    }
+
+    private fun fetchSecureKey(secureKey: String) {
+        appPrefs.secureKey = secureKey
     }
 }

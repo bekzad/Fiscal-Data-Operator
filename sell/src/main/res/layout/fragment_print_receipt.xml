@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:padding="@dimen/margin_16dp"
+    tools:context=".ui.fragment.print_receipt.PrintReceiptFragment">
+
+    <ImageView
+        android:id="@+id/iv_check"
+        android:layout_width="0dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_print_cashier_check"
+        style="@style/NormalSizeWhiteText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:text="@string/print_cashier_check"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_check" />
+
+    <TextView
+        android:id="@+id/tv_payment_amount"
+        style="@style/StyleTwPaymentAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_print_cashier_check"
+        tools:text="351.68 с" />
+
+    <TextView
+        android:id="@+id/tv_change_text"
+        style="@style/NormalSizeYellowText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_32dp"
+        android:text="@string/change"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_payment_amount" />
+
+    <TextView
+        android:id="@+id/tv_change_amount"
+        style="@style/StyleChangeAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_change_text"
+        tools:text="351.68 с" />
+
+    <TextView
+        android:id="@+id/tv_fail_to_print"
+        style="@style/NormalSizeBlueText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_50dp"
+        android:text="@string/fail_to_print"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_new_sale" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_new_sale"
+        style="@style/BtnGreen"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/new_sale"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

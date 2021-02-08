@@ -12,24 +12,9 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-
-fun AppCompatActivity.replaceFragment(
-    container: Int,
-    fragment: Fragment,
-    addToBack: Boolean = false,
-    backStackTag: String? = null
-) {
-    if (addToBack)
-        supportFragmentManager.beginTransaction().replace(container, fragment)
-            .addToBackStack(backStackTag).commit()
-    else
-        supportFragmentManager.beginTransaction().replace(container, fragment).commit()
-}
 
 fun AppCompatActivity.setToolbarTitle(text: String) {
     this.supportActionBar?.setTitle(text)
@@ -53,8 +38,12 @@ fun Date.formatForDecoratorDateTimeDefaults(): String {
     return sdf.format(this)
 }
 
-fun LocalDateTime.formatForServerDateTimeDefaults() =
-    format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"))
+fun Date.subtractDays(amount: Int): Date {
+    val c = Calendar.getInstance()
+    c.time = this
+    c.add(Calendar.DATE, -amount)
+    return c.time
+}
 
 fun ListView.requestLayoutForChangedDataset() {
     val listAdapter = this.adapter
@@ -72,7 +61,7 @@ fun ListView.requestLayoutForChangedDataset() {
     }
 }
 
-val Fragment.parentActivity get() = (activity as AppCompatActivity)
+inline val Fragment.parentActivity get() = (activity as AppCompatActivity)
 
 inline fun <reified T : Activity> Context.startActivity(noinline extra: Intent.() -> Unit = {}) {
     val intent = Intent(this, T::class.java)

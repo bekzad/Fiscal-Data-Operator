@@ -18,6 +18,7 @@ class ReceiptDetailView(context: Context, attr: AttributeSet?) : ConstraintLayou
         vb.tvTitle.text = OperationType.valueOf(content.operationType).type
         vb.tvCounter.text = "#${content.indexNum}"
         vb.tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(content.createdAt).formatForLocalDateTimeDefaults()
+        // TODO ("add BigDecimal")
         vb.tvAmount.text = "${String.format("%.2f", content.total).toDouble()} с"
     }
 

@@ -2,7 +2,6 @@ package kg.nurtelecom.sell.ui.fragment.price_output
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.sell.Product
@@ -11,13 +10,12 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.PriceOutputFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
+import kg.nurtelecom.sell.utils.hideKeyboard
 import kg.nurtelecom.sell.utils.isZero
 import java.math.BigDecimal
 
 
-class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
-
-    override val vm: SellMainViewModel by activityViewModels()
+class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         PriceOutputFragmentBinding.inflate(inflater, container, false)
@@ -25,14 +23,17 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     override fun setupToolbar(): Int = R.string.price_entry
 
     override fun setupViews() {
-        setupCustomEditText()
+        setupEditText()
         vb.btnCheck.setOnClickListener { navigateToSellFragment() }
     }
 
     override fun subscribeToLiveData() {
-        super.subscribeToLiveData()
-        vm.selectedProductData.observe(viewLifecycleOwner, {
-            vb.icProductPrice.setContent(it.productPrice)
+        vm.selectedProductData.observe(viewLifecycleOwner, { product ->
+            if (vm.selectedProductData.value != null) {
+                if (product != null) {
+                    vb.icProductPrice.setContent(product.productPrice)
+                }
+            }
         })
     }
 
@@ -41,7 +42,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
         vm.clearSelectedProduct()
     }
 
-    private fun setupCustomEditText() {
+    private fun setupEditText() {
         vb.apply {
             icProductPrice.fetchTextState {
                 if (it != null) vb.btnCheck.isEnabled = it.isNotEmpty()
@@ -55,6 +56,7 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding>() {
     private fun navigateToSellFragment() {
         sendProduct(fetchProductData())
         parentActivity.replaceFragment<SellFragment>(R.id.sell_container, true)
+        parentActivity.hideKeyboard()
     }
 
     private fun fetchProductData(): Product {

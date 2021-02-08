@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:padding="@dimen/margin_16dp"
+    tools:context=".ui.fragment.print_receipt.SaveReceiptFragment">
+
+    <TextView
+        android:id="@+id/tv_headers"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="Headers"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_code"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="Code"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_headers" />
+
+    <TextView
+        android:id="@+id/tv_cashier_check"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="Body"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_code" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_print_check"
+        style="@style/BtnGreen"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/print_check"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

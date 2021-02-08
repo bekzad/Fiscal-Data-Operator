@@ -16,7 +16,7 @@
     <string name="history_title">История</string>
     <string name="text_sale_type">Кассовый чек</string>
     <string name="text_counter">#123</string>
-    <string name="text_timestamp">25/09/19 - 15:43</string>
+    <string name="text_timestamp">25/09/19 – 15:43</string>
     <string name="text_payment_amount">75.00 с</string>
     <string name="text_profile">Профиль</string>
     <string name="text_date">11 апреля 2020</string>
@@ -29,6 +29,7 @@
     <string name="delete_icon">Delete Icon</string>
     <string name="price">Цена, сом</string>
     <string name="zero">0</string>
+    <string name="title_credit_list">Список кредитов</string>
 
     <!--Side menu sell-->
     <string name="nav_open_drawer">open</string>
@@ -37,6 +38,8 @@
     <string name="text_shift_opening">Открытие смены:</string>
     <string name="text_date_opening">27.06.20 / 08:45 </string>
     <string name="text_sale">Продажа</string>
+    <string name="text_credit">Кредит</string>
+    <string name="text_no_deposit">Без взноса</string>
     <string name="text_return">Возврат</string>
     <string name="text_report">X - отчет</string>
     <string name="text_interim_report">Промежуточный отчет смены</string>
@@ -47,9 +50,36 @@
     <string name="text_operations_list">Список операций за период</string>
     <string name="text_shift_closing_and_report">Закрытие смены и z-отчет</string>
 
+    <!--Side menu other operations-->
+    <string name="text_purchase">Покупка</string>
+    <string name="text_return_purchase">Возврат покупки</string>
+    <string name="text_prepayment">Предоплата</string>
+    <string name="text_refund_prepayment">Возврат предоплаты</string>
+    <string name="text_close_credit">Закрытие кредита</string>
+    <string name="text_repayment_credit">Возврат кредита</string>
+    <string name="text_deposit_and_payment_cashbox">Внесение и выплаты из кассы</string>
+    <string name="text_deposit_and_payment">Внесение и выплаты</string>
+    <string name="text_change_cashbox">Изменение суммы в кассе</string>
+    <string name="text_history_deposits_payments">История внесений и выплат</string>
+    <string name="text_fiscal_report">Фискальный отчет</string>
+    <string name="text_period_report">Отчет за период</string>
+
+    <!--Reports-->
+    <string name="text_x_report">X-отчет</string>
+    <string name="text_print_check">Печать чека</string>
+
     <!--Bottom Sheet Dialog-->
     <string name="text_shift_closing">Закрытие смены</string>
     <string name="text_shift_close">Закрыть смену</string>
     <string name="text_shift_cancel">Отмена</string>
     <string name="text_shift_closing_description">Просле закрытия смены будет сформирован и отправлен Z отчет (отчет конца смены). Начать смену можно будет на следующий день.</string>
+
+    <!--user-->
+    <string name="surname">Фамилия</string>
+    <string name="name">Имя</string>
+    <string name="middleName">Отчество</string>
+    <string name="phoneNumber">+996</string>
+    <string name="inn">ИНН</string>
+    <string name="changing_user_data">Изменение данных</string>
+
 </resources>

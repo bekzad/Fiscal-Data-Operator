@@ -31,7 +31,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/product_not_from_list_button"
-        tools:listitem="@layout/all_products_item_list" />
+        app:layout_constraintTop_toBottomOf="@id/product_not_from_list_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

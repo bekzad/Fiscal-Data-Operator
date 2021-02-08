@@ -1,124 +1,138 @@
 package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
+import androidx.appcompat.widget.Toolbar
+import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.core.activity.CoreActivity
-import kg.nurtelecom.core.extension.getCurrentVisibleFragment
 import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.extension.startActivity
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.core.menu.DrawerListener
+import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ActivitySellMainBinding
 import kg.nurtelecom.sell.databinding.SideMenuSellMainBinding
-import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.bottom_sheet.BottomSheetFragment
 import kg.nurtelecom.sell.ui.fragment.history.HistoryFragment
-import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentByCardFragment
-import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentByCashFragment
+import kg.nurtelecom.sell.ui.fragment.other_operations.OtherOperationsFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
-import kg.nurtelecom.sell.ui.fragment.price_output.PriceOutputFragment
+import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment
+import kg.nurtelecom.sell.ui.fragment.report.XReportFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
+import kg.nurtelecom.sell.utils.setupActionBarDrawerToggle
 
 class SellMainActivity :
     CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var toolbar: Toolbar
 
     override fun getBinding(): ActivitySellMainBinding =
         ActivitySellMainBinding.inflate(layoutInflater)
 
     override fun setupViews() {
-        super.setupViews()
+        toolbar = vb.tbSellMain
+        setSupportActionBar(toolbar)
+        setupDrawerLayout()
+        setupRegime()
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+        replaceFragment<SellFragment>(R.id.sell_container, false)
+    }
+
+    private fun setupDrawerLayout() {
+        drawerLayout = vb.drawerLayout
+        drawerLayout.setupActionBarDrawerToggle(this)
+        setupNavigationListener()
         setSupportActionBar(vb.tbSellMain)
-        setupNavDrawer()
-        replaceFragment(R.id.sell_container, SellFragment.newInstance())
+        setupOperationType()
+        if (vm.operationType == OperationType.PREPAY)
+            replaceFragment<PaymentMethodFragment>(R.id.sell_container)
+        else
+            replaceFragment<SellFragment>(R.id.sell_container)
     }
 
-    private fun setupNavDrawer() {
-        val actionBarToggle = ActionBarDrawerToggle(
-            this,
-            vb.drawerLayout,
-            vb.tbSellMain,
-            R.string.nav_open_drawer,
-            R.string.nav_close_drawer
-        )
-        actionBarToggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
-        vb.drawerLayout.addDrawerListener(actionBarToggle)
-        setupDrawerListener()
-        actionBarToggle.syncState()
+    private fun setupOperationType() {
+        vm.operationType = when(intent?.getStringExtra("operationType")) {
+            OperationType.POSTPAY.type -> OperationType.POSTPAY
+            OperationType.PREPAY.type -> OperationType.PREPAY
+            else -> OperationType.SALE
+        }
     }
 
-    private fun setupDrawerListener() {
-        vb.drawerLayout.addDrawerListener(drawerListener())
-        val view = vb.navView.getHeaderView(0)
-        val sideMenu = SideMenuSellMainBinding.bind(view)
-        val bottomSheetFragment = BottomSheetFragment()
+    private fun setupRegime() {
+        vb.mcRegime.visible(vm.isRegimeNonFiscal)
+    }
+
+    private fun setupNavigationListener() {
+        val headerView = vb.navView.inflateHeaderView(R.layout.side_menu_sell_main)
+        val sideMenu = SideMenuSellMainBinding.bind(headerView)
+
+        sideMenu.btnDrawerClose.setOnClickListener {
+            closeNavDrawer()
+        }
         sideMenu.btnMenuItemSale.setOnClickListener {
-            replaceFragment(R.id.sell_container, SellFragment.newInstance(), true)
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
+            replaceFragment<SellFragment>(R.id.sell_container)
+            vm.operationType = OperationType.SALE
         }
         sideMenu.btnMenuItemClose.setOnClickListener {
-            bottomSheetFragment.show(supportFragmentManager, "BottomSheetFragment")
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
+            BottomSheetFragment.newInstance(supportFragmentManager)
         }
         sideMenu.btnMenuItemReturn.setOnClickListener {
-            // here place for replacing fragment
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
+            replaceFragment<RefundFragment>(R.id.sell_container)
         }
         sideMenu.btnMenuItemGreeting.setOnClickListener {
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            closeNavDrawer()
             finish()
         }
         sideMenu.btnMenuItemReport.setOnClickListener {
-            // here place for replacing fragment
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            replaceFragment<XReportFragment>(R.id.sell_container)
+            closeNavDrawer()
         }
         sideMenu.btnMenuItemHistory.setOnClickListener {
-            HistoryActivity.start(this)
-            finishAndRemoveTask()
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            replaceFragment<HistoryFragment>(R.id.sell_container)
+            closeNavDrawer()
         }
         sideMenu.btnMenuItemInformation.setOnClickListener {
-            replaceFragment(R.id.sell_container, AboutAppFragment.newInstance(), true)
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            replaceFragment<AboutAppFragment>(R.id.sell_container)
+            closeNavDrawer()
         }
         sideMenu.btnMenuItemOperations.setOnClickListener {
-            // here place for replacing fragment
-            vb.drawerLayout.closeDrawer(GravityCompat.START)
+            replaceFragment<OtherOperationsFragment>(R.id.sell_container)
+            closeNavDrawer()
         }
     }
 
-    private fun drawerListener(): DrawerLayout.DrawerListener {
-        return object : DrawerListener() {
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
-            override fun onDrawerStateChanged(newState: Int) {}
-            override fun onDrawerClosed(drawerView: View) {
-                super.onDrawerClosed(drawerView)
-                vb.tbSellMain.setNavigationIcon(R.drawable.ic_baseline_menu_24)
-                when (getCurrentVisibleFragment()) {
-                    is AboutAppFragment -> setToolbarTitle(R.string.info_about_app)
-                    is SellFragment -> setToolbarTitle(R.string.text_sale)
-                    is AddProductFragment -> setToolbarTitle(R.string.product_selection)
-                    is PriceOutputFragment -> setToolbarTitle(R.string.price_entry)
-                    is PaymentMethodFragment, is PaymentByCardFragment,
-                    is PaymentByCashFragment -> setToolbarTitle(R.string.payment_method)
-                }
-            }
+    private fun closeNavDrawer() {
+        drawerLayout.closeDrawer(GravityCompat.START)
+    }
 
-            override fun onDrawerOpened(drawerView: View) {
-                super.onDrawerOpened(drawerView)
-                setToolbarTitle(resources.getString(R.string.text_menu))
-                vb.tbSellMain.setNavigationIcon(R.drawable.ic_baseline_close_24)
-            }
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 
     companion object {
         fun start(context: Context?) {
             context?.startActivity<SellMainActivity>()
+        }
+
+        fun start(context: Context?, operationType: OperationType) {
+            context?.startActivity<SellMainActivity> {
+                this.putExtra("operationType", operationType.type)
+            }
         }
     }
 }

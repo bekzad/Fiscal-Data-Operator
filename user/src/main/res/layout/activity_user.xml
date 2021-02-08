@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,6 +19,7 @@
         android:id="@+id/et_surname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hint_text="@string/surname"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,6 +29,7 @@
         android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hint_text="@string/name"
         app:layout_constraintTop_toBottomOf="@+id/et_surname"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -38,6 +39,7 @@
         android:id="@+id/et_middlename"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hint_text="@string/middleName"
         app:layout_constraintTop_toBottomOf="@+id/et_name"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -47,6 +49,7 @@
         android:id="@+id/et_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hint_text="@string/phoneNumber"
         app:layout_constraintTop_toBottomOf="@+id/et_middlename"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -56,6 +59,7 @@
         android:id="@+id/et_identification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hint_text="@string/inn"
         app:layout_constraintTop_toBottomOf="@+id/et_phone"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -68,7 +72,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:hint="Изменение данных"
+        android:hint="@string/changing_user_data"
         android:textColorHint="@color/white"
         android:layout_marginBottom="@dimen/margin_16dp"/>
 

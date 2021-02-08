@@ -1,13 +1,13 @@
 package kg.nurtelecom.sell.repository
 
-import kg.nurtelecom.core.extension.formatForServerDateTimeDefaults
+import kg.nurtelecom.core.extension.subtractDays
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.data.history.DateBody
 import kg.nurtelecom.data.history_by_id.Result
 import kg.nurtelecom.network.data.api.HistoryApi
 import kg.nurtelecom.storage.sharedpref.AppPreferences
-import java.time.LocalDateTime
-import java.time.temporal.ChronoUnit
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HistoryRepository(
     private val historyApi: HistoryApi,
@@ -16,8 +16,9 @@ class HistoryRepository(
     suspend fun fetchChecksHistory() : List<Content> {
         val checksHistory = historyApi.fetchChecksHistory(
             "Bearer ${appPrefs.token}", DateBody(
-                LocalDateTime.now().minus(Keys.AMOUNT_OF_DAYS, ChronoUnit.DAYS).formatForServerDateTimeDefaults(),
-                LocalDateTime.now().formatForServerDateTimeDefaults()))
+                SimpleDateFormat(DATE_FORMAT, Locale("ru")).format(Date().subtractDays(AMOUNT_OF_DAYS)),
+                SimpleDateFormat(DATE_FORMAT, Locale("ru")).format(Date())
+            ))
         return checksHistory.result.content
     }
 
@@ -27,7 +28,8 @@ class HistoryRepository(
         return detailCheckHistory.result
     }
 
-    object Keys {
-        const val AMOUNT_OF_DAYS = 14L
+    companion object Keys {
+        private const val AMOUNT_OF_DAYS = 14
+        private const val DATE_FORMAT = "dd.MM.yyyy HH:mm:ss"
     }
 }

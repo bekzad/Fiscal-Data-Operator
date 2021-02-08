@@ -29,6 +29,7 @@
             android:layout_width="0dp"
             android:layout_marginTop="5dp"
             android:background="@null"
+            android:hint="@string/zero"
             android:inputType="numberDecimal"
             android:textColorHint="@color/lightGrey"
             app:layout_constraintEnd_toStartOf="@id/iv_next_icon"

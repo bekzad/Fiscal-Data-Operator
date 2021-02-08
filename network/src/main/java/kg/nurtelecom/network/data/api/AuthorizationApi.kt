@@ -3,6 +3,7 @@ package kg.nurtelecom.network.data.api
 import kg.nurtelecom.data.AccessToken
 import kg.nurtelecom.data.LogoutResult
 import kg.nurtelecom.data.UserResult
+import kg.nurtelecom.data.session.OpenSession
 import retrofit2.http.*
 
 interface AuthorizationApi {
@@ -20,4 +21,9 @@ interface AuthorizationApi {
     @Headers("Authorization: Basic ZGV2OkZndkRlNHZkITM={token}")
     @POST("invalidate")
     suspend fun logout(@Header("token") token: String): LogoutResult
+
+    @POST("get-secure-key?invalidate_existing=true")
+    suspend fun openSession(
+        @Header("Authorization") token: String, @Header("session_uuid") session_uuid: String
+    ): OpenSession
 }

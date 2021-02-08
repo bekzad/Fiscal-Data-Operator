@@ -1,4 +1,4 @@
-package kg.nurtelecom.network.data.api
+package kg.nurtelecom.data
 
 data class ChangePasswordResult(
     val result: Boolean,

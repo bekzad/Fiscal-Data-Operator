@@ -4,37 +4,52 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.databinding.BottomSheetFragmentBinding
+import kg.nurtelecom.sell.ui.activity.SellMainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class BottomSheetFragment : BottomSheetDialogFragment(){
+class BottomSheetFragment : BottomSheetDialogFragment() {
 
-    private var _bottomSheetFragmentBinding: BottomSheetFragmentBinding? = null
-    private val bottomSheetFragmentBinding get() = _bottomSheetFragmentBinding!!
+    private val vm: SellMainViewModel by viewModel()
+    private val vb: BottomSheetFragmentBinding by lazy { BottomSheetFragmentBinding.inflate(layoutInflater) }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        subscribeToLiveData()
+        showsDialog = true
+        vb.tvMenuItemClose.setOnClickListener {
+            vm.closeSession()
+        }
+        vb.btnMenuItemCancel.setOnClickListener {
+            dismiss()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _bottomSheetFragmentBinding = BottomSheetFragmentBinding.inflate(inflater, container, false)
-        return bottomSheetFragmentBinding.root
+        return vb.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        bottomSheetFragmentBinding.tvMenuItemClose.setOnClickListener {
-            // here place for replacing fragment
-        }
-        bottomSheetFragmentBinding.btnMenuItemCancel.setOnClickListener {
-            dismiss()
-        }
+    fun subscribeToLiveData() {
+        vm.sessionReportData.observe(viewLifecycleOwner, {
+            when(it) {
+                is ReportDetailed -> {
+                    dismiss()
+                    activity?.finish()
+                }
+            }
+        })
     }
 
-    override fun onDestroyView() {
-        _bottomSheetFragmentBinding = null
-        super.onDestroyView()
+    companion object {
+        fun newInstance(supportFragmentManager: FragmentManager) {
+            return BottomSheetFragment().show(supportFragmentManager, "BottomSheetFragment")
+        }
     }
 }

@@ -1,15 +1,11 @@
 package kg.nurtelecom.changepassword.ui
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.changepassword.core.CoreFragment
 import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.user.R
 import kg.nurtelecom.user.databinding.FragmentCurrentPasswordBinding
 
@@ -34,7 +30,7 @@ class CurrentPasswordFragment : CoreFragment<FragmentCurrentPasswordBinding>() {
 
     private fun navigateToCreateNewPasswordFragment() {
         val activity = activity as AppCompatActivity
-        activity.replaceFragment(R.id.container_main,CreateNewPasswordFragment.newInstance())
+        activity.replaceFragment<CreateNewPasswordFragment>(R.id.container_main)
     }
 
     companion object {

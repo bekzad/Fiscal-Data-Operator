@@ -2,12 +2,44 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="@dimen/margin_16dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:clickable="false"
     android:focusable="false">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_drawer_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:background="@null"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/ic_baseline_close_24"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="@string/menu"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_20sp" />
+
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
+        android:layout_margin="@dimen/margin_16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/radius_4dp">
@@ -39,7 +71,9 @@
         android:insetTop="@dimen/margin_0dp"
         android:insetBottom="@dimen/margin_0dp"
         android:padding="@dimen/margin_16dp"
-        android:text="@string/test_print_x_report" />
+        android:text="@string/test_print_x_report"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"/>
 
     <Button
         android:id="@+id/btn_test_z_report"
@@ -50,7 +84,9 @@
         android:insetTop="@dimen/margin_0dp"
         android:insetBottom="@dimen/margin_0dp"
         android:padding="@dimen/margin_16dp"
-        android:text="@string/test_print_z_report" />
+        android:text="@string/test_print_z_report"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"/>
 
     <Button
         android:id="@+id/btn_test"
@@ -61,5 +97,7 @@
         android:insetTop="@dimen/margin_0dp"
         android:insetBottom="@dimen/margin_0dp"
         android:padding="@dimen/margin_16dp"
-        android:text="@string/test_empty" />
+        android:text="@string/test_empty"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"/>
 </LinearLayout>

@@ -1,44 +1,85 @@
 package kg.nurtelecom.sell.ui.activity
 
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import kg.nurtelecom.core.viewmodel.CoreViewModel
+import kg.nurtelecom.data.enums.OperationType
+import kg.nurtelecom.data.receipt.result.FetchReceiptResult
 import kg.nurtelecom.data.sell.AllProducts
+import kg.nurtelecom.data.sell.CatalogResult
 import kg.nurtelecom.data.sell.Product
+import kg.nurtelecom.data.sell.Products
+import kg.nurtelecom.data.z_report.ReportDetailed
+import kg.nurtelecom.sell.repository.SellRepository
+import kg.nurtelecom.sell.repository.SessionRepository
 import kg.nurtelecom.sell.utils.roundUp
+import kotlinx.coroutines.Dispatchers
+import retrofit2.Response
 import java.math.BigDecimal
-
 
 abstract class SellMainViewModel : CoreViewModel() {
 
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<AllProducts>
+    abstract var isProductEmpty: MutableLiveData<Boolean>
+    abstract val productCatalog: MutableLiveData<List<CatalogResult>>
+    abstract val isRegimeNonFiscal: Boolean
+    abstract val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>>
+    abstract val fetchReceiptResultString: MutableLiveData<Response<String>>
+    abstract var operationType: OperationType
 
+    abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
-
-    abstract fun removeProductFromList(position: Int)
-
+    abstract fun removeProduct(position: Int)
     abstract fun sendSelectedProduct(product: AllProducts)
+    abstract fun fetchProductCatalog()
+    abstract fun clearSelectedProduct()
+    abstract fun searchProduct(name: String)
+    open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 
-    // TODO: must be changed
-    abstract val allProducts: MutableLiveData<MutableList<AllProducts>>
-
-    open fun clearSelectedProduct() {}
+    // Session
+    abstract var sessionReportData: MutableLiveData<ReportDetailed>
+    abstract fun fetchReportSession()
+    abstract fun closeSession()
 }
 
-
-class SellMainViewModelImpl : SellMainViewModel() {
+class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
+    private val sellRepository: SellRepository) : SellMainViewModel() {
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
 
-    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
+    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData()
 
     override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
+
+    override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
+
+    override val isRegimeNonFiscal: Boolean = sellRepository.isNonFiscalRegime
+
+    override val productCatalog: MutableLiveData<List<CatalogResult>> = MutableLiveData(listOf())
+
+    init {
+        fetchProductCatalog()
+    }
+
+    override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> = MutableLiveData()
+    override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
+    override var operationType: OperationType = OperationType.SALE
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
         taxSum.value = calculateTaxSum()
+        isProductEmpty.value = false
+    }
+
+    override fun fetchProductCatalog() {
+        if (!sellRepository.isNonFiscalRegime) {
+            safeCall(Dispatchers.IO) {
+                productCatalog.postValue(sellRepository.fetchProductCategory())
+            }
+        }
     }
 
     private fun calculateTaxSum(): BigDecimal {
@@ -57,9 +98,12 @@ class SellMainViewModelImpl : SellMainViewModel() {
         return taxSum.roundUp()
     }
 
-    override fun removeProductFromList(position: Int) {
+    override fun removeProduct(position: Int) {
         productList.value?.removeAt(position)
         taxSum.value = calculateTaxSum()
+        if (productList.value.isNullOrEmpty()) {
+            isProductEmpty.value = true
+        }
     }
 
     override fun sendSelectedProduct(product: AllProducts) {
@@ -67,16 +111,50 @@ class SellMainViewModelImpl : SellMainViewModel() {
     }
 
     override fun clearSelectedProduct() {
-        selectedProductData.value = AllProducts("", BigDecimal.ZERO)
+        selectedProductData.value = null
     }
 
-    // TODO: must be changed
-    private val mockedAllProducts = mutableListOf(
-        AllProducts("Test product name1", BigDecimal("25.00")),
-        AllProducts("Test product name2", BigDecimal("45.00"))
-    )
+    override fun searchProduct(name: String) {
+        val searchList = mutableListOf<Products>()
+        productCatalog.value?.let { list ->
+            list.forEach { catalog ->
+                catalog.products.forEach { product ->
+                    searchList.add(product)
+                }
+            }
+            val filteredList = searchList.filter { products ->
+                products.name.contains(name, true)
+            }
+            filteredProducts?.value = filteredList
+        }
+    }
 
-    override val allProducts: MutableLiveData<MutableList<AllProducts>> =
-        MutableLiveData(mockedAllProducts)
+    override fun fetchReceipt(fetchReceiptRequest: String) {
+        safeCall(Dispatchers.IO) {
+            val response = sellRepository.fetchReceipt(fetchReceiptRequest)
+            fetchReceiptResultString.postValue(response)
 
+            val gson = Gson()
+            val jsonBody = response.body() ?: ""
+            val jsonString = """${jsonBody}"""
+//
+//            val fetchReceiptResult = gson.fromJson(jsonString, FetchReceiptResult::java)
+//            fetchReceiptResult.postValue()
+        }
+    }
+
+    // Session
+    override var sessionReportData: MutableLiveData<ReportDetailed> = MutableLiveData()
+
+    override fun fetchReportSession() {
+        safeCall(Dispatchers.IO) {
+            sessionReportData.postValue(sessionRepository.fetchReportSession())
+        }
+    }
+
+    override fun closeSession() {
+        safeCall(Dispatchers.IO) {
+            sessionReportData.postValue(sessionRepository.closeSession())
+        }
+    }
 }
