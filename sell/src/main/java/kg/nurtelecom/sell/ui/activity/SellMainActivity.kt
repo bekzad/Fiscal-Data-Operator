@@ -73,7 +73,7 @@ class SellMainActivity :
     private fun setupNavigationListener() {
         val headerView = vb.navView.inflateHeaderView(R.layout.side_menu_sell_main)
         val sideMenu = SideMenuSellMainBinding.bind(headerView)
-
+        sideMenu.tvSessionDateOpening.text = vm.fetchCurrentDate()
         sideMenu.btnDrawerClose.setOnClickListener {
             closeNavDrawer()
         }

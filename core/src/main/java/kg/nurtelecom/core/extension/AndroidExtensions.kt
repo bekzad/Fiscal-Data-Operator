@@ -45,6 +45,10 @@ fun Date.subtractDays(amount: Int): Date {
     return c.time
 }
 
+fun Date.formatForCurrentDate(): String {
+    return SimpleDateFormat("dd.MM.yy / HH:mm", Locale("ru")).format(this)
+}
+
 fun ListView.requestLayoutForChangedDataset() {
     val listAdapter = this.adapter
     listAdapter?.let { adapter ->

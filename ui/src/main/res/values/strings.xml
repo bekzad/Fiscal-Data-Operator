@@ -35,8 +35,8 @@
     <string name="nav_open_drawer">open</string>
     <string name="nav_close_drawer">close</string>
     <string name="text_menu">Меню</string>
-    <string name="text_shift_opening">Открытие смены:</string>
-    <string name="text_date_opening">27.06.20 / 08:45 </string>
+    <string name="text_session_opening">Открытие смены:</string>
+    <string name="text_session_date_opening">27.06.20 / 08:45 </string>
     <string name="text_sale">Продажа</string>
     <string name="text_credit">Кредит</string>
     <string name="text_no_deposit">Без взноса</string>
@@ -48,7 +48,7 @@
     <string name="text_information">Информация</string>
     <string name="text_operations">Прочие операции</string>
     <string name="text_operations_list">Список операций за период</string>
-    <string name="text_shift_closing_and_report">Закрытие смены и z-отчет</string>
+    <string name="text_session_closing_and_report">Закрытие смены и z-отчет</string>
 
     <!--Side menu other operations-->
     <string name="text_purchase">Покупка</string>
@@ -69,10 +69,10 @@
     <string name="text_print_check">Печать чека</string>
 
     <!--Bottom Sheet Dialog-->
-    <string name="text_shift_closing">Закрытие смены</string>
-    <string name="text_shift_close">Закрыть смену</string>
-    <string name="text_shift_cancel">Отмена</string>
-    <string name="text_shift_closing_description">Просле закрытия смены будет сформирован и отправлен Z отчет (отчет конца смены). Начать смену можно будет на следующий день.</string>
+    <string name="text_session_closing">Закрытие смены</string>
+    <string name="text_session_close">Закрыть смену</string>
+    <string name="text_session_cancel">Отмена</string>
+    <string name="text_session_closing_description">Просле закрытия смены будет сформирован и отправлен Z отчет (отчет конца смены). Начать смену можно будет на следующий день.</string>
 
     <!--user-->
     <string name="surname">Фамилия</string>

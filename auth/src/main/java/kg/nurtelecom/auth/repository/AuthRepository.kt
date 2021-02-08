@@ -1,9 +1,11 @@
 package kg.nurtelecom.auth.repository
 
+import kg.nurtelecom.core.extension.formatForCurrentDate
 import kg.nurtelecom.data.AccessToken
 import kg.nurtelecom.network.data.api.AuthorizationApi
 import kg.nurtelecom.storage.roomdatabase.DataDao
 import kg.nurtelecom.storage.sharedpref.AppPreferences
+import java.util.*
 
 class AuthRepository(
     private val authApi: AuthorizationApi,
@@ -15,7 +17,7 @@ class AuthRepository(
         saveToken(response.access_token)
         saveRefreshToken(response.refresh_token)
         saveFiscalRegime(isFiscalRegime)
-        fetchSecureKey(authApi.openSession("Bearer ${appPrefs.token}", appPrefs.token).result)
+        openSession(authApi.openSession("Bearer ${appPrefs.token}", appPrefs.token).result)
         return response
     }
 
@@ -36,7 +38,8 @@ class AuthRepository(
         dataDao.insert(user.result.user.userDetail)
     }
 
-    private fun fetchSecureKey(secureKey: String) {
+    private fun openSession(secureKey: String) {
         appPrefs.secureKey = secureKey
+        appPrefs.currentDate = Date().formatForCurrentDate()
     }
 }
