@@ -1,13 +1,9 @@
 package kg.nurtelecom.network.data.api
 
-import kg.nurtelecom.data.UserDetail
-import kg.nurtelecom.data.UserUpdateResult
+import kg.nurtelecom.data.*
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.*
-import kg.nurtelecom.data.ChangePasswordBody
-import kg.nurtelecom.data.UserDetailModel
 
 
 interface UserApi {
