@@ -92,6 +92,7 @@ class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterab
 
         fun bind(header: String) {
             viewBinding.tvHeader.text = header
+//            viewBinding.root.setOnClickListener(listener)
             itemData[header]?.let { items ->
                 viewBinding.lvItemDetailView.items = items
                 viewBinding.root

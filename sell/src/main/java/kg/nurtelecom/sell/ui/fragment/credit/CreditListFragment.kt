@@ -18,7 +18,10 @@ import java.text.SimpleDateFormat
 
 class CreditListFragment : CoreFragment<CreditListFragmentBinding, CreditListVM>(CreditListVM::class) {
 
-    private var historyAdapter: HistoryAdapter = HistoryAdapter()
+    private var historyAdapter: HistoryAdapter = HistoryAdapter ()
+//    {
+//        parentActivity.replaceFragment<CreditCheckViewFragment>(R.id.sell_container)
+//    }
 
     override fun subscribeToLiveData() {
         observeCreditList()

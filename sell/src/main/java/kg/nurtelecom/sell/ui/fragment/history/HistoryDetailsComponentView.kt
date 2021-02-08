@@ -15,6 +15,7 @@ import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.ofd.cell.ReceiptDetailView
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailsComponentViewBinding
+import kg.nurtelecom.sell.ui.fragment.credit.CreditCheckViewFragment
 import kg.nurtelecom.sell.ui.fragment.history.detail.HistoryDetailFragment
 
 class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
@@ -60,7 +61,7 @@ class HistoryDetailsComponentView(context: Context, attrs: AttributeSet) :
             itemView?.setReceipt(item)
             itemView?.setOnClickListener {
                 val checkId = bundleOf(CHECK_ID to item.id)
-                activity.replaceFragment<HistoryDetailFragment>(R.id.sell_container) {
+                activity.replaceFragment<CreditCheckViewFragment>(R.id.sell_container) {
                     checkId
                 }
             }
