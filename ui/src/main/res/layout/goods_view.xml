@@ -5,14 +5,12 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingEnd="@dimen/margin_16dp"
     tools:ignore="RtlSymmetry">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/darkGrey"
         app:cardCornerRadius="@dimen/radius_0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,54 +24,46 @@
             android:orientation="vertical"
             android:paddingTop="@dimen/margin_12dp">
 
-            <ImageView
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/iv_detail_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_14dp"
-                android:src="@drawable/ic_green_check"
+                android:layout_marginStart="@dimen/margin_12dp"
+                android:theme="@style/PinkCheckBox"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_title"
-                style="@style/HistoryItemTitleTextStyle"
+                android:id="@+id/tv_product_name"
+                style="@style/GoodsItemTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_14dp"
-                android:text="@string/text_sale_type"
+                android:text="@string/text_product_name"
                 app:layout_constraintStart_toEndOf="@id/iv_detail_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_counter"
-                style="@style/HistoryItemSecondaryTextStyle"
+                style="@style/GoodsItemSecondaryTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_counter"
-                app:layout_constraintStart_toStartOf="@id/tv_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+                android:layout_marginBottom="@dimen/margin_12dp"
+                android:text="@string/text_product_count"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_product_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_name" />
 
             <TextView
-                android:id="@+id/tv_timestamp"
-                style="@style/HistoryItemSecondaryTextStyle"
+                android:id="@+id/tv_product_price"
+                style="@style/GoodsItemSecondaryTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_timestamp"
-                android:layout_marginBottom="@dimen/margin_4dp"
-                app:layout_constraintStart_toStartOf="@id/tv_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_counter"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <TextView
-                android:id="@+id/tv_amount"
-                style="@style/HistoryItemTitleTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_payment_amount"
                 android:layout_marginEnd="@dimen/margin_8dp"
+                android:text="@string/text_product_price"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_counter"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/tv_counter" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

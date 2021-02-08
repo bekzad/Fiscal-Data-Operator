@@ -100,4 +100,15 @@
         android:text="@string/test_empty"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"/>
+
+    <kg.nurtelecom.ofd.cell.GoodsView
+        android:id="@+id/btn_menu_item_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        app:showArrowIcon="true"
+        app:subTitle="@string/text_interim_report"
+        app:title="@string/text_report" />
 </LinearLayout>
