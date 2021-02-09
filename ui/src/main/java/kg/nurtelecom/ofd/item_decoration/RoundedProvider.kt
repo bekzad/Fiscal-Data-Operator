@@ -5,23 +5,23 @@ import android.view.View
 import android.view.ViewOutlineProvider
 
 class RoundOutlineProvider(
-        var outlineRadius: Float = 0f,
+        var outlineRadius: Float = none_rounded_radius,
         var roundMode: RoundMode = RoundMode.NONE
 ) : ViewOutlineProvider() {
 
     private val topOffset
         get() = when (roundMode) {
-            RoundMode.ALL, RoundMode.TOP -> 0
+            RoundMode.ALL, RoundMode.TOP -> none_rounded_radius.toInt()
             RoundMode.NONE, RoundMode.BOTTOM -> cornerRadius.toInt()
         }
     private val bottomOffset
         get() = when (roundMode) {
-            RoundMode.ALL, RoundMode.BOTTOM -> 0
+            RoundMode.ALL, RoundMode.BOTTOM -> none_rounded_radius.toInt()
             RoundMode.NONE, RoundMode.TOP -> cornerRadius.toInt()
         }
     private val cornerRadius
         get() = if (roundMode == RoundMode.NONE) {
-            0f
+            none_rounded_radius
         } else {
             outlineRadius
         }
@@ -34,5 +34,9 @@ class RoundOutlineProvider(
                 view.height + bottomOffset,
                 cornerRadius
         )
+    }
+
+    private companion object {
+        private const val none_rounded_radius = 0f
     }
 }
