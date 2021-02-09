@@ -9,5 +9,5 @@ data class Content (
 	val totalGoodsSum : Double,
 	val createdAt : String,
 	val tspName : String,
-	val id : Int
+	val id : Long
 )

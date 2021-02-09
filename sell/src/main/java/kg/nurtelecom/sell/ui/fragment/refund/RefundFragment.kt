@@ -13,6 +13,7 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 import java.text.SimpleDateFormat
 
@@ -29,16 +30,6 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
 
     override fun setupToolbar(): Int  = R.string.text_return
 
-    override fun setupViews() {
-        setHasOptionsMenu(true)
-        initRecyclerView()
-        vm.fetchChecksHistory()
-    }
-
-    override fun subscribeToLiveData() {
-        observeCheckHistory()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.sell_menu, menu)
@@ -47,30 +38,36 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
         searchView.imeOptions = EditorInfo.IME_ACTION_DONE
         searchView.queryHint = getString(R.string.text_search)
         search(searchView)
+        search.doOnMenuItemCollapse {
+            historyAdapter.addHeaderAndSubmitList(vm.checksHistoryData.value, null)
+            true
+        }
     }
 
     private fun search(searchView: SearchView) {
-        searchView.doOnQueryTextChange { newText ->
-            historyAdapter.filter.filter(newText)
+        searchView.doOnQueryTextChange { name ->
+            vm.searchChecks(name)
             true
+        }
+    }
+
+    override fun setupViews() {
+        setHasOptionsMenu(true)
+        initRecyclerView()
+        vm.fetchChecksHistory()
+    }
+
+    override fun subscribeToLiveData() {
+        vm.checksHistoryData.observe(viewLifecycleOwner, { items ->
+            historyAdapter.addHeaderAndSubmitList(items.filter { it.operationType == "SALE" })
+        })
+        vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedItems ->
+            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems.filter { it.operationType == "SALE" })
         }
     }
 
     private fun initRecyclerView() {
         vb.rvHistory.adapter = historyAdapter
-    }
-
-    private fun observeCheckHistory() {
-        vm.checksHistoryData.observe(viewLifecycleOwner, {
-            if (it != null) {
-                val groupedItems = it.groupBy { book ->
-                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForDecoratorDateTimeDefaults()
-                }
-                historyAdapter.itemData = groupedItems.toSortedMap()
-                historyAdapter.setListData(it as ArrayList<Content>)
-                historyAdapter.notifyDataSetChanged()
-            }
-        })
     }
 
     companion object {

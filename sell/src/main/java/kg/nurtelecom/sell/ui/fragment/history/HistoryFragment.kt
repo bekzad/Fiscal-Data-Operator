@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
-import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
+import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,6 +26,8 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
         return ChecksHistoryRecycleViewBinding.inflate(layoutInflater)
     }
 
+    override fun setupToolbar(): Int  = R.string.history_title
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.sell_menu, menu)
@@ -34,9 +36,18 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
         searchView.imeOptions = EditorInfo.IME_ACTION_DONE
         searchView.queryHint = getString(R.string.text_search)
         search(searchView)
+        search.doOnMenuItemCollapse {
+            historyAdapter.addHeaderAndSubmitList(vm.checksHistoryData.value, null)
+            true
+        }
     }
 
-    override fun setupToolbar(): Int  = R.string.history_title
+    private fun search(searchView: SearchView) {
+        searchView.doOnQueryTextChange { name ->
+            vm.searchChecks(name)
+            true
+        }
+    }
 
     override fun setupViews() {
         setHasOptionsMenu(true)
@@ -45,31 +56,16 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
     }
 
     override fun subscribeToLiveData() {
-        observeCheckHistory()
-    }
-
-    private fun search(searchView: SearchView) {
-        searchView.doOnQueryTextChange { newText ->
-            historyAdapter.filter.filter(newText)
-            true
+        vm.checksHistoryData.observe(viewLifecycleOwner, { items ->
+            historyAdapter.addHeaderAndSubmitList(items)
+        })
+        vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedItems ->
+            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems)
         }
     }
 
     private fun initRecyclerView() {
         vb.rvHistory.adapter = historyAdapter
-    }
-
-    private fun observeCheckHistory() {
-        vm.checksHistoryData.observe(viewLifecycleOwner, {
-            if (it != null) {
-                val groupedItems = it.groupBy { book ->
-                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault()).parse(book.createdAt).formatForDecoratorDateTimeDefaults()
-                }
-                historyAdapter.itemData = groupedItems.toSortedMap()
-                historyAdapter.setListData(it as ArrayList<Content>)
-                historyAdapter.notifyDataSetChanged()
-            }
-        })
     }
 
     companion object {
@@ -78,3 +74,4 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
         }
     }
 }
+

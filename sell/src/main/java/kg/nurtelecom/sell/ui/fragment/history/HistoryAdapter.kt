@@ -1,101 +1,170 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
+import kg.nurtelecom.core.extension.formatForLocalDateTimeDefaults
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.history.Content
-import kg.nurtelecom.sell.databinding.ChecksHistoryListItemBinding
+import kg.nurtelecom.sell.databinding.ProductCategoryHeaderBinding
+import kg.nurtelecom.ui.databinding.DetailViewBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
+class HistoryAdapter :
+        ListAdapter<ChecksItem, RecyclerView.ViewHolder>(CheckOperationTypeDiffCallback()) {
 
-    private var mFilteredList: MutableList<Content>? = null
-    private var contents = ArrayList<Content>()
+    private val adapterScope = CoroutineScope(Dispatchers.Default)
 
-    fun setListData(data: ArrayList<Content>) {
-        this.contents = data
+    fun addHeaderAndSubmitList(content: List<Content>?, sortedList: List<Content>? = null) {
+        val uniqueContent = content?.distinctBy { dateFormat(it.createdAt) }
+        adapterScope.launch {
+            if (!sortedList.isNullOrEmpty()) {
+                submitSortedProducts(sortedList)
+            } else {
+                val items = when (content) {
+                    null -> listOf(ChecksItem.Header(""))
+                    else -> {
+                        val checks = ArrayList<ChecksItem>()
+                        if (uniqueContent != null) {
+                            for (i in uniqueContent) {
+                                val date = dateFormat(i.createdAt)
+                                checks.add(ChecksItem.Header(date))
+                                for (j in content) {
+                                    if(date == dateFormat(j.createdAt)) {
+                                        checks.add(ChecksItem.CheckItem(j))
+                                    }
+                                }
+                            }
+                        }
+                        checks
+                    }
+                }
+                submitProducts(items)
+            }
+        }
     }
 
+    private fun dateFormat(date: String): String {
+        return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault()).parse(date).formatForDecoratorDateTimeDefaults()
+    }
 
-    private var itemHeaders: List<String> = listOf()
-
-    var itemData: Map<String, List<Content>> = emptyMap()
-        set(value) {
-            field = value
-            itemHeaders = itemData.keys.toList()
-            notifyDataSetChanged()
+    private suspend fun submitProducts(items: List<ChecksItem>?) {
+        withContext(Dispatchers.Main) {
+            submitList(items)
         }
+    }
+
+    private suspend fun submitSortedProducts(sortedList: List<Content>?) {
+        val mList = ArrayList<ChecksItem>()
+        if (sortedList != null) {
+            for (i in sortedList) {
+                mList.add(ChecksItem.CheckItem(i))
+            }
+        }
+        submitProducts(mList)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val viewBinding: ChecksHistoryListItemBinding =
-            ChecksHistoryListItemBinding.inflate(layoutInflater, parent, false)
-        return ItemViewHolder(viewBinding)
+        return when (viewType) {
+            ITEM_VIEW_TYPE_HEADER -> CheckHeaderViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> HistoryViewHolder.from(parent)
+            else -> throw ClassCastException("Unknown type viewType $viewType")
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (position >= 0 && position < itemHeaders.size) {
-            (holder as ItemViewHolder).bind(itemHeaders[position])
-        }
-    }
-
-    override fun getItemCount() = itemHeaders.size
-
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence): FilterResults {
-                val charString = charSequence.toString()
-                if (charString.isEmpty()) {
-                    mFilteredList = contents
-                } else {
-                    val filteredList = ArrayList<Content>()
-                    for (content in contents) {
-                        if (charString in OperationType.valueOf(content.operationType).type.toLowerCase(Locale.ROOT)
-                            || charString in content.total.toString()
-                        ) {
-                            filteredList.add(content)
-                        }
-                    }
-                    mFilteredList = filteredList
-                }
-
-                val filterResults = FilterResults()
-                filterResults.values = mFilteredList
-
-                return filterResults
+        when (holder) {
+            is CheckHeaderViewHolder -> {
+                val item = getItem(position) as ChecksItem.Header
+                holder.bind(item.name)
             }
-
-            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
-                mFilteredList = filterResults.values as MutableList<Content>?
-                val groupedItems = mFilteredList?.groupBy { book ->
-                    SimpleDateFormat(
-                        "yyyy-MM-dd'T'HH:mm:SSS"
-                    ).parse(book.createdAt).formatForDecoratorDateTimeDefaults()
-                }
-                if (groupedItems != null) {
-                    itemData = groupedItems.toSortedMap()
-                }
-                notifyDataSetChanged()
+            is HistoryViewHolder -> {
+                val item = getItem(position) as ChecksItem.CheckItem
+                holder.bind(item.product)
             }
         }
     }
 
-
-    inner class ItemViewHolder(private val viewBinding: ChecksHistoryListItemBinding) :
-        RecyclerView.ViewHolder(viewBinding.root) {
-
-        fun bind(header: String) {
-            viewBinding.tvHeader.text = header
-            itemData[header]?.let { items ->
-                viewBinding.lvItemDetailView.items = items
-                viewBinding.root
-            }
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is ChecksItem.Header -> ITEM_VIEW_TYPE_HEADER
+            is ChecksItem.CheckItem -> ITEM_VIEW_TYPE_ITEM
         }
     }
+
+    companion object {
+        private const val ITEM_VIEW_TYPE_HEADER = 0
+        private const val ITEM_VIEW_TYPE_ITEM = 1
+    }
+}
+
+class HistoryViewHolder(private val binding: DetailViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+    fun bind(content: Content) {
+        Log.d("HISTORY", content.toString())
+        binding.apply {
+            tvTitle.text = OperationType.valueOf(content.operationType).type
+            tvCounter.text = "#${content.indexNum}"
+            tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(content.createdAt).formatForLocalDateTimeDefaults()
+            // TODO ("add BigDecimal")
+            tvAmount.text = "${String.format("%.2f", content.total).toDouble()} с"
+        }
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): HistoryViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = DetailViewBinding.inflate(layoutInflater, parent, false)
+            return HistoryViewHolder(binding)
+        }
+    }
+}
+
+class CheckHeaderViewHolder(private val binding: ProductCategoryHeaderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+    fun bind(name: String) {
+        binding.tvHeader.text = name
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): CheckHeaderViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = ProductCategoryHeaderBinding.inflate(layoutInflater, parent, false)
+            return CheckHeaderViewHolder(binding)
+        }
+    }
+}
+
+class CheckOperationTypeDiffCallback : DiffUtil.ItemCallback<ChecksItem>() {
+    override fun areItemsTheSame(oldItem: ChecksItem, newItem: ChecksItem): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: ChecksItem, newItem: ChecksItem): Boolean {
+        return oldItem == newItem
+    }
+}
+
+sealed class ChecksItem {
+    data class CheckItem(val product: Content) : ChecksItem() {
+        override val id: Long = product.id
+    }
+
+    data class Header(val name: String) : ChecksItem() {
+        override val id: Long = name.hashCode().toLong()
+    }
+
+    abstract val id: Long
 }

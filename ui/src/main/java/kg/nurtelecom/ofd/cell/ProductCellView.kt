@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.CompoundButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import kg.nurtelecom.core.extension.visible
+import kg.nurtelecom.data.history_by_id.ReceiptItems
 import kg.nurtelecom.ui.R
 import kg.nurtelecom.ui.databinding.ProductCellViewBinding
 
@@ -14,9 +15,9 @@ class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(c
 
     init {
         context.theme.obtainStyledAttributes(
-            attr,
-            R.styleable.ProductCellView,
-            0, 0).apply {
+                attr,
+                R.styleable.ProductCellView,
+                0, 0).apply {
             try {
                 setTitle(getString(R.styleable.ProductCellView_title).toString())
                 setSubTitle(getString(R.styleable.ProductCellView_subTitle))

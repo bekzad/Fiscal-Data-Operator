@@ -6,7 +6,7 @@ data class ReceiptItems (
 	val productName : String,
 	val productCode : String,
 	val productQuantity : Int,
-	val productUnitPrice : Int,
+	val productUnitPrice : Double,
 	val productUnitMeasure : String,
 	val productNdsType : Int,
 	val productNdsAmount : Double,
