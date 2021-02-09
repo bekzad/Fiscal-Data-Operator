@@ -7,7 +7,6 @@ import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
-import kg.nurtelecom.sell.ui.fragment.history.HistoryDetailsComponentView.Companion.CHECK_ID
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 import kg.nurtelecom.sell.ui.fragment.refund.detail.RefundDetailFragment
 
@@ -23,10 +22,7 @@ class HistoryDetailFragment :
 
     override fun setupToolbar(): Int = R.string.history_title
 
-    override fun setupViews() {
-        val someInt = requireArguments().getInt(CHECK_ID)
-        vm.fetchDetailCheckHistory(someInt)
-    }
+    override fun setupViews() {}
 
     override fun subscribeToLiveData() {
         vm.detailCheckHistory.observe(viewLifecycleOwner) {

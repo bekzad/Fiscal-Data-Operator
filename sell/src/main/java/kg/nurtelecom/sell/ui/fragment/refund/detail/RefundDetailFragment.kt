@@ -2,12 +2,15 @@ package kg.nurtelecom.sell.ui.fragment.refund.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment.Companion.CHECK_ID
 
 class RefundDetailFragment :
     CoreFragment<ChecksHistoryDetailFragmentBinding, HistoryViewModel>(HistoryViewModel::class) {
@@ -22,14 +25,14 @@ class RefundDetailFragment :
     override fun setupToolbar(): Int = R.string.history_title
 
     override fun setupViews() {
-//        val id = requireArguments().getInt(CHECK_ID)
-//        vm.fetchDetailCheckHistory(id)
-//        vb.btnCheckReturn.setOnClickListener {
-//            val checkId = bundleOf(CHECK_ID to id)
-//            parentActivity.replaceFragment<RefundProductsFragment>(R.id.sell_container) {
-//                checkId
-//            }
-//        }
+        val id = requireArguments().getInt(CHECK_ID)
+        val checkId = bundleOf(CHECK_ID to id)
+        vm.fetchDetailCheckHistory(id)
+        vb.btnCheckReturn.setOnClickListener {
+            parentActivity.replaceFragment<RefundProductsFragment>(R.id.sell_container) {
+                checkId
+            }
+        }
     }
 
     override fun subscribeToLiveData() {

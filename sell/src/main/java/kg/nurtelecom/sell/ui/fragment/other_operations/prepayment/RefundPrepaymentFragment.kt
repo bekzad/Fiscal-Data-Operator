@@ -6,20 +6,18 @@ import android.view.MenuInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
-import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
-import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
+import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
-import java.text.SimpleDateFormat
 
-class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
+class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class), ProductItemClickListener {
 
-    private var historyAdapter: HistoryAdapter = HistoryAdapter()
+    private var historyAdapter: HistoryAdapter = HistoryAdapter(this)
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -55,6 +53,10 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, H
         setHasOptionsMenu(true)
         initRecyclerView()
         vm.fetchChecksHistory()
+    }
+
+    override fun removeProduct(position: Int) {
+        vm.fetchDetailCheckHistory(position)
     }
 
     override fun subscribeToLiveData() {

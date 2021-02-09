@@ -6,20 +6,23 @@ import android.view.MenuInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
-import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
-import kg.nurtelecom.data.history.Content
+import androidx.core.os.bundleOf
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
+import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.ui.fragment.history.detail.HistoryDetailFragment
+import kg.nurtelecom.sell.ui.fragment.refund.detail.RefundDetailFragment
 import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
-import java.text.SimpleDateFormat
 
-class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
+class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class), ProductItemClickListener {
 
-    private var historyAdapter: HistoryAdapter = HistoryAdapter()
+    private var historyAdapter: HistoryAdapter = HistoryAdapter(this)
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -51,6 +54,14 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
         }
     }
 
+    override fun removeProduct(position: Int) {
+        vm.fetchDetailCheckHistory(position)
+        val checkId = bundleOf(CHECK_ID to position)
+        parentActivity.replaceFragment<RefundDetailFragment>(R.id.sell_container) {
+            checkId
+        }
+    }
+
     override fun setupViews() {
         setHasOptionsMenu(true)
         initRecyclerView()
@@ -74,5 +85,6 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
         fun newInstance(): RefundFragment {
             return RefundFragment()
         }
+        const val CHECK_ID: String = "check_id"
     }
 }

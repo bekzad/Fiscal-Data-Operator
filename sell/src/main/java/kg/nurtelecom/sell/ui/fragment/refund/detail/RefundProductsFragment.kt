@@ -8,6 +8,7 @@ import kg.nurtelecom.data.history_by_id.ReceiptItems
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.FragmentRefundProductsBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment.Companion.CHECK_ID
 
 class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, HistoryViewModel>(HistoryViewModel::class) {
 
@@ -23,9 +24,9 @@ class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, Histo
     }
 
     override fun setupViews() {
-//        val id = requireArguments().getInt(CHECK_ID)
+        val id = requireArguments().getInt(CHECK_ID)
         initRecyclerView()
-//        vm.fetchDetailCheckHistory(id)
+        vm.fetchDetailCheckHistory(id)
     }
 
     private fun initRecyclerView() {

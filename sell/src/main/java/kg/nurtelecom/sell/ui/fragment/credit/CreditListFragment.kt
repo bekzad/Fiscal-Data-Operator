@@ -1,28 +1,24 @@
 package kg.nurtelecom.sell.ui.fragment.credit
 
-import android.graphics.Color
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.MenuItemCompat
-import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.core.extension.parentActivity
-import kg.nurtelecom.core.extension.setToolbarTitle
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.fragment.CoreFragment
-import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.R
+import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.CreditListFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.ui.fragment.history.detail.HistoryDetailFragment
 import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
-import java.text.SimpleDateFormat
 
-class CreditListFragment : CoreFragment<CreditListFragmentBinding, HistoryViewModel>(HistoryViewModel::class) {
+class CreditListFragment : CoreFragment<CreditListFragmentBinding, HistoryViewModel>(HistoryViewModel::class), ProductItemClickListener {
 
-    private var historyAdapter: HistoryAdapter = HistoryAdapter()
+    private var historyAdapter: HistoryAdapter = HistoryAdapter(this)
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -50,6 +46,11 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, HistoryViewMo
         initRecyclerView()
         vm.fetchChecksHistory()
     }
+
+    override fun removeProduct(id: Int) {
+        vm.fetchDetailCheckHistory(id)
+    }
+
 
     override fun subscribeToLiveData() {
         vm.checksHistoryData.observe(viewLifecycleOwner, { product ->

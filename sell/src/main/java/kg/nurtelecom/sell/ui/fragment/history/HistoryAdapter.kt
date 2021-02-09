@@ -1,6 +1,5 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +9,7 @@ import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.core.extension.formatForLocalDateTimeDefaults
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.history.Content
+import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.ProductCategoryHeaderBinding
 import kg.nurtelecom.ui.databinding.DetailViewBinding
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +20,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HistoryAdapter :
+
+class HistoryAdapter(private val itemClick: ProductItemClickListener) :
         ListAdapter<ChecksItem, RecyclerView.ViewHolder>(CheckOperationTypeDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -77,7 +78,7 @@ class HistoryAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_VIEW_TYPE_HEADER -> CheckHeaderViewHolder.from(parent)
-            ITEM_VIEW_TYPE_ITEM -> HistoryViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> HistoryViewHolder.from(parent, itemClick)
             else -> throw ClassCastException("Unknown type viewType $viewType")
         }
     }
@@ -108,25 +109,28 @@ class HistoryAdapter :
     }
 }
 
-class HistoryViewHolder(private val binding: DetailViewBinding) :
+class HistoryViewHolder(private val binding: DetailViewBinding, private val itemClick: ProductItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
     fun bind(content: Content) {
-        Log.d("HISTORY", content.toString())
         binding.apply {
             tvTitle.text = OperationType.valueOf(content.operationType).type
             tvCounter.text = "#${content.indexNum}"
             tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(content.createdAt).formatForLocalDateTimeDefaults()
-            // TODO ("add BigDecimal")
             tvAmount.text = "${String.format("%.2f", content.total).toDouble()} с"
+
+        }
+
+        itemView.setOnClickListener {
+            itemClick.removeProduct(content.id.toInt())
         }
     }
 
     companion object {
-        fun from(parent: ViewGroup): HistoryViewHolder {
+        fun from(parent: ViewGroup, itemClick: ProductItemClickListener): HistoryViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = DetailViewBinding.inflate(layoutInflater, parent, false)
-            return HistoryViewHolder(binding)
+            return HistoryViewHolder(binding, itemClick)
         }
     }
 }
