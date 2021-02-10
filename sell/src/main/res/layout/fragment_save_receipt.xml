@@ -9,37 +9,63 @@
     tools:context=".ui.fragment.print_receipt.SaveReceiptFragment">
 
     <TextView
-        android:id="@+id/tv_headers"
+        android:id="@+id/tv_taxSalesPointName"
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:hint="Headers"
+        android:hint="Наименование"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_code"
+        android:id="@+id/tv_cashiers_check"
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:hint="Code"
+        android:gravity="center_horizontal"
+        android:text="@string/cashiers_check"
         android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_headers" />
+        app:layout_constraintTop_toBottomOf="@id/tv_taxSalesPointName" />
 
     <TextView
-        android:id="@+id/tv_cashier_check"
+        android:id="@+id/tv_receipt_number"
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:hint="Body"
+        android:gravity="center_horizontal"
+        android:text="@string/receipt_number"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cashiers_check" />
+
+    <TextView
+        android:id="@+id/tv_receipt_items"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="ReceiptItems"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_code" />
+        app:layout_constraintTop_toBottomOf="@id/tv_receipt_number" />
+
+    <TextView
+        android:id="@+id/tv_total_prices"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="TotalPrices"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_receipt_items" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_print_check"

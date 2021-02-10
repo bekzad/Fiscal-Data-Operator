@@ -3,7 +3,6 @@ package kg.nurtelecom.data.receipt.result
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.enums.PaymentType
 import java.math.BigDecimal
-import java.time.LocalDateTime
 
 data class Receipt (
     val id: Long, // id чека

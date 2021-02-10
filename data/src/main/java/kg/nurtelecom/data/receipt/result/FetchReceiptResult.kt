@@ -3,7 +3,7 @@ package kg.nurtelecom.data.receipt.result
 import java.io.Serializable
 
 data class FetchReceiptResult (
-    val result: Result, // сгенерированный чек для печати
+    val result: Result?, // сгенерированный чек для печати
     val resultCode: String, // Успешность запроса (SUCCESS, FAIL, EXCEPTION)
 
     // Needs to be checked if they send null

@@ -27,7 +27,6 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val productCatalog: MutableLiveData<List<CatalogResult>>
     abstract val isRegimeNonFiscal: Boolean
     abstract val fetchReceiptResult: MutableLiveData<FetchReceiptResult>
-    abstract val fetchReceiptResultString: MutableLiveData<Response<String>>
     abstract var operationType: OperationType
 
     abstract fun fetchReceipt(fetchReceiptRequest: String)
@@ -66,7 +65,6 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
     }
 
     override val fetchReceiptResult: MutableLiveData<FetchReceiptResult> = MutableLiveData()
-    override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
     override var operationType: OperationType = OperationType.SALE
 
     override fun addNewProduct(product: Product) {
@@ -132,19 +130,20 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
 
     override fun fetchReceipt(fetchReceiptRequest: String) {
         safeCall(Dispatchers.IO) {
+
             val response = sellRepository.fetchReceipt(fetchReceiptRequest)
-            fetchReceiptResultString.postValue(response)
+
+            // We are casting the Json response into data classes and saving them to livedata
+            val responseBody: String
+
+            if (response.isSuccessful){
+                responseBody = response.body() ?: "Successful response, null body"
+            } else {
+                responseBody = response.errorBody()?.string() ?: "Fail response, null error body"
+            }
+
             if (response.code() != 401) {
-                var responseBody = ""
-                if (response.body().isNullOrEmpty()) {
-                    responseBody = response.errorBody()!!.string()
-                } else {
-                    responseBody = response.body()!!
-                }
-                val jsonString = responseBody.replace("\\s+".toRegex(), "")
-                Log.e("JSonString", jsonString)
-                val fetchReceiptResultTmp = Gson().fromJson(jsonString, FetchReceiptResult::class.java)
-                Log.e("fetchReceiptResult", fetchReceiptResultTmp.toString())
+                val fetchReceiptResultTmp = Gson().fromJson(responseBody, FetchReceiptResult::class.java)
                 fetchReceiptResult.postValue(fetchReceiptResultTmp)
             }
         }
