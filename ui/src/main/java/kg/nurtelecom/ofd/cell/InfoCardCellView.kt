@@ -2,6 +2,7 @@ package kg.nurtelecom.ofd.cell
 
 import android.content.Context
 import android.graphics.Color
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -48,9 +49,7 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
                     // Set edit text
                     val editable = getBoolean(R.styleable.InfoCardCellView_is_editable, true)
                     vb.etContent.setTextColor(txtColor)
-                    if (!editable) {
-                        mDisableChildrenTouchEvents = true
-                    }
+                    setIsEditable(editable)
 
                     // Set the next icon
                     val addNextIcon = getBoolean(R.styleable.InfoCardCellView_add_next_icon, false)
@@ -70,6 +69,10 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
 
     fun setContent(value: BigDecimal) {
         vb.etContent.setText(value.toString())
+    }
+
+    fun getContent(): String {
+        return vb.etContent.text.toString()
     }
 
     fun setHint(hint: BigDecimal) {
@@ -104,12 +107,15 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
                 vb.ivNextIcon.visible(false)
                 vb.etContent.setTextColor(Color.BLACK)
                 vb.tvTitle.setTextColor(Color.BLACK)
+                eraseContent()
             }
         }
     }
     
     fun setIsEditable(value: Boolean) {
         mDisableChildrenTouchEvents = !value
+        if (!value)
+            vb.etContent.inputType = InputType.TYPE_NULL
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
