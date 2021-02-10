@@ -8,14 +8,14 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
-import kg.nurtelecom.sell.core.ProductItemClickListener
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 
-class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class), ProductItemClickListener {
+class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class), ItemClickListener {
 
     private var historyAdapter: HistoryAdapter = HistoryAdapter(this)
 

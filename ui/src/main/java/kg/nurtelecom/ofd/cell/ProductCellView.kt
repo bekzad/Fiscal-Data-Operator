@@ -10,7 +10,7 @@ import kg.nurtelecom.data.history_by_id.ReceiptItems
 import kg.nurtelecom.ui.R
 import kg.nurtelecom.ui.databinding.ProductCellViewBinding
 
-class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(context, attr) {
+class ProductCellView(context: Context, attr: AttributeSet?) : ConstraintLayout(context, attr) {
     private val vb = ProductCellViewBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
@@ -29,6 +29,17 @@ class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(c
                 recycle()
             }
         }
+    }
+
+    fun isChecked(): Boolean {
+        return vb.cbSelectItem.isChecked
+    }
+
+    fun setProduct(item: ReceiptItems) {
+        setTitle(item.productName)
+        setSubTitle("${String.format("%.2f", item.productUnitPrice).toDouble()} * ${item.productQuantity} + ${item.discount}")
+        setCellValue("${String.format("%.2f", item.total).toDouble()} с")
+        vb.cbSelectItem.visible(true)
     }
 
     fun setTitle(title: String) {

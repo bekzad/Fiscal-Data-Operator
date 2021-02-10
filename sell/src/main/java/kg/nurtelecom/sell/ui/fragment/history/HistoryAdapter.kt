@@ -9,7 +9,7 @@ import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.core.extension.formatForLocalDateTimeDefaults
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.history.Content
-import kg.nurtelecom.sell.core.ProductItemClickListener
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ProductCategoryHeaderBinding
 import kg.nurtelecom.ui.databinding.DetailViewBinding
 import kotlinx.coroutines.CoroutineScope
@@ -21,7 +21,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class HistoryAdapter(private val itemClick: ProductItemClickListener) :
+class HistoryAdapter(private val itemClick: ItemClickListener) :
         ListAdapter<ChecksItem, RecyclerView.ViewHolder>(CheckOperationTypeDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -109,7 +109,7 @@ class HistoryAdapter(private val itemClick: ProductItemClickListener) :
     }
 }
 
-class HistoryViewHolder(private val binding: DetailViewBinding, private val itemClick: ProductItemClickListener) :
+class HistoryViewHolder(private val binding: DetailViewBinding, private val itemClick: ItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
     fun bind(content: Content) {
@@ -118,7 +118,6 @@ class HistoryViewHolder(private val binding: DetailViewBinding, private val item
             tvCounter.text = "#${content.indexNum}"
             tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(content.createdAt).formatForLocalDateTimeDefaults()
             tvAmount.text = "${String.format("%.2f", content.total).toDouble()} с"
-
         }
 
         itemView.setOnClickListener {
@@ -127,7 +126,7 @@ class HistoryViewHolder(private val binding: DetailViewBinding, private val item
     }
 
     companion object {
-        fun from(parent: ViewGroup, itemClick: ProductItemClickListener): HistoryViewHolder {
+        fun from(parent: ViewGroup, itemClick: ItemClickListener): HistoryViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = DetailViewBinding.inflate(layoutInflater, parent, false)
             return HistoryViewHolder(binding, itemClick)

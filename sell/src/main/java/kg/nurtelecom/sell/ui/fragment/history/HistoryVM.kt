@@ -7,19 +7,23 @@ import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.data.history_by_id.Result
 import kg.nurtelecom.sell.repository.HistoryRepository
 import kotlinx.coroutines.Dispatchers
+import java.math.BigDecimal
 
 abstract class HistoryViewModel : CoreViewModel() {
     abstract var checksHistoryData: MutableLiveData<List<Content>>
     abstract var detailCheckHistory: MutableLiveData<Result>
+    abstract var totalSum: MutableLiveData<BigDecimal>
     open val filteredChecksHistory: MutableLiveData<List<Content>>? = MutableLiveData()
     abstract fun fetchChecksHistory()
     abstract fun fetchDetailCheckHistory(id: Int)
     abstract fun searchChecks(name: String)
+    abstract fun calculateTotalSum(total: BigDecimal)
 }
 
 class HistoryViewModelImpl (private val historyRepository: HistoryRepository) : HistoryViewModel() {
     override var  checksHistoryData: MutableLiveData<List<Content>> = MutableLiveData()
     override var  detailCheckHistory: MutableLiveData<Result> = MutableLiveData()
+    override var totalSum: MutableLiveData<BigDecimal> = MutableLiveData()
 
     override fun fetchChecksHistory() {
         safeCall(Dispatchers.IO) {
@@ -44,5 +48,9 @@ class HistoryViewModelImpl (private val historyRepository: HistoryRepository) : 
             }
             filteredChecksHistory?.value = filteredList
         }
+    }
+
+    override fun calculateTotalSum(total: BigDecimal) {
+        totalSum.postValue(total)
     }
 }

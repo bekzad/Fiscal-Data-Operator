@@ -81,9 +81,4 @@
     <string name="phoneNumber">+996</string>
     <string name="inn">ИНН</string>
     <string name="changing_user_data">Изменение данных</string>
-
-    <!--goods-->
-    <string name="text_product_name">Наименование товара</string>
-    <string name="text_product_count">157.00 * 2 + 12%</string>
-    <string name="text_product_price">351.68 с</string>
 </resources>

@@ -1,13 +1,16 @@
 package kg.nurtelecom.sell.ui.fragment.refund.detail
 
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.history_by_id.ReceiptItems
-import kg.nurtelecom.ofd.cell.GoodsView
-import kg.nurtelecom.ofd.cell.ProductCellView
+import kg.nurtelecom.sell.core.ItemClickListener
+import kg.nurtelecom.sell.core.ProductClickListener
+import kg.nurtelecom.ui.databinding.ProductCellViewBinding
+import java.math.BigDecimal
 
-class RefundAdapter: RecyclerView.Adapter<RefundAdapter.ItemsViewHolder>() {
+class RefundAdapter(private val itemClick: ProductClickListener): RecyclerView.Adapter<RefundAdapter.RefundViewHolder>() {
 
     var items = ArrayList<ReceiptItems>()
 
@@ -15,25 +18,37 @@ class RefundAdapter: RecyclerView.Adapter<RefundAdapter.ItemsViewHolder>() {
         this.items = data
     }
 
-    class ItemsViewHolder(view: View): RecyclerView.ViewHolder(view){
-        private val receiptDetailView: GoodsView = view as GoodsView
+    class RefundViewHolder(private val binding: ProductCellViewBinding, private val itemClick: ProductClickListener): RecyclerView.ViewHolder(binding.root){
 
-        fun getCustomView(item: ReceiptItems): GoodsView {
-//            Log.d("CHECKED", receiptDetailView.isChecked().toString())
-            return receiptDetailView
+        fun bind(item: ReceiptItems) {
+            binding.apply {
+                tvTitle.text = item.productName
+                tvSubTitle.text = "${String.format("%.2f", item.productUnitPrice).toDouble()} * ${item.productQuantity} + ${item.discount}"
+                tvCellValue.text = "${String.format("%.2f", item.total).toDouble()} с"
+                cbSelectItem.visible(true)
+            }
+
+            binding.cbSelectItem.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    itemClick.selectProduct(BigDecimal(item.total))
+                }
+            }
+        }
+        companion object {
+            fun from(parent: ViewGroup, itemClick: ProductClickListener): RefundViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ProductCellViewBinding.inflate(layoutInflater, parent, false)
+                return RefundViewHolder(binding, itemClick)
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
-        val itemView = GoodsView(parent.context, null)
-        itemView.layoutParams =  ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
-        return ItemsViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RefundViewHolder {
+        return RefundViewHolder.from(parent, itemClick)
     }
 
-    override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
-        holder.getCustomView(items[position]).setProduct(items[position])
+    override fun onBindViewHolder(holder: RefundViewHolder, position: Int) {
+        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int {
