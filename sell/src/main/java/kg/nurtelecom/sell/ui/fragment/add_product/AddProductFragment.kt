@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.add_product
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -25,6 +26,11 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewM
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         AddProductFragmentBinding.inflate(inflater, container, false)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        vm.fetchProductCatalogLocally()
+    }
 
     override fun setupToolbar(): Int = R.string.product_selection
 

@@ -1,14 +1,13 @@
 package kg.nurtelecom.sell.ui.activity
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.google.gson.Gson
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
-import kg.nurtelecom.data.sell.AllProducts
-import kg.nurtelecom.data.sell.CatalogResult
-import kg.nurtelecom.data.sell.Product
-import kg.nurtelecom.data.sell.Products
+import kg.nurtelecom.data.sell.*
 import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
@@ -23,20 +22,23 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<AllProducts>
     abstract var isProductEmpty: MutableLiveData<Boolean>
-    abstract val productCatalog: MutableLiveData<List<CatalogResult>>
+    abstract var productCatalog: LiveData<List<CatalogResult>>
     abstract val isRegimeNonFiscal: Boolean
     abstract val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>>
     abstract val fetchReceiptResultString: MutableLiveData<Response<String>>
-    abstract var operationType: OperationType
 
+    open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
+
+    abstract var operationType: OperationType
     abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
     abstract fun removeProduct(position: Int)
     abstract fun sendSelectedProduct(product: AllProducts)
-    abstract fun fetchProductCatalog()
+    //abstract fun fetchProductCatalog()
     abstract fun clearSelectedProduct()
     abstract fun searchProduct(name: String)
-    open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
+    abstract fun fetchProductCatalogRemotely()
+    abstract fun fetchProductCatalogLocally()
 
     // Session
     abstract var sessionReportData: MutableLiveData<ReportDetailed>
@@ -45,41 +47,30 @@ abstract class SellMainViewModel : CoreViewModel() {
 }
 
 class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
-    private val sellRepository: SellRepository) : SellMainViewModel() {
-
-    override val productList: MutableLiveData<MutableList<Product>> =
-        MutableLiveData(mutableListOf())
-
-    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData()
-
-    override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
-
-    override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
+                            private val sellRepository: SellRepository) : SellMainViewModel() {
 
     override val isRegimeNonFiscal: Boolean = sellRepository.isNonFiscalRegime
 
-    override val productCatalog: MutableLiveData<List<CatalogResult>> = MutableLiveData(listOf())
-
-    init {
-        fetchProductCatalog()
-    }
+    override val productList: MutableLiveData<MutableList<Product>> =
+            MutableLiveData(mutableListOf())
+    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData()
+    override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
+    override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
+    override var productCatalog: LiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
     override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> = MutableLiveData()
     override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
+
     override var operationType: OperationType = OperationType.SALE
+
+    init {
+        fetchProductCatalogRemotely()
+    }
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
         taxSum.value = calculateTaxSum()
         isProductEmpty.value = false
-    }
-
-    override fun fetchProductCatalog() {
-        if (!sellRepository.isNonFiscalRegime) {
-            safeCall(Dispatchers.IO) {
-                productCatalog.postValue(sellRepository.fetchProductCategory())
-            }
-        }
     }
 
     private fun calculateTaxSum(): BigDecimal {
@@ -126,6 +117,18 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
                 products.name.contains(name, true)
             }
             filteredProducts?.value = filteredList
+        }
+    }
+
+    override fun fetchProductCatalogRemotely() {
+        safeCall(Dispatchers.IO) {
+            sellRepository.fetchProductCategoryRemotely()
+        }
+    }
+
+    override fun fetchProductCatalogLocally() {
+        safeCall(Dispatchers.IO) {
+            productCatalog = sellRepository.catalogFromLocal.asLiveData()
         }
     }
 
