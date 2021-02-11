@@ -8,16 +8,16 @@ import kg.nurtelecom.data.sell.Products
 class ProductConverter {
 
     @TypeConverter
-    fun stringToProduct(json: String): Products {
+    fun stringToProduct(json: String): List<Products> {
         val gson = Gson()
-        val type = object : TypeToken<Products>() {}.type
+        val type = object : TypeToken<List<Products>>() {}.type
         return gson.fromJson(json, type)
     }
 
     @TypeConverter
-    fun productToString(products: Products): String {
+    fun productToString(products: List<Products>): String {
         val gson = Gson()
-        val type = object : TypeToken<Products>() {}.type
+        val type = object : TypeToken<List<Products>>() {}.type
         return gson.toJson(products, type)
     }
 
