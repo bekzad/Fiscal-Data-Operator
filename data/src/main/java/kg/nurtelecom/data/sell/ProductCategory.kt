@@ -1,5 +1,9 @@
 package kg.nurtelecom.data.sell
 
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.math.BigDecimal
 
 data class ProductCategory (
@@ -12,8 +16,8 @@ data class ProductCategory (
 data class ProductCatalog (
 	val id : Long,
 	val name : String,
-	val businessType : BusinessType,
-	val taxPayer : TaxPayer
+	@Ignore val businessType : BusinessType,
+	@Ignore val taxPayer : TaxPayer
 )
 
 data class Products (
@@ -27,12 +31,14 @@ data class Products (
 	val unit : String
 )
 
+@Entity(tableName = "catalog")
 data class CatalogResult (
+	@PrimaryKey(autoGenerate = true) val dbId: Long,
 	val id : Int,
 	val name : String,
 	val productCatalog : ProductCatalog,
 	val products : List<Products>
-)
+): Serializable
 
 data class TaxPayer (
 	val id : Long,
