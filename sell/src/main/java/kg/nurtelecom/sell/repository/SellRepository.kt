@@ -9,12 +9,19 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 class SellRepository(
-    private val sellApi: SellApi,
-    private val productApi: ProductApi,
-    private val appPrefs: AppPreferences,
-    private val sellDao: SellDao) {
+        private val sellApi: SellApi,
+        private val productApi: ProductApi,
+        private val appPrefs: AppPreferences,
+        private val sellDao: SellDao) {
 
     val isNonFiscalRegime: Boolean get() = appPrefs.fiscalRegime
+    val isDialogShow: Boolean get() = appPrefs.isFiscalDialogShow
+
+    val catalogFromLocal: Flow<List<CatalogResult>> = sellDao.fetchProductCatalog()
+
+    fun changeDialogPref(value: Boolean) {
+        appPrefs.isFiscalDialogShow = value
+    }
 
     suspend fun fetchProductCategoryRemotely() {
         sellDao.insertProductCatalog(productApi.fetchProductCatalog("Bearer ${appPrefs.token}").result)
@@ -26,7 +33,5 @@ class SellRepository(
                 uuid = appPrefs.token,
                 fetchReceiptRequest = fetchReceiptRequest)
     }
-
-    val catalogFromLocal: Flow<List<CatalogResult>> = sellDao.fetchProductCatalog()
 
 }

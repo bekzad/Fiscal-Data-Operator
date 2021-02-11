@@ -2,16 +2,12 @@ package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
 import androidx.appcompat.widget.Toolbar
-import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.core.extension.visible
-import kg.nurtelecom.core.menu.DrawerListener
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R

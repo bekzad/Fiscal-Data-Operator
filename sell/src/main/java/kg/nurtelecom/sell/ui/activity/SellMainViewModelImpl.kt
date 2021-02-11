@@ -26,6 +26,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val isRegimeNonFiscal: Boolean
     abstract val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>>
     abstract val fetchReceiptResultString: MutableLiveData<Response<String>>
+    abstract val isDialogShow: MutableLiveData<Boolean>
 
     open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 
@@ -34,7 +35,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun addNewProduct(product: Product)
     abstract fun removeProduct(position: Int)
     abstract fun sendSelectedProduct(product: AllProducts)
-    //abstract fun fetchProductCatalog()
+    abstract fun setDialogVisibility(value: Boolean)
     abstract fun clearSelectedProduct()
     abstract fun searchProduct(name: String)
     abstract fun fetchProductCatalogRemotely()
@@ -63,8 +64,15 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
 
     override var operationType: OperationType = OperationType.SALE
 
+    override val isDialogShow: MutableLiveData<Boolean> = MutableLiveData(sellRepository.isDialogShow)
+
     init {
         fetchProductCatalogRemotely()
+    }
+
+    override fun setDialogVisibility(value: Boolean) {
+        isDialogShow.value = value
+        sellRepository.changeDialogPref(value)
     }
 
     override fun addNewProduct(product: Product) {

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
@@ -49,6 +50,9 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
         vm.isProductEmpty.observe(viewLifecycleOwner) { state ->
             vb.icSumPay.changeEditText(state)
         }
+        vm.isDialogShow.observe(viewLifecycleOwner, { state ->
+            vb.dvRegime.visible(!state)
+        })
     }
 
     override fun removeProduct(position: Int) {
@@ -73,6 +77,11 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
 
     private fun startPrepay() {
         parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container, false)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        vm.setDialogVisibility(true)
     }
 
     companion object {
