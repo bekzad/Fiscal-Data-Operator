@@ -24,7 +24,6 @@ class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, Histo
     override fun subscribeToLiveData() {
         vm.detailCheckHistory.observe(viewLifecycleOwner) {
             parentActivity.setToolbarTitle(getString(R.string.cash_check_number, it.receipt.indexNum))
-
             refundAdapter.setListData(it.receipt.receiptItems as ArrayList<ReceiptItems>)
             vb.rvRefund.adapter = refundAdapter
         }
