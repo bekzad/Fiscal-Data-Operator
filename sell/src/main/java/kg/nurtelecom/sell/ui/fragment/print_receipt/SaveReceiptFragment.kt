@@ -1,17 +1,18 @@
 package kg.nurtelecom.sell.ui.fragment.print_receipt
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.data.history_by_id.ReceiptItems
+import kg.nurtelecom.data.receipt.result.FetchReceiptResult
+import kg.nurtelecom.data.receipt.result.Receipt
 import kg.nurtelecom.data.receipt.result.ReceiptItemResult
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentSaveReceiptBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.utils.isNotZero
-import java.lang.StringBuilder
 
 class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainViewModel>(SellMainViewModel::class) {
 
@@ -23,59 +24,94 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
     override fun setupToolbar(): Int = R.string.print_check
 
     override fun setupViews() {
-        super.setupViews()
-
         vb.btnPrintCheck.setOnClickListener {
             navigateToPrintReceipt()
         }
     }
 
     override fun subscribeToLiveData() {
-        // TO DO exception when I am trying to observe null object
+        // TO DO exception when I am trying to observe null object only when the code is 401
         vm.fetchReceiptResult.observe(viewLifecycleOwner, { response ->
-            val receiptNumber = response.result?.receipt?.indexNum.toString() ?: ""
-
-            val itemBuilder = StringBuilder()
-            val receiptItems = response.result?.receipt?.receiptItems
-            if (!receiptItems.isNullOrEmpty()) {
-                for (receipt in receiptItems) {
-                    val receiptItem: String
-                    with(receipt) {
-                        receiptItem = "$productName       ${productUnitPrice}с. * $productQuantity = $subTotal"
-                    }
-                    itemBuilder.append(receiptItem)
-                }
-            }
-
-            val builder = StringBuilder()
-            val receipt = response.result?.receipt
-
-            val subtotal = "ВСЕГО       =${receipt?.subtotal}\n"
-            val discountTotal = "СКИДКА       =${receipt?.discountTotal}\n"
-            val chargeTotal = "НАЦЕНКА       =${receipt?.chargeTotal}\n"
-            val ndsAmountTotal = "НДС 12       =${receipt?.ndsAmountTotal}\n"
-            val nspAmountTotal = "НСП 1       =${receipt?.nspAmountTotal}\n"
-            val total = "ИТОГО       =${receipt?.total}"
-
-            if (receipt != null) {
-                builder.append(subtotal)
-                if (receipt.discountTotal.isNotZero()) {
-                    builder.append(discountTotal)
-                }
-                if (receipt.chargeTotal.isNotZero()) {
-                    builder.append(chargeTotal)
-                }
-                builder.append(ndsAmountTotal)
-                builder.append(nspAmountTotal)
-                builder.append(total)
-            }
-
-            vb.tvTaxSalesPointName.text = response.result?.taxSalesPointName
-            vb.tvReceiptNumber.text = getString(R.string.receipt_number, receiptNumber)
-            vb.tvReceiptItems.text = itemBuilder
-            vb.tvTotalPrices.text = builder
+            updateScreen(response)
         })
+    }
 
+    private fun updateScreen(response: FetchReceiptResult) {
+        // Get the receipt
+        val receipt = response.result?.receipt
+        val receiptNumber = receipt?.indexNum.toString()
+        val receiptItems = receipt?.receiptItems
+
+        // Get the receiptItems and totalPrices as one string to assign to a TextView
+        val receiptItemsString = retrieveReceiptItems(receiptItems)
+        val totalPricesString = retrieveTotalPrices(receipt)
+
+        // Set the values of textViews
+        vb.tvTaxSalesPointName.text = response.result?.taxSalesPointName
+        vb.tvReceiptNumber.text = getString(R.string.receipt_number, receiptNumber)
+        vb.tvProductName.text = receiptItemsString["names"]
+        vb.tvReceiptItems.text = receiptItemsString["items"]
+        vb.tvTotalPricesText.text = totalPricesString["texts"]
+        vb.tvTotalPrices.text = totalPricesString["prices"]
+    }
+
+    private fun retrieveReceiptItems(receiptItems: List<ReceiptItemResult>?): Map<String, StringBuilder> {
+        val nameBuilder = StringBuilder()
+        val itemBuilder = StringBuilder()
+
+        if (!receiptItems.isNullOrEmpty()) {
+            for (receipt in receiptItems) {
+                var productNames: String
+                val receiptItem: String
+                with(receipt) {
+                    productNames = "$productName\n" // TO DO other things beside the name exist
+                    receiptItem = "${productUnitPrice}с. * $productQuantity = ${subtotal}с.\n" // To do Quantity can be meters or kg
+                }
+                nameBuilder.append(productNames)
+                itemBuilder.append(receiptItem)
+            }
+        }
+        return mapOf("names" to nameBuilder, "items" to itemBuilder)
+    }
+
+    private fun retrieveTotalPrices(receipt: Receipt?): Map<String, StringBuilder> {
+
+        val totalPrices = StringBuilder()
+        val totalPricesText = StringBuilder()
+
+        val subtotal = "=${receipt?.subtotal}с.\n"
+        val discountTotal = "=${receipt?.discountTotal}с.\n"
+        val chargeTotal = "=${receipt?.chargeTotal}с.\n"
+        val ndsAmountTotal = "=${receipt?.ndsAmountTotal}с.\n"
+        val nspAmountTotal = "=${receipt?.nspAmountTotal}с.\n"
+        val total = "=${receipt?.total}с."
+
+        val subtotalText = "ВСЕГО\n"
+        val discountTotalText = "СКИДКА\n"
+        val chargeTotalText = "НАЦЕНКА\n"
+        val ndsAmountTotalText = "НДС 12\n" // TO DO not always 12
+        val nspAmountTotalText = "НСП 1\n" // TO DO not always 1
+        val totalText = "ИТОГО"
+
+        if (receipt != null) {
+            totalPrices.append(subtotal)
+            totalPricesText.append(subtotalText)
+            if (receipt.discountTotal.isNotZero()) {
+                totalPrices.append(discountTotal)
+                totalPricesText.append(discountTotalText)
+            }
+            if (receipt.chargeTotal.isNotZero()) {
+                totalPrices.append(chargeTotal)
+                totalPricesText.append(chargeTotalText)
+            }
+            totalPrices.append(ndsAmountTotal)
+            totalPricesText.append(ndsAmountTotalText)
+            totalPrices.append(nspAmountTotal)
+            totalPricesText.append(nspAmountTotalText)
+            totalPrices.append(total)
+            totalPricesText.append(totalText)
+        }
+        return mapOf("texts" to totalPricesText, "prices" to totalPrices)
     }
 
     private fun navigateToPrintReceipt() {

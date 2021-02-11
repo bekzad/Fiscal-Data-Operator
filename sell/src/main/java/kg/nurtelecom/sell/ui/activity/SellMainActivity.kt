@@ -1,17 +1,16 @@
 package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
 import androidx.appcompat.widget.Toolbar
-import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import kg.nurtelecom.auth.ui.AuthActivity
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.core.extension.visible
-import kg.nurtelecom.core.menu.DrawerListener
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
@@ -27,10 +26,34 @@ import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.utils.setupActionBarDrawerToggle
 
 class SellMainActivity :
-    CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
+    CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: Toolbar
+
+    override fun onStart() {
+        super.onStart()
+        val pref: SharedPreferences = getSharedPreferences(
+            "kg.nurtelecom.storage.appPref",
+            Context.MODE_PRIVATE
+        )
+        pref.registerOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        Log.e("OnSharedChanged", "OnSharedChaged")
+        if (sharedPreferences?.getString("ACCESS_TOKEN", "").isNullOrEmpty()) {
+            Log.e("OnSharedChanged", "OnSharedChaged inside if statement")
+            AuthActivity.start(this)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val pref = getSharedPreferences("kg.nurtelecom.storage.appPref", MODE_PRIVATE)
+        pref.unregisterOnSharedPreferenceChangeListener(this)
+    }
 
     override fun getBinding(): ActivitySellMainBinding =
         ActivitySellMainBinding.inflate(layoutInflater)

@@ -3,6 +3,7 @@ package kg.nurtelecom.sell.ui.activity
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
@@ -15,7 +16,6 @@ import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
 import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.Dispatchers
-import retrofit2.Response
 import java.math.BigDecimal
 
 abstract class SellMainViewModel : CoreViewModel() {
@@ -142,9 +142,11 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
                 responseBody = response.errorBody()?.string() ?: "Fail response, null error body"
             }
 
-            if (response.code() != 401) {
+            try {
                 val fetchReceiptResultTmp = Gson().fromJson(responseBody, FetchReceiptResult::class.java)
                 fetchReceiptResult.postValue(fetchReceiptResultTmp)
+            } catch (e: JsonSyntaxException) {
+                Log.e("Gson", "Could not parse the responseBody $responseBody to FetchReceiptResult")
             }
         }
     }

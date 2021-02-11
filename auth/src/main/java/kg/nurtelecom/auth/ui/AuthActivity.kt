@@ -1,8 +1,10 @@
 package kg.nurtelecom.auth.ui
 
+import android.content.Context
 import kg.nurtelecom.auth.databinding.AuthActivityBinding
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.enable
+import kg.nurtelecom.core.extension.startActivity
 
 class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewModel::class) {
 
@@ -67,5 +69,8 @@ class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewM
 
     companion object {
         const val AUTH_RESULT = 1
+        fun start(context: Context?) {
+            context?.startActivity<AuthActivity>()
+        }
     }
 }

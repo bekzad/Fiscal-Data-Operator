@@ -41,6 +41,7 @@ dependencies {
     implementation project(path: ':data')
     implementation project(path: ':storage')
     implementation project(path: ':ui')
+    implementation project(path: ':auth')
 
     implementation libs.kotlin
     implementation libs.androidx.values()
