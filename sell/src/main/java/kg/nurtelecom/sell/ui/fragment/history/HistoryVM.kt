@@ -49,6 +49,7 @@ class HistoryViewModelImpl (private val historyRepository: HistoryRepository) : 
             }
             val filteredList = searchList.filter { item ->
                 OperationType.valueOf(item.operationType).type.contains(name, true)
+                        || item.indexNum.toString().contains(name, true)
             }
             filteredChecksHistory?.value = filteredList
         }

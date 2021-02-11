@@ -61,10 +61,10 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, H
 
     override fun subscribeToLiveData() {
         vm.checksHistoryData.observe(viewLifecycleOwner, { items ->
-            historyAdapter.addHeaderAndSubmitList(items)
+            historyAdapter.addHeaderAndSubmitList(items.filter { it.operationType == "PREPAY" })
         })
         vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedItems ->
-            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems)
+            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems.filter { it.operationType == "PREPAY" })
         }
     }
 

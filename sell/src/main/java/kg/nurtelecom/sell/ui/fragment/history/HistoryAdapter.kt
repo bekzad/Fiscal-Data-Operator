@@ -29,12 +29,13 @@ class HistoryAdapter(private val itemClick: ItemClickListener) :
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
     fun addHeaderAndSubmitList(content: List<Content>?, sortedList: List<Content>? = null) {
-        val uniqueContent = content?.distinctBy { dateFormat(it.createdAt) }
+        val sortedContent = content?.sortedByDescending { it.indexNum }
+        val uniqueContent = sortedContent?.distinctBy { dateFormat(it.createdAt) }
         adapterScope.launch {
             if (!sortedList.isNullOrEmpty()) {
                 submitSortedProducts(sortedList)
             } else {
-                val items = when (content) {
+                val items = when (sortedContent) {
                     null -> listOf(ChecksItem.Header(""))
                     else -> {
                         val checks = ArrayList<ChecksItem>()
@@ -42,7 +43,7 @@ class HistoryAdapter(private val itemClick: ItemClickListener) :
                             for (i in uniqueContent) {
                                 val date = dateFormat(i.createdAt)
                                 checks.add(ChecksItem.Header(date))
-                                for (j in content) {
+                                for (j in sortedContent) {
                                     if(date == dateFormat(j.createdAt)) {
                                         checks.add(ChecksItem.CheckItem(j))
                                     }
@@ -68,9 +69,10 @@ class HistoryAdapter(private val itemClick: ItemClickListener) :
     }
 
     private suspend fun submitSortedProducts(sortedList: List<Content>?) {
+        val sortedContent = sortedList?.sortedByDescending { it.indexNum }
         val mList = ArrayList<ChecksItem>()
-        if (sortedList != null) {
-            for (i in sortedList) {
+        if (sortedContent != null) {
+            for (i in sortedContent) {
                 mList.add(ChecksItem.CheckItem(i))
             }
         }
