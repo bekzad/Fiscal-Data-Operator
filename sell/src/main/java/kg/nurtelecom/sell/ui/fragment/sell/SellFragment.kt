@@ -51,8 +51,8 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
         }
     }
 
-    override fun removeProduct(position: Int) {
-        vm.removeProduct(position)
+    override fun <T> onItemClick(value: T) {
+        vm.removeProduct(value as Int)
         productAdapter.notifyDataSetChanged()
     }
 

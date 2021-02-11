@@ -50,9 +50,9 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
         }
     }
 
-    override fun removeProduct(position: Int) {
-        vm.fetchDetailCheckHistory(position)
-        val checkId = bundleOf(CHECK_ID to position)
+    override fun <T> onItemClick(value: T) {
+        vm.fetchDetailCheckHistory(value as Int)
+        val checkId = bundleOf(CHECK_ID to value)
         parentActivity.replaceFragment<RefundDetailFragment>(R.id.sell_container) {
             checkId
         }

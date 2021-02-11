@@ -1,12 +1,14 @@
-package kg.nurtelecom.storage.roomdatabase
+package kg.nurtelecom.storage.roomDatabase
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import kg.nurtelecom.data.AccessToken
+import kg.nurtelecom.data.Result
 import kg.nurtelecom.data.UserDetail
 
-@Database(entities = [UserDetail::class], version = 2)
+@Database(entities = [UserDetail::class, AccessToken::class], version = 3)
 abstract class RoomDB : RoomDatabase() {
 
     abstract fun getDataDao(): DataDao

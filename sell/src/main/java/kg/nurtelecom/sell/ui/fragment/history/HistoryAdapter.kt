@@ -121,7 +121,7 @@ class HistoryViewHolder(private val binding: DetailViewBinding, private val item
         }
 
         itemView.setOnClickListener {
-            itemClick.removeProduct(content.id.toInt())
+            itemClick.onItemClick(content.id.toInt())
         }
     }
 

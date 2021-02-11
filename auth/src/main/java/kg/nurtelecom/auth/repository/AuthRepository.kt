@@ -3,7 +3,7 @@ package kg.nurtelecom.auth.repository
 import kg.nurtelecom.core.extension.formatForCurrentDate
 import kg.nurtelecom.data.AccessToken
 import kg.nurtelecom.network.data.api.AuthorizationApi
-import kg.nurtelecom.storage.roomdatabase.DataDao
+import kg.nurtelecom.storage.roomDatabase.DataDao
 import kg.nurtelecom.storage.sharedpref.AppPreferences
 import java.util.*
 

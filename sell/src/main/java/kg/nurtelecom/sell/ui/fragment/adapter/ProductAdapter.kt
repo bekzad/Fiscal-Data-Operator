@@ -37,7 +37,7 @@ class ProductAdapter(private val itemClick: ItemClickListener) :
             binding.apply {
                 tvProductCount.text = fetchProductExpression(product)
                 tvProductSum.text = product.totalPrice.toString()
-                ivRemoveProduct.setOnClickListener { itemClick.removeProduct(position) }
+                ivRemoveProduct.setOnClickListener { itemClick.onItemClick(position) }
             }
         }
 
@@ -61,8 +61,8 @@ class ProductAdapter(private val itemClick: ItemClickListener) :
 
         companion object {
             fun getInstance(
-                parent: ViewGroup,
-                itemClick: ItemClickListener
+                    parent: ViewGroup,
+                    itemClick: ItemClickListener
             ): ProductViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ProductListItemBinding.inflate(layoutInflater, parent, false)

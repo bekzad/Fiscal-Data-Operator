@@ -9,13 +9,13 @@ import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.data.history_by_id.ReceiptItems
 import kg.nurtelecom.sell.R
-import kg.nurtelecom.sell.core.ProductClickListener
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.FragmentRefundProductsBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment.Companion.CHECK_ID
 import java.math.BigDecimal
 
-class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, HistoryViewModel>(HistoryViewModel::class), ProductClickListener {
+class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, HistoryViewModel>(HistoryViewModel::class), ItemClickListener {
 
     private var refundAdapter: RefundAdapter = RefundAdapter(this)
 
@@ -37,8 +37,8 @@ class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, Histo
         vm.fetchDetailCheckHistory(id)
     }
 
-    override fun selectProduct(total: BigDecimal) {
-        vm.calculateTotalSum(total)
+    override fun <T> onItemClick(value: T) {
+        vm.calculateTotalSum(value as BigDecimal)
     }
 
     private fun initRecyclerView() {

@@ -44,8 +44,8 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, HistoryViewMo
         vm.fetchChecksHistory()
     }
 
-    override fun removeProduct(id: Int) {
-        vm.fetchDetailCheckHistory(id)
+    override fun <T> onItemClick(value: T) {
+        vm.fetchDetailCheckHistory(value as Int)
     }
 
 

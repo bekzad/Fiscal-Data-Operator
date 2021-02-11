@@ -1,5 +1,5 @@
 package kg.nurtelecom.sell.core
 
 interface ItemClickListener {
-    fun removeProduct(position: Int)
+    fun <T> onItemClick(value: T)
 }

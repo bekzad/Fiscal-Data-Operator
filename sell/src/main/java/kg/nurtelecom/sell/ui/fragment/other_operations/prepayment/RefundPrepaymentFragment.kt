@@ -55,8 +55,8 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, H
         vm.fetchChecksHistory()
     }
 
-    override fun removeProduct(position: Int) {
-        vm.fetchDetailCheckHistory(position)
+    override fun <T> onItemClick(value: T) {
+        vm.fetchDetailCheckHistory(value as Int)
     }
 
     override fun subscribeToLiveData() {

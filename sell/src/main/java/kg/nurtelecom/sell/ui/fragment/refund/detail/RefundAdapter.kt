@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.history_by_id.ReceiptItems
 import kg.nurtelecom.sell.core.ItemClickListener
-import kg.nurtelecom.sell.core.ProductClickListener
 import kg.nurtelecom.ui.databinding.ProductCellViewBinding
 import java.math.BigDecimal
 
-class RefundAdapter(private val itemClick: ProductClickListener): RecyclerView.Adapter<RefundAdapter.RefundViewHolder>() {
+class RefundAdapter(private val itemClick: ItemClickListener): RecyclerView.Adapter<RefundAdapter.RefundViewHolder>() {
 
     var items = ArrayList<ReceiptItems>()
 
@@ -18,7 +17,7 @@ class RefundAdapter(private val itemClick: ProductClickListener): RecyclerView.A
         this.items = data
     }
 
-    class RefundViewHolder(private val binding: ProductCellViewBinding, private val itemClick: ProductClickListener): RecyclerView.ViewHolder(binding.root){
+    class RefundViewHolder(private val binding: ProductCellViewBinding, private val itemClick: ItemClickListener): RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: ReceiptItems) {
             binding.apply {
@@ -30,12 +29,12 @@ class RefundAdapter(private val itemClick: ProductClickListener): RecyclerView.A
 
             binding.cbSelectItem.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    itemClick.selectProduct(BigDecimal(item.total))
+                    itemClick.onItemClick(BigDecimal(item.total))
                 }
             }
         }
         companion object {
-            fun from(parent: ViewGroup, itemClick: ProductClickListener): RefundViewHolder {
+            fun from(parent: ViewGroup, itemClick: ItemClickListener): RefundViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ProductCellViewBinding.inflate(layoutInflater, parent, false)
                 return RefundViewHolder(binding, itemClick)
