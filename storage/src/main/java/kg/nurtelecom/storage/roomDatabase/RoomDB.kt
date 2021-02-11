@@ -8,7 +8,7 @@ import kg.nurtelecom.data.AccessToken
 import kg.nurtelecom.data.Result
 import kg.nurtelecom.data.UserDetail
 
-@Database(entities = [UserDetail::class, AccessToken::class], version = 3)
+@Database(entities = [UserDetail::class], version = 4)
 abstract class RoomDB : RoomDatabase() {
 
     abstract fun getDataDao(): DataDao

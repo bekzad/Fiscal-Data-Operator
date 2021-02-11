@@ -3,6 +3,7 @@ package kg.nurtelecom.sell.ui.fragment.refund.detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kg.nurtelecom.core.extension.roundOff
 import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.history_by_id.ReceiptItems
 import kg.nurtelecom.sell.core.ItemClickListener
@@ -20,17 +21,17 @@ class RefundAdapter(private val itemClick: ItemClickListener): RecyclerView.Adap
     class RefundViewHolder(private val binding: ProductCellViewBinding, private val itemClick: ItemClickListener): RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: ReceiptItems) {
+            val discount = if (item.discount.toInt() != 0) "- ${item.discount.toInt()}%" else ""
+            val charge = if (item.charge.toInt() != 0) "+ ${item.charge.toInt()}%" else ""
             binding.apply {
                 tvTitle.text = item.productName
-                tvSubTitle.text = "${String.format("%.2f", item.productUnitPrice).toDouble()} * ${item.productQuantity} + ${item.discount}"
-                tvCellValue.text = "${String.format("%.2f", item.total).toDouble()} с"
+                tvSubTitle.text = "${item.productUnitPrice.roundOff(2)} * ${item.productQuantity} $discount $charge"
+                tvCellValue.text = "${item.total.roundOff(2)} с"
                 cbSelectItem.visible(true)
             }
 
             binding.cbSelectItem.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    itemClick.onItemClick(BigDecimal(item.total))
-                }
+                itemClick.onItemClick(item, isChecked)
             }
         }
         companion object {

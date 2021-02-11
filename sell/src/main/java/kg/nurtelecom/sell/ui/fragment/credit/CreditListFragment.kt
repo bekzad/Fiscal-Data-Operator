@@ -44,7 +44,7 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, HistoryViewMo
         vm.fetchChecksHistory()
     }
 
-    override fun <T> onItemClick(value: T) {
+    override fun <T> onItemClick(value: T, isChecked: Boolean) {
         vm.fetchDetailCheckHistory(value as Int)
     }
 

@@ -50,7 +50,7 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
         }
     }
 
-    override fun <T> onItemClick(value: T) {
+    override fun <T> onItemClick(value: T, isChecked: Boolean) {
         vm.fetchDetailCheckHistory(value as Int)
         val checkId = bundleOf(CHECK_ID to value)
         parentActivity.replaceFragment<RefundDetailFragment>(R.id.sell_container) {

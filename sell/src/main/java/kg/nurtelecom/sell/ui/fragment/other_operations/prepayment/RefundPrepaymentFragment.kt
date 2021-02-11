@@ -55,7 +55,7 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, H
         vm.fetchChecksHistory()
     }
 
-    override fun <T> onItemClick(value: T) {
+    override fun <T> onItemClick(value: T, isChecked: Boolean) {
         vm.fetchDetailCheckHistory(value as Int)
     }
 

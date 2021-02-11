@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.data.history_by_id.ReceiptItems
@@ -12,6 +13,7 @@ import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.FragmentRefundProductsBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment.Companion.CHECK_ID
 import java.math.BigDecimal
 
@@ -26,8 +28,14 @@ class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, Histo
             refundAdapter.setListData(it.receipt.receiptItems as ArrayList<ReceiptItems>)
             vb.rvRefund.adapter = refundAdapter
         }
-        vm.totalSum.observe(viewLifecycleOwner) { taxSum ->
-            vb.icSumPay.setContent(taxSum)
+        vm.totalSum.observe(viewLifecycleOwner) { sum ->
+            if (sum.compareTo(BigDecimal.ZERO) == 0) {
+                vb.icSumPay.setContent(BigDecimal.ZERO)
+                vb.icSumPay.changeEditText(true)
+            } else {
+                vb.icSumPay.setContent(sum)
+                vb.icSumPay.changeEditText(false, resources.getColor(R.color.orange))
+            }
         }
     }
 
@@ -35,10 +43,13 @@ class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, Histo
         val id = requireArguments().getInt(CHECK_ID)
         initRecyclerView()
         vm.fetchDetailCheckHistory(id)
+        vb.icSumPay.setOnClickListener {
+            parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
+        }
     }
 
-    override fun <T> onItemClick(value: T) {
-        vm.calculateTotalSum(value as BigDecimal)
+    override fun <T> onItemClick(value: T, isChecked: Boolean) {
+        vm.calculateTotalSum(value as ReceiptItems, isChecked)
     }
 
     private fun initRecyclerView() {

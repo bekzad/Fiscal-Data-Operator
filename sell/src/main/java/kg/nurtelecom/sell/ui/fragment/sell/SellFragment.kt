@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.sell
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import kg.nurtelecom.core.extension.parentActivity
@@ -51,7 +52,7 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
         }
     }
 
-    override fun <T> onItemClick(value: T) {
+    override fun <T> onItemClick(value: T, isChecked: Boolean) {
         vm.removeProduct(value as Int)
         productAdapter.notifyDataSetChanged()
     }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
 import kg.nurtelecom.core.extension.formatForLocalDateTimeDefaults
+import kg.nurtelecom.core.extension.roundOff
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.history.Content
 import kg.nurtelecom.sell.core.ItemClickListener
@@ -16,6 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -117,7 +119,7 @@ class HistoryViewHolder(private val binding: DetailViewBinding, private val item
             tvTitle.text = OperationType.valueOf(content.operationType).type
             tvCounter.text = "#${content.indexNum}"
             tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(content.createdAt).formatForLocalDateTimeDefaults()
-            tvAmount.text = "${String.format("%.2f", content.total).toDouble()} с"
+            tvAmount.text = "${content.total.roundOff(2)} с"
         }
 
         itemView.setOnClickListener {

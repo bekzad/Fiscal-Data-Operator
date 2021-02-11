@@ -1,12 +1,14 @@
 package kg.nurtelecom.data.history_by_id
 
+import java.math.BigDecimal
+
 data class ReceiptItems (
 	val id : Int,
 	val productId : String,
 	val productName : String,
 	val productCode : String,
 	val productQuantity : Int,
-	val productUnitPrice : Double,
+	val productUnitPrice : BigDecimal,
 	val productUnitMeasure : String,
 	val productNdsType : Int,
 	val productNdsAmount : Double,
@@ -17,6 +19,6 @@ data class ReceiptItems (
 	val discount : Double,
 	val charge : Double,
 	val subtotal : Double,
-	val total : Double,
+	val total : BigDecimal,
 	val itemIndex : Double
 )

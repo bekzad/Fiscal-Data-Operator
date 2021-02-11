@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -49,21 +50,7 @@ fun Date.formatForCurrentDate(): String {
     return SimpleDateFormat("dd.MM.yy / HH:mm", Locale("ru")).format(this)
 }
 
-fun ListView.requestLayoutForChangedDataset() {
-    val listAdapter = this.adapter
-    listAdapter?.let { adapter ->
-        val itemCount = adapter.count
-        var totalHeight = 0
-        for (position in 0 until itemCount) {
-            val item = adapter.getView(position, null, this)
-            item.measure(0, 0)
-            totalHeight += item.measuredHeight
-            val layoutParams = this.layoutParams
-            layoutParams.height = totalHeight
-            this.requestLayout()
-        }
-    }
-}
+fun BigDecimal.roundOff(amount: Int): BigDecimal  = setScale(amount, BigDecimal.ROUND_HALF_UP)
 
 inline val Fragment.parentActivity get() = (activity as AppCompatActivity)
 

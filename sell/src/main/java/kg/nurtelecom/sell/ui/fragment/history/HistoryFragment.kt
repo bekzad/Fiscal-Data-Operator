@@ -50,7 +50,7 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
         }
     }
 
-    override fun <T> onItemClick(value: T) {
+    override fun <T> onItemClick(value: T, isChecked: Boolean) {
         vm.fetchDetailCheckHistory(value as Int)
         parentActivity.replaceFragment<HistoryDetailFragment>(R.id.sell_container)
     }
