@@ -79,58 +79,97 @@
         android:paddingBottom="@dimen/margin_14dp"
         android:text="@string/text_return" />
 
-    <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/btn_menu_item_greeting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.cardview.widget.CardView
         android:layout_marginLeft="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_16dp"
         android:layout_marginRight="@dimen/margin_16dp"
-        app:showArrowIcon="true"
-        app:title="@string/main_greeting" />
-
-    <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/btn_menu_item_report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/radius_10dp"
+        app:cardBackgroundColor="@color/darkGrey">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <kg.nurtelecom.ofd.cell.CellView
+                android:id="@+id/btn_menu_item_greeting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:showArrowIcon="true"
+                app:title="@string/main_greeting" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:layout_marginLeft="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_8dp"
         android:layout_marginRight="@dimen/margin_16dp"
-        app:showArrowIcon="true"
-        app:subTitle="@string/text_interim_report"
-        app:title="@string/text_report" />
-
-    <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/btn_menu_item_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_16dp"
-        android:layout_marginRight="@dimen/margin_16dp"
-        app:showArrowIcon="true"
-        app:subTitle="@string/text_history_list"
-        app:title="@string/text_history" />
+        app:cardCornerRadius="@dimen/radius_10dp"
+        app:cardBackgroundColor="@color/darkGrey">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <kg.nurtelecom.ofd.cell.CellView
+                android:id="@+id/btn_menu_item_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:showArrowIcon="true"
+                app:subTitle="@string/text_interim_report"
+                app:title="@string/text_report" />
 
-    <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/btn_menu_item_information"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_16dp"
-        android:layout_marginTop="@dimen/margin_8dp"
-        android:layout_marginRight="@dimen/margin_16dp"
-        app:showArrowIcon="true"
-        app:title="@string/text_information" />
-
-    <kg.nurtelecom.ofd.cell.CellView
-        android:id="@+id/btn_menu_item_operations"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            <kg.nurtelecom.ofd.cell.CellView
+                android:id="@+id/btn_menu_item_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:showArrowIcon="true"
+                app:subTitle="@string/text_history_list"
+                app:title="@string/text_history" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
         android:layout_marginLeft="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_8dp"
         android:layout_marginRight="@dimen/margin_16dp"
-        app:showArrowIcon="true"
-        app:subTitle="@string/text_operations_list"
-        app:title="@string/text_operations" />
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/radius_10dp"
+        app:cardBackgroundColor="@color/darkGrey">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <kg.nurtelecom.ofd.cell.CellView
+                android:id="@+id/btn_menu_item_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:showArrowIcon="true"
+                app:title="@string/text_information" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/radius_10dp"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        app:cardBackgroundColor="@color/darkGrey">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <kg.nurtelecom.ofd.cell.CellView
+                android:id="@+id/btn_menu_item_operations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:showArrowIcon="true"
+                app:subTitle="@string/text_operations_list"
+                app:title="@string/text_operations" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_menu_item_close"
@@ -143,5 +182,4 @@
         android:text="@string/text_shift_closing_and_report"
         android:textColor="@color/red"
         android:textSize="@dimen/text_14sp" />
-
 </LinearLayout>
