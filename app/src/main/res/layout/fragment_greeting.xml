@@ -10,7 +10,7 @@
         android:id="@+id/cv_first_selection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/radius_10dp"
+        app:cardCornerRadius="@dimen/radius_5dp"
         app:cardBackgroundColor="@color/darkGrey"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -38,7 +38,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_marginTop="@dimen/margin_8dp"
-        app:cardCornerRadius="@dimen/radius_10dp"
+        app:cardCornerRadius="@dimen/radius_5dp"
         app:cardBackgroundColor="@color/darkGrey"
         android:id="@+id/cv_second_selection"
         android:layout_width="match_parent"

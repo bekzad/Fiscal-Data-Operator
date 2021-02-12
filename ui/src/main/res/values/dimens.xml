@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="radius_10dp">5dp</dimen>
+    <dimen name="radius_5dp">5dp</dimen>
     <dimen name="radius_4dp">4dp</dimen>
     <dimen name="radius_0dp">0dp</dimen>
 

@@ -85,7 +85,7 @@
         android:layout_marginRight="@dimen/margin_16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/radius_10dp"
+        app:cardCornerRadius="@dimen/radius_5dp"
         app:cardBackgroundColor="@color/darkGrey">
         <LinearLayout
             android:layout_width="match_parent"
@@ -106,7 +106,7 @@
         android:layout_marginRight="@dimen/margin_16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/radius_10dp"
+        app:cardCornerRadius="@dimen/radius_5dp"
         app:cardBackgroundColor="@color/darkGrey">
         <LinearLayout
             android:layout_width="match_parent"
@@ -135,7 +135,7 @@
         android:layout_marginRight="@dimen/margin_16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/radius_10dp"
+        app:cardCornerRadius="@dimen/radius_5dp"
         app:cardBackgroundColor="@color/darkGrey">
         <LinearLayout
             android:layout_width="match_parent"
@@ -152,7 +152,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/radius_10dp"
+        app:cardCornerRadius="@dimen/radius_5dp"
         android:layout_marginLeft="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_8dp"
         android:layout_marginRight="@dimen/margin_16dp"
