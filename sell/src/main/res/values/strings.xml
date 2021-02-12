@@ -39,5 +39,6 @@
     <string name="new_sale">Новая Продажа</string>
     <string name="fail_to_print">НЕ УДАЛОСЬ РАСПЕЧАТАТЬ ЧЕК?</string>
     <string name="prepay">Предоплата</string>
+    <string name="choose_products">Выберите товары для возврата:</string>
 
 </resources>

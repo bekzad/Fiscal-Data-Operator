@@ -20,4 +20,6 @@ class SessionRepository(
             "Bearer ${appPrefs.token}", appPrefs.token
         )
     }
+
+    fun fetchCurrentDate() = appPrefs.currentDate
 }

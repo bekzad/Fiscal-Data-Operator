@@ -41,17 +41,18 @@
         android:layout_marginLeft="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_8dp"
         android:layout_marginRight="@dimen/margin_16dp"
-        android:text="@string/text_shift_opening"
+        android:text="@string/text_session_opening"
         android:textColor="@color/grey"
         android:textSize="@dimen/text_14sp" />
 
     <TextView
+        android:id="@+id/tv_session_date_opening"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_2dp"
         android:layout_marginRight="@dimen/margin_16dp"
-        android:text="@string/text_date_opening"
+        android:text="@string/text_session_date_opening"
         android:textColor="@color/white"
         android:textSize="@dimen/text_20sp" />
 
@@ -179,7 +180,7 @@
         android:layout_marginTop="@dimen/margin_24dp"
         android:layout_marginRight="@dimen/margin_16dp"
         android:background="@null"
-        android:text="@string/text_shift_closing_and_report"
+        android:text="@string/text_session_closing_and_report"
         android:textColor="@color/red"
         android:textSize="@dimen/text_14sp" />
 </LinearLayout>

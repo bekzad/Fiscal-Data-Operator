@@ -37,6 +37,7 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewM
 
     private fun setupRV() {
         vb.allProductsRv.adapter = catalogAdapter
+        vb.allProductsRv.addItemDecoration(RoundDecor())
     }
 
     override fun subscribeToLiveData() {

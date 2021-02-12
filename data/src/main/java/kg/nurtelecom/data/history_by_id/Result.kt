@@ -13,5 +13,5 @@ data class Result (
 	val nspType : String,
 	val alreadyPayed : Int,
 	val receipt : Receipt,
-	val debt : Int
+	val debt : Double
 )

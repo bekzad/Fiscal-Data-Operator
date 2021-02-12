@@ -94,10 +94,10 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
         else BigDecimal.ZERO
     }
 
-    fun changeEditText(state: Boolean) {
+    fun changeEditText(state: Boolean, color: Int = resources.getColor(R.color.green)) {
         when (state) {
             false -> {
-                vb.mcvRoot.setCardBackgroundColor(resources.getColor(R.color.green))
+                vb.mcvRoot.setCardBackgroundColor(color)
                 vb.ivNextIcon.visible(true)
                 vb.etContent.setTextColor(Color.WHITE)
                 vb.tvTitle.setTextColor(Color.WHITE)
