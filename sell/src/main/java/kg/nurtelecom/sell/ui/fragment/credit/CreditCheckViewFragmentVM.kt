@@ -12,8 +12,8 @@ abstract class CreditCheckViewFragmentVM : CoreViewModel() {
     abstract var detailCreditCheckHistory: MutableLiveData<Result>
     abstract fun fetchChecksHistory()
     abstract fun fetchDetailCheckHistory(id: Int)
-
 }
+
 class CreditCheckViewFragmentVMImpl(private val creditCheckViewRepository : HistoryRepository): CreditCheckViewFragmentVM (){
     override var  creditCheckData: MutableLiveData<List<Content>> = MutableLiveData()
     override var  detailCreditCheckHistory: MutableLiveData<Result> = MutableLiveData()

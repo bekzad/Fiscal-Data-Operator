@@ -1,15 +1,21 @@
 package kg.nurtelecom.sell.ui.fragment.credit
 
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
-import kg.nurtelecom.core.fragment.CoreFragment
+import androidx.core.os.bundleOf
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.sell.R
+import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.CreditListFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment.Companion.CHECK_ID
 import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 
@@ -46,15 +52,19 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, HistoryViewMo
 
     override fun <T> onItemClick(value: T, isChecked: Boolean) {
         vm.fetchDetailCheckHistory(value as Int)
+        val checkId = bundleOf(CHECK_ID to value)
+        parentActivity.replaceFragment<CreditCheckViewFragment>(R.id.sell_container) {
+            checkId
+        }
     }
 
 
     override fun subscribeToLiveData() {
         vm.checksHistoryData.observe(viewLifecycleOwner, { product ->
-            historyAdapter.addHeaderAndSubmitList(product)
+            historyAdapter.addHeaderAndSubmitList(product.filter { it.operationType == "POSTPAY" })
         })
         vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedProducts ->
-            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedProducts)
+            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedProducts.filter { it.operationType == "POSTPAY" })
         }
     }
 
@@ -62,9 +72,12 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, HistoryViewMo
         vb.lvCreditList.adapter = historyAdapter
     }
 
-    fun setupToolbar(): Int = R.string.title_credit_list
+    override fun setupToolbar(): Int = R.string.title_credit_list
 
-    override fun getBinding(): CreditListFragmentBinding {
+    override fun createViewBinding(
+            inflater: LayoutInflater,
+            container: ViewGroup?
+    ): CreditListFragmentBinding {
         return CreditListFragmentBinding.inflate(layoutInflater)
     }
 
