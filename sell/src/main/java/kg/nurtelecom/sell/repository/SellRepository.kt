@@ -11,6 +11,8 @@ class SellRepository(
     private val productApi: ProductApi,
     private val appPrefs: AppPreferences) {
 
+    val observedToken get() = appPrefs.sharedPreference
+
     val isNonFiscalRegime: Boolean get() = appPrefs.fiscalRegime
 
     suspend fun fetchProductCategory(): List<CatalogResult> {

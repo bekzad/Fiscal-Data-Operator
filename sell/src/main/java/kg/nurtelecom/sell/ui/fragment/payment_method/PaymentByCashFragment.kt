@@ -17,14 +17,16 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCashBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.print_receipt.SaveReceiptFragment
+import kg.nurtelecom.sell.utils.isEqualTo
 import kg.nurtelecom.sell.utils.isGreaterThan
+import kg.nurtelecom.sell.utils.isGreaterThanOrEqualTo
 import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 
 class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     private var sumWithNSP: BigDecimal = BigDecimal.ZERO
-    private var canContinue: Boolean = false
+    private var canContinue = false
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -48,9 +50,9 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
                 // TO Do error dialog box that entered amount is less than what is required
             }
         }
-
+        // Can continue to the next fragment only if paid amount is greater than or equal to sumWithTaxes
         vb.icReceived.fetchTextState {
-            canContinue = BigDecimal(it.toString()).isGreaterThan(sumWithNSP) == true
+            canContinue = BigDecimal(it.toString()).isGreaterThanOrEqualTo(sumWithNSP) == true
         }
 
         vb.icReceived.apply {

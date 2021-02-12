@@ -1,7 +1,9 @@
 package kg.nurtelecom.sell.ui.activity
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import kg.nurtelecom.core.viewmodel.CoreViewModel
@@ -14,8 +16,11 @@ import kg.nurtelecom.data.sell.Products
 import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
+import kg.nurtelecom.sell.utils.observeKey
 import kg.nurtelecom.sell.utils.roundUp
+import kg.nurtelecom.storage.sharedpref.AppPreferences.Keys.ACCESS_TOKEN
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.math.BigDecimal
 
 abstract class SellMainViewModel : CoreViewModel() {
@@ -29,6 +34,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val fetchReceiptResult: MutableLiveData<FetchReceiptResult>
     abstract var operationType: OperationType
     abstract val amountPaid: MutableLiveData<BigDecimal>
+    abstract val accessToken: LiveData<String>
 
     abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
@@ -47,6 +53,10 @@ abstract class SellMainViewModel : CoreViewModel() {
 
 class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
     private val sellRepository: SellRepository) : SellMainViewModel() {
+
+    @ExperimentalCoroutinesApi
+    override val accessToken: LiveData<String>
+        get() = sellRepository.observedToken.observeKey(ACCESS_TOKEN, "").asLiveData()
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())

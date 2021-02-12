@@ -1,8 +1,6 @@
 package kg.nurtelecom.sell.ui.activity
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -26,34 +24,10 @@ import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.utils.setupActionBarDrawerToggle
 
 class SellMainActivity :
-    CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class),
-    SharedPreferences.OnSharedPreferenceChangeListener {
+    CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class){
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: Toolbar
-
-    override fun onStart() {
-        super.onStart()
-        val pref: SharedPreferences = getSharedPreferences(
-            "kg.nurtelecom.storage.appPref",
-            Context.MODE_PRIVATE
-        )
-        pref.registerOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        Log.e("OnSharedChanged", "OnSharedChaged")
-        if (sharedPreferences?.getString("ACCESS_TOKEN", "").isNullOrEmpty()) {
-            Log.e("OnSharedChanged", "OnSharedChaged inside if statement")
-            AuthActivity.start(this)
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        val pref = getSharedPreferences("kg.nurtelecom.storage.appPref", MODE_PRIVATE)
-        pref.unregisterOnSharedPreferenceChangeListener(this)
-    }
 
     override fun getBinding(): ActivitySellMainBinding =
         ActivitySellMainBinding.inflate(layoutInflater)
@@ -67,6 +41,15 @@ class SellMainActivity :
             drawerLayout.openDrawer(GravityCompat.START)
         }
         replaceFragment<SellFragment>(R.id.sell_container, false)
+    }
+
+    // If Access token is empty go to Authorization
+    override fun subscribeToLiveData() {
+        vm.accessToken.observe(this, { accessToken ->
+            if (accessToken.isNullOrEmpty()) {
+                AuthActivity.start(this)
+            }
+        })
     }
 
     private fun setupDrawerLayout() {
