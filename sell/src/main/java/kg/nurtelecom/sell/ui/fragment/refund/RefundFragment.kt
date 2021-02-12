@@ -1,24 +1,24 @@
 package kg.nurtelecom.sell.ui.fragment.refund
 
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
-import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
-import kg.nurtelecom.data.history.Content
+import androidx.core.os.bundleOf
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryAdapter
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.ui.fragment.refund.detail.RefundDetailFragment
+import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
-import java.text.SimpleDateFormat
 
-class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class) {
+class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryViewModel>(HistoryViewModel::class), ItemClickListener {
 
-    private var historyAdapter: HistoryAdapter = HistoryAdapter()
+    private var historyAdapter: HistoryAdapter = HistoryAdapter(this)
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -29,16 +29,6 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
 
     override fun setupToolbar(): Int  = R.string.text_return
 
-    override fun setupViews() {
-        setHasOptionsMenu(true)
-        initRecyclerView()
-        vm.fetchChecksHistory()
-    }
-
-    override fun subscribeToLiveData() {
-        observeCheckHistory()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.sell_menu, menu)
@@ -47,12 +37,39 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
         searchView.imeOptions = EditorInfo.IME_ACTION_DONE
         searchView.queryHint = getString(R.string.text_search)
         search(searchView)
+        search.doOnMenuItemCollapse {
+            historyAdapter.addHeaderAndSubmitList(vm.checksHistoryData.value, null)
+            true
+        }
     }
 
     private fun search(searchView: SearchView) {
-        searchView.doOnQueryTextChange { newText ->
-            historyAdapter.filter.filter(newText)
+        searchView.doOnQueryTextChange { name ->
+            vm.searchChecks(name)
             true
+        }
+    }
+
+    override fun <T> onItemClick(value: T, isChecked: Boolean) {
+        vm.fetchDetailCheckHistory(value as Int)
+        val checkId = bundleOf(CHECK_ID to value)
+        parentActivity.replaceFragment<RefundDetailFragment>(R.id.sell_container) {
+            checkId
+        }
+    }
+
+    override fun setupViews() {
+        setHasOptionsMenu(true)
+        initRecyclerView()
+        vm.fetchChecksHistory()
+    }
+
+    override fun subscribeToLiveData() {
+        vm.checksHistoryData.observe(viewLifecycleOwner, { items ->
+            historyAdapter.addHeaderAndSubmitList(items.filter { it.operationType == "SALE" })
+        })
+        vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedItems ->
+            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems.filter { it.operationType == "SALE" })
         }
     }
 
@@ -60,22 +77,10 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
         vb.rvHistory.adapter = historyAdapter
     }
 
-    private fun observeCheckHistory() {
-        vm.checksHistoryData.observe(viewLifecycleOwner, {
-            if (it != null) {
-                val groupedItems = it.groupBy { book ->
-                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(book.createdAt).formatForDecoratorDateTimeDefaults()
-                }
-                historyAdapter.itemData = groupedItems.toSortedMap()
-                historyAdapter.setListData(it as ArrayList<Content>)
-                historyAdapter.notifyDataSetChanged()
-            }
-        })
-    }
-
     companion object {
         fun newInstance(): RefundFragment {
             return RefundFragment()
         }
+        const val CHECK_ID: String = "check_id"
     }
 }

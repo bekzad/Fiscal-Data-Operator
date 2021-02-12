@@ -14,9 +14,9 @@ class ProductCellView(context: Context, attr: AttributeSet) : ConstraintLayout(c
 
     init {
         context.theme.obtainStyledAttributes(
-            attr,
-            R.styleable.ProductCellView,
-            0, 0).apply {
+                attr,
+                R.styleable.ProductCellView,
+                0, 0).apply {
             try {
                 setTitle(getString(R.styleable.ProductCellView_title).toString())
                 setSubTitle(getString(R.styleable.ProductCellView_subTitle))

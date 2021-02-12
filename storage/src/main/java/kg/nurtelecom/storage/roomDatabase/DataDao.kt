@@ -1,4 +1,4 @@
-package kg.nurtelecom.storage.roomdatabase
+package kg.nurtelecom.storage.roomDatabase
 
 import androidx.room.*
 import kg.nurtelecom.data.UserDetail
@@ -15,6 +15,6 @@ interface DataDao {
     @Query("SELECT * FROM user")
     suspend fun getUserProfile(): UserDetail
 
-     @Update
-     suspend fun updateUserProfile(userDetail: UserDetail)
+    @Update
+    suspend fun updateUserProfile(userDetail: UserDetail)
 }

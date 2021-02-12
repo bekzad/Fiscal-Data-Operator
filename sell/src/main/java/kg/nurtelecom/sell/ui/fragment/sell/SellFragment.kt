@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.sell
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import kg.nurtelecom.core.extension.parentActivity
@@ -7,14 +8,14 @@ import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
-import kg.nurtelecom.sell.core.ProductItemClickListener
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.SellFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 
-class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMainViewModel::class), ProductItemClickListener {
+class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMainViewModel::class), ItemClickListener {
 
     private val productAdapter: ProductAdapter = ProductAdapter(this)
 
@@ -51,8 +52,8 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
         }
     }
 
-    override fun removeProduct(position: Int) {
-        vm.removeProduct(position)
+    override fun <T> onItemClick(value: T, isChecked: Boolean) {
+        vm.removeProduct(value as Int)
         productAdapter.notifyDataSetChanged()
     }
 

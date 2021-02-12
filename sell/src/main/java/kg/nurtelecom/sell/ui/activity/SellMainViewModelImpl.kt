@@ -28,6 +28,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>>
     abstract val fetchReceiptResultString: MutableLiveData<Response<String>>
     abstract var operationType: OperationType
+    abstract var sessionReportData: MutableLiveData<ReportDetailed>
 
     abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
@@ -39,9 +40,10 @@ abstract class SellMainViewModel : CoreViewModel() {
     open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 
     // Session
-    abstract var sessionReportData: MutableLiveData<ReportDetailed>
     abstract fun fetchReportSession()
     abstract fun closeSession()
+
+    abstract fun fetchCurrentDate(): String
 }
 
 class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
@@ -67,6 +69,8 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
     override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> = MutableLiveData()
     override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
     override var operationType: OperationType = OperationType.SALE
+
+    override fun fetchCurrentDate() = sessionRepository.fetchCurrentDate()
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)

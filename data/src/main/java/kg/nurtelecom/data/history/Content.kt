@@ -1,7 +1,9 @@
 package kg.nurtelecom.data.history
 
+import java.math.BigDecimal
+
 data class Content (
-	val total : Double,
+	val total : BigDecimal,
 	val gnsRegNum : Int,
 	val indexNum : Int,
 	val subtotal : Int,
@@ -9,5 +11,5 @@ data class Content (
 	val totalGoodsSum : Double,
 	val createdAt : String,
 	val tspName : String,
-	val id : Int
+	val id : Long
 )

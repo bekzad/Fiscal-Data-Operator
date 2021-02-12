@@ -5,7 +5,9 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingEnd="@dimen/margin_16dp">
+    android:paddingStart="@dimen/margin_16dp"
+    android:paddingEnd="@dimen/margin_16dp"
+    tools:ignore="RtlSymmetry">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/detail"
