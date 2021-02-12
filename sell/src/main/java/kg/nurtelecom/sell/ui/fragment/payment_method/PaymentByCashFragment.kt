@@ -17,12 +17,14 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCashBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.print_receipt.SaveReceiptFragment
+import kg.nurtelecom.sell.utils.isGreaterThan
 import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 
 class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     private var sumWithNSP: BigDecimal = BigDecimal.ZERO
+    private var canContinue: Boolean = false
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -37,15 +39,23 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
         setupPaymentMode()
 
         vb.btnContinue.setOnClickListener {
-            vm.taxSum.value = sumWithNSP
-            navigateToSaveReceipt()
-            fetchReceipt()
+            if (canContinue) {
+                vm.taxSum.value = sumWithNSP
+                vm.amountPaid.value = vb.icReceived.fetchInputData()
+                navigateToSaveReceipt()
+                fetchReceipt()
+            } else {
+                // TO Do error dialog box that entered amount is less than what is required
+            }
+        }
+
+        vb.icReceived.fetchTextState {
+            canContinue = BigDecimal(it.toString()).isGreaterThan(sumWithNSP) == true
         }
 
         vb.icReceived.apply {
             fetchTextState {
                 if (it.isNullOrEmpty()) {
-                    vb.btnContinue.text = getString(R.string.without_change)
                     setupButtons()
                 } else {
                     vb.btnContinue.text = getString(R.string.pay_cash)
@@ -102,6 +112,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
         when (vm.operationType) {
             OperationType.POSTPAY -> vb.btnContinue.text = getString(R.string.text_no_deposit)
             OperationType.PREPAY -> vb.btnContinue.text = getString(R.string.btn_continue)
+            OperationType.SALE -> vb.btnContinue.text = getString(R.string.without_change)
         }
     }
 

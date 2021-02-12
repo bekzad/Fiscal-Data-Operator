@@ -24,7 +24,7 @@
     <string name="price_som">Цена, сом:</string>
     <string name="non_fiscal_mode_message">Нефискальный режим.</string>
     <string name="alert_icon_description">Alert icon</string>
-    <string name="count">Count</string>
+    <string name="count">Количество</string>
     <string name="product_not_from_list">Товар не из списка</string>
     <string name="position_with_n">Позиция №</string>
     <string name="position">Позиция</string>
@@ -40,9 +40,7 @@
     <string name="fail_to_print">НЕ УДАЛОСЬ РАСПЕЧАТАТЬ ЧЕК?</string>
     <string name="prepay">Предоплата</string>
     <string name="cashiers_check">КАССОВЫЙ ЧЕК</string>
-    <string name="receipt_number2">Sale %1$s</string>
     <string name="receipt_number">ПРОДАЖА №%1$s</string>
     <string name="logout_fail_massage">Не удалось выполнить выход</string>
-
 
 </resources>

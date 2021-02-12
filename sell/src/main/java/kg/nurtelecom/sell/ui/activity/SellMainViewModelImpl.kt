@@ -28,6 +28,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val isRegimeNonFiscal: Boolean
     abstract val fetchReceiptResult: MutableLiveData<FetchReceiptResult>
     abstract var operationType: OperationType
+    abstract val amountPaid: MutableLiveData<BigDecimal>
 
     abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
@@ -60,12 +61,13 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
 
     override val productCatalog: MutableLiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
+    override val amountPaid: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
+    override val fetchReceiptResult: MutableLiveData<FetchReceiptResult> = MutableLiveData()
+    override var operationType: OperationType = OperationType.SALE
+
     init {
         fetchProductCatalog()
     }
-
-    override val fetchReceiptResult: MutableLiveData<FetchReceiptResult> = MutableLiveData()
-    override var operationType: OperationType = OperationType.SALE
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)

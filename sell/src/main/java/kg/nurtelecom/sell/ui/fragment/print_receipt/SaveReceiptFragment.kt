@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.data.history_by_id.ReceiptItems
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
 import kg.nurtelecom.data.receipt.result.Receipt
 import kg.nurtelecom.data.receipt.result.ReceiptItemResult
@@ -45,6 +44,18 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
         // Get the receiptItems and totalPrices as one string to assign to a TextView
         val receiptItemsString = retrieveReceiptItems(receiptItems)
         val totalPricesString = retrieveTotalPrices(receipt)
+
+        vm.amountPaid.observe(viewLifecycleOwner, { amountPaid ->
+            var amountPaidText = "Получено:\nНАЛИЧНЫЕ"
+            var amountPaidValue = "\n=${amountPaid}с."
+            val change = amountPaid.subtract(receipt?.total)
+            if (change.isNotZero()) {
+                amountPaidText += "\nСДАЧА"
+                amountPaidValue += "\n=${change}с."
+            }
+            vb.tvAmountPaidText.text = amountPaidText
+            vb.tvAmountPaid.text =amountPaidValue
+        })
 
         // Set the values of textViews
         vb.tvTaxSalesPointName.text = response.result?.taxSalesPointName

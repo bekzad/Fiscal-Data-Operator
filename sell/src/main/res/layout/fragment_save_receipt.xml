@@ -8,6 +8,12 @@
     android:padding="@dimen/margin_16dp"
     tools:context=".ui.fragment.print_receipt.SaveReceiptFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cl_receipt_container"
+        android:visibility="gone">
+
     <TextView
         android:id="@+id/tv_taxSalesPointName"
         android:layout_width="@dimen/margin_0dp"
@@ -49,10 +55,10 @@
         android:id="@+id/iv_horizontal_line"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:src="@drawable/horizontal_line"
         android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/horizontal_line"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_receipt_number" />
 
     <TextView
@@ -71,8 +77,8 @@
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:hint="ReceiptItems"
         android:gravity="right"
+        android:hint="ReceiptItems"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline"
@@ -82,10 +88,10 @@
         android:id="@+id/iv_horizontal_line_2"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:src="@drawable/horizontal_line"
         android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/horizontal_line"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_receipt_items" />
 
     <TextView
@@ -93,7 +99,7 @@
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:hint="TotalPrices"
+        android:hint="TotalPricesText"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,8 +110,8 @@
         android:layout_width="@dimen/margin_0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:hint="TotalPrices"
         android:gravity="right"
+        android:hint="TotalPrices"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline"
@@ -115,11 +121,34 @@
         android:id="@+id/iv_horizontal_line_3"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:src="@drawable/horizontal_line"
         android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/horizontal_line"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_total_prices" />
+
+    <TextView
+        android:id="@+id/tv_amount_paid_text"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="Amount Paid text"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_horizontal_line_3" />
+
+    <TextView
+        android:id="@+id/tv_amount_paid"
+        android:layout_width="@dimen/margin_0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="right"
+        android:hint="Amount Paid"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/iv_horizontal_line_3" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_print_check"
@@ -137,7 +166,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintGuide_begin="180dp" />
+        app:layout_constraintGuide_begin="180dp"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
