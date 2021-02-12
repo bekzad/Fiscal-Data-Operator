@@ -149,12 +149,6 @@
                     app:showArrowIcon="true"
                     app:title="@string/text_close_credit">
 
-                    <kg.nurtelecom.ofd.cell.CellView
-                        android:id="@+id/btn_menu_item_history_deposits_payments"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:showArrowIcon="true"
-                        app:title="@string/text_history_deposits_payments" />
                 </kg.nurtelecom.ofd.cell.CellView>
 
                 <kg.nurtelecom.ofd.cell.CellView
@@ -199,6 +193,13 @@
                     app:showArrowIcon="true"
                     app:subTitle="@string/text_change_cashbox"
                     app:title="@string/text_deposit_and_payment" />
+
+                <kg.nurtelecom.ofd.cell.CellView
+                    android:id="@+id/btn_menu_item_history_deposits_payments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:showArrowIcon="true"
+                    app:title="@string/text_history_deposits_payments" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
