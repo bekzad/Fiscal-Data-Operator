@@ -1,6 +1,7 @@
 package kg.nurtelecom.sell.ui.fragment.print_receipt
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
@@ -32,6 +33,7 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
         // TO DO exception when I am trying to observe null object only when the code is 401
         vm.fetchReceiptResult.observe(viewLifecycleOwner, { response ->
             updateScreen(response)
+            vb.clReceiptContainer.visibility = View.VISIBLE
         })
     }
 
