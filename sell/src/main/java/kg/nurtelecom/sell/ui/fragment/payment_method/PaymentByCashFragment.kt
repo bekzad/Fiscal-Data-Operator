@@ -17,16 +17,13 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCashBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.print_receipt.SaveReceiptFragment
-import kg.nurtelecom.sell.utils.isEqualTo
-import kg.nurtelecom.sell.utils.isGreaterThan
 import kg.nurtelecom.sell.utils.isGreaterThanOrEqualTo
-import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 
 class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMainViewModel>(SellMainViewModel::class) {
 
-    private var sumWithNSP: BigDecimal = BigDecimal.ZERO
-    private var canContinue = false
+    private var amountPaidVar = BigDecimal.ZERO
+    private var canContinue = true
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -36,23 +33,19 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     override fun setupToolbar(): Int = R.string.payment_method
 
     override fun setupViews() {
-        // We are changing the value in viewModel before continuing
-        // NSP is added to the value of taxSum
         setupPaymentMode()
 
+        // We are changing the value in viewModel before continuing
+        // NSP is added to the value of taxSum
         vb.btnContinue.setOnClickListener {
             if (canContinue) {
-                vm.taxSum.value = sumWithNSP
-                vm.amountPaid.value = vb.icReceived.fetchInputData()
+                vm.taxSum.value = vm.sumWithNSP.value
+                vm.amountPaid.value = amountPaidVar
                 navigateToSaveReceipt()
                 fetchReceipt()
             } else {
                 // TO Do error dialog box that entered amount is less than what is required
             }
-        }
-        // Can continue to the next fragment only if paid amount is greater than or equal to sumWithTaxes
-        vb.icReceived.fetchTextState {
-            canContinue = BigDecimal(it.toString()).isGreaterThanOrEqualTo(sumWithNSP) == true
         }
 
         vb.icReceived.apply {
@@ -60,21 +53,25 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
                 if (it.isNullOrEmpty()) {
                     setupButtons()
                 } else {
+                    // Amount paid will change only if user enters something
+                    amountPaidVar= BigDecimal(it.toString())
                     vb.btnContinue.text = getString(R.string.pay_cash)
                     vb.btnContinue.enable(true)
                 }
+                // Can continue to the next fragment only if paid amount is greater than or equal to sumWithTaxes
+                canContinue = amountPaidVar.isGreaterThanOrEqualTo(vm.sumWithNSP.value!!)
             }
         }
     }
 
-    // We are adding NSP and showing to the user the result
+    // By default amount paid is equal to the sum with taxes
+    // Because we want to pass to the next fragment if there is no value
     override fun subscribeToLiveData() {
-        val taxNSP = BigDecimal("1.01")
-        vm.taxSum.observe(viewLifecycleOwner) { sum ->
-            sumWithNSP = sum.multiply(taxNSP).roundUp()
+        vm.sumWithNSP.observe(viewLifecycleOwner) { sumWithNSP ->
             sumWithNSP.apply {
                 vb.icSum.setContent(this)
                 vb.icReceived.setHint(this)
+                amountPaidVar = this
             }
         }
     }

@@ -50,6 +50,9 @@ dependencies {
     implementation libs.koin.values()
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    // QR code generator
+    implementation 'com.google.zxing:core:3.4.0'
+
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()
 }

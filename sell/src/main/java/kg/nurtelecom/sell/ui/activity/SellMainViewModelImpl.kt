@@ -27,6 +27,7 @@ abstract class SellMainViewModel : CoreViewModel() {
 
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<BigDecimal>
+    abstract val sumWithNSP: LiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<AllProducts>
     abstract var isProductEmpty: MutableLiveData<Boolean>
     abstract val productCatalog: MutableLiveData<List<CatalogResult>>
@@ -35,6 +36,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract var operationType: OperationType
     abstract val amountPaid: MutableLiveData<BigDecimal>
     abstract val accessToken: LiveData<String>
+    abstract val change: MutableLiveData<BigDecimal>
 
     abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
@@ -61,7 +63,11 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
 
-    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData()
+    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
+    override val sumWithNSP: LiveData<BigDecimal>
+        get() = calculateSumWithNSP()
+
+    override val change: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
     override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
 
@@ -106,7 +112,11 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
             taxSum = taxSum.add(totalPrice).add(tax)
         }
 
-        return taxSum.roundUp()
+        return taxSum
+    }
+
+    private fun calculateSumWithNSP(): LiveData<BigDecimal> {
+        return MutableLiveData(taxSum.value?.multiply(BigDecimal("1.01")))
     }
 
     override fun removeProduct(position: Int) {

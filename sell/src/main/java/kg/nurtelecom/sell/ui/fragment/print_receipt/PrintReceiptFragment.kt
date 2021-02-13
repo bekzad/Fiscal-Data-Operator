@@ -29,6 +29,9 @@ class PrintReceiptFragment : CoreFragment<FragmentPrintReceiptBinding, SellMainV
         vm.taxSum.observe(viewLifecycleOwner) { sum ->
             vb.tvPaymentAmount.text = sum.toString()
         }
+        vm.change.observe(viewLifecycleOwner) { change ->
+            vb.tvChangeAmount.text = change.toString()
+        }
     }
 
     private fun navigateToSellFragment() {
