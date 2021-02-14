@@ -2,6 +2,7 @@ package kg.nurtelecom.sell.ui.activity
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
 import com.google.gson.Gson
 import kg.nurtelecom.core.viewmodel.CoreViewModel
@@ -13,6 +14,8 @@ import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
 import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import retrofit2.Response
 import java.math.BigDecimal
 
@@ -29,6 +32,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract var operationType: OperationType
     abstract var sessionReportData: MutableLiveData<ReportDetailed>
     abstract val isDialogShow: MutableLiveData<Boolean>
+    abstract val isSubmitBtnEnabled: Flow<Boolean>
 
     open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 
@@ -42,6 +46,10 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun fetchProductCatalogRemotely()
     abstract fun fetchProductCatalogLocally()
 
+    // user input validation
+    abstract fun setProductPrice(price: String)
+    abstract fun setProductCharge(charge: String)
+
     // Session
     abstract fun fetchReportSession()
     abstract fun closeSession()
@@ -49,27 +57,58 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun fetchCurrentDate(): String
 }
 
-class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
-                            private val sellRepository: SellRepository) : SellMainViewModel() {
+class SellMainViewModelImpl(
+    private val sessionRepository: SessionRepository,
+    private val sellRepository: SellRepository
+) : SellMainViewModel() {
 
     override val isRegimeNonFiscal: Boolean = sellRepository.isNonFiscalRegime
 
     override val productList: MutableLiveData<MutableList<Product>> =
-            MutableLiveData(mutableListOf())
+        MutableLiveData(mutableListOf())
     override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData()
     override val selectedProductData: MutableLiveData<Products> = MutableLiveData()
     override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
     override var productCatalog: LiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
-    override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> = MutableLiveData()
+    override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> =
+        MutableLiveData()
     override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
 
     override var operationType: OperationType = OperationType.SALE
 
-    override val isDialogShow: MutableLiveData<Boolean> = MutableLiveData(sellRepository.isDialogShow)
+    override val isDialogShow: MutableLiveData<Boolean> =
+        MutableLiveData(sellRepository.isDialogShow)
+
+    // user input validation
+    private val productPrice: MutableLiveData<String> = MutableLiveData("")
+    private val productCharge: MutableLiveData<String> = MutableLiveData("")
+
+    override val isSubmitBtnEnabled: Flow<Boolean> = combine(
+        productPrice.asFlow(),
+        productCharge.asFlow()
+    ) { price, charge ->
+
+        var isPriceCorrect = false
+        if (!productPrice.value.isNullOrEmpty()) {
+            isPriceCorrect = price.isNotEmpty()
+        }
+
+        val isChargeCorrect = charge.length < 3
+
+        return@combine isPriceCorrect and isChargeCorrect
+    }
 
     init {
         fetchProductCatalogRemotely()
+    }
+
+    override fun setProductPrice(price: String) {
+        productPrice.value = price
+    }
+
+    override fun setProductCharge(charge: String) {
+        productCharge.value = charge
     }
 
     override fun setDialogVisibility(value: Boolean) {
@@ -115,6 +154,8 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
 
     override fun clearSelectedProduct() {
         selectedProductData.value = null
+        productPrice.value = null
+        productCharge.value = ""
     }
 
     override fun searchProduct(name: String) {

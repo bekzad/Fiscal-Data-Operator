@@ -6,7 +6,7 @@ import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
-import androidx.core.widget.doOnTextChanged
+import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.card.MaterialCardView
 import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.ui.R
@@ -84,7 +84,7 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
     }
 
     fun fetchTextState(action: (text: CharSequence?) -> Unit) {
-        vb.etContent.doOnTextChanged { text, _, _, _ ->
+        vb.etContent.doAfterTextChanged { text ->
             action(text)
         }
     }
