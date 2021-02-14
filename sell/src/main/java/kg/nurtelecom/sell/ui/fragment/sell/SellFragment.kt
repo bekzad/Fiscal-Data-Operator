@@ -68,7 +68,7 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
 
     private fun setupNavigation() {
         vb.icSumPay.setOnClickListener {
-            if (vb.icSumPay.getContent().isNullOrEmpty()) {
+            if (vb.icSumPay.getContent().isEmpty()) {
                 return@setOnClickListener
             }
             parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
