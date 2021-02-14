@@ -1,6 +1,5 @@
 package kg.nurtelecom.sell.ui.fragment.sell
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import kg.nurtelecom.core.extension.parentActivity

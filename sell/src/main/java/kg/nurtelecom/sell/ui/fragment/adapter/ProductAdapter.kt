@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.R
-import kg.nurtelecom.sell.core.ProductItemClickListener
 import kg.nurtelecom.sell.databinding.ProductListItemBinding
 import kg.nurtelecom.sell.utils.isNotZero
 import java.math.BigDecimal
@@ -39,7 +38,8 @@ class ProductAdapter(private val itemClick: ItemClickListener) :
         fun bind(product: Product, position: Int) {
             binding.apply {
                 if (product.productName.isEmpty()) {
-                    tvProductPosition.text = root.resources.getString(R.string.position_with_n, position + 1)
+                    tvProductPosition.text =
+                        root.resources.getString(R.string.position_with_n, position + 1)
                 } else tvProductPosition.text = product.productName
 
                 tvProductCount.text = fetchProductExpression(product)
@@ -74,10 +74,7 @@ class ProductAdapter(private val itemClick: ItemClickListener) :
         }
 
         companion object {
-            fun getInstance(
-                    parent: ViewGroup,
-                    itemClick: ItemClickListener
-            ): ProductViewHolder {
+            fun getInstance(parent: ViewGroup, itemClick: ItemClickListener): ProductViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ProductListItemBinding.inflate(layoutInflater, parent, false)
                 return ProductViewHolder(binding, itemClick)

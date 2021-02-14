@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.data.sell.Product
 import kg.nurtelecom.ofd.item_decoration.RoundDecor
 import kg.nurtelecom.data.sell.Products
 import kg.nurtelecom.sell.R
@@ -22,7 +23,7 @@ import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 
 
-class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewModel>(SellMainViewModel::class),  ItemClickListener {
+class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewModel>(SellMainViewModel::class), ItemClickListener {
 
     private val catalogAdapter: ProductCategoryAdapter = ProductCategoryAdapter(this)
 
@@ -56,8 +57,8 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewM
         }
     }
 
-    override fun transferData(product: Products) {
-        vm.sendSelectedProduct(product)
+    override fun <T> onItemClick(value: T, isChecked: Boolean) {
+        vm.sendSelectedProduct(value as Products)
         navigateToPriceOutputFragment()
     }
 

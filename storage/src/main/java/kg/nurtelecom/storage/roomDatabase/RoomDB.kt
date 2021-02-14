@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import kg.nurtelecom.data.UserDetail
 import kg.nurtelecom.data.sell.CatalogResult
-import kg.nurtelecom.storage.roomDatabase.SellDao
 import kg.nurtelecom.storage.roomDatabase.converters.BusinessTypeConverter
 import kg.nurtelecom.storage.roomDatabase.converters.CatalogConverter
 import kg.nurtelecom.storage.roomDatabase.converters.ProductConverter

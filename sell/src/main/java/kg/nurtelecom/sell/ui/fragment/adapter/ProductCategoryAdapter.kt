@@ -99,7 +99,7 @@ class ProductsViewHolder(private val binding: ProductCategoryItemBinding) :
     fun bind(product: Products, clickListener: ItemClickListener) {
         binding.apply {
             root.setOnClickListener {
-                clickListener.transferData(product)
+                clickListener.onItemClick(product)
             }
             tvProductName.text = product.name
             val formattedPrice = "${product.price.roundUp()} <u>с</u>"
