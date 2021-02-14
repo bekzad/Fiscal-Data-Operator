@@ -26,7 +26,7 @@
     <string name="alert_icon_description">Alert icon</string>
     <string name="count">Count</string>
     <string name="product_not_from_list">Товар не из списка</string>
-    <string name="position_with_n">Позиция №</string>
+    <string name="position_with_n">Позиция № %d</string>
     <string name="position">Позиция</string>
     <string name="payment_method">Метод оплаты</string>
     <string name="cash_check_number">Кассовый чек №%d</string>

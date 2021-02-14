@@ -15,6 +15,7 @@ class AppPreferences(context: Context) : BasePreferences(context) {
     var fiscalRegime: Boolean by PreferenceDelegate(sharedPreference, Keys.FISCAL_REGIME, false)
     var secureKey: String by PreferenceDelegate(sharedPreference, Keys.SECURE_KEY, "")
     var currentDate: String by PreferenceDelegate(sharedPreference, Keys.CURRENT_DATE, "")
+    var isFiscalDialogShow: Boolean by PreferenceDelegate(sharedPreference, Keys.FISCAL_DIALOG_STATE, false)
 
     object Keys {
         const val ACCESS_TOKEN = "ACCESS_TOKEN"
@@ -22,5 +23,6 @@ class AppPreferences(context: Context) : BasePreferences(context) {
         const val FISCAL_REGIME = "FISCAL_REGIME"
         const val SECURE_KEY = "SECURE_KEY"
         const val CURRENT_DATE = "CURRENT_DATE"
+        const val FISCAL_DIALOG_STATE = "FISCAL_DIALOG_STATE"
     }
 }

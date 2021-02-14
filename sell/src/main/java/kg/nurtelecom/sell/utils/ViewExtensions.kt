@@ -44,7 +44,7 @@ fun DrawerLayout.setupActionBarDrawerToggle(
         R.string.nav_open_drawer,
         R.string.nav_close_drawer
     )
-    actionBarToggle.drawerArrowDrawable.color = ContextCompat.getColor(activity ,R.color.white)
+    actionBarToggle.drawerArrowDrawable.color = ContextCompat.getColor(activity, R.color.white)
     addDrawerListener(actionBarToggle)
     actionBarToggle.syncState()
 }

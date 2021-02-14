@@ -8,4 +8,5 @@ val storageKoin = module {
     single { AppPreferences(get()) }
     single { RoomDB.getInstance(get()) }
     single { get<RoomDB>().getDataDao() }
+    single { get<RoomDB>().getSellDao() }
 }

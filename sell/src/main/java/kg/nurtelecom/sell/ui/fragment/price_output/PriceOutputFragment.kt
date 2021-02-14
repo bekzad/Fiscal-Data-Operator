@@ -30,9 +30,8 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding, SellMainVie
     override fun subscribeToLiveData() {
         vm.selectedProductData.observe(viewLifecycleOwner, { product ->
             if (vm.selectedProductData.value != null) {
-                if (product != null) {
-                    vb.icProductPrice.setContent(product.productPrice)
-                }
+                vb.tvName.text = product.name
+                vb.icProductPrice.setContent(product.price)
             }
         })
     }
@@ -63,12 +62,27 @@ class PriceOutputFragment : CoreFragment<PriceOutputFragmentBinding, SellMainVie
         val countCanBeZero = vb.icProductCount.fetchInputData()
         val count = if (countCanBeZero.isZero()) BigDecimal.ONE else countCanBeZero
 
+        var currentProductId: Long? = null
+        var productName = ""
+        vm.selectedProductData.value?.let { product ->
+            currentProductId = product.id
+            productName = product.name
+        }
+
         return Product(
-            price = vb.icProductPrice.fetchInputData(),
-            count = count,
+            productId = currentProductId,
+            productName = productName,
+            productUnitPrice = vb.icProductPrice.fetchInputData(),
+            productQuantity = count,
             discount = vb.icProductDiscount.fetchInputData(),
-            allowance = vb.icProductAllowance.fetchInputData()
+            charge = vb.icProductAllowance.fetchInputData(),
+            itemIndex = 0L
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        vm.clearSelectedProduct()
     }
 
     companion object {
