@@ -81,8 +81,14 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
 
         // Here we are sending id as just null
         for ((index, product) in productList.withIndex()) {
-            val itemIndex = index + 1
-            val itemRequest = ReceiptItemRequest(null, product.count, product.totalPrice, itemIndex.toLong())
+            val itemIndex: Long = (index + 1).toLong()
+            var name: String
+            name = if (product.productName.isEmpty()) {
+                "Позиция № $itemIndex"
+            } else product.productName
+            val itemRequest = ReceiptItemRequest(product.productId, name, product.productQuantity, product.productUnitPrice,
+                itemIndex
+            )
             receiptItems.add(itemRequest)
         }
 

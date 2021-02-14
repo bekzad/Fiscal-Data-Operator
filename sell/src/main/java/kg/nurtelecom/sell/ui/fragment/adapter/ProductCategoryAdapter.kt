@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.data.sell.CatalogResult
 import kg.nurtelecom.data.sell.Products
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ProductCategoryHeaderBinding
 import kg.nurtelecom.sell.databinding.ProductCategoryItemBinding
 import kg.nurtelecom.sell.utils.roundUp
@@ -16,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ProductCategoryAdapter :
+class ProductCategoryAdapter(private val clickListener: ItemClickListener) :
     ListAdapter<ProductsItem, RecyclerView.ViewHolder>(ProductCategoryDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -74,7 +75,7 @@ class ProductCategoryAdapter :
             }
             is ProductsViewHolder -> {
                 val item = getItem(position) as ProductsItem.ProductItem
-                holder.bind(item.product)
+                holder.bind(item.product, clickListener)
             }
         }
     }
@@ -95,8 +96,11 @@ class ProductCategoryAdapter :
 class ProductsViewHolder(private val binding: ProductCategoryItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(product: Products) {
+    fun bind(product: Products, clickListener: ItemClickListener) {
         binding.apply {
+            root.setOnClickListener {
+                clickListener.transferData(product)
+            }
             tvProductName.text = product.name
             val formattedPrice = "${product.price.roundUp()} <u>с</u>"
             tvProductPrice.text =

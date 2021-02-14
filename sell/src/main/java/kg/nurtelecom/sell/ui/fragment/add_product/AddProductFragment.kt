@@ -9,9 +9,10 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.data.sell.AllProducts
+import kg.nurtelecom.data.sell.Products
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.AddProductFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductCategoryAdapter
@@ -20,9 +21,9 @@ import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 
 
-class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
+class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewModel>(SellMainViewModel::class),  ItemClickListener {
 
-    private val catalogAdapter: ProductCategoryAdapter = ProductCategoryAdapter()
+    private val catalogAdapter: ProductCategoryAdapter = ProductCategoryAdapter(this)
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
         AddProductFragmentBinding.inflate(inflater, container, false)
@@ -53,9 +54,13 @@ class AddProductFragment : CoreFragment<AddProductFragmentBinding, SellMainViewM
         }
     }
 
-    private fun navigateToPriceOutputFragment(allProducts: AllProducts) {
+    override fun transferData(product: Products) {
+        vm.sendSelectedProduct(product)
+        navigateToPriceOutputFragment()
+    }
+
+    private fun navigateToPriceOutputFragment() {
         parentActivity.replaceFragment<PriceOutputFragment>(R.id.sell_container)
-        vm.sendSelectedProduct(allProducts)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

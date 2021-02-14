@@ -20,7 +20,7 @@ abstract class SellMainViewModel : CoreViewModel() {
 
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<BigDecimal>
-    abstract val selectedProductData: MutableLiveData<AllProducts>
+    abstract val selectedProductData: MutableLiveData<Products>
     abstract var isProductEmpty: MutableLiveData<Boolean>
     abstract var productCatalog: LiveData<List<CatalogResult>>
     abstract val isRegimeNonFiscal: Boolean
@@ -34,7 +34,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
     abstract fun removeProduct(position: Int)
-    abstract fun sendSelectedProduct(product: AllProducts)
+    abstract fun sendSelectedProduct(product: Products)
     abstract fun setDialogVisibility(value: Boolean)
     abstract fun clearSelectedProduct()
     abstract fun searchProduct(name: String)
@@ -55,7 +55,7 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
     override val productList: MutableLiveData<MutableList<Product>> =
             MutableLiveData(mutableListOf())
     override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData()
-    override val selectedProductData: MutableLiveData<AllProducts> = MutableLiveData()
+    override val selectedProductData: MutableLiveData<Products> = MutableLiveData()
     override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
     override var productCatalog: LiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
@@ -89,7 +89,7 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
         val hundred = BigDecimal("100.0")
 
         for (product in productList.value ?: listOf()) {
-            totalPrice = product.totalPrice
+            totalPrice = product.productUnitPrice
             tax = (totalPrice.multiply(taxRate).divide(hundred))
             taxSum = taxSum.add(totalPrice).add(tax)
         }
@@ -105,7 +105,7 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
         }
     }
 
-    override fun sendSelectedProduct(product: AllProducts) {
+    override fun sendSelectedProduct(product: Products) {
         selectedProductData.value = product
     }
 

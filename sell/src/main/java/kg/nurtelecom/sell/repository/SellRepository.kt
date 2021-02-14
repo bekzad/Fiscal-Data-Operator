@@ -9,10 +9,11 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 class SellRepository(
-        private val sellApi: SellApi,
-        private val productApi: ProductApi,
-        private val appPrefs: AppPreferences,
-        private val sellDao: SellDao) {
+    private val sellApi: SellApi,
+    private val productApi: ProductApi,
+    private val appPrefs: AppPreferences,
+    private val sellDao: SellDao
+) {
 
     val isNonFiscalRegime: Boolean get() = appPrefs.fiscalRegime
     val isDialogShow: Boolean get() = appPrefs.isFiscalDialogShow
@@ -29,9 +30,10 @@ class SellRepository(
 
     suspend fun fetchReceipt(fetchReceiptRequest: String): Response<String> {
         return sellApi.fetchReceipt(
-                accessToken = "Bearer ${appPrefs.token}",
-                uuid = appPrefs.token,
-                fetchReceiptRequest = fetchReceiptRequest)
+            accessToken = "Bearer ${appPrefs.token}",
+            uuid = appPrefs.token,
+            fetchReceiptRequest = fetchReceiptRequest
+        )
     }
 
 }

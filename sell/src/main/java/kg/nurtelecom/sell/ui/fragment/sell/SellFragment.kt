@@ -15,7 +15,8 @@ import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 
-class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMainViewModel::class), ProductItemClickListener {
+class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMainViewModel::class),
+    ProductItemClickListener {
 
     private val productAdapter: ProductAdapter = ProductAdapter(this)
 
@@ -24,7 +25,6 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
 
     override fun setupToolbar(): Int {
         return when (vm.operationType) {
-            OperationType.SALE -> R.string.text_sale
             OperationType.POSTPAY -> R.string.text_credit
             OperationType.PREPAY -> {
                 startPrepay()
@@ -61,17 +61,20 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
     }
 
     private fun setupRegime() {
-        vb.dvRegime.setupDialog(vm.isRegimeNonFiscal)
-        vb.dvRegime.hideDialog()
+        vb.apply {
+            dvRegime.setupDialog(vm.isRegimeNonFiscal)
+            dvRegime.hideDialog()
+        }
     }
 
     private fun setupNavigation() {
-        vb.icSumPay.setOnClickListener {
-            parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
-        }
-
-        vb.btnAddProduct.setOnClickListener {
-            parentActivity.replaceFragment<AddProductFragment>(R.id.sell_container)
+        vb.apply {
+            icSumPay.setOnClickListener {
+                parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
+            }
+            btnAddProduct.setOnClickListener {
+                parentActivity.replaceFragment<AddProductFragment>(R.id.sell_container)
+            }
         }
     }
 
