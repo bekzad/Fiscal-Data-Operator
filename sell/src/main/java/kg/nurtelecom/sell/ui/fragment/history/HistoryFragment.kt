@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.ofd.item_decoration.RoundDecor
@@ -14,6 +15,8 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.fragment.history.detail.HistoryDetailFragment
+import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment
+import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment.Companion.CHECK_ID
 import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 

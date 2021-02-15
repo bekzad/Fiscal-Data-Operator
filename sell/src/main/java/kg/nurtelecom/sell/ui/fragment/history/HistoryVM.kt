@@ -21,6 +21,7 @@ abstract class HistoryViewModel : CoreViewModel() {
     abstract fun fetchDetailCheckHistory(id: Int)
     abstract fun searchChecks(name: String)
     abstract fun calculateTotalSum(items: ReceiptItems, isChecked: Boolean)
+    abstract fun resetTotalSum()
 }
 
 class HistoryViewModelImpl (private val historyRepository: HistoryRepository) : HistoryViewModel() {
@@ -63,5 +64,9 @@ class HistoryViewModelImpl (private val historyRepository: HistoryRepository) : 
         } else {
             totalSum.value?.minus(items.total.roundOff(2))
         }
+    }
+
+    override fun resetTotalSum() {
+        totalSum.value = BigDecimal.ZERO
     }
 }

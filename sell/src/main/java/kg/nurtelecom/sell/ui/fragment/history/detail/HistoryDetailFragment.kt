@@ -2,13 +2,18 @@ package kg.nurtelecom.sell.ui.fragment.history.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.ChecksHistoryDetailFragmentBinding
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
+import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment
+import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment.Companion.CHECK_ID
 import kg.nurtelecom.sell.ui.fragment.refund.detail.RefundDetailFragment
+import kg.nurtelecom.sell.ui.fragment.refund.detail.RefundProductsFragment
 
 class HistoryDetailFragment :
     CoreFragment<ChecksHistoryDetailFragmentBinding, HistoryViewModel>(HistoryViewModel::class) {
@@ -22,7 +27,11 @@ class HistoryDetailFragment :
 
     override fun setupToolbar(): Int = R.string.history_title
 
-    override fun setupViews() {}
+    override fun setupViews() {
+        vb.btnCheckReturn.setOnClickListener {
+            // print check
+        }
+    }
 
     override fun subscribeToLiveData() {
         vm.detailCheckHistory.observe(viewLifecycleOwner) {

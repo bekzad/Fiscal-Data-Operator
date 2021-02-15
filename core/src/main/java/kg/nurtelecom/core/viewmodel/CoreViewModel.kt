@@ -3,6 +3,7 @@ package kg.nurtelecom.core.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kg.nurtelecom.core.ErrorHandler
 import kg.nurtelecom.core.Event
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +18,7 @@ abstract class CoreViewModel : ViewModel() {
             try {
                 func()
             } catch (e: Exception) {
+//                throw ErrorHandler(e.message)
                 e.printStackTrace()
             }
         }
