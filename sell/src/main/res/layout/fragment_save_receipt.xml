@@ -9,19 +9,19 @@
     tools:context=".ui.fragment.print_receipt.SaveReceiptFragment">
 
     <ScrollView
+        android:id="@+id/sv_receipt_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_0dp"
-        android:background="@drawable/rounded_white_background"
         android:layout_marginBottom="@dimen/margin_16dp"
+        android:background="@drawable/rounded_white_background"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/btn_print_check"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_receipt_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_0dp"
             android:padding="@dimen/margin_16dp"
-            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView

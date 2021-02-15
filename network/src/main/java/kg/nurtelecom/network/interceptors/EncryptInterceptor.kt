@@ -1,10 +1,11 @@
 package kg.nurtelecom.network.interceptors
 
-import android.util.Log
 import kg.nurtelecom.storage.sharedpref.AppPreferences
-import okhttp3.*
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
 import okio.Buffer
 
 class EncryptInterceptor(appPrefs: AppPreferences) : Interceptor {
@@ -21,8 +22,6 @@ class EncryptInterceptor(appPrefs: AppPreferences) : Interceptor {
 
         val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
         val strNewBody: String = encryption.encrypt(strOldBody)
-        Log.e("Encrypt this", strOldBody)
-        Log.e("Encrypted", strNewBody)
         val body: RequestBody = strNewBody.toRequestBody(mediaType)
 
         request = request.newBuilder()

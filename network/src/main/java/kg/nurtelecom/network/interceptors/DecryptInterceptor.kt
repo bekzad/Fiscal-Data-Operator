@@ -1,6 +1,5 @@
 package kg.nurtelecom.network.interceptors
 
-import android.util.Log
 import kg.nurtelecom.storage.sharedpref.AppPreferences
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -26,7 +25,6 @@ class DecryptInterceptor(appPrefs: AppPreferences) : Interceptor {
         if (response.code != 401) {
             decryptedString = encryption.decrypt(responseString)
         }
-        Log.e("DecryptInterceptor", decryptedString)
 
         val newResponse = response.newBuilder()
         return newResponse

@@ -48,7 +48,7 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
         // TO DO exception when I am trying to observe null object only when the code is 401
         vm.fetchReceiptResult.observe(viewLifecycleOwner, { response ->
             updateScreen(response)
-            vb.clReceiptContainer.visibility = View.VISIBLE
+            vb.svReceiptContainer.visibility = View.VISIBLE
         })
     }
 

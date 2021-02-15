@@ -17,21 +17,7 @@ class RefreshTokenInterceptor(private val appPrefs: AppPreferences) : Intercepto
 
         // If the response code is 401 then, fetch new token and make a new request with new token
         if (response.code == 401) {
-            val newResponse = makeTokenRefreshCall(request, chain)
-            // If new request is also not successful then logout the user
-            // It might happen when refresh token has expired
-//            if (!newResponse.isSuccessful) {
-
-//                val requestToLogout = RefreshTokenInstance.serviceBuilder(RefreshTokenApi::class.java)
-//                val callLogoutResult = requestToLogout.logout(appPrefs.token)
-//                val logoutResult = callLogoutResult.execute().body()
-//                if (logoutResult?.resultCode == "SUCCESS") {
-//                    appPrefs.token = ""
-//                    appPrefs.refreshToken = ""
-//                    appPrefs.secureKey = ""
-//                }
-//            }
-            return newResponse
+            return makeTokenRefreshCall(request, chain)
         }
 
         // If the response is not 401 then return the normal response
