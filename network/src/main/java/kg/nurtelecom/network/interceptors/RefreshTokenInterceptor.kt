@@ -20,16 +20,17 @@ class RefreshTokenInterceptor(private val appPrefs: AppPreferences) : Intercepto
             val newResponse = makeTokenRefreshCall(request, chain)
             // If new request is also not successful then logout the user
             // It might happen when refresh token has expired
-            if (!newResponse.isSuccessful) {
-                val requestToLogout = RefreshTokenInstance.serviceBuilder(RefreshTokenApi::class.java)
-                val callLogoutResult = requestToLogout.logout(appPrefs.token)
-                val logoutResult = callLogoutResult.execute().body()
-                if (logoutResult?.resultCode == "SUCCESS") {
-                    appPrefs.token = ""
-                    appPrefs.refreshToken = ""
-                    appPrefs.secureKey = ""
-                }
-            }
+//            if (!newResponse.isSuccessful) {
+
+//                val requestToLogout = RefreshTokenInstance.serviceBuilder(RefreshTokenApi::class.java)
+//                val callLogoutResult = requestToLogout.logout(appPrefs.token)
+//                val logoutResult = callLogoutResult.execute().body()
+//                if (logoutResult?.resultCode == "SUCCESS") {
+//                    appPrefs.token = ""
+//                    appPrefs.refreshToken = ""
+//                    appPrefs.secureKey = ""
+//                }
+//            }
             return newResponse
         }
 

@@ -30,12 +30,23 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
           ChangePasswordActivity.start(requireContext())
         }
         vb.cellFiscalMode.setOnClickListener {
-            SellMainActivity.start(requireContext())
+            val intent = Intent(activity, SellMainActivity::class.java)
+            startActivityForResult(intent, SellMainActivity.LOGGED_OUT)
         }
 
         vb.cellProfile.setOnClickListener {
             val intent = Intent(activity, UserActivity::class.java)
             startActivity(intent)
+        }
+    }
+    // Go to Auth Activity via Splash activity if already logged out
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (resultCode) {
+            SellMainActivity.LOGGED_OUT -> {
+                val intent = Intent(activity, SplashActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

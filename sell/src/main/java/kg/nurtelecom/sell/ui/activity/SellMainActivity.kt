@@ -4,11 +4,8 @@ import android.content.Context
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import kg.nurtelecom.auth.ui.AuthActivity
 import kg.nurtelecom.core.activity.CoreActivity
-import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.core.extension.startActivity
-import kg.nurtelecom.core.extension.visible
+import kg.nurtelecom.core.extension.*
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
@@ -43,11 +40,17 @@ class SellMainActivity :
         replaceFragment<SellFragment>(R.id.sell_container, false)
     }
 
-    // If Access token is empty go to Authorization
     override fun subscribeToLiveData() {
-        vm.accessToken.observe(this, { accessToken ->
-            if (accessToken.isNullOrEmpty()) {
-                AuthActivity.start(this)
+        vm.event.observe(this, {
+            when (it) {
+                is UserLogout -> {
+                    if (it.resultCode == "SUCCESS") {
+                        setResult(LOGGED_OUT)
+                        finish()
+                    } else {
+                        vb.root.snackbar(application.resources.getString(R.string.logout_fail_massage))
+                    }
+                }
             }
         })
     }
@@ -131,6 +134,8 @@ class SellMainActivity :
     }
 
     companion object {
+        const val LOGGED_OUT = 1
+
         fun start(context: Context?) {
             context?.startActivity<SellMainActivity>()
         }

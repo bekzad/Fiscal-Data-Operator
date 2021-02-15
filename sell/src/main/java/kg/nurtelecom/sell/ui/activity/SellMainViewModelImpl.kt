@@ -3,9 +3,9 @@ package kg.nurtelecom.sell.ui.activity
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
@@ -16,11 +16,7 @@ import kg.nurtelecom.data.sell.Products
 import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
-import kg.nurtelecom.sell.utils.observeKey
-import kg.nurtelecom.sell.utils.roundUp
-import kg.nurtelecom.storage.sharedpref.AppPreferences.Keys.ACCESS_TOKEN
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.math.BigDecimal
 
 abstract class SellMainViewModel : CoreViewModel() {
@@ -35,8 +31,8 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val fetchReceiptResult: MutableLiveData<FetchReceiptResult>
     abstract var operationType: OperationType
     abstract val amountPaid: MutableLiveData<BigDecimal>
-    abstract val accessToken: LiveData<String>
     abstract val change: MutableLiveData<BigDecimal>
+    open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 
     abstract fun fetchReceipt(fetchReceiptRequest: String)
     abstract fun addNewProduct(product: Product)
@@ -45,7 +41,6 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun fetchProductCatalog()
     abstract fun clearSelectedProduct()
     abstract fun searchProduct(name: String)
-    open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 
     // Session
     abstract var sessionReportData: MutableLiveData<ReportDetailed>
@@ -55,10 +50,6 @@ abstract class SellMainViewModel : CoreViewModel() {
 
 class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
     private val sellRepository: SellRepository) : SellMainViewModel() {
-
-    @ExperimentalCoroutinesApi
-    override val accessToken: LiveData<String>
-        get() = sellRepository.observedToken.observeKey(ACCESS_TOKEN, "").asLiveData()
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
@@ -81,6 +72,7 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
     override val fetchReceiptResult: MutableLiveData<FetchReceiptResult> = MutableLiveData()
     override var operationType: OperationType = OperationType.SALE
 
+    // This is a first call to Api, it fetches the whole product catalog list
     init {
         fetchProductCatalog()
     }
@@ -94,9 +86,19 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
     override fun fetchProductCatalog() {
         if (!sellRepository.isNonFiscalRegime) {
             safeCall(Dispatchers.IO) {
-                productCatalog.postValue(sellRepository.fetchProductCategory())
+                val response = sellRepository.fetchProductCategory()
+                if (!response.isSuccessful) {
+                    productCatalog.postValue(response.body()!!.result)
+                } else {
+                    logout()
+                }
             }
         }
+    }
+
+    private suspend fun logout() {
+        val result = sellRepository.logout()
+        event.postValue(UserLogout(result.resultCode))
     }
 
     private fun calculateTaxSum(): BigDecimal {
@@ -188,3 +190,5 @@ class SellMainViewModelImpl(private val sessionRepository: SessionRepository,
         }
     }
 }
+
+class UserLogout(val resultCode: String) : CoreEvent()
