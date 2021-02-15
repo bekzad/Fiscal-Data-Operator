@@ -1,6 +1,7 @@
 package kg.nurtelecom.sell.repository
 
 import kg.nurtelecom.data.LogoutResult
+import kg.nurtelecom.data.sell.CatalogResult
 import kg.nurtelecom.data.sell.ProductCategory
 import kg.nurtelecom.network.data.api.AuthorizationApi
 import kg.nurtelecom.network.data.api.ProductApi
@@ -26,12 +27,12 @@ class SellRepository(
         appPrefs.isFiscalDialogShow = value
     }
 
-    suspend fun fetchProductCategoryRemotely() {
-        sellDao.insertProductCatalog(productApi.fetchProductCatalog("Bearer ${appPrefs.token}").result)
-    }
-    
-    suspend fun fetchProductCategory(): Response<ProductCategory> {
+    suspend fun fetchProductCategoryRemotely(): Response<ProductCategory> {
         return productApi.fetchProductCatalog("Bearer ${appPrefs.token}")
+    }
+
+    suspend fun saveCatalogToDatabase(catalog: List<CatalogResult>) {
+        sellDao.insertProductCatalog(catalog)
     }
 
     suspend fun fetchReceipt(fetchReceiptRequest: String): Response<String> {

@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.activity
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
@@ -17,7 +18,6 @@ import kg.nurtelecom.sell.repository.SessionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import retrofit2.Response
 import java.math.BigDecimal
 
 abstract class SellMainViewModel : CoreViewModel() {
@@ -79,9 +79,8 @@ class SellMainViewModelImpl(
 
     override val change: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
-    override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> =
+    override val fetchReceiptResult: MutableLiveData<FetchReceiptResult> =
         MutableLiveData()
-    override val fetchReceiptResultString: MutableLiveData<Response<String>> = MutableLiveData()
 
     override var operationType: OperationType = OperationType.SALE
 
@@ -108,8 +107,6 @@ class SellMainViewModelImpl(
     }
 
     override val amountPaid: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
-    override val fetchReceiptResult: MutableLiveData<FetchReceiptResult> = MutableLiveData()
-    override var operationType: OperationType = OperationType.SALE
 
     // This is a first call to Api, it fetches the whole product catalog list
     init {
@@ -135,24 +132,6 @@ class SellMainViewModelImpl(
         productList.value?.add(product)
         taxSum.value = calculateTaxSum()
         isProductEmpty.value = false
-    }
-
-    override fun fetchProductCatalog() {
-        if (!sellRepository.isNonFiscalRegime) {
-            safeCall(Dispatchers.IO) {
-                val response = sellRepository.fetchProductCategory()
-                if (!response.isSuccessful) {
-                    productCatalog.postValue(response.body()!!.result)
-                } else {
-                    logout()
-                }
-            }
-        }
-    }
-
-    private suspend fun logout() {
-        val result = sellRepository.logout()
-        event.postValue(UserLogout(result.resultCode))
     }
 
     private fun calculateTaxSum(): BigDecimal {
@@ -210,8 +189,18 @@ class SellMainViewModelImpl(
 
     override fun fetchProductCatalogRemotely() {
         safeCall(Dispatchers.IO) {
-            sellRepository.fetchProductCategoryRemotely()
+            val response = sellRepository.fetchProductCategoryRemotely()
+            if (response.isSuccessful) {
+                sellRepository.saveCatalogToDatabase(response.body()!!.result)
+            } else {
+                logout()
+            }
         }
+    }
+
+    private suspend fun logout() {
+        val result = sellRepository.logout()
+        event.postValue(UserLogout(result.resultCode))
     }
 
     override fun fetchProductCatalogLocally() {
