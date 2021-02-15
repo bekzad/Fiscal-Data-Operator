@@ -25,7 +25,6 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<Products>
-    abstract val sumWithNSP: LiveData<BigDecimal>
     abstract var isProductEmpty: MutableLiveData<Boolean>
     abstract var productCatalog: LiveData<List<CatalogResult>>
     abstract val isRegimeNonFiscal: Boolean
@@ -34,6 +33,8 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract var sessionReportData: MutableLiveData<ReportDetailed>
     abstract val isDialogShow: MutableLiveData<Boolean>
     abstract val isSubmitBtnEnabled: Flow<Boolean>
+    abstract val ndsRate: MutableLiveData<BigDecimal>
+    abstract val nspRate: MutableLiveData<BigDecimal>
 
     abstract val amountPaid: MutableLiveData<BigDecimal>
     abstract val change: MutableLiveData<BigDecimal>
@@ -48,6 +49,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract fun searchProduct(name: String)
     abstract fun fetchProductCatalogRemotely()
     abstract fun fetchProductCatalogLocally()
+    abstract fun updateTaxSum()
 
     // user input validation
     abstract fun setProductPrice(price: String)
@@ -67,15 +69,14 @@ class SellMainViewModelImpl(
 
     override val isRegimeNonFiscal: Boolean = sellRepository.isNonFiscalRegime
 
-    override val productList: MutableLiveData<MutableList<Product>> =
-        MutableLiveData(mutableListOf())
+    override val productList: MutableLiveData<MutableList<Product>> = MutableLiveData(mutableListOf())
     override val selectedProductData: MutableLiveData<Products> = MutableLiveData()
     override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
     override var productCatalog: LiveData<List<CatalogResult>> = MutableLiveData(listOf())
 
     override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
-    override val sumWithNSP: LiveData<BigDecimal>
-        get() = calculateSumWithNSP()
+    override val ndsRate = MutableLiveData(BigDecimal("12.0"))
+    override val nspRate = MutableLiveData(BigDecimal.ZERO)
 
     override val change: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
@@ -130,28 +131,47 @@ class SellMainViewModelImpl(
 
     override fun addNewProduct(product: Product) {
         productList.value?.add(product)
-        taxSum.value = calculateTaxSum()
+        updateTaxSum()
         isProductEmpty.value = false
     }
-
+    override fun updateTaxSum() {
+        taxSum.value = calculateTaxSum()
+    }
+    // This calculates the total sum with nds and nsp taxes discounts and charges
     private fun calculateTaxSum(): BigDecimal {
-        var taxSum = BigDecimal.ZERO
-        var totalPrice: BigDecimal
-        var tax: BigDecimal
-        val taxRate = BigDecimal("12.0")
-        val hundred = BigDecimal("100.0")
-
-        for (product in productList.value ?: listOf()) {
-            totalPrice = product.productUnitPrice
-            tax = (totalPrice.multiply(taxRate).divide(hundred))
-            taxSum = taxSum.add(totalPrice).add(tax)
-        }
-
-        return taxSum
+        val totalGoodsSum = calculateTotalGoodsSum()
+        val ndsAmount = calculateNdsAmount(totalGoodsSum)
+        val nspAmount = calculateNspAmount(totalGoodsSum)
+        return totalGoodsSum.add(ndsAmount).add(nspAmount).stripTrailingZeros()
     }
 
-    private fun calculateSumWithNSP(): LiveData<BigDecimal> {
-        return MutableLiveData(taxSum.value?.multiply(BigDecimal("1.01")))
+    // This is the amount of NDS tax totalGoodsSum + ndsRate
+    private fun calculateNdsAmount(totalGoodsSum: BigDecimal): BigDecimal {
+        val ndsPercentage = ndsRate.value!!.divide(BigDecimal("100.0"))
+        return totalGoodsSum.multiply(ndsPercentage)
+    }
+    // This is the amount of NSP tax totalGoodsSum + nspRate
+    private fun calculateNspAmount(totalGoodsSum: BigDecimal): BigDecimal {
+        val ndsPercentage = nspRate.value!!.divide(BigDecimal("100.0"))
+        return totalGoodsSum.multiply(ndsPercentage)
+    }
+    // This is a total sum of products with discount and charge added - sum(priceWithDiscount),
+    // but no taxes
+    private fun calculateTotalGoodsSum(): BigDecimal {
+        val listOfProducts = productList.value ?: listOf()
+        var totalGoodsSum = BigDecimal.ZERO
+        for (product in listOfProducts) {
+            totalGoodsSum += calculatePriceWithDiscount(product)
+        }
+        return totalGoodsSum
+    }
+    // This is the price with a discount and charge - price - discount + charge , (no taxes added)
+    private fun calculatePriceWithDiscount(product: Product): BigDecimal {
+        val subtotal = product.productUnitPrice.multiply(product.productQuantity)
+        val hundred = BigDecimal("100.0")
+        val discount = subtotal.multiply(product.discount).divide(hundred)
+        val allowance = subtotal.multiply(product.charge).divide(hundred)
+        return subtotal.subtract(discount).add(allowance)
     }
 
     override fun removeProduct(position: Int) {

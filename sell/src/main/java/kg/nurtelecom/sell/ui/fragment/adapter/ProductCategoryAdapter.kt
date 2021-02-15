@@ -11,7 +11,6 @@ import kg.nurtelecom.data.sell.Products
 import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ProductCategoryHeaderBinding
 import kg.nurtelecom.sell.databinding.ProductCategoryItemBinding
-import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -102,7 +101,7 @@ class ProductsViewHolder(private val binding: ProductCategoryItemBinding) :
                 clickListener.onItemClick(product)
             }
             tvProductName.text = product.name
-            val formattedPrice = "${product.price.roundUp()} <u>с</u>"
+            val formattedPrice = "${product.price} <u>с</u>"
             tvProductPrice.text =
                 HtmlCompat.fromHtml(formattedPrice, HtmlCompat.FROM_HTML_MODE_LEGACY)
         }

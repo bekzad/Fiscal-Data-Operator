@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import java.math.BigDecimal
+import java.math.MathContext
 import java.math.RoundingMode
 
 
@@ -15,7 +16,6 @@ fun AppCompatActivity.hideKeyboard() {
     }
 }
 
-// Check whether a given BigDecimal value is a zero or not
 fun BigDecimal.isZero() = this.compareTo(BigDecimal.ZERO) == 0
 fun BigDecimal.isNotZero() = this.compareTo(BigDecimal.ZERO) != 0
 fun BigDecimal.isGreaterThan(another: BigDecimal) = this.compareTo(another) == 1

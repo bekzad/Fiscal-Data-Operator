@@ -9,6 +9,8 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPrintReceiptBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
+import kg.nurtelecom.sell.utils.isNotZero
+import java.math.BigDecimal
 
 class PrintReceiptFragment : CoreFragment<FragmentPrintReceiptBinding, SellMainViewModel>(SellMainViewModel::class) {
 
@@ -30,12 +32,22 @@ class PrintReceiptFragment : CoreFragment<FragmentPrintReceiptBinding, SellMainV
             vb.tvPaymentAmount.text = sum.toString()
         }
         vm.change.observe(viewLifecycleOwner) { change ->
-            vb.tvChangeAmount.text = change.toString()
+            if (change.isNotZero()) {
+                vb.tvChangeAmount.text = change.toString()
+            }
         }
     }
 
     private fun navigateToSellFragment() {
-        parentActivity.replaceFragment<SellFragment>(R.id.sell_container, true)
+        updateVM()
+        parentActivity.replaceFragment<SellFragment>(R.id.sell_container, false)
+    }
+
+    private fun updateVM() {
+        vm.nspRate.value = BigDecimal.ZERO
+        vm.productList.value = mutableListOf()
+        vm.updateTaxSum()
+        vm.isProductEmpty.value = true
     }
 
     companion object {

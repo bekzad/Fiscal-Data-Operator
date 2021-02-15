@@ -14,6 +14,7 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.adapter.ProductAdapter
 import kg.nurtelecom.sell.ui.fragment.add_product.AddProductFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
+import java.math.BigDecimal
 
 class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMainViewModel::class), ItemClickListener {
 
@@ -35,6 +36,7 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
 
     override fun setupViews() {
         vb.rvProduct.adapter = productAdapter
+        setupVM()
         setupRegime()
         setupNavigation()
     }
@@ -59,6 +61,11 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
         productAdapter.notifyDataSetChanged()
     }
 
+    private fun setupVM() {
+        vm.nspRate.value = BigDecimal.ZERO
+        vm.updateTaxSum()
+    }
+
     private fun setupRegime() {
         vb.apply {
             dvRegime.setupDialog(vm.isRegimeNonFiscal)
@@ -71,7 +78,7 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
             if (vb.icSumPay.getContent().isEmpty()) {
                 return@setOnClickListener
             }
-            parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container)
+            parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container, true)
         }
 
         vb.btnAddProduct.setOnClickListener {

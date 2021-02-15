@@ -39,7 +39,6 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
         // NSP is added to the value of taxSum
         vb.btnContinue.setOnClickListener {
             if (canContinue) {
-                vm.taxSum.value = vm.sumWithNSP.value
                 vm.amountPaid.value = amountPaidVar
                 navigateToSaveReceipt()
                 fetchReceipt()
@@ -59,7 +58,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
                     vb.btnContinue.enable(true)
                 }
                 // Can continue to the next fragment only if paid amount is greater than or equal to sumWithTaxes
-                canContinue = amountPaidVar.isGreaterThanOrEqualTo(vm.sumWithNSP.value!!)
+                canContinue = amountPaidVar.isGreaterThanOrEqualTo(vm.taxSum.value!!)
             }
         }
     }
@@ -67,8 +66,8 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     // By default amount paid is equal to the sum with taxes
     // Because we want to pass to the next fragment if there is no value
     override fun subscribeToLiveData() {
-        vm.sumWithNSP.observe(viewLifecycleOwner) { sumWithNSP ->
-            sumWithNSP.apply {
+        vm.taxSum.observe(viewLifecycleOwner) { taxSum ->
+            taxSum.apply {
                 vb.icSum.setContent(this)
                 vb.icReceived.setHint(this)
                 amountPaidVar = this
@@ -77,7 +76,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     }
 
     private fun navigateToSaveReceipt() {
-        parentActivity.replaceFragment<SaveReceiptFragment>(R.id.sell_container, true)
+        parentActivity.replaceFragment<SaveReceiptFragment>(R.id.sell_container, false)
     }
 
     private fun fetchReceipt() {

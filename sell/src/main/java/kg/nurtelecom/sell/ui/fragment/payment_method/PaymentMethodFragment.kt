@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.payment_method
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentMethodBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
+import java.math.BigDecimal
 
 
 class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding, SellMainViewModel>(SellMainViewModel::class) {
@@ -39,11 +41,15 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding, SellMai
 
     private fun setupNavigate() {
         vb.btnCashPayment.setOnClickListener {
-            parentActivity.replaceFragment<PaymentByCashFragment>(R.id.sell_container, true)
+            vm.nspRate.value = BigDecimal.ONE
+            vm.updateTaxSum()
+            parentActivity.replaceFragment<PaymentByCashFragment>(R.id.sell_container, false)
         }
 
         vb.btnCardPayment.setOnClickListener {
-            parentActivity.replaceFragment<PaymentByCardFragment>(R.id.sell_container, true)
+            vm.nspRate.value = BigDecimal.ZERO
+            vm.updateTaxSum()
+            parentActivity.replaceFragment<PaymentByCardFragment>(R.id.sell_container, false)
         }
     }
 

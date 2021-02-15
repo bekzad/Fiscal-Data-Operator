@@ -180,7 +180,8 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
     }
 
     private fun navigateToPrintReceipt() {
-        parentActivity.replaceFragment<PrintReceiptFragment>(R.id.sell_container, true)
+        vb.svReceiptContainer.visibility = View.GONE
+        parentActivity.replaceFragment<PrintReceiptFragment>(R.id.sell_container, false)
     }
 
     companion object {
