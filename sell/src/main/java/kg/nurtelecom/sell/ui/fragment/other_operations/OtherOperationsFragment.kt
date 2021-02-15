@@ -13,6 +13,8 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.credit.CreditListFragment
 import kg.nurtelecom.sell.ui.fragment.other_operations.prepayment.RefundPrepaymentFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
+import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutFragment
+import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutVM
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 
 class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
@@ -48,7 +50,7 @@ class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, Sel
             // here place for replacing fragment
         }
         vb.btnMenuItemDepositAndPayment.setOnClickListener{
-            // here place for replacing fragment
+            parentActivity.replaceFragment<ReceiptInOutFragment>(R.id.sell_container)
         }
         vb.btnMenuItemHistoryDepositsPayments.setOnClickListener{
             // here place for replacing fragment

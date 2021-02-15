@@ -11,6 +11,8 @@ import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModelImpl
 import kg.nurtelecom.sell.ui.fragment.credit.CreditListVM
 import kg.nurtelecom.sell.ui.fragment.credit.CreditListVMImpl
+import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutVM
+import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutVMImpl
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -22,4 +24,5 @@ val sellKoin = module {
     viewModel<HistoryViewModel> { HistoryViewModelImpl(get()) }
     viewModel <CreditListVM> { CreditListVMImpl(get()) }
     viewModel <CreditCheckViewFragmentVM> { CreditCheckViewFragmentVMImpl(get()) }
+    viewModel<ReceiptInOutVM> { ReceiptInOutVMImpl() }
 }
