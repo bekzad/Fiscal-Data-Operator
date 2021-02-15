@@ -3,7 +3,6 @@ package kg.nurtelecom.data.receipt.result
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.enums.PaymentType
 import java.math.BigDecimal
-import java.time.LocalDateTime
 
 data class Receipt (
     val id: Long, // id чека
@@ -23,7 +22,7 @@ data class Receipt (
     val checkCode: String, // Update
     val indexNum: Long, // счетчик чеков: последний для этого ККМ + 1
     val rollBackReceiptNum: String, // Update
-    val createdAt: LocalDateTime,
+    val createdAt: String, // Should be LocalDateTime
     val shiftId: Long, // id смены
     val receiptItems: List<ReceiptItemResult>, // позиции чека
 )

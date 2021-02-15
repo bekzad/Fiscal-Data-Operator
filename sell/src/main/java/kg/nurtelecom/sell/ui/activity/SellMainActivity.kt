@@ -5,9 +5,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import kg.nurtelecom.core.activity.CoreActivity
-import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.core.extension.startActivity
-import kg.nurtelecom.core.extension.visible
+import kg.nurtelecom.core.extension.*
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
@@ -23,7 +21,7 @@ import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 import kg.nurtelecom.sell.utils.setupActionBarDrawerToggle
 
 class SellMainActivity :
-    CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class) {
+    CoreActivity<ActivitySellMainBinding, SellMainViewModel>(SellMainViewModel::class){
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: Toolbar
@@ -40,6 +38,21 @@ class SellMainActivity :
             drawerLayout.openDrawer(GravityCompat.START)
         }
         replaceFragment<SellFragment>(R.id.sell_container, false)
+    }
+
+    override fun subscribeToLiveData() {
+        vm.event.observe(this, {
+            when (it) {
+                is UserLogout -> {
+                    if (it.resultCode == "SUCCESS") {
+                        setResult(LOGGED_OUT)
+                        finish()
+                    } else {
+                        vb.root.snackbar(application.resources.getString(R.string.logout_fail_massage))
+                    }
+                }
+            }
+        })
     }
 
     private fun setupDrawerLayout() {
@@ -121,6 +134,8 @@ class SellMainActivity :
     }
 
     companion object {
+        const val LOGGED_OUT = 1
+
         fun start(context: Context?) {
             context?.startActivity<SellMainActivity>()
         }

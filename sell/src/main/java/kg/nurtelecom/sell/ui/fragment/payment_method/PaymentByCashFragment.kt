@@ -17,12 +17,13 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentPaymentByCashBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.print_receipt.SaveReceiptFragment
-import kg.nurtelecom.sell.utils.roundUp
+import kg.nurtelecom.sell.utils.isGreaterThanOrEqualTo
 import java.math.BigDecimal
 
 class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMainViewModel>(SellMainViewModel::class) {
 
-    private var sumWithNSP: BigDecimal = BigDecimal.ZERO
+    private var amountPaidVar = BigDecimal.ZERO
+    private var canContinue = true
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -32,37 +33,45 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     override fun setupToolbar(): Int = R.string.payment_method
 
     override fun setupViews() {
-        // We are changing the value in viewModel before continuing
-        // NSP is added to the value of taxSum
         setupPaymentMode()
 
+        // We are changing the value in viewModel before continuing
+        // NSP is added to the value of taxSum
         vb.btnContinue.setOnClickListener {
-            vm.taxSum.value = sumWithNSP
-            navigateToSaveReceipt()
-            fetchReceipt()
+            if (canContinue) {
+                vm.taxSum.value = vm.sumWithNSP.value
+                vm.amountPaid.value = amountPaidVar
+                navigateToSaveReceipt()
+                fetchReceipt()
+            } else {
+                // TO Do error dialog box that entered amount is less than what is required
+            }
         }
 
         vb.icReceived.apply {
             fetchTextState {
                 if (it.isNullOrEmpty()) {
-                    vb.btnContinue.text = getString(R.string.without_change)
                     setupButtons()
                 } else {
+                    // Amount paid will change only if user enters something
+                    amountPaidVar= BigDecimal(it.toString())
                     vb.btnContinue.text = getString(R.string.pay_cash)
                     vb.btnContinue.enable(true)
                 }
+                // Can continue to the next fragment only if paid amount is greater than or equal to sumWithTaxes
+                canContinue = amountPaidVar.isGreaterThanOrEqualTo(vm.sumWithNSP.value!!)
             }
         }
     }
 
-    // We are adding NSP and showing to the user the result
+    // By default amount paid is equal to the sum with taxes
+    // Because we want to pass to the next fragment if there is no value
     override fun subscribeToLiveData() {
-        val taxNSP = BigDecimal("1.01")
-        vm.taxSum.observe(viewLifecycleOwner) { sum ->
-            sumWithNSP = sum.multiply(taxNSP).roundUp()
+        vm.sumWithNSP.observe(viewLifecycleOwner) { sumWithNSP ->
             sumWithNSP.apply {
                 vb.icSum.setContent(this)
                 vb.icReceived.setHint(this)
+                amountPaidVar = this
             }
         }
     }
@@ -84,7 +93,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
             val itemIndex: Long = (index + 1).toLong()
             var name: String
             name = if (product.productName.isEmpty()) {
-                "Позиция № $itemIndex"
+                "Позиция"
             } else product.productName
             val itemRequest = ReceiptItemRequest(product.productId, name, product.productQuantity, product.productUnitPrice,
                 itemIndex
@@ -104,6 +113,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
         when (vm.operationType) {
             OperationType.POSTPAY -> vb.btnContinue.text = getString(R.string.text_no_deposit)
             OperationType.PREPAY -> vb.btnContinue.text = getString(R.string.btn_continue)
+            OperationType.SALE -> vb.btnContinue.text = getString(R.string.without_change)
         }
     }
 

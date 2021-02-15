@@ -5,6 +5,7 @@ import kg.nurtelecom.network.UnsafeOkHttpClient
 import kg.nurtelecom.network.data.api.*
 import kg.nurtelecom.network.interceptors.DecryptInterceptor
 import kg.nurtelecom.network.interceptors.EncryptInterceptor
+import kg.nurtelecom.network.interceptors.RefreshTokenInterceptor
 import kg.nurtelecom.storage.sharedpref.AppPreferences
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,7 +17,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 val networkKoin = module {
 
-    single { provideOkHttp() }
+    single { provideOkHttp(get()) }
     single { provideRetrofit(get()) }
     single(named("encryptedOkHttp")) { provideOkHttpEncrypted(get()) }
     single(named("encryptedRetrofit")) { provideEncryptedRetrofit(get(named("encryptedOkHttp"))) }
@@ -36,8 +37,9 @@ fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         .build()
 }
 
-fun provideOkHttp(): OkHttpClient {
+fun provideOkHttp(appPrefs: AppPreferences): OkHttpClient {
     val builder = UnsafeOkHttpClient.getUnsafeOkHttpClient()
+    builder.addInterceptor(RefreshTokenInterceptor(appPrefs))
     if (BuildConfig.DEBUG)
         builder.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
     return builder.build()
@@ -53,11 +55,12 @@ fun provideEncryptedRetrofit(okHttpClient: OkHttpClient): Retrofit {
 
 fun provideOkHttpEncrypted(appPrefs: AppPreferences): OkHttpClient {
     val builder = UnsafeOkHttpClient.getUnsafeOkHttpClient()
-    builder
-        .addInterceptor(EncryptInterceptor(appPrefs))
-        .addInterceptor(DecryptInterceptor(appPrefs))
     if (BuildConfig.DEBUG)
         builder
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+    builder
+            .addInterceptor((RefreshTokenInterceptor(appPrefs)))
+            .addInterceptor(EncryptInterceptor(appPrefs))
+            .addInterceptor(DecryptInterceptor(appPrefs))
     return builder.build()
 }

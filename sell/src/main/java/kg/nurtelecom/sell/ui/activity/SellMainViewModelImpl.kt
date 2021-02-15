@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
+import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
@@ -12,7 +14,6 @@ import kg.nurtelecom.data.sell.*
 import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
-import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -24,16 +25,18 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val productList: MutableLiveData<MutableList<Product>>
     abstract val taxSum: MutableLiveData<BigDecimal>
     abstract val selectedProductData: MutableLiveData<Products>
+    abstract val sumWithNSP: LiveData<BigDecimal>
     abstract var isProductEmpty: MutableLiveData<Boolean>
     abstract var productCatalog: LiveData<List<CatalogResult>>
     abstract val isRegimeNonFiscal: Boolean
-    abstract val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>>
-    abstract val fetchReceiptResultString: MutableLiveData<Response<String>>
+    abstract val fetchReceiptResult: MutableLiveData<FetchReceiptResult>
     abstract var operationType: OperationType
     abstract var sessionReportData: MutableLiveData<ReportDetailed>
     abstract val isDialogShow: MutableLiveData<Boolean>
     abstract val isSubmitBtnEnabled: Flow<Boolean>
 
+    abstract val amountPaid: MutableLiveData<BigDecimal>
+    abstract val change: MutableLiveData<BigDecimal>
     open val filteredProducts: MutableLiveData<List<Products>>? = MutableLiveData()
 
     abstract fun fetchReceipt(fetchReceiptRequest: String)
@@ -66,10 +69,15 @@ class SellMainViewModelImpl(
 
     override val productList: MutableLiveData<MutableList<Product>> =
         MutableLiveData(mutableListOf())
-    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData()
     override val selectedProductData: MutableLiveData<Products> = MutableLiveData()
     override var isProductEmpty: MutableLiveData<Boolean> = MutableLiveData(true)
     override var productCatalog: LiveData<List<CatalogResult>> = MutableLiveData(listOf())
+
+    override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
+    override val sumWithNSP: LiveData<BigDecimal>
+        get() = calculateSumWithNSP()
+
+    override val change: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
     override val fetchReceiptResult: MutableLiveData<Response<FetchReceiptResult>> =
         MutableLiveData()
@@ -99,6 +107,11 @@ class SellMainViewModelImpl(
         return@combine isPriceCorrect and isChargeCorrect
     }
 
+    override val amountPaid: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
+    override val fetchReceiptResult: MutableLiveData<FetchReceiptResult> = MutableLiveData()
+    override var operationType: OperationType = OperationType.SALE
+
+    // This is a first call to Api, it fetches the whole product catalog list
     init {
         fetchProductCatalogRemotely()
     }
@@ -124,6 +137,24 @@ class SellMainViewModelImpl(
         isProductEmpty.value = false
     }
 
+    override fun fetchProductCatalog() {
+        if (!sellRepository.isNonFiscalRegime) {
+            safeCall(Dispatchers.IO) {
+                val response = sellRepository.fetchProductCategory()
+                if (!response.isSuccessful) {
+                    productCatalog.postValue(response.body()!!.result)
+                } else {
+                    logout()
+                }
+            }
+        }
+    }
+
+    private suspend fun logout() {
+        val result = sellRepository.logout()
+        event.postValue(UserLogout(result.resultCode))
+    }
+
     private fun calculateTaxSum(): BigDecimal {
         var taxSum = BigDecimal.ZERO
         var totalPrice: BigDecimal
@@ -137,7 +168,11 @@ class SellMainViewModelImpl(
             taxSum = taxSum.add(totalPrice).add(tax)
         }
 
-        return taxSum.roundUp()
+        return taxSum
+    }
+
+    private fun calculateSumWithNSP(): LiveData<BigDecimal> {
+        return MutableLiveData(taxSum.value?.multiply(BigDecimal("1.01")))
     }
 
     override fun removeProduct(position: Int) {
@@ -187,15 +222,24 @@ class SellMainViewModelImpl(
 
     override fun fetchReceipt(fetchReceiptRequest: String) {
         safeCall(Dispatchers.IO) {
-            val response = sellRepository.fetchReceipt(fetchReceiptRequest)
-            fetchReceiptResultString.postValue(response)
 
-            val gson = Gson()
-            val jsonBody = response.body() ?: ""
-            val jsonString = """${jsonBody}"""
-//
-//            val fetchReceiptResult = gson.fromJson(jsonString, FetchReceiptResult::java)
-//            fetchReceiptResult.postValue()
+            val response = sellRepository.fetchReceipt(fetchReceiptRequest)
+
+            // We are casting the Json response into data classes and saving them to livedata
+            val responseBody: String
+
+            if (response.isSuccessful){
+                responseBody = response.body() ?: "Successful response, null body"
+            } else {
+                responseBody = response.errorBody()?.string() ?: "Fail response, null error body"
+            }
+
+            try {
+                val fetchReceiptResultTmp = Gson().fromJson(responseBody, FetchReceiptResult::class.java)
+                fetchReceiptResult.postValue(fetchReceiptResultTmp)
+            } catch (e: JsonSyntaxException) {
+                Log.e("Gson", "Could not parse the responseBody $responseBody to FetchReceiptResult")
+            }
         }
     }
 
@@ -214,3 +258,5 @@ class SellMainViewModelImpl(
         }
     }
 }
+
+class UserLogout(val resultCode: String) : CoreEvent()

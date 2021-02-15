@@ -7,9 +7,9 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.Buffer
 
-class EncryptInterceptor(private val appPrefs: AppPreferences) : Interceptor {
+class EncryptInterceptor(appPrefs: AppPreferences) : Interceptor {
 
-    internal val encryption = Encryption(appPrefs)
+    private val encryption = Encryption(appPrefs)
 
     override fun intercept(chain: Interceptor.Chain): Response {
 
@@ -21,14 +21,14 @@ class EncryptInterceptor(private val appPrefs: AppPreferences) : Interceptor {
 
         val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
         val strNewBody: String = encryption.encrypt(strOldBody)
+        Log.e("Encrypt this", strOldBody)
+        Log.e("Encrypted", strNewBody)
         val body: RequestBody = strNewBody.toRequestBody(mediaType)
 
         request = request.newBuilder()
             .header("Content-Type", body.contentType().toString())
             .header("Content-Length", body.contentLength().toString())
             .method(request.method, body).build()
-
-        Log.e("Request, Encrypted", strNewBody)
 
         return chain.proceed(request)
     }

@@ -10,6 +10,8 @@ class GreetingRepository(private val network: AuthorizationApi, private val appP
         val result = network.logout(appPref.token)
         appPref.token = ""
         appPref.isFiscalDialogShow = false
+        appPref.refreshToken = ""
+        appPref.secureKey = ""
         return result
     }
 }

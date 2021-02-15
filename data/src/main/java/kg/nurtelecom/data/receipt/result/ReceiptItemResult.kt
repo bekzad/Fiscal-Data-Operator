@@ -10,8 +10,17 @@ data class ReceiptItemResult (
     val productQuantity: BigDecimal, // кол-во товара
     val productUnitPrice: BigDecimal, // стоимость товара
     val productUnitMeasure: String, // единицы измерения
+    /* Update */
+    val productNdsType: Int,
+    val productNdsAmount: BigDecimal,
+    val productNspType: Int,
+    val productNspAmount: BigDecimal,
+    val productMarkType: String,
+    val productMarkCode: String,
+    /* Update */
     val discount: BigDecimal, // скидка
     val charge: BigDecimal, // надбавка
-    val subTotal: BigDecimal, // сумма без учета всего (налоги, скидки, надбавки)
+    val subtotal: BigDecimal, // сумма без учета всего (налоги, скидки, надбавки)
+    val total: BigDecimal, // Update
     val itemIndex: Long, // счетчик позиций в пределах каждого чека, начинаем с 1
 )

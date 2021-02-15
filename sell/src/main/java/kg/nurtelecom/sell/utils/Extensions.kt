@@ -18,5 +18,10 @@ fun AppCompatActivity.hideKeyboard() {
 // Check whether a given BigDecimal value is a zero or not
 fun BigDecimal.isZero() = this.compareTo(BigDecimal.ZERO) == 0
 fun BigDecimal.isNotZero() = this.compareTo(BigDecimal.ZERO) != 0
+fun BigDecimal.isGreaterThan(another: BigDecimal) = this.compareTo(another) == 1
+fun BigDecimal.isLessThan(another: BigDecimal) = this.compareTo(another) == -1
+fun BigDecimal.isEqualTo(another: BigDecimal) = this.compareTo(another) == 0
+fun BigDecimal.isGreaterThanOrEqualTo(another: BigDecimal) = this.isGreaterThan(another) || this.isEqualTo(another)
+fun BigDecimal.isLessThanOrEqualTo(another: BigDecimal) = this.isLessThan(another) || this.isEqualTo(another)
 
 fun BigDecimal.roundUp() = this.setScale(2, RoundingMode.CEILING)
