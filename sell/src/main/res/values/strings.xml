@@ -51,6 +51,7 @@
     <string name="receipt_in">Внесение</string>
     <string name="receipt_out">Выплата</string>
     <string name="receipt_in_out">Внесение и Выплаты из кассы</string>
+    <string name="receipt_in_out_history">История внесений и выплат из кассы</string>
     <string name="sum_som">Сумма, сом</string>
     <string name="confirm">Подтвердить</string>
 

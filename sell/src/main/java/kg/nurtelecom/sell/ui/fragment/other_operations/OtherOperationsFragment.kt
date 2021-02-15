@@ -14,6 +14,7 @@ import kg.nurtelecom.sell.ui.fragment.credit.CreditListFragment
 import kg.nurtelecom.sell.ui.fragment.other_operations.prepayment.RefundPrepaymentFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutFragment
+import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutHistoryFragment
 import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutVM
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 
@@ -53,7 +54,7 @@ class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, Sel
             parentActivity.replaceFragment<ReceiptInOutFragment>(R.id.sell_container)
         }
         vb.btnMenuItemHistoryDepositsPayments.setOnClickListener{
-            // here place for replacing fragment
+            parentActivity.replaceFragment<ReceiptInOutHistoryFragment>(R.id.sell_container)
         }
         vb.btnMenuItemFiscalReport.setOnClickListener{
             // here place for replacing fragment
