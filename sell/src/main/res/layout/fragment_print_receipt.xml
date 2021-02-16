@@ -8,13 +8,12 @@
     android:padding="@dimen/margin_16dp"
     tools:context=".ui.fragment.print_receipt.PrintReceiptFragment">
 
-    <ImageView
+    <kg.nurtelecom.ofd.receipt.ReceiptImage
         android:id="@+id/iv_check"
         android:layout_width="0dp"
         android:layout_height="124dp"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/white"
-                android:src="@drawable/horizontal_line"
+                android:src="@drawable/horizontal_dashed_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_receipt_number" />
@@ -99,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/white"
-                android:src="@drawable/horizontal_line"
+                android:src="@drawable/horizontal_dashed_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_receipt_items" />
@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/white"
-                android:src="@drawable/horizontal_line"
+                android:src="@drawable/horizontal_dashed_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_total_prices" />
@@ -165,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/white"
-                android:src="@drawable/horizontal_line"
+                android:src="@drawable/horizontal_dashed_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_amount_paid" />
