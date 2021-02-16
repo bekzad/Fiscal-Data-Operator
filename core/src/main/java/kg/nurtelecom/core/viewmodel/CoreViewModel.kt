@@ -3,17 +3,14 @@ package kg.nurtelecom.core.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.CoreEvent.Success
 import kg.nurtelecom.core.CoreEvent.Error
 import kg.nurtelecom.core.CoreEvent.Loading
-import kg.nurtelecom.core.ErrorHandler
 import kg.nurtelecom.core.Event
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import retrofit2.Response
 
 abstract class CoreViewModel : ViewModel() {
 

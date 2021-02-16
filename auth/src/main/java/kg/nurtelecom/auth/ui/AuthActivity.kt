@@ -1,13 +1,16 @@
 package kg.nurtelecom.auth.ui
 
 import android.content.Context
+import android.os.Handler
 import kg.nurtelecom.auth.databinding.AuthActivityBinding
 import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.startActivity
 import kg.nurtelecom.core.extension.toast
+import kg.nurtelecom.core.extension.setProgressBarColor
 import kg.nurtelecom.core.extension.visible
+import kg.nurtelecom.ui.R
 
 class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewModel::class) {
 
@@ -29,7 +32,7 @@ class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewM
 
     override fun setupViews() {
         vb.progressbar.visible(false)
-//        vb.tvError?.visible(false)
+        vb.tvError.visible(false)
         vb.btnLogin.enable(false)
 
         vb.etLogin.setTextChangedListener {
@@ -60,14 +63,19 @@ class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewM
             when (it) {
                 is CoreEvent.Loading -> {
                     vb.progressbar.visible(true)
+                    vb.progressbar.setProgressBarColor(R.color.green)
                 }
                 is CoreEvent.Success -> {
                     setResult(AUTH_RESULT)
                     finish()
                 }
                 is CoreEvent.Error -> {
-                    vb.progressbar.visible(false)
-//                    vb.tvError?.visible(true)
+                    vb.progressbar.setProgressBarColor(R.color.red)
+                    vb.tvError.visible(true)
+                    Handler().postDelayed({
+                        vb.progressbar.visible(false)
+                    }, 1000)
+
                 }
             }
         })
