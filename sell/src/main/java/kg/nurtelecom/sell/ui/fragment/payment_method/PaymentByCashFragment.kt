@@ -37,7 +37,6 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
 
         vb.btnContinue.setOnClickListener {
             if (canContinue) {
-                vm.amountPaid.value = amountPaidVar
                 navigateToSaveReceipt()
                 fetchReceipt()
             } else {
@@ -74,6 +73,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     }
 
     private fun navigateToSaveReceipt() {
+        vm.amountPaid.value = amountPaidVar
         parentActivity.replaceFragment<SaveReceiptFragment>(R.id.sell_container, false)
     }
 

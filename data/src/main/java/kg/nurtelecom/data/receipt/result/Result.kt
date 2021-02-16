@@ -1,5 +1,7 @@
 package kg.nurtelecom.data.receipt.result
 
+import kg.nurtelecom.data.enums.NdsType
+import kg.nurtelecom.data.enums.NspType
 import java.math.BigDecimal
 
 data class Result(
@@ -12,8 +14,8 @@ data class Result(
     val cashRegisterVersion: String,
     val taxPayerName: String,
     val taxAccountingMethodName: String,
-    val ndsType: String,
-    val nspType: String,
+    val ndsType: NdsType,
+    val nspType: NspType,
     val alreadyPayed: BigDecimal,
     val debt: String,
     val receipt: Receipt // Total receipt

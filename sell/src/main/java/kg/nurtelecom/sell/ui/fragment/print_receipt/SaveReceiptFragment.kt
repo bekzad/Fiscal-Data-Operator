@@ -13,6 +13,7 @@ import com.google.zxing.WriterException
 import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.data.enums.PaymentType
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
 import kg.nurtelecom.data.receipt.result.Receipt
 import kg.nurtelecom.data.receipt.result.ReceiptItemResult
@@ -70,7 +71,7 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
 
         // Get the receiptItems and totalPrices as one string to assign to a TextView
         val receiptItemsMap = retrieveReceiptItems(receiptItems)
-        val totalPricesMap = retrieveTotalPrices(receipt)
+        val totalPricesMap = retrieveTotalPrices(response.result)
         val amountPaidMap = retrieveAmountPaid(receipt)
         val cashierInformation = retrieveCashierInfo(response.result)
         val qrCode = generateQRCode(qrCodeString)
@@ -113,9 +114,10 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
         return hashMapOf("names" to nameBuilder, "items" to itemBuilder)
     }
 
-    private fun retrieveTotalPrices(receipt: Receipt?): HashMap<String, StringBuilder> {
+    private fun retrieveTotalPrices(result: Result?): HashMap<String, StringBuilder> {
         val totalPrices = StringBuilder()
         val totalPricesText = StringBuilder()
+        val receipt = result?.receipt
 
         val subtotal = "=${receipt?.subtotal?.roundUp()}с.\n"
         val discountTotal = "=${receipt?.discountTotal?.roundUp()}с.\n"
@@ -127,8 +129,8 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
         val subtotalText = "ВСЕГО\n"
         val discountTotalText = "СКИДКА\n"
         val chargeTotalText = "НАЦЕНКА\n"
-        val ndsAmountTotalText = "НДС 12\n" // TO DO not always 12
-        val nspAmountTotalText = "НСП 1\n" // TO DO not always 1
+        val ndsAmountTotalText = "${result?.ndsType?.ndsTypeValue}\n"
+        val nspAmountTotalText = "${result?.nspType?.nspTypeValue}\n"
         val totalText = "ИТОГО"
 
         if (receipt != null) {
@@ -153,7 +155,7 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
     }
 
     private fun retrieveAmountPaid(receipt: Receipt?): HashMap<String, String> {
-        var amountPaidText = "Получено:\nНАЛИЧНЫЕ"
+        var amountPaidText = "Получено:\n${receipt?.paymentType?.paymentTypeValue}"
         var amountPaidValue = "\n=${amountPaidVar}с."
         val change = amountPaidVar.subtract(receipt?.total!!.roundUp())
         vm.change.value = change

@@ -16,7 +16,8 @@ class RefreshTokenInterceptor(private val appPrefs: AppPreferences) : Intercepto
         val response = chain.proceed(request)
 
         // If the response code is 401 then, fetch new token and make a new request with new token
-        if (response.code == 401) {
+        val responseCode = response.code
+        if (responseCode == 401 || responseCode == 500) {
             return makeTokenRefreshCall(request, chain)
         }
 
