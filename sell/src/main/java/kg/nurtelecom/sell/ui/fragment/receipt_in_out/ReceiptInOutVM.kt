@@ -14,7 +14,7 @@ class ReceiptInOutVMImpl(private val receiptInOutRepository: ReceiptInOutReposit
 
     override fun generateReceiptInOut() {
         safeCall(Dispatchers.Default) {
-            Log.i("ERLAN", receiptInOutRepository.generateReceiptInOut())
+            Log.i("ERLAN", receiptInOutRepository.generateReceiptInOut().toString())
         }
     }
 
