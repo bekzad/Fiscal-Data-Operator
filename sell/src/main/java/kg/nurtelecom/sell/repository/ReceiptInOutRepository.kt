@@ -13,9 +13,9 @@ class ReceiptInOutRepository(
         private val api: ReceiptInOutApi,
         private val appPref: AppPreferences) {
 
-    suspend fun generateReceiptInOut(): ReceiptInOutRequestResult {
+    suspend fun generateReceiptInOut(requestBody: ReceiptInOutRequest): ReceiptInOutRequestResult {
         val gson = Gson()
-        val jsonString = gson.toJson(ReceiptInOutRequest(null, ReceiptInOutType.INCOME, BigDecimal(300)))
+        val jsonString = gson.toJson(requestBody)
         val result = api.generateReceiptInOut("Bearer ${appPref.token}", jsonString)
         return gson.fromJson(result, ReceiptInOutRequestResult::class.java)
     }

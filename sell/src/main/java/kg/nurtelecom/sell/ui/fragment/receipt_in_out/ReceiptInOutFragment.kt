@@ -4,6 +4,7 @@ package kg.nurtelecom.sell.ui.fragment.receipt_in_out
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.receipt_in_out.ReceiptInOutType
@@ -25,6 +26,9 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
 
     override fun setupViews() {
         super.setupViews()
+        vm.selectedReceiptInOut = null
+        vb.btnConfirm.enable(false)
+
         vb.btnConfirm.setOnClickListener {
             vm.generateReceiptInOut()
         }
@@ -39,9 +43,25 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
 
         vb.icInputSum.fetchTextState {
             if (!it.isNullOrEmpty()) {
+                vb.btnConfirm.enable(true)
                 vm.sum = BigDecimal(it.toString())
+            } else {
+                vb.btnConfirm.enable(false)
             }
         }
+    }
+
+    override fun subscribeToLiveData() {
+        super.subscribeToLiveData()
+        vm.event.observe(viewLifecycleOwner, {
+            when (it) {
+                is ReceiptInOutCreated -> {
+                    if (vm.selectedReceiptInOut != null)
+                        vb.icInputSum.eraseContent()
+                        parentActivity.replaceFragment<ReceiptInOutDetailFragment>(R.id.sell_container)
+                }
+            }
+        })
     }
 
     private fun setupIncome() {
