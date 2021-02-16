@@ -11,7 +11,7 @@
     <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_sum_pay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/margin_0dp"
         android:layout_margin="@dimen/margin_8dp"
         app:is_editable="false"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,11 +56,11 @@
 
     <Button
         android:id="@+id/btn_add_product"
+        style="@style/BtnGreen"
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_0dp"
-        android:backgroundTint="@color/green"
+        android:layout_margin="@dimen/margin_8dp"
         android:text="@string/add_product"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,13 +1,9 @@
 package kg.nurtelecom.sell.ui.fragment.payment_method
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.sell.R
@@ -35,7 +31,7 @@ class PaymentMethodFragment : CoreFragment<FragmentPaymentMethodBinding, SellMai
 
     override fun subscribeToLiveData() {
         vm.taxSum.observe(viewLifecycleOwner) { sum ->
-            vb.tvPaymentAmount.text = sum.toString()
+            vb.tvPaymentAmount.text = getString(R.string.payment_amount, sum)
         }
     }
 

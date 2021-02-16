@@ -7,7 +7,7 @@ data class Result(
     val inn: String, // ИНН ОП
     val cashRegisterId: Long, // id ККМ
     val gnsRegNum: String, // Регистрационный номер ККМ
-    // Update after this
+    /* Update */
     val cashRegisterName: String,
     val cashRegisterVersion: String,
     val taxPayerName: String,
@@ -17,4 +17,5 @@ data class Result(
     val alreadyPayed: BigDecimal,
     val debt: String,
     val receipt: Receipt // Total receipt
+    /* Update */
 )

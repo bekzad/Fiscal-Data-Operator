@@ -24,4 +24,4 @@ fun BigDecimal.isEqualTo(another: BigDecimal) = this.compareTo(another) == 0
 fun BigDecimal.isGreaterThanOrEqualTo(another: BigDecimal) = this.isGreaterThan(another) || this.isEqualTo(another)
 fun BigDecimal.isLessThanOrEqualTo(another: BigDecimal) = this.isLessThan(another) || this.isEqualTo(another)
 
-fun BigDecimal.roundUp() = this.setScale(2, RoundingMode.CEILING)
+fun BigDecimal.roundUp() = this.setScale(2, RoundingMode.HALF_UP)

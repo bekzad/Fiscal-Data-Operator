@@ -2,7 +2,7 @@
 <resources>
     <string name="payment_by_cash">Наличные</string>
     <string name="payment_by_card">Оплата Картой</string>
-    <string name="tw_to_be_paid">Итого к оплате</string>
+    <string name="tw_to_be_paid">Итого к оплате:</string>
     <string name="btn_continue">Далее</string>
     <string name="no_back_money">Без сдачи</string>
     <string name="et_received">Принято у клиента, сом:</string>
@@ -41,6 +41,7 @@
     <string name="prepay">Предоплата</string>
     <string name="choose_products">Выберите товары для возврата:</string>
     <string name="cashiers_check">КАССОВЫЙ ЧЕК</string>
+    <string name="payment_amount">%1$s с</string>
     <string name="receipt_number">ПРОДАЖА №%1$s</string>
     <string name="receipt_info">\n\n\n\n\nФПЧЕК%1$s\n\n\n</string>
     <string name="logout_fail_massage">Не удалось выполнить выход</string>

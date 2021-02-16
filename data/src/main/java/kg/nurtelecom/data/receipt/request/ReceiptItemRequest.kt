@@ -7,7 +7,7 @@ data class ReceiptItemRequest (
     val productName: String,
     val productQuantity: BigDecimal, // количество товара
     val productUnitPrice: BigDecimal?, // if not set take from product
-    val discount: BigDecimal?, // Update
-    val charge: BigDecimal?, // Update
+    val discount: BigDecimal?,
+    val charge: BigDecimal?,
     val itemIndex: Long //счетчик позиций в пределах каждого чека, начинаем с 1
 )

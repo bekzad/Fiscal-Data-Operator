@@ -35,8 +35,6 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     override fun setupViews() {
         setupPaymentMode()
 
-        // We are changing the value in viewModel before continuing
-        // NSP is added to the value of taxSum
         vb.btnContinue.setOnClickListener {
             if (canContinue) {
                 vm.amountPaid.value = amountPaidVar
@@ -80,6 +78,9 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     }
 
     private fun fetchReceipt() {
+        // Clear the old receipt before going to the next fragment
+        vm.fetchReceiptResult.value = null
+
         val receiptItems: MutableList<ReceiptItemRequest> = mutableListOf()
         var productList: List<Product> = listOf()
 
@@ -87,7 +88,6 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
             productList = it
         })
 
-        // Here we are sending id as just null
         for ((index, product) in productList.withIndex()) {
             val itemIndex: Long = (index + 1).toLong()
             val name: String = if (product.productName.isEmpty()) {

@@ -15,6 +15,7 @@ import kg.nurtelecom.data.sell.*
 import kg.nurtelecom.data.z_report.ReportDetailed
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
+import kg.nurtelecom.sell.utils.roundUp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -80,8 +81,7 @@ class SellMainViewModelImpl(
 
     override val change: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
-    override val fetchReceiptResult: MutableLiveData<FetchReceiptResult> =
-        MutableLiveData()
+    override val fetchReceiptResult: MutableLiveData<FetchReceiptResult> = MutableLiveData()
 
     override var operationType: OperationType = OperationType.SALE
 
@@ -142,7 +142,7 @@ class SellMainViewModelImpl(
         val totalGoodsSum = calculateTotalGoodsSum()
         val ndsAmount = calculateNdsAmount(totalGoodsSum)
         val nspAmount = calculateNspAmount(totalGoodsSum)
-        return totalGoodsSum.add(ndsAmount).add(nspAmount).stripTrailingZeros()
+        return totalGoodsSum.add(ndsAmount).add(nspAmount).roundUp()
     }
 
     // This is the amount of NDS tax totalGoodsSum + ndsRate
@@ -231,12 +231,10 @@ class SellMainViewModelImpl(
 
     override fun fetchReceipt(fetchReceiptRequest: String) {
         safeCall(Dispatchers.IO) {
-
             val response = sellRepository.fetchReceipt(fetchReceiptRequest)
 
             // We are casting the Json response into data classes and saving them to livedata
             val responseBody: String
-
             if (response.isSuccessful){
                 responseBody = response.body() ?: "Successful response, null body"
             } else {

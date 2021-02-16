@@ -68,7 +68,7 @@ class InfoCardCellView(context: Context, attrs: AttributeSet? = null) :
     }
 
     fun setContent(value: BigDecimal) {
-        vb.etContent.setText(value.toString())
+        vb.etContent.setText(value.toPlainString())
     }
 
     fun getContent(): String {

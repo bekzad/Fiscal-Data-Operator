@@ -36,7 +36,7 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
 
     override fun setupViews() {
         vb.rvProduct.adapter = productAdapter
-        setupVM()
+        clearVM()
         setupRegime()
         setupNavigation()
     }
@@ -61,7 +61,7 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
         productAdapter.notifyDataSetChanged()
     }
 
-    private fun setupVM() {
+    private fun clearVM() {
         vm.nspRate.value = BigDecimal.ZERO
         vm.updateTaxSum()
     }
@@ -86,7 +86,9 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
         }
     }
 
+    // Clear the old receipts before going to the next fragment
     private fun startPrepay() {
+
         parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container, false)
     }
 

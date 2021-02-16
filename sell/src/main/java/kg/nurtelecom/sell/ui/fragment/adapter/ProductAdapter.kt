@@ -8,6 +8,7 @@ import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.ProductListItemBinding
 import kg.nurtelecom.sell.utils.isNotZero
+import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 
 class ProductAdapter(private val itemClick: ItemClickListener) :
@@ -57,7 +58,7 @@ class ProductAdapter(private val itemClick: ItemClickListener) :
                 if (product.charge.isNotZero()) ("+ ${product.charge}%") else
                     ""
             productExpressionLine.apply {
-                append("${product.productUnitPrice} * ")
+                append("${product.productUnitPrice.roundUp()} * ")
                 append("${product.productQuantity} ")
                 append(discount)
                 append(allowance)
@@ -70,7 +71,7 @@ class ProductAdapter(private val itemClick: ItemClickListener) :
             val hundred = BigDecimal("100.0")
             val discount = totalPrice.multiply(product.discount).divide(hundred)
             val allowance = totalPrice.multiply(product.charge).divide(hundred)
-            return totalPrice.subtract(discount).add(allowance)
+            return totalPrice.subtract(discount).add(allowance).roundUp()
         }
 
         companion object {

@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
+import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
@@ -20,6 +22,7 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentSaveReceiptBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.utils.isNotZero
+import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
 
 class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainViewModel>(SellMainViewModel::class) {
@@ -45,10 +48,16 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
             amountPaidVar = amountPaid
         })
 
-        // TO DO exception when I am trying to observe null object only when the code is 401
+        // TO DO exception when I am trying to observe null object only when the code is 500
         vm.fetchReceiptResult.observe(viewLifecycleOwner, { response ->
-            updateScreen(response)
-            vb.svReceiptContainer.visibility = View.VISIBLE
+            if (response != null) {
+                updateScreen(response)
+                vb.svReceiptContainer.visibility = View.VISIBLE
+                vb.btnPrintCheck.enable(true)
+            } else {
+                vb.svReceiptContainer.visibility = View.GONE
+                vb.btnPrintCheck.enable(false)
+            }
         })
     }
 
@@ -89,8 +98,13 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
                 var productNames: String
                 val receiptItem: String
                 with(receipt) {
-                    productNames = "$productName\n" // TO DO other things beside the name exist
-                    receiptItem = "${productUnitPrice}с. * $productQuantity = ${subtotal}с.\n" // To do Quantity can be meters or kg
+                    val productUnitMeasureStr = productUnitMeasure ?: ""
+                    if (!productCode.isNullOrEmpty()) {
+                        productNames = "$productName\n$productCode [M] ($productCode)\n\n"
+                    } else {
+                        productNames = "$productName\n\n\n"
+                    }
+                    receiptItem = "${productUnitPrice}с. * ${productQuantity}${productUnitMeasureStr} = ${subtotal.roundUp()}с.\n\n\n"
                 }
                 nameBuilder.append(productNames)
                 itemBuilder.append(receiptItem)
@@ -103,12 +117,12 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
         val totalPrices = StringBuilder()
         val totalPricesText = StringBuilder()
 
-        val subtotal = "=${receipt?.subtotal}с.\n"
-        val discountTotal = "=${receipt?.discountTotal}с.\n"
-        val chargeTotal = "=${receipt?.chargeTotal}с.\n"
-        val ndsAmountTotal = "=${receipt?.ndsAmountTotal}с.\n"
-        val nspAmountTotal = "=${receipt?.nspAmountTotal}с.\n"
-        val total = "=${receipt?.total}с."
+        val subtotal = "=${receipt?.subtotal?.roundUp()}с.\n"
+        val discountTotal = "=${receipt?.discountTotal?.roundUp()}с.\n"
+        val chargeTotal = "=${receipt?.chargeTotal?.roundUp()}с.\n"
+        val ndsAmountTotal = "=${receipt?.ndsAmountTotal?.roundUp()}с.\n"
+        val nspAmountTotal = "=${receipt?.nspAmountTotal?.roundUp()}с.\n"
+        val total = "=${receipt?.total?.roundUp()}с."
 
         val subtotalText = "ВСЕГО\n"
         val discountTotalText = "СКИДКА\n"
@@ -141,7 +155,7 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
     private fun retrieveAmountPaid(receipt: Receipt?): HashMap<String, String> {
         var amountPaidText = "Получено:\nНАЛИЧНЫЕ"
         var amountPaidValue = "\n=${amountPaidVar}с."
-        val change = amountPaidVar.subtract(receipt?.total)
+        val change = amountPaidVar.subtract(receipt?.total!!.roundUp())
         vm.change.value = change
         if (change.isNotZero()) {
             amountPaidText += "\nСДАЧА"
@@ -180,7 +194,6 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
     }
 
     private fun navigateToPrintReceipt() {
-        vb.svReceiptContainer.visibility = View.GONE
         parentActivity.replaceFragment<PrintReceiptFragment>(R.id.sell_container, false)
     }
 

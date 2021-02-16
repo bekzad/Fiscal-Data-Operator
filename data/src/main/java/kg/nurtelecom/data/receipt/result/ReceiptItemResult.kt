@@ -6,10 +6,10 @@ data class ReceiptItemResult (
     val id: Long, // id позиции чека
     val productId: Long, // id товара
     val productName: String, // наименование товара
-    val productCode: String, // код товара
+    val productCode: String?, // код товара
     val productQuantity: BigDecimal, // кол-во товара
     val productUnitPrice: BigDecimal, // стоимость товара
-    val productUnitMeasure: String, // единицы измерения
+    val productUnitMeasure: String?, // единицы измерения
     /* Update */
     val productNdsType: Int,
     val productNdsAmount: BigDecimal,

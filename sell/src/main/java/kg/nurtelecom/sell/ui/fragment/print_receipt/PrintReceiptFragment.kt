@@ -1,7 +1,9 @@
 package kg.nurtelecom.sell.ui.fragment.print_receipt
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.sell.R
@@ -29,21 +31,22 @@ class PrintReceiptFragment : CoreFragment<FragmentPrintReceiptBinding, SellMainV
 
     override fun subscribeToLiveData() {
         vm.taxSum.observe(viewLifecycleOwner) { sum ->
-            vb.tvPaymentAmount.text = sum.toString()
+            vb.tvPaymentAmount.text = HtmlCompat.fromHtml("$sum <u>с</u>" , HtmlCompat.FROM_HTML_MODE_LEGACY)
         }
         vm.change.observe(viewLifecycleOwner) { change ->
             if (change.isNotZero()) {
-                vb.tvChangeAmount.text = change.toString()
+                vb.tvChangeText.visibility = View.VISIBLE
+                vb.tvChangeAmount.text = HtmlCompat.fromHtml("$change <u>с</u>" , HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
         }
     }
 
     private fun navigateToSellFragment() {
-        updateVM()
+        clearVM()
         parentActivity.replaceFragment<SellFragment>(R.id.sell_container, false)
     }
 
-    private fun updateVM() {
+    private fun clearVM() {
         vm.nspRate.value = BigDecimal.ZERO
         vm.productList.value = mutableListOf()
         vm.updateTaxSum()
