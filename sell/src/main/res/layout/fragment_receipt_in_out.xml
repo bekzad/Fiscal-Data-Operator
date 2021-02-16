@@ -8,7 +8,8 @@
     <Button
         android:id="@+id/btn_receipt_in"
         android:text="@string/receipt_in"
-        style="@style/GreenButtonStyle"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"
         android:layout_width="@dimen/size_0dp"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_32dp"
@@ -20,7 +21,8 @@
     <Button
         android:id="@+id/btn_receipt_out"
         android:text="@string/receipt_out"
-        style="@style/WhiteButtonStyle"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
         android:layout_width="@dimen/size_0dp"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_32dp"
