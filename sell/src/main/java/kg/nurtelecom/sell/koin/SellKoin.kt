@@ -1,6 +1,7 @@
 package kg.nurtelecom.sell.koin
 
 import kg.nurtelecom.sell.repository.HistoryRepository
+import kg.nurtelecom.sell.repository.ReceiptInOutRepository
 import kg.nurtelecom.sell.repository.SellRepository
 import kg.nurtelecom.sell.repository.SessionRepository
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
@@ -22,10 +23,11 @@ val sellKoin = module {
     single { HistoryRepository(get(), get()) }
     single { SellRepository(get(), get(), get(), get(), get()) }
     single { SessionRepository(get(), get()) }
+    single { ReceiptInOutRepository(get(), get()) }
     viewModel<SellMainViewModel> { SellMainViewModelImpl(get(), get()) }
     viewModel<HistoryViewModel> { HistoryViewModelImpl(get()) }
     viewModel <CreditListVM> { CreditListVMImpl(get()) }
     viewModel <CreditCheckViewFragmentVM> { CreditCheckViewFragmentVMImpl(get()) }
-    viewModel<ReceiptInOutVM> { ReceiptInOutVMImpl() }
+    viewModel<ReceiptInOutVM> { ReceiptInOutVMImpl(get()) }
     viewModel<ReceiptInOutHistoryVM> { ReceiptInOutHistoryVMImpl() }
 }

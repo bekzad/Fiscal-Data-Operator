@@ -20,6 +20,13 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
         return R.string.receipt_in_out
     }
 
+    override fun setupViews() {
+        super.setupViews()
+        vb.btnConfirm.setOnClickListener {
+            vm.generateReceiptInOut()
+        }
+    }
+
     companion object {
         fun newInstance(): ReceiptInOutFragment {
             return ReceiptInOutFragment()
