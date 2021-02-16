@@ -2,9 +2,12 @@ package kg.nurtelecom.auth.ui
 
 import android.content.Context
 import kg.nurtelecom.auth.databinding.AuthActivityBinding
+import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.startActivity
+import kg.nurtelecom.core.extension.toast
+import kg.nurtelecom.core.extension.visible
 
 class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewModel::class) {
 
@@ -25,6 +28,8 @@ class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewM
     }
 
     override fun setupViews() {
+        vb.progressbar.visible(false)
+//        vb.tvError?.visible(false)
         vb.btnLogin.enable(false)
 
         vb.etLogin.setTextChangedListener {
@@ -53,9 +58,16 @@ class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewM
     private fun observeAuthorization() {
         vm.event.observe(this, {
             when (it) {
-                is AuthUser -> {
+                is CoreEvent.Loading -> {
+                    vb.progressbar.visible(true)
+                }
+                is CoreEvent.Success -> {
                     setResult(AUTH_RESULT)
                     finish()
+                }
+                is CoreEvent.Error -> {
+                    vb.progressbar.visible(false)
+//                    vb.tvError?.visible(true)
                 }
             }
         })

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import kg.nurtelecom.changepassword.ui.ChangePasswordActivity
+import kg.nurtelecom.core.CoreEvent.Success
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
 import kg.nurtelecom.core.extension.snackbar
@@ -53,13 +54,9 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
         super.subscribeToLiveData()
         vm.event.observe(viewLifecycleOwner, {
             when (it) {
-                is UserLogout -> {
-                    if (it.resultCode == "SUCCESS") {
-                        val intent = Intent(activity, SplashActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        vb.root.snackbar(requireContext().resources.getString(R.string.logout_fail_massage))
-                    }
+                is Success -> {
+                    val intent = Intent(activity, SplashActivity::class.java)
+                    startActivity(intent)
                 }
             }
         })
