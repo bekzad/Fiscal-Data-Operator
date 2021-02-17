@@ -1,4 +1,4 @@
-package kg.nurtelecom.sell.ui.fragment.receipt_in_out
+package kg.nurtelecom.sell.ui.fragment.receipt_in_out.receipt_in_out
 
 import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.viewmodel.CoreViewModel

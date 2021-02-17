@@ -16,7 +16,7 @@ interface ReceiptInOutApi {
     ): String
 
     @POST("receiptinout/history")
-    suspend fun fetchHistoryReceiptInOutList(
+    suspend fun fetchReceiptInOutHistoryList(
         @Header("Authorization") accessToken: String,
         @Body receiptInOutHistoryRequest: String
     ): String

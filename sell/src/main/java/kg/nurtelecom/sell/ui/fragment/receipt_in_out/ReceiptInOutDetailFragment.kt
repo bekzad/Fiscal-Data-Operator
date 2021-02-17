@@ -2,10 +2,10 @@ package kg.nurtelecom.sell.ui.fragment.receipt_in_out
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import kg.nurtelecom.core.fragment.SimpleFragment
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentReceiptInOutDetailBinding
+import kg.nurtelecom.sell.ui.fragment.receipt_in_out.receipt_in_out.ReceiptInOutVM
 
 class ReceiptInOutDetailFragment : CoreFragment<FragmentReceiptInOutDetailBinding, ReceiptInOutVM>(ReceiptInOutVM::class) {
 

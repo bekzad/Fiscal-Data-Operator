@@ -1,4 +1,4 @@
-package kg.nurtelecom.sell.ui.fragment.receipt_in_out
+package kg.nurtelecom.sell.ui.fragment.receipt_in_out.receipt_in_out
 
 
 import android.view.LayoutInflater
@@ -11,9 +11,11 @@ import kg.nurtelecom.data.receipt_in_out.ReceiptInOutType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.databinding.FragmentReceiptInOutBinding
+import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutDetailFragment
 import java.math.BigDecimal
 
-class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptInOutVM>(ReceiptInOutVM::class) {
+class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptInOutVM>(
+    ReceiptInOutVM::class) {
 
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentReceiptInOutBinding {
