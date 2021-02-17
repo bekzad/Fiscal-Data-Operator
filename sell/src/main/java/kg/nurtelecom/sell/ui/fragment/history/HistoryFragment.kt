@@ -18,7 +18,6 @@ import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
 import kg.nurtelecom.sell.ui.activity.SellMainActivity
-import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.history.detail.HistoryDetailFragment
 import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
@@ -64,7 +63,6 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
 
     override fun setupViews() {
         setHasOptionsMenu(true)
-        (activity as SellMainActivity?)?.isProgressBarVisible(false)
         initRecyclerView()
         vm.fetchChecksHistory()
     }
@@ -74,7 +72,7 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
             when (it) {
                 is CoreEvent.Loading -> {
                     (activity as SellMainActivity?)?.isProgressBarVisible(true)
-                    (activity as SellMainActivity?)?.progressBarColor(R.color.green)
+                    (activity as SellMainActivity?)?.setProgressBarColor(R.color.green)
                 }
                 is CoreEvent.Success -> {
                     vm.checksHistoryData.observe(viewLifecycleOwner, { items ->
@@ -86,14 +84,13 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
                     (activity as SellMainActivity?)?.isProgressBarVisible(false)
                 }
                 is CoreEvent.Error -> {
-                    (activity as SellMainActivity?)?.progressBarColor(R.color.red)
+                    (activity as SellMainActivity?)?.setProgressBarColor(R.color.red)
                     Handler().postDelayed({
                         (activity as SellMainActivity?)?.isProgressBarVisible(false)
                     }, 1000)
                 }
             }
         })
-
     }
 
     private fun initRecyclerView() {

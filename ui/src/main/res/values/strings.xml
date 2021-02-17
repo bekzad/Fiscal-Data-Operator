@@ -67,6 +67,7 @@
 
     <!--Reports-->
     <string name="text_x_report">X-отчет</string>
+    <string name="text_z_report">Z-отчет</string>
     <string name="text_print_check">Печать чека</string>
 
     <!--Bottom Sheet Dialog-->

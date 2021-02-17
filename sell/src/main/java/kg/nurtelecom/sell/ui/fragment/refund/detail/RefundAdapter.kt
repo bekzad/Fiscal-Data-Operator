@@ -27,7 +27,7 @@ class RefundAdapter(private val itemClick: ItemClickListener): RecyclerView.Adap
             binding.apply {
                 tvTitle.text = item.productName
                 tvSubTitle.text = "${item.productUnitPrice.roundOff(2)} * ${item.productQuantity} $discount $charge"
-                tvCellValue.text = "${item.total.roundOff(2)} с"
+                tvCellValue.text = "${item.total.roundOff(2)} c̲"
                 cbSelectItem.visible(true)
             }
 

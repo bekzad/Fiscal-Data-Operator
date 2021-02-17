@@ -6,9 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kg.nurtelecom.core.extension.parentActivity
+import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.z_report.ReportDetailed
+import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.databinding.BottomSheetFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
+import kg.nurtelecom.sell.ui.fragment.other_operations.OtherOperationsFragment
+import kg.nurtelecom.sell.ui.fragment.report.ZReportFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
@@ -18,10 +23,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subscribeToLiveData()
         showsDialog = true
         vb.tvMenuItemClose.setOnClickListener {
-            vm.closeSession()
+            parentActivity.replaceFragment<ZReportFragment>(R.id.sell_container)
+            dismiss()
         }
         vb.btnMenuItemCancel.setOnClickListener {
             dismiss()
@@ -34,17 +39,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         return vb.root
-    }
-
-    fun subscribeToLiveData() {
-        vm.sessionReportData.observe(viewLifecycleOwner, {
-            when(it) {
-                is ReportDetailed -> {
-                    dismiss()
-                    activity?.finish()
-                }
-            }
-        })
     }
 
     companion object {

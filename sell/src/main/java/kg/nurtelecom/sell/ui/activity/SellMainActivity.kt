@@ -143,7 +143,7 @@ class SellMainActivity :
         vb.progressbar.visible(value)
     }
 
-    fun progressBarColor(color: Int) {
+    fun setProgressBarColor(color: Int) {
         vb.progressbar.setProgressBarColor(color)
     }
 

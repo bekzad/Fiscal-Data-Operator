@@ -16,8 +16,8 @@ class HistoryRepository(
     suspend fun fetchChecksHistory(operationType: String? = null) : List<Content> {
         val checksHistory = historyApi.fetchChecksHistory(
             "Bearer ${appPrefs.token}", DateBody(
-                SimpleDateFormat(DATE_FORMAT, Locale("ru")).format(Date().subtractDays(AMOUNT_OF_DAYS)),
-                SimpleDateFormat(DATE_FORMAT, Locale("ru")).format(Date()),
+                SimpleDateFormat(DATE_FORMAT, Locale(LANGUAGE)).format(Date().subtractDays(AMOUNT_OF_DAYS)),
+                SimpleDateFormat(DATE_FORMAT, Locale(LANGUAGE)).format(Date()),
                 operationType
             ))
         return checksHistory.result.content
@@ -32,5 +32,6 @@ class HistoryRepository(
     companion object Keys {
         private const val AMOUNT_OF_DAYS = 14
         private const val DATE_FORMAT = "dd.MM.yyyy HH:mm:ss"
+        private const val LANGUAGE = "ru"
     }
 }

@@ -121,7 +121,7 @@ class HistoryViewHolder(private val binding: DetailViewBinding, private val item
             tvTitle.text = OperationType.valueOf(content.operationType).type
             tvCounter.text = "#${content.indexNum}"
             tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS").parse(content.createdAt).formatForLocalDateTimeDefaults()
-            tvAmount.text = "${content.total.roundOff(2)} с"
+            tvAmount.text = "${content.total.roundOff(2)} c̲"
         }
 
         itemView.setOnClickListener {

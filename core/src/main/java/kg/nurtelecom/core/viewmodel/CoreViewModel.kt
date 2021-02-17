@@ -27,6 +27,7 @@ abstract class CoreViewModel : ViewModel() {
                         var message = ""
                         when(throwable.code()) {
                             400, 401 -> message = "Неверные учетные данные"
+                            500 -> message = "Имеется открытая сессия. Закрыть?"
                         }
                         event.postValue(Error(false, throwable.code(), throwable.response()?.errorBody(), message))
                     }
@@ -36,9 +37,5 @@ abstract class CoreViewModel : ViewModel() {
                 }
             }
         }
-    }
-
-    fun error(): String {
-        return "Error"
     }
 }
