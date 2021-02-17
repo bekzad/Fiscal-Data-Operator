@@ -26,18 +26,15 @@ class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>
 
     private fun filterDataSource() {
         data.clear()
-        val temp = dataSource.groupBy { dateFormat(it.createdAt) }
+        val temp = dataSource.groupBy { it.createdAt.substring(0..9) }
         temp.forEach {
-            data.add(ListItem.Header(dateFormat(it.key)))
+            data.add(ListItem.Header(it.key))
             it.value.forEach {
                 data.add(ListItem.ReceiptItem(it))
             }
         }
     }
 
-    private fun dateFormat(date: String): String {
-        return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault()).parse(date).formatForDecoratorDateTimeDefaults()
-    }
 
     override fun getItemViewType(position: Int): Int {
         return when (data[position]) {
@@ -67,7 +64,7 @@ class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>
 
     class ReceiptItemViewHolder(private val vb: DetailViewBinding) : RecyclerView.ViewHolder(vb.root) {
         fun bind(itemData: ListItem.ReceiptItem) {
-            vb.tvTitle.text = itemData.receipt.toString()
+            vb.tvTitle.text = itemData.receipt.receiptType.toString() + itemData.receipt.sum.toString()
         }
 
         companion object {
@@ -94,8 +91,8 @@ class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>
     }
 
     companion object {
-        val RECEIPT_ITEM_VIEW_TYPE = 0
-        val HEADER_ITEM_VIEW_TYPE = 1
+        const val RECEIPT_ITEM_VIEW_TYPE = 0
+        const val HEADER_ITEM_VIEW_TYPE = 1
     }
 
 }
