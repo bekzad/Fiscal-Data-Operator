@@ -1,5 +1,7 @@
 package kg.nurtelecom.data.receipt_in_out
 
+import java.io.Serializable
+
 data class ReceiptInOutResult(
         val taxSalesPointName: String,
         val inn: String,
@@ -10,4 +12,4 @@ data class ReceiptInOutResult(
         val taxPayerName: String,
         val taxAccountingMethodName: String,
         val receiptInOutModel: ReceiptInOutModel
-)
+): Serializable

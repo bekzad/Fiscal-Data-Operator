@@ -4,6 +4,7 @@ package kg.nurtelecom.sell.ui.fragment.receipt_in_out.receipt_in_out
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
@@ -15,7 +16,7 @@ import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutDetailFragment
 import java.math.BigDecimal
 
 class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptInOutVM>(
-    ReceiptInOutVM::class) {
+        ReceiptInOutVM::class) {
 
 
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentReceiptInOutBinding {
@@ -28,7 +29,7 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
 
     override fun setupViews() {
         super.setupViews()
-        vm.selectedReceiptInOut = null
+        vm.event.value = null
         vb.btnConfirm.enable(false)
 
         vb.btnConfirm.setOnClickListener {
@@ -58,9 +59,8 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
         vm.event.observe(viewLifecycleOwner, {
             when (it) {
                 is ReceiptInOutCreated -> {
-                    if (vm.selectedReceiptInOut != null)
-                        vb.icInputSum.eraseContent()
-                        parentActivity.replaceFragment<ReceiptInOutDetailFragment>(R.id.sell_container)
+                    vb.icInputSum.eraseContent()
+                    parentActivity.replaceFragment<ReceiptInOutDetailFragment>(R.id.sell_container, args = {bundleOf(Pair("receipt", it.receipt))} )
                 }
             }
         })

@@ -24,4 +24,10 @@ class ReceiptInOutRepository(
         val result = api.fetchReceiptInOutHistoryList("Bearer ${appPref.token}", jsonString)
         return gson.fromJson(result, ReceiptInOutHistoryRequestResult::class.java)
     }
+
+    suspend fun fetchReceiptInOutById(id: Long): ReceiptInOutResult {
+        val gson = Gson()
+        val result = api.fetchReceiptInOutById("Bearer ${appPref.token}", id)
+        return gson.fromJson(result, ReceiptInOutResult::class.java)
+    }
 }

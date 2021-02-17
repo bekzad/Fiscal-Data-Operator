@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.core.extension.formatForDecoratorDateTimeDefaults
+import kg.nurtelecom.core.extension.formatForLocalDateTimeDefaults
+import kg.nurtelecom.core.extension.roundOff
 import kg.nurtelecom.data.receipt_in_out.ReceiptInOutHistoryModel
+import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ProductCategoryHeaderBinding
 import kg.nurtelecom.ui.databinding.DetailViewBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>, private val listener: ItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val data: MutableList<ListItem> = mutableListOf()
 
@@ -28,7 +31,7 @@ class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>
         data.clear()
         val temp = dataSource.groupBy { it.createdAt.substring(0..9) }
         temp.forEach {
-            data.add(ListItem.Header(it.key))
+            data.add(ListItem.Header(dateFormat(it.key)))
             it.value.forEach {
                 data.add(ListItem.ReceiptItem(it))
             }
@@ -46,7 +49,7 @@ class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             HEADER_ITEM_VIEW_TYPE -> HeaderItemViewHolder.newInstance(parent)
-            else -> ReceiptItemViewHolder.newInstance(parent)
+            else -> ReceiptItemViewHolder.newInstance(parent, listener)
         }
     }
 
@@ -62,21 +65,27 @@ class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>
     }
 
 
-    class ReceiptItemViewHolder(private val vb: DetailViewBinding) : RecyclerView.ViewHolder(vb.root) {
+    class ReceiptItemViewHolder(private val vb: DetailViewBinding, private val listener: ItemClickListener) : RecyclerView.ViewHolder(vb.root) {
         fun bind(itemData: ListItem.ReceiptItem) {
-            vb.tvTitle.text = itemData.receipt.receiptType.toString() + itemData.receipt.sum.toString()
+            vb.apply {
+                tvTitle.text = itemData.receipt.receiptType.type
+                tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault()).parse(itemData.receipt.createdAt).formatForLocalDateTimeDefaults()
+                tvAmount.text = "${itemData.receipt.sum.roundOff(2)} с"
+                tvCounter.text = "#${itemData.receipt.indexNum}"
+            }
+            vb.root.setOnClickListener { listener.onItemClick(itemData.receipt.id) }
         }
 
         companion object {
-            fun newInstance(parent: ViewGroup): ReceiptItemViewHolder {
+            fun newInstance(parent: ViewGroup, listener: ItemClickListener): ReceiptItemViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
                 val vb = DetailViewBinding.inflate(inflater, parent, false)
-                return ReceiptItemViewHolder(vb)
+                return ReceiptItemViewHolder(vb, listener)
             }
         }
     }
 
-    class HeaderItemViewHolder(private val vb: ProductCategoryHeaderBinding): RecyclerView.ViewHolder(vb.root) {
+    class HeaderItemViewHolder(private val vb: ProductCategoryHeaderBinding) : RecyclerView.ViewHolder(vb.root) {
         fun bind(header: String) {
             vb.tvHeader.text = header
         }
@@ -88,6 +97,10 @@ class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>
                 return HeaderItemViewHolder(vb)
             }
         }
+    }
+
+    private fun dateFormat(date: String): String {
+        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date).formatForDecoratorDateTimeDefaults()
     }
 
     companion object {

@@ -3,9 +3,7 @@ package kg.nurtelecom.network.data.api
 import kg.nurtelecom.data.receipt_in_out.ReceiptInOutHistoryRequest
 import kg.nurtelecom.data.receipt_in_out.ReceiptInOutRequest
 import kg.nurtelecom.data.receipt_in_out.ReceiptInOutRequestResult
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ReceiptInOutApi {
 
@@ -19,5 +17,11 @@ interface ReceiptInOutApi {
     suspend fun fetchReceiptInOutHistoryList(
         @Header("Authorization") accessToken: String,
         @Body receiptInOutHistoryRequest: String
+    ): String
+
+    @GET("receiptinout/history/{id}")
+    suspend fun fetchReceiptInOutById(
+            @Header("Authorization") accessToken: String,
+            @Query("id") id: Long
     ): String
 }
