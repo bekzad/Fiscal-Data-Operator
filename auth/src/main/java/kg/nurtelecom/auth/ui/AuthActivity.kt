@@ -62,6 +62,7 @@ class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewM
         vm.event.observe(this, {
             when (it) {
                 is CoreEvent.Loading -> {
+                    vb.tvError.visible(false)
                     vb.progressbar.visible(true)
                     vb.progressbar.setProgressBarColor(R.color.green)
                 }
@@ -71,11 +72,11 @@ class  AuthActivity : CoreActivity<AuthActivityBinding, AuthViewModel>(AuthViewM
                 }
                 is CoreEvent.Error -> {
                     vb.progressbar.setProgressBarColor(R.color.red)
+                    vb.tvError.text = it.message
                     vb.tvError.visible(true)
                     Handler().postDelayed({
                         vb.progressbar.visible(false)
                     }, 1000)
-
                 }
             }
         })

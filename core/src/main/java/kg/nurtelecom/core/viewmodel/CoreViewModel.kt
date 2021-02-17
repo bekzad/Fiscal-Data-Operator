@@ -26,12 +26,12 @@ abstract class CoreViewModel : ViewModel() {
                     is HttpException -> {
                         var message = ""
                         when(throwable.code()) {
-                            401 -> message = "Неверные учетные данные"
+                            400, 401 -> message = "Неверные учетные данные"
                         }
                         event.postValue(Error(false, throwable.code(), throwable.response()?.errorBody(), message))
                     }
                     else -> {
-                        event.postValue(Error(true, null, null, "Ошибка сети. Попробуйте заново."))
+                        event.postValue(Error(true, null, null, "Ошибка сети. Проверьте интернет соединение"))
                     }
                 }
             }

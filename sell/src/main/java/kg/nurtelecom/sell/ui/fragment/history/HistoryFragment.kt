@@ -1,22 +1,25 @@
 package kg.nurtelecom.sell.ui.fragment.history
 
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
+import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.ofd.item_decoration.RoundDecor
+import kg.nurtelecom.core.extension.setProgressBarColor
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.ChecksHistoryRecycleViewBinding
+import kg.nurtelecom.sell.ui.activity.SellMainActivity
+import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.history.detail.HistoryDetailFragment
-import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment
-import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment.Companion.CHECK_ID
 import kg.nurtelecom.sell.utils.doOnMenuItemCollapse
 import kg.nurtelecom.sell.utils.doOnQueryTextChange
 
@@ -25,8 +28,8 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
     private var historyAdapter: HistoryAdapter = HistoryAdapter(this)
 
     override fun createViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
+            inflater: LayoutInflater,
+            container: ViewGroup?
     ): ChecksHistoryRecycleViewBinding {
         return ChecksHistoryRecycleViewBinding.inflate(layoutInflater)
     }
@@ -61,17 +64,36 @@ class HistoryFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryVie
 
     override fun setupViews() {
         setHasOptionsMenu(true)
+        (activity as SellMainActivity?)?.isProgressBarVisible(false)
         initRecyclerView()
         vm.fetchChecksHistory()
     }
 
     override fun subscribeToLiveData() {
-        vm.checksHistoryData.observe(viewLifecycleOwner, { items ->
-            historyAdapter.addHeaderAndSubmitList(items)
+        vm.event.observe(this, {
+            when (it) {
+                is CoreEvent.Loading -> {
+                    (activity as SellMainActivity?)?.isProgressBarVisible(true)
+                    (activity as SellMainActivity?)?.progressBarColor(R.color.green)
+                }
+                is CoreEvent.Success -> {
+                    vm.checksHistoryData.observe(viewLifecycleOwner, { items ->
+                        historyAdapter.addHeaderAndSubmitList(items)
+                    })
+                    vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedItems ->
+                        historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems)
+                    }
+                    (activity as SellMainActivity?)?.isProgressBarVisible(false)
+                }
+                is CoreEvent.Error -> {
+                    (activity as SellMainActivity?)?.progressBarColor(R.color.red)
+                    Handler().postDelayed({
+                        (activity as SellMainActivity?)?.isProgressBarVisible(false)
+                    }, 1000)
+                }
+            }
         })
-        vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedItems ->
-            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems)
-        }
+
     }
 
     private fun initRecyclerView() {

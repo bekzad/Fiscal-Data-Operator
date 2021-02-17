@@ -9,6 +9,7 @@
     tools:context=".ui.activity.SellMainActivity"
     tools:openDrawer="end">
 
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,6 +17,16 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_4dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="invisible"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:id="@+id/progressbar"
+                tools:ignore="MissingConstraints" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/tb_sell_main"

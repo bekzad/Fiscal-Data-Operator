@@ -5,8 +5,13 @@ import android.content.Context
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.viewbinding.ViewBinding
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.*
+import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.core.extension.setProgressBarColor
+import kg.nurtelecom.core.extension.startActivity
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
@@ -132,6 +137,14 @@ class SellMainActivity :
         } else {
             super.onBackPressed()
         }
+    }
+
+    fun isProgressBarVisible(value: Boolean) {
+        vb.progressbar.visible(value)
+    }
+
+    fun progressBarColor(color: Int) {
+        vb.progressbar.setProgressBarColor(color)
     }
 
     companion object {

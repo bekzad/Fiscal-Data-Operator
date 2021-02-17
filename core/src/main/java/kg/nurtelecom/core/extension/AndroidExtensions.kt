@@ -54,8 +54,7 @@ fun Date.formatForCurrentDate(): String {
 fun BigDecimal.roundOff(amount: Int): BigDecimal  = setScale(amount, BigDecimal.ROUND_HALF_UP)
 
 fun ProgressBar.setProgressBarColor(color: Int) {
-    progressDrawable.setColorFilter(
-            resources.getColor(color), android.graphics.PorterDuff.Mode.SRC_IN)
+    progressDrawable.setColorFilter(resources.getColor(color), android.graphics.PorterDuff.Mode.SRC_IN)
 }
 
 inline val Fragment.parentActivity get() = (activity as AppCompatActivity)

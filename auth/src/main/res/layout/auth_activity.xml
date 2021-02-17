@@ -7,11 +7,10 @@
     android:background="@color/black">
 
     <ProgressBar
-        style="@android:style/Widget.ProgressBar.Horizontal"
         android:id="@+id/progressbar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="4dp" />
-
+        android:layout_height="@dimen/size_4dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,12 +21,12 @@
 
         <TextView
             android:id="@+id/tv_error"
-            android:background="@color/red"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/red"
+            android:paddingStart="@dimen/margin_16dp"
             android:paddingTop="@dimen/margin_16dp"
             android:paddingBottom="@dimen/margin_16dp"
-            android:paddingStart="@dimen/margin_16dp"
             android:text="@string/tv_error"
             android:textColor="@color/white"
             android:textSize="@dimen/text_16sp"
@@ -37,7 +36,6 @@
             android:id="@+id/et_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8dp"
             android:inputType="text"
             app:hint_text="@string/ed_login" />
 
@@ -45,7 +43,7 @@
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginTop="@dimen/margin_4dp"
             android:inputType="textPassword"
             app:hint_text="@string/ed_password" />
 
