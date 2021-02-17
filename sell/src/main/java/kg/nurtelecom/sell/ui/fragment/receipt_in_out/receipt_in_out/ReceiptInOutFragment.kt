@@ -18,7 +18,6 @@ import java.math.BigDecimal
 class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptInOutVM>(
         ReceiptInOutVM::class) {
 
-
     override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentReceiptInOutBinding {
         return FragmentReceiptInOutBinding.inflate(layoutInflater)
     }
@@ -33,7 +32,7 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
         vb.btnConfirm.enable(false)
 
         vb.btnConfirm.setOnClickListener {
-            vm.generateReceiptInOut()
+            vm.generateReceiptInOut(BigDecimal(vb.icInputSum.getContent()))
         }
 
         vb.btnReceiptIn.setOnClickListener {
@@ -47,7 +46,6 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
         vb.icInputSum.fetchTextState {
             if (!it.isNullOrEmpty()) {
                 vb.btnConfirm.enable(true)
-                vm.sum = BigDecimal(it.toString())
             } else {
                 vb.btnConfirm.enable(false)
             }
@@ -95,5 +93,4 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
             return ReceiptInOutFragment()
         }
     }
-
 }

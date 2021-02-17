@@ -13,34 +13,31 @@ import kg.nurtelecom.ui.databinding.DetailViewBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>, private val listener: ItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ReceiptInOutAdapter(private val listener: ItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val data: MutableList<ListItem> = mutableListOf()
-
-    init {
-        filterDataSource()
-    }
+    private var dataSource: List<ReceiptInOutHistoryModel> = listOf()
+    private val dataSourceFiltered: MutableList<ListItem> = mutableListOf()
 
     fun updateDataSource(newData: List<ReceiptInOutHistoryModel>) {
         dataSource = newData
         filterDataSource()
-        notifyDataSetChanged()
     }
 
     private fun filterDataSource() {
-        data.clear()
+        dataSourceFiltered.clear()
         val temp = dataSource.groupBy { it.createdAt.substring(0..9) }
         temp.forEach {
-            data.add(ListItem.Header(dateFormat(it.key)))
+            dataSourceFiltered.add(ListItem.Header(dateFormat(it.key)))
             it.value.forEach {
-                data.add(ListItem.ReceiptItem(it))
+                dataSourceFiltered.add(ListItem.ReceiptItem(it))
             }
         }
+        notifyDataSetChanged()
     }
 
 
     override fun getItemViewType(position: Int): Int {
-        return when (data[position]) {
+        return when (dataSourceFiltered[position]) {
             is ListItem.Header -> HEADER_ITEM_VIEW_TYPE
             is ListItem.ReceiptItem -> RECEIPT_ITEM_VIEW_TYPE
         }
@@ -55,13 +52,13 @@ class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is ReceiptItemViewHolder -> holder.bind(data[position] as ListItem.ReceiptItem)
-            is HeaderItemViewHolder -> holder.bind((data[position] as ListItem.Header).name)
+            is ReceiptItemViewHolder -> holder.bind(dataSourceFiltered[position] as ListItem.ReceiptItem)
+            is HeaderItemViewHolder -> holder.bind((dataSourceFiltered[position] as ListItem.Header).name)
         }
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return dataSourceFiltered.size
     }
 
 
@@ -70,7 +67,7 @@ class ReceiptInOutAdapter(private var dataSource: List<ReceiptInOutHistoryModel>
             vb.apply {
                 tvTitle.text = itemData.receipt.receiptType.type
                 tvTimestamp.text = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault()).parse(itemData.receipt.createdAt).formatForLocalDateTimeDefaults()
-                tvAmount.text = "${itemData.receipt.sum.roundOff(2)} с"
+                tvAmount.text = "${itemData.receipt.sum.roundOff(2)} c̲"
                 tvCounter.text = "#${itemData.receipt.indexNum}"
             }
             vb.root.setOnClickListener { listener.onItemClick(itemData.receipt.id) }

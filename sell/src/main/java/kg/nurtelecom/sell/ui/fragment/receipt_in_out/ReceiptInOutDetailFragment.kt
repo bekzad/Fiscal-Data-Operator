@@ -6,26 +6,19 @@ import kg.nurtelecom.sell.databinding.FragmentReceiptInOutDetailBinding
 
 class ReceiptInOutDetailFragment : SimpleFragment<FragmentReceiptInOutDetailBinding>() {
 
-
-
     override fun setupViews() {
         super.setupViews()
         val receipt = arguments?.get("receipt")
         vb.tvReceiptDetail.text = (receipt as ReceiptInOutResult).toString()
-
     }
 
     override fun getBinding(): FragmentReceiptInOutDetailBinding {
         return FragmentReceiptInOutDetailBinding.inflate(layoutInflater)
     }
 
-
     companion object {
         fun newInstance(): ReceiptInOutDetailFragment {
             return ReceiptInOutDetailFragment()
         }
     }
-
-
-
 }

@@ -6,7 +6,6 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.data.receipt_in_out.ReceiptInOutHistoryModel
 import kg.nurtelecom.ofd.item_decoration.RoundDecor
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
@@ -14,12 +13,11 @@ import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.FragmentReceiptInOutHistoryBinding
 import kg.nurtelecom.sell.ui.fragment.adapter.ReceiptInOutAdapter
 import kg.nurtelecom.sell.ui.fragment.receipt_in_out.ReceiptInOutDetailFragment
-import kg.nurtelecom.sell.ui.fragment.receipt_in_out.receipt_in_out.ReceiptInOutCreated
 
 class ReceiptInOutHistoryFragment : CoreFragment<FragmentReceiptInOutHistoryBinding, ReceiptInOutHistoryVM>(
     ReceiptInOutHistoryVM::class), ItemClickListener {
 
-    private val historyListAdapter = ReceiptInOutAdapter(listOf(), this)
+    private val historyListAdapter = ReceiptInOutAdapter(this)
 
     override fun setupViews() {
         super.setupViews()
