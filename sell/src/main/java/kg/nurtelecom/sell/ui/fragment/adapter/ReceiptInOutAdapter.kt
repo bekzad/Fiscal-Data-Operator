@@ -35,7 +35,6 @@ class ReceiptInOutAdapter(private val listener: ItemClickListener) : RecyclerVie
         notifyDataSetChanged()
     }
 
-
     override fun getItemViewType(position: Int): Int {
         return when (dataSourceFiltered[position]) {
             is ListItem.Header -> HEADER_ITEM_VIEW_TYPE
@@ -46,21 +45,21 @@ class ReceiptInOutAdapter(private val listener: ItemClickListener) : RecyclerVie
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             HEADER_ITEM_VIEW_TYPE -> HeaderItemViewHolder.newInstance(parent)
-            else -> ReceiptItemViewHolder.newInstance(parent, listener)
+            RECEIPT_ITEM_VIEW_TYPE -> ReceiptItemViewHolder.newInstance(parent, listener)
+            else -> throw ClassCastException("Unknown type viewType $viewType")
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is ReceiptItemViewHolder -> holder.bind(dataSourceFiltered[position] as ListItem.ReceiptItem)
-            is HeaderItemViewHolder -> holder.bind((dataSourceFiltered[position] as ListItem.Header).name)
+            is HeaderItemViewHolder -> holder.bind(dataSourceFiltered[position] as ListItem.Header)
         }
     }
 
     override fun getItemCount(): Int {
         return dataSourceFiltered.size
     }
-
 
     class ReceiptItemViewHolder(private val vb: DetailViewBinding, private val listener: ItemClickListener) : RecyclerView.ViewHolder(vb.root) {
         fun bind(itemData: ListItem.ReceiptItem) {
@@ -83,8 +82,8 @@ class ReceiptInOutAdapter(private val listener: ItemClickListener) : RecyclerVie
     }
 
     class HeaderItemViewHolder(private val vb: ProductCategoryHeaderBinding) : RecyclerView.ViewHolder(vb.root) {
-        fun bind(header: String) {
-            vb.tvHeader.text = header
+        fun bind(header: ListItem.Header) {
+            vb.tvHeader.text = header.name
         }
 
         companion object {
@@ -104,7 +103,6 @@ class ReceiptInOutAdapter(private val listener: ItemClickListener) : RecyclerVie
         const val RECEIPT_ITEM_VIEW_TYPE = 0
         const val HEADER_ITEM_VIEW_TYPE = 1
     }
-
 }
 
 sealed class ListItem {
