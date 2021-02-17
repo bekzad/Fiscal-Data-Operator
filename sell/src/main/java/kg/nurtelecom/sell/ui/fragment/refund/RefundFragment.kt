@@ -61,15 +61,15 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
     override fun setupViews() {
         setHasOptionsMenu(true)
         initRecyclerView()
-        vm.fetchChecksHistory()
+        vm.fetchChecksHistory("SALE")
     }
 
     override fun subscribeToLiveData() {
         vm.checksHistoryData.observe(viewLifecycleOwner, { items ->
-            historyAdapter.addHeaderAndSubmitList(items.filter { it.operationType == "SALE" })
+            historyAdapter.addHeaderAndSubmitList(items)
         })
         vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedItems ->
-            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems.filter { it.operationType == "SALE" })
+            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems)
         }
     }
 

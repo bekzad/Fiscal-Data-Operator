@@ -13,11 +13,12 @@ class HistoryRepository(
     private val historyApi: HistoryApi,
     private val appPrefs: AppPreferences
 ) {
-    suspend fun fetchChecksHistory() : List<Content> {
+    suspend fun fetchChecksHistory(operationType: String? = null) : List<Content> {
         val checksHistory = historyApi.fetchChecksHistory(
             "Bearer ${appPrefs.token}", DateBody(
                 SimpleDateFormat(DATE_FORMAT, Locale("ru")).format(Date().subtractDays(AMOUNT_OF_DAYS)),
-                SimpleDateFormat(DATE_FORMAT, Locale("ru")).format(Date())
+                SimpleDateFormat(DATE_FORMAT, Locale("ru")).format(Date()),
+                operationType
             ))
         return checksHistory.result.content
     }

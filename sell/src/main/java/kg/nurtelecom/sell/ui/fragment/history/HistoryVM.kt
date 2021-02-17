@@ -17,7 +17,7 @@ abstract class HistoryViewModel : CoreViewModel() {
     abstract var totalSum: MutableLiveData<BigDecimal>
     abstract var totalProducts: MutableLiveData<List<ReceiptItems>>
     open val filteredChecksHistory: MutableLiveData<List<Content>>? = MutableLiveData()
-    abstract fun fetchChecksHistory()
+    abstract fun fetchChecksHistory(operationType: String? = null)
     abstract fun fetchDetailCheckHistory(id: Int)
     abstract fun searchChecks(name: String)
     abstract fun calculateTotalSum(items: ReceiptItems, isChecked: Boolean)
@@ -30,9 +30,9 @@ class HistoryViewModelImpl (private val historyRepository: HistoryRepository) : 
     override var totalSum: MutableLiveData<BigDecimal> = MutableLiveData()
     override var totalProducts: MutableLiveData<List<ReceiptItems>> = MutableLiveData()
 
-    override fun fetchChecksHistory() {
+    override fun fetchChecksHistory(operationType: String?) {
         safeCall(Dispatchers.IO) {
-            checksHistoryData.postValue(historyRepository.fetchChecksHistory())
+            checksHistoryData.postValue(historyRepository.fetchChecksHistory(operationType))
         }
     }
 
