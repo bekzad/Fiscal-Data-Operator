@@ -246,7 +246,6 @@ class SellMainViewModelImpl(
                 val fetchReceiptResultTmp = Gson().fromJson(responseBody, FetchReceiptResult::class.java)
                 fetchReceiptResult.postValue(fetchReceiptResultTmp)
             } catch (e: JsonSyntaxException) {
-                e.printStackTrace()
                 Log.e("Gson", "Could not parse the responseBody $responseBody to FetchReceiptResult")
             }
         }

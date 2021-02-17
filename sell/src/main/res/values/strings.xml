@@ -45,6 +45,7 @@
     <string name="receipt_number">ПРОДАЖА №%1$s</string>
     <string name="receipt_info">\n\n\n\n\nФПЧЕК%1$s\n\n\n</string>
     <string name="logout_fail_massage">Не удалось выполнить выход</string>
+    <string name="dialog_error">Некорректные данные в запросе</string>
     <string name="tv_help">Для проверки чека зайдите на сайт ГНС\n www.kkm.gov.kg</string>
 
 </resources>

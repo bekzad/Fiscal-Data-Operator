@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.fragment.payment_method
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.google.gson.Gson
@@ -26,8 +27,8 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
     private var canContinue = true
 
     override fun createViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
+            inflater: LayoutInflater,
+            container: ViewGroup?
     ): FragmentPaymentByCashBinding = FragmentPaymentByCashBinding.inflate(inflater, container, false)
 
     override fun setupToolbar(): Int = R.string.payment_method
@@ -40,7 +41,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
                 navigateToSaveReceipt()
                 fetchReceipt()
             } else {
-                // TO Do error dialog box that entered amount is less than what is required
+                showErrorDialogBox()
             }
         }
 
@@ -48,9 +49,10 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
             fetchTextState {
                 if (it.isNullOrEmpty()) {
                     setupButtons()
+                    amountPaidVar = vm.taxSum.value!!
                 } else {
                     // Amount paid will change only if user enters something
-                    amountPaidVar= BigDecimal(it.toString())
+                    amountPaidVar = BigDecimal(it.toString())
                     vb.btnContinue.text = getString(R.string.pay_cash)
                     vb.btnContinue.enable(true)
                 }
@@ -94,7 +96,7 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
                 "Позиция"
             } else product.productName
             val itemRequest = ReceiptItemRequest(product.productId, name, product.productQuantity, product.productUnitPrice,
-                product.discount, product.charge, itemIndex)
+                    product.discount, product.charge, itemIndex)
             receiptItems.add(itemRequest)
         }
 
@@ -122,6 +124,15 @@ class PaymentByCashFragment : CoreFragment<FragmentPaymentByCashBinding, SellMai
             }
         }
         setupButtons()
+    }
+
+    private fun showErrorDialogBox() {
+        val inflater = requireActivity().layoutInflater;
+        AlertDialog.Builder(context)
+                .setCustomTitle(inflater.inflate(R.layout.error_dialog, null))
+                .setPositiveButton(android.R.string.ok) { dialog, which -> }
+                .setMessage(R.string.dialog_error)
+                .show()
     }
 
     companion object {
