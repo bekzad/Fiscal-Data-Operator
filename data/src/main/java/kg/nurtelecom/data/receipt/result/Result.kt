@@ -2,6 +2,7 @@ package kg.nurtelecom.data.receipt.result
 
 import kg.nurtelecom.data.enums.NdsType
 import kg.nurtelecom.data.enums.NspType
+import java.io.Serializable
 import java.math.BigDecimal
 
 data class Result(
@@ -20,4 +21,4 @@ data class Result(
     val debt: String,
     val receipt: Receipt // Total receipt
     /* Update */
-)
+) : Serializable

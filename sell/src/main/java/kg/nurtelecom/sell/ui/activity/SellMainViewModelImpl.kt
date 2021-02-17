@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
-import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
+import com.google.gson.*
 import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.viewmodel.CoreViewModel
 import kg.nurtelecom.data.enums.OperationType
@@ -20,6 +19,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import java.math.BigDecimal
+import java.util.*
+
 
 abstract class SellMainViewModel : CoreViewModel() {
 
@@ -64,8 +65,8 @@ abstract class SellMainViewModel : CoreViewModel() {
 }
 
 class SellMainViewModelImpl(
-    private val sessionRepository: SessionRepository,
-    private val sellRepository: SellRepository
+        private val sessionRepository: SessionRepository,
+        private val sellRepository: SellRepository
 ) : SellMainViewModel() {
 
     override val isRegimeNonFiscal: Boolean = sellRepository.isNonFiscalRegime
@@ -93,8 +94,8 @@ class SellMainViewModelImpl(
     private val productCharge: MutableLiveData<String> = MutableLiveData("")
 
     override val isSubmitBtnEnabled: Flow<Boolean> = combine(
-        productPrice.asFlow(),
-        productCharge.asFlow()
+            productPrice.asFlow(),
+            productCharge.asFlow()
     ) { price, charge ->
 
         var isPriceCorrect = false
@@ -245,6 +246,7 @@ class SellMainViewModelImpl(
                 val fetchReceiptResultTmp = Gson().fromJson(responseBody, FetchReceiptResult::class.java)
                 fetchReceiptResult.postValue(fetchReceiptResultTmp)
             } catch (e: JsonSyntaxException) {
+                e.printStackTrace()
                 Log.e("Gson", "Could not parse the responseBody $responseBody to FetchReceiptResult")
             }
         }

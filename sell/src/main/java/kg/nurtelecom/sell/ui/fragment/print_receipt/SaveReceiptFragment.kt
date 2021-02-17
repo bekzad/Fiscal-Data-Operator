@@ -6,14 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
-import kg.nurtelecom.data.enums.PaymentType
 import kg.nurtelecom.data.receipt.result.FetchReceiptResult
 import kg.nurtelecom.data.receipt.result.Receipt
 import kg.nurtelecom.data.receipt.result.ReceiptItemResult
@@ -25,6 +23,7 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.utils.isNotZero
 import kg.nurtelecom.sell.utils.roundUp
 import java.math.BigDecimal
+import java.text.SimpleDateFormat
 
 class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainViewModel>(SellMainViewModel::class) {
 
@@ -172,7 +171,12 @@ class SaveReceiptFragment : CoreFragment<FragmentSaveReceiptBinding, SellMainVie
         builder.append("ИНН ${result?.inn}\n")
         builder.append("РНМ ${result?.gnsRegNum}\n")
         builder.append("СНО ${result?.taxAccountingMethodName}\n")
-        builder.append("\n${result?.receipt?.createdAt}\n") // To Do converter to time
+
+        val parser =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val formatter = SimpleDateFormat("dd/MM/yy HH:mm")
+        val formattedDateTime = formatter.format(parser.parse(result?.receipt?.createdAt))
+
+        builder.append("\n${formattedDateTime}\n")
         builder.append("\n${result?.receipt?.indexNum.toString().padStart(8, '0')} ${result?.receipt?.checkCode}")
         return builder
     }
