@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
+import kg.nurtelecom.ofd.item_decoration.RoundDecor
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ItemClickListener
@@ -70,6 +71,7 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, H
 
     private fun initRecyclerView() {
         vb.rvHistory.adapter = historyAdapter
+        vb.rvHistory.addItemDecoration(RoundDecor())
     }
 
     companion object {

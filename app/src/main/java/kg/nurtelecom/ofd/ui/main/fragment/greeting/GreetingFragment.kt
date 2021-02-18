@@ -57,15 +57,16 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
             when (it) {
                 is CoreEvent.Loading -> {
                     vb.progressbar.visible(true)
-                    vb.progressbar.setProgressBarColor(kg.nurtelecom.ui.R.color.green)
+                    vb.progressbar.setProgressBarColor(R.color.green)
                 }
                 is CoreEvent.Success -> {
                     val intent = Intent(activity, SplashActivity::class.java)
+                    vm.logout()
                     startActivity(intent)
                 }
                 is CoreEvent.Error -> {
                      vb.root.snackbar(requireContext().resources.getString(R.string.logout_fail_massage))
-                    vb.progressbar.setProgressBarColor(kg.nurtelecom.ui.R.color.red)
+                    vb.progressbar.setProgressBarColor(R.color.red)
                     Handler().postDelayed({
                         vb.progressbar.visible(false)
                     }, 1000)

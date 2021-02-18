@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import kg.nurtelecom.core.extension.enable
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.data.receipt_in_out.ReceiptInOutResult
 import kg.nurtelecom.data.receipt_in_out.ReceiptInOutType
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
@@ -28,7 +29,7 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
 
     override fun setupViews() {
         super.setupViews()
-        vm.event.value = null
+        vm.receiptInOutCreated.value = null
         vb.btnConfirm.enable(false)
 
         vb.btnConfirm.setOnClickListener {
@@ -54,11 +55,11 @@ class ReceiptInOutFragment : CoreFragment<FragmentReceiptInOutBinding, ReceiptIn
 
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
-        vm.event.observe(viewLifecycleOwner, {
+        vm.receiptInOutCreated.observe(viewLifecycleOwner, {
             when (it) {
-                is ReceiptInOutCreated -> {
+                is ReceiptInOutResult -> {
                     vb.icInputSum.eraseContent()
-                    parentActivity.replaceFragment<ReceiptInOutDetailFragment>(R.id.sell_container, args = {bundleOf(Pair("receipt", it.receipt))} )
+                    parentActivity.replaceFragment<ReceiptInOutDetailFragment>(R.id.sell_container, args = {bundleOf(Pair("receipt", it))} )
                 }
             }
         })

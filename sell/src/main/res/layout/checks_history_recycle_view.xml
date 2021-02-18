@@ -19,6 +19,8 @@
         android:id="@+id/rv_history"
         android:layout_width="@dimen/size_0dp"
         android:layout_height="@dimen/size_0dp"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
         android:background="@color/black"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"

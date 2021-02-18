@@ -2,10 +2,14 @@ package kg.nurtelecom.sell.ui.activity
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.os.Handler
+import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewbinding.ViewBinding
+import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.*
 import kg.nurtelecom.core.extension.replaceFragment
@@ -47,16 +51,10 @@ class SellMainActivity :
     }
 
     override fun subscribeToLiveData() {
-        vm.event.observe(this, {
-            when (it) {
-                is UserLogout -> {
-                    if (it.resultCode == "SUCCESS") {
-                        setResult(Activity.RESULT_OK)
-                        finish()
-                    } else {
-                        vb.root.snackbar(application.resources.getString(R.string.logout_fail_massage))
-                    }
-                }
+        vm.logoutEvent.observe(this, {
+            if (it) {
+                setResult(Activity.RESULT_OK)
+                finish()
             }
         })
     }

@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.ofd.item_decoration.RoundDecor
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ItemClickListener
@@ -47,7 +48,7 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, HistoryViewMo
     override fun setupViews() {
         setHasOptionsMenu(true)
         initRecyclerView()
-        vm.fetchChecksHistory()
+        vm.fetchChecksHistory("POSTPAY")
     }
 
     override fun <T> onItemClick(value: T, isChecked: Boolean) {
@@ -61,15 +62,16 @@ class CreditListFragment : CoreFragment<CreditListFragmentBinding, HistoryViewMo
 
     override fun subscribeToLiveData() {
         vm.checksHistoryData.observe(viewLifecycleOwner, { product ->
-            historyAdapter.addHeaderAndSubmitList(product.filter { it.operationType == "POSTPAY" })
+            historyAdapter.addHeaderAndSubmitList(product)
         })
         vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedProducts ->
-            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedProducts.filter { it.operationType == "POSTPAY" })
+            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedProducts)
         }
     }
 
     private fun initRecyclerView() {
-        vb.lvCreditList.adapter = historyAdapter
+        vb.rvCreditList.adapter = historyAdapter
+        vb.rvCreditList.addItemDecoration(RoundDecor())
     }
 
     override fun setupToolbar(): Int = R.string.title_credit_list

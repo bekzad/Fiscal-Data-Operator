@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.ofd.item_decoration.RoundDecor
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ItemClickListener
@@ -95,6 +96,7 @@ class RefundFragment : CoreFragment<ChecksHistoryRecycleViewBinding, HistoryView
 
     private fun initRecyclerView() {
         vb.rvHistory.adapter = historyAdapter
+        vb.rvHistory.addItemDecoration(RoundDecor())
     }
 
     companion object {
