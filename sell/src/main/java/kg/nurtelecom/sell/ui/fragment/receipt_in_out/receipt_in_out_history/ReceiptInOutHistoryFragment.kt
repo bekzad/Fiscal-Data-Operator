@@ -21,6 +21,7 @@ class ReceiptInOutHistoryFragment : CoreFragment<FragmentReceiptInOutHistoryBind
 
     override fun setupViews() {
         super.setupViews()
+        vm.event.value = null
         setupRV()
     }
 

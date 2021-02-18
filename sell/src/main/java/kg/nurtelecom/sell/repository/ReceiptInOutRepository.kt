@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.repository
 
+import android.util.Log
 import com.google.gson.Gson
 import kg.nurtelecom.core.extension.subtractDays
 import kg.nurtelecom.data.receipt_in_out.*
@@ -36,7 +37,7 @@ class ReceiptInOutRepository(
 
     suspend fun fetchReceiptInOutById(id: Long): ReceiptInOutResult {
         val result = api.fetchReceiptInOutById("Bearer ${appPref.token}", id)
-        return gson.fromJson(result, ReceiptInOutResult::class.java)
+        return gson.fromJson(result, ReceiptInOutRequestResult::class.java).result
     }
 
     companion object {
