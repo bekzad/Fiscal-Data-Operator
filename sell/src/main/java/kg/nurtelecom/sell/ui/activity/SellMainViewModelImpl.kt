@@ -37,6 +37,7 @@ abstract class SellMainViewModel : CoreViewModel() {
     abstract val isSubmitBtnEnabled: Flow<Boolean>
     abstract val ndsRate: MutableLiveData<BigDecimal>
     abstract val nspRate: MutableLiveData<BigDecimal>
+    abstract val logoutEvent: MutableLiveData<Boolean>
 
     abstract val amountPaid: MutableLiveData<BigDecimal>
     abstract val change: MutableLiveData<BigDecimal>
@@ -79,6 +80,7 @@ class SellMainViewModelImpl(
     override val taxSum: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
     override val ndsRate = MutableLiveData(BigDecimal("12.0"))
     override val nspRate = MutableLiveData(BigDecimal.ZERO)
+    override val logoutEvent: MutableLiveData<Boolean> = MutableLiveData(false)
 
     override val change: MutableLiveData<BigDecimal> = MutableLiveData(BigDecimal.ZERO)
 
@@ -220,8 +222,8 @@ class SellMainViewModelImpl(
     }
 
     private suspend fun logout() {
-        val result = sellRepository.logout()
-        event.postValue(UserLogout(result.resultCode))
+        sellRepository.logout()
+        logoutEvent.postValue(true)
     }
 
     override fun fetchProductCatalogLocally() {
@@ -268,5 +270,3 @@ class SellMainViewModelImpl(
         }
     }
 }
-
-class UserLogout(val resultCode: String) : CoreEvent()

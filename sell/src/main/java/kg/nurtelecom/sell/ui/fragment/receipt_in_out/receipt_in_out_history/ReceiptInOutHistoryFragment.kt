@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.data.receipt_in_out.ReceiptInOutResult
 import kg.nurtelecom.ofd.item_decoration.RoundDecor
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
@@ -21,7 +22,7 @@ class ReceiptInOutHistoryFragment : CoreFragment<FragmentReceiptInOutHistoryBind
 
     override fun setupViews() {
         super.setupViews()
-        vm.event.value = null
+        vm.receiptInOutFetched.value = null
         setupRV()
     }
 
@@ -56,10 +57,10 @@ class ReceiptInOutHistoryFragment : CoreFragment<FragmentReceiptInOutHistoryBind
             historyListAdapter.updateDataSource(it)
         })
 
-        vm.event.observe(viewLifecycleOwner, {
+        vm.receiptInOutFetched.observe(viewLifecycleOwner, {
             when (it) {
-                is ReceiptInOutFetched -> {
-                    parentActivity.replaceFragment<ReceiptInOutDetailFragment>(R.id.sell_container, args = { bundleOf(Pair("receipt", it.receipt)) } )
+                is ReceiptInOutResult -> {
+                    parentActivity.replaceFragment<ReceiptInOutDetailFragment>(R.id.sell_container, args = { bundleOf(Pair("receipt", it)) } )
                 }
             }
         })

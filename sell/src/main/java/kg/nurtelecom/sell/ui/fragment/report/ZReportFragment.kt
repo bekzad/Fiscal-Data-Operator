@@ -10,19 +10,19 @@ import kg.nurtelecom.sell.databinding.ReportFragmentBinding
 import kg.nurtelecom.sell.ui.activity.SellMainActivity
 import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 
-class XReportFragment: CoreFragment<ReportFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
+class ZReportFragment: CoreFragment<ReportFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
 
     override fun createViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
+            inflater: LayoutInflater,
+            container: ViewGroup?
     ): ReportFragmentBinding {
         return ReportFragmentBinding.inflate(layoutInflater)
     }
 
-    override fun setupToolbar(): Int  = R.string.text_x_report
+    override fun setupToolbar(): Int  = R.string.text_z_report
 
     override fun setupViews() {
-        vm.fetchReportSession()
+        vm.closeSession()
     }
 
     override fun subscribeToLiveData() {

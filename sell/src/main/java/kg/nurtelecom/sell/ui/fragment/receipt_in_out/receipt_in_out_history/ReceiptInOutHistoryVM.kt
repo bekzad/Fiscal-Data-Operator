@@ -14,11 +14,13 @@ abstract class ReceiptInOutHistoryVM : CoreViewModel() {
     abstract fun fetchReceiptInOutById(id: Long)
 
     abstract val receiptInOutHistoryList: MutableLiveData<List<ReceiptInOutHistoryModel>>
+    abstract val receiptInOutFetched: MutableLiveData<ReceiptInOutResult>
 }
 
 class ReceiptInOutHistoryVMImpl(private val repository: ReceiptInOutRepository) : ReceiptInOutHistoryVM() {
 
     override val receiptInOutHistoryList: MutableLiveData<List<ReceiptInOutHistoryModel>> = MutableLiveData()
+    override val receiptInOutFetched: MutableLiveData<ReceiptInOutResult> = MutableLiveData()
 
     override fun fetchReceiptInOutHistoryList() {
         safeCall(Dispatchers.Default) {
@@ -30,9 +32,7 @@ class ReceiptInOutHistoryVMImpl(private val repository: ReceiptInOutRepository) 
     override fun fetchReceiptInOutById(id: Long) {
         safeCall(Dispatchers.Default) {
             val result = repository.fetchReceiptInOutById(id)
-            event.postValue(ReceiptInOutFetched(result))
+            receiptInOutFetched.postValue(result)
         }
     }
 }
-
-class ReceiptInOutFetched(val receipt: ReceiptInOutResult) : CoreEvent()

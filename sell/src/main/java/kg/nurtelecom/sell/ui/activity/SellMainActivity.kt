@@ -2,11 +2,20 @@ package kg.nurtelecom.sell.ui.activity
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.os.Handler
+import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.viewbinding.ViewBinding
+import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.activity.CoreActivity
 import kg.nurtelecom.core.extension.*
+import kg.nurtelecom.core.extension.replaceFragment
+import kg.nurtelecom.core.extension.setProgressBarColor
+import kg.nurtelecom.core.extension.startActivity
+import kg.nurtelecom.core.extension.visible
 import kg.nurtelecom.data.enums.OperationType
 import kg.nurtelecom.ofd.fragments.aboutapp.AboutAppFragment
 import kg.nurtelecom.sell.R
@@ -42,16 +51,10 @@ class SellMainActivity :
     }
 
     override fun subscribeToLiveData() {
-        vm.event.observe(this, {
-            when (it) {
-                is UserLogout -> {
-                    if (it.resultCode == "SUCCESS") {
-                        setResult(Activity.RESULT_OK)
-                        finish()
-                    } else {
-                        vb.root.snackbar(application.resources.getString(R.string.logout_fail_massage))
-                    }
-                }
+        vm.logoutEvent.observe(this, {
+            if (it) {
+                setResult(Activity.RESULT_OK)
+                finish()
             }
         })
     }
@@ -132,6 +135,14 @@ class SellMainActivity :
         } else {
             super.onBackPressed()
         }
+    }
+
+    fun isProgressBarVisible(value: Boolean) {
+        vb.progressbar.visible(value)
+    }
+
+    fun setProgressBarColor(color: Int) {
+        vb.progressbar.setProgressBarColor(color)
     }
 
     companion object {

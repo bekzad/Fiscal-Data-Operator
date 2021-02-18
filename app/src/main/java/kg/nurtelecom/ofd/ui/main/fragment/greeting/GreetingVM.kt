@@ -12,11 +12,8 @@ class GreetingVMImpl(private val greetingRepository: GreetingRepository): Greeti
 
     override fun logout() {
         safeCall {
-            val result = greetingRepository.logout()
-            event.postValue(UserLogout(result.resultCode))
+            greetingRepository.logout()
         }
     }
 
 }
-
-class UserLogout(val resultCode: String) : CoreEvent()
