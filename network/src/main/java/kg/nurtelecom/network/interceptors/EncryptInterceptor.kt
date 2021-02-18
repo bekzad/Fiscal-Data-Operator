@@ -17,6 +17,11 @@ class EncryptInterceptor(appPrefs: AppPreferences) : Interceptor {
         var request = chain.request()
         val oldBody = request.body
         val buffer = Buffer()
+
+        if (oldBody == null) {
+            return chain.proceed(request)
+        }
+
         oldBody!!.writeTo(buffer)
         val strOldBody: String = buffer.readUtf8()
 
