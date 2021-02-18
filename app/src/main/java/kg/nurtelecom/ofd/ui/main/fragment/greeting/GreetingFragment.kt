@@ -1,6 +1,8 @@
 package kg.nurtelecom.ofd.ui.main.fragment.greeting
 
+import android.app.Activity
 import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContracts
 import kg.nurtelecom.changepassword.ui.ChangePasswordActivity
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.setToolbarTitle
@@ -25,28 +27,25 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
 
     override fun setupViews() {
         super.setupViews()
+        val startForResult = parentActivity
+            .registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = Intent(activity, SplashActivity::class.java)
+                startActivity(intent)
+            }
+        }
         vb.btnInvalidate.setOnClickListener { vm.logout() }
         vb.cellChangePassword.setOnClickListener {
           ChangePasswordActivity.start(requireContext())
         }
         vb.cellFiscalMode.setOnClickListener {
             val intent = Intent(activity, SellMainActivity::class.java)
-            startActivityForResult(intent, SellMainActivity.LOGGED_OUT)
+            startForResult.launch(intent)
         }
 
         vb.cellProfile.setOnClickListener {
             val intent = Intent(activity, UserActivity::class.java)
             startActivity(intent)
-        }
-    }
-    // Go to Auth Activity via Splash activity if already logged out
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (resultCode) {
-            SellMainActivity.LOGGED_OUT -> {
-                val intent = Intent(activity, SplashActivity::class.java)
-                startActivity(intent)
-            }
         }
     }
 

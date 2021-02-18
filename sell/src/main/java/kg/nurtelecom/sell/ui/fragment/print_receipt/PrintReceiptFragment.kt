@@ -3,7 +3,6 @@ package kg.nurtelecom.sell.ui.fragment.print_receipt
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.HtmlCompat
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.sell.R
@@ -31,12 +30,12 @@ class PrintReceiptFragment : CoreFragment<FragmentPrintReceiptBinding, SellMainV
 
     override fun subscribeToLiveData() {
         vm.taxSum.observe(viewLifecycleOwner) { sum ->
-            vb.tvPaymentAmount.text = HtmlCompat.fromHtml("$sum <u>с</u>" , HtmlCompat.FROM_HTML_MODE_LEGACY)
+            vb.tvPaymentAmount.text = getString(R.string.amount_in_soms, sum)
         }
         vm.change.observe(viewLifecycleOwner) { change ->
             if (change.isNotZero()) {
                 vb.tvChangeText.visibility = View.VISIBLE
-                vb.tvChangeAmount.text = HtmlCompat.fromHtml("$change <u>с</u>" , HtmlCompat.FROM_HTML_MODE_LEGACY)
+                vb.tvChangeAmount.text = getString(R.string.amount_in_soms, change)
             }
         }
     }

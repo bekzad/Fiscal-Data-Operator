@@ -86,9 +86,7 @@ class SellFragment : CoreFragment<SellFragmentBinding, SellMainViewModel>(SellMa
         }
     }
 
-    // Clear the old receipts before going to the next fragment
     private fun startPrepay() {
-
         parentActivity.replaceFragment<PaymentMethodFragment>(R.id.sell_container, false)
     }
 

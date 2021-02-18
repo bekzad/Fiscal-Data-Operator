@@ -11,7 +11,7 @@ class RefreshTokenInterceptor(private val appPrefs: AppPreferences) : Intercepto
 
     override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
 
-        var request = chain.request()
+        val request = chain.request()
         // Make a request and save the response here
         val response = chain.proceed(request)
 

@@ -2,7 +2,6 @@ package kg.nurtelecom.sell.ui.fragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -101,9 +100,7 @@ class ProductsViewHolder(private val binding: ProductCategoryItemBinding) :
                 clickListener.onItemClick(product)
             }
             tvProductName.text = product.name
-            val formattedPrice = "${product.price} <u>с</u>"
-            tvProductPrice.text =
-                HtmlCompat.fromHtml(formattedPrice, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            tvProductPrice.text = "${product.price} c̲"
         }
     }
 

@@ -47,5 +47,6 @@
     <string name="logout_fail_massage">Не удалось выполнить выход</string>
     <string name="dialog_error">Некорректные данные в запросе</string>
     <string name="tv_help">Для проверки чека зайдите на сайт ГНС\n www.kkm.gov.kg</string>
+    <string name="amount_in_soms">%1$s c̲</string>
 
 </resources>

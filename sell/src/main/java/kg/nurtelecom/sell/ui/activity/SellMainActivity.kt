@@ -1,5 +1,6 @@
 package kg.nurtelecom.sell.ui.activity
 
+import android.app.Activity
 import android.content.Context
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -45,7 +46,7 @@ class SellMainActivity :
             when (it) {
                 is UserLogout -> {
                     if (it.resultCode == "SUCCESS") {
-                        setResult(LOGGED_OUT)
+                        setResult(Activity.RESULT_OK)
                         finish()
                     } else {
                         vb.root.snackbar(application.resources.getString(R.string.logout_fail_massage))
@@ -134,8 +135,6 @@ class SellMainActivity :
     }
 
     companion object {
-        const val LOGGED_OUT = 1
-
         fun start(context: Context?) {
             context?.startActivity<SellMainActivity>()
         }

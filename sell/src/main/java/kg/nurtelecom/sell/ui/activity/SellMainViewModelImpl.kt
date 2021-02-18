@@ -239,7 +239,9 @@ class SellMainViewModelImpl(
             if (response.isSuccessful){
                 responseBody = response.body() ?: "Successful response, null body"
             } else {
+                // Logout if the result of fetching a receipt is not successful
                 responseBody = response.errorBody()?.string() ?: "Fail response, null error body"
+                logout()
             }
 
             try {
