@@ -2,7 +2,6 @@ package kg.nurtelecom.sell.ui.fragment.other_operations
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.data.enums.OperationType
@@ -13,6 +12,8 @@ import kg.nurtelecom.sell.ui.activity.SellMainViewModel
 import kg.nurtelecom.sell.ui.fragment.credit.CreditListFragment
 import kg.nurtelecom.sell.ui.fragment.other_operations.prepayment.RefundPrepaymentFragment
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
+import kg.nurtelecom.sell.ui.fragment.receipt_in_out.receipt_in_out.ReceiptInOutFragment
+import kg.nurtelecom.sell.ui.fragment.receipt_in_out.receipt_in_out_history.ReceiptInOutHistoryFragment
 import kg.nurtelecom.sell.ui.fragment.sell.SellFragment
 
 class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, SellMainViewModel>(SellMainViewModel::class) {
@@ -48,10 +49,10 @@ class OtherOperationsFragment : CoreFragment<OtherOperationsFragmentBinding, Sel
             // here place for replacing fragment
         }
         vb.btnMenuItemDepositAndPayment.setOnClickListener{
-            // here place for replacing fragment
+            parentActivity.replaceFragment<ReceiptInOutFragment>(R.id.sell_container)
         }
         vb.btnMenuItemHistoryDepositsPayments.setOnClickListener{
-            // here place for replacing fragment
+            parentActivity.replaceFragment<ReceiptInOutHistoryFragment>(R.id.sell_container)
         }
         vb.btnMenuItemFiscalReport.setOnClickListener{
             // here place for replacing fragment

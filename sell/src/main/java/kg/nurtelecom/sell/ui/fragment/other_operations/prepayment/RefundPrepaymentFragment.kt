@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
+import kg.nurtelecom.ofd.item_decoration.RoundDecor
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.CoreFragment
 import kg.nurtelecom.sell.core.ItemClickListener
@@ -52,7 +53,7 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, H
     override fun setupViews() {
         setHasOptionsMenu(true)
         initRecyclerView()
-        vm.fetchChecksHistory()
+        vm.fetchChecksHistory("PREPAY")
     }
 
     override fun <T> onItemClick(value: T, isChecked: Boolean) {
@@ -61,15 +62,16 @@ class RefundPrepaymentFragment : CoreFragment<ChecksHistoryRecycleViewBinding, H
 
     override fun subscribeToLiveData() {
         vm.checksHistoryData.observe(viewLifecycleOwner, { items ->
-            historyAdapter.addHeaderAndSubmitList(items.filter { it.operationType == "PREPAY" })
+            historyAdapter.addHeaderAndSubmitList(items)
         })
         vm.filteredChecksHistory?.observe(viewLifecycleOwner) { sortedItems ->
-            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems.filter { it.operationType == "PREPAY" })
+            historyAdapter.addHeaderAndSubmitList(null, sortedList = sortedItems)
         }
     }
 
     private fun initRecyclerView() {
         vb.rvHistory.adapter = historyAdapter
+        vb.rvHistory.addItemDecoration(RoundDecor())
     }
 
     companion object {

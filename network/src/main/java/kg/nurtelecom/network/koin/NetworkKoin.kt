@@ -27,6 +27,7 @@ val networkKoin = module {
     single { get<Retrofit>().create(ReportsApi::class.java) }
     single { get<Retrofit>().create(ProductApi::class.java) }
     single { get<Retrofit>(named("encryptedRetrofit")).create(SellApi::class.java) }
+    single { get<Retrofit>(named("encryptedRetrofit")).create(ReceiptInOutApi::class.java) }
 }
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {

@@ -1,9 +1,8 @@
 package kg.nurtelecom.sell.ui.fragment.refund.detail
 
-import android.graphics.Rect
-import android.view.View
+import android.os.Handler
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.extension.parentActivity
 import kg.nurtelecom.core.extension.replaceFragment
 import kg.nurtelecom.core.extension.setToolbarTitle
@@ -12,6 +11,7 @@ import kg.nurtelecom.data.history_by_id.ReceiptItems
 import kg.nurtelecom.sell.R
 import kg.nurtelecom.sell.core.ItemClickListener
 import kg.nurtelecom.sell.databinding.FragmentRefundProductsBinding
+import kg.nurtelecom.sell.ui.activity.SellMainActivity
 import kg.nurtelecom.sell.ui.fragment.history.HistoryViewModel
 import kg.nurtelecom.sell.ui.fragment.payment_method.PaymentMethodFragment
 import kg.nurtelecom.sell.ui.fragment.refund.RefundFragment.Companion.CHECK_ID
@@ -22,11 +22,28 @@ class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, Histo
     private var refundAdapter: RefundAdapter = RefundAdapter(this)
 
     override fun subscribeToLiveData() {
-        vm.detailCheckHistory.observe(viewLifecycleOwner) {
-            parentActivity.setToolbarTitle(getString(R.string.cash_check_number, it.receipt.indexNum))
-            refundAdapter.setListData(it.receipt.receiptItems as ArrayList<ReceiptItems>)
-            vb.rvRefund.adapter = refundAdapter
-        }
+        vm.event.observe(this, { it ->
+            when (it) {
+                is CoreEvent.Loading -> {
+                    (activity as SellMainActivity?)?.isProgressBarVisible(true)
+                    (activity as SellMainActivity?)?.setProgressBarColor(R.color.green)
+                }
+                is CoreEvent.Success -> {
+                    vm.detailCheckHistory.observe(viewLifecycleOwner) {
+                        parentActivity.setToolbarTitle(getString(R.string.cash_check_number, it.receipt.indexNum))
+                        refundAdapter.setListData(it.receipt.receiptItems as ArrayList<ReceiptItems>)
+                        vb.rvRefund.adapter = refundAdapter
+                    }
+                    (activity as SellMainActivity?)?.isProgressBarVisible(false)
+                }
+                is CoreEvent.Error -> {
+                    (activity as SellMainActivity?)?.setProgressBarColor(R.color.red)
+                    Handler().postDelayed({
+                        (activity as SellMainActivity?)?.isProgressBarVisible(false)
+                    }, 1000)
+                }
+            }
+        })
         vm.totalSum.observe(viewLifecycleOwner) { sum ->
             if (sum.compareTo(BigDecimal.ZERO) == 0) {
                 vb.icSumPay.setContent(BigDecimal.ZERO)
@@ -54,7 +71,6 @@ class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, Histo
     private fun initRecyclerView() {
         vb.rvRefund.adapter = refundAdapter
         vb.rvRefund.layoutManager = LinearLayoutManager(activity)
-        vb.rvRefund.addItemDecoration(DefaultItemDecorator(18, 8))
     }
 
     override fun getBinding(): FragmentRefundProductsBinding {
@@ -67,19 +83,9 @@ class RefundProductsFragment : CoreFragment<FragmentRefundProductsBinding, Histo
         }
     }
 
-    class DefaultItemDecorator(private val horizontalSpacing: Int, private val verticalSpacing: Int) :
-            RecyclerView.ItemDecoration(){
-
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-            super.getItemOffsets(outRect, view, parent,
-                    state)
-            outRect.right = horizontalSpacing
-            outRect.left = horizontalSpacing
-            if (parent.getChildLayoutPosition(view) ==
-                    0) {
-                outRect.top = verticalSpacing
-            }
-            outRect.bottom = verticalSpacing
-        }
+    override fun onResume() {
+        super.onResume()
+        vm.resetTotalSum()
+        vb.icSumPay.changeEditText(true)
     }
 }
