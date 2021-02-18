@@ -3,11 +3,12 @@ package kg.nurtelecom.ofd.ui.main.fragment.greeting
 import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
+import android.os.Handler
+import kg.nurtelecom.auth.ui.AuthActivity
 import kg.nurtelecom.changepassword.ui.ChangePasswordActivity
+import kg.nurtelecom.core.CoreEvent
 import kg.nurtelecom.core.CoreEvent.Success
-import kg.nurtelecom.core.extension.parentActivity
-import kg.nurtelecom.core.extension.setToolbarTitle
-import kg.nurtelecom.core.extension.snackbar
+import kg.nurtelecom.core.extension.*
 import kg.nurtelecom.core.fragment.CoreFragment
 import kg.nurtelecom.ofd.R
 import kg.nurtelecom.ofd.databinding.FragmentGreetingBinding
@@ -52,11 +53,22 @@ class GreetingFragment : CoreFragment<FragmentGreetingBinding, GreetingVM>(Greet
 
     override fun subscribeToLiveData() {
         super.subscribeToLiveData()
-        vm.event.observe(viewLifecycleOwner, {
+        vm.event.observe(this, {
             when (it) {
-                is Success -> {
+                is CoreEvent.Loading -> {
+                    vb.progressbar.visible(true)
+                    vb.progressbar.setProgressBarColor(kg.nurtelecom.ui.R.color.green)
+                }
+                is CoreEvent.Success -> {
                     val intent = Intent(activity, SplashActivity::class.java)
                     startActivity(intent)
+                }
+                is CoreEvent.Error -> {
+                     vb.root.snackbar(requireContext().resources.getString(R.string.logout_fail_massage))
+                    vb.progressbar.setProgressBarColor(kg.nurtelecom.ui.R.color.red)
+                    Handler().postDelayed({
+                        vb.progressbar.visible(false)
+                    }, 1000)
                 }
             }
         })
