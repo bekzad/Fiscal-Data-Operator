@@ -16,7 +16,7 @@ import org.koin.dsl.module
 
 val sellKoin = module {
     single { HistoryRepository(get(), get()) }
-    single { SellRepository(get(), get(), get()) }
+    single { SellRepository(get(), get(), get(), get(), get()) }
     single { SessionRepository(get(), get()) }
     viewModel<SellMainViewModel> { SellMainViewModelImpl(get(), get()) }
     viewModel<HistoryViewModel> { HistoryViewModelImpl(get()) }

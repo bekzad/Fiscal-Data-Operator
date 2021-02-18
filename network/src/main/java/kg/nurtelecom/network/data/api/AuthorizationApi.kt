@@ -24,6 +24,7 @@ interface AuthorizationApi {
 
     @POST("get-secure-key?invalidate_existing=true")
     suspend fun openSession(
-        @Header("Authorization") token: String, @Header("session_uuid") session_uuid: String
+        @Header("Authorization") token: String,
+        @Header("session_uuid") session_uuid: String
     ): OpenSession
 }

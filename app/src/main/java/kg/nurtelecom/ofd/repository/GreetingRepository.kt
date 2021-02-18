@@ -9,6 +9,9 @@ class GreetingRepository(private val network: AuthorizationApi, private val appP
     suspend fun logout(): LogoutResult {
         val result = network.logout(appPref.token)
         appPref.token = ""
+        appPref.isFiscalDialogShow = false
+        appPref.refreshToken = ""
+        appPref.secureKey = ""
         return result
     }
 }

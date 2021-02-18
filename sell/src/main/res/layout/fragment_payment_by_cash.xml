@@ -10,7 +10,7 @@
 
     <kg.nurtelecom.ofd.cell.InfoCardCellView
         android:id="@+id/ic_sum"
-        android:layout_width="@dimen/margin_0dp"
+        android:layout_width="@dimen/size_0dp"
         android:layout_height="wrap_content"
         android:background="@color/green"
         android:textColor="@color/white"

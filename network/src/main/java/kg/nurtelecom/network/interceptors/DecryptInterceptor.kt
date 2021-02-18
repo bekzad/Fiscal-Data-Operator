@@ -7,24 +7,28 @@ import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 
 
-class DecryptInterceptor(private val appPrefs: AppPreferences) : Interceptor {
+class DecryptInterceptor(appPrefs: AppPreferences) : Interceptor {
 
-    internal val encryption = Encryption(appPrefs)
+    private val encryption = Encryption(appPrefs)
 
     override fun intercept(chain: Interceptor.Chain): Response {
 
         val response = chain.proceed(chain.request())
-        val newResponse = response.newBuilder()
         var contentType = response.header("Content-Type")
         if (contentType.isNullOrEmpty()) contentType = "application/json"
-        val responseString = response.body!!.string()
+        var responseString = "No response body/error body from api"
+        if (response.body != null) {
+            responseString = response.body!!.string()
+        }
 
-        var decryptedString = ""
+        var decryptedString = responseString
         if (response.code != 401) {
             decryptedString = encryption.decrypt(responseString)
         }
 
-        newResponse.body(decryptedString.toResponseBody(contentType.toMediaTypeOrNull()))
-        return newResponse.build()
+        val newResponse = response.newBuilder()
+        return newResponse
+                .body(decryptedString.toResponseBody(contentType.toMediaTypeOrNull()))
+                .build()
     }
 }

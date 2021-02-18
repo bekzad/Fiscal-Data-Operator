@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -41,13 +42,17 @@ dependencies {
     implementation project(path: ':data')
     implementation project(path: ':storage')
     implementation project(path: ':ui')
+    implementation project(path: ':auth')
 
     implementation libs.kotlin
     implementation libs.androidx.values()
     implementation libs.google.values()
     implementation libs.network.values()
     implementation libs.koin.values()
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt libs.roomKapt.values()
+    
+    // QR code generator
+    implementation 'com.google.zxing:core:3.4.0'
 
     testImplementation libs.testImpl.values()
     androidTestImplementation libs.androidTestImpl.values()

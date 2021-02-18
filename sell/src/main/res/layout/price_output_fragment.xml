@@ -9,12 +9,12 @@
 
     <TextView
         style="@style/SmallLabelTextStyle"
-        android:id="@+id/tv_position"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_16dp"
-        android:text="@string/position"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,9 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tv_position"
-        app:layout_constraintTop_toBottomOf="@id/tv_position"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
         app:title_text="@string/price" />
 
     <kg.nurtelecom.ofd.cell.InfoCardCellView
@@ -33,6 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
         app:hint_text="1"
         app:layout_constraintEnd_toEndOf="@id/ic_product_price"
         app:layout_constraintStart_toStartOf="@id/ic_product_price"
@@ -53,6 +57,7 @@
             android:id="@+id/ic_product_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8dp"
             android:layout_marginEnd="@dimen/margin_4dp"
             android:layout_weight="1"
             android:textColor="@color/green"
@@ -66,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_4dp"
+            android:layout_marginEnd="@dimen/margin_8dp"
             android:layout_weight="1"
             android:textColor="@color/red"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +87,8 @@
         android:layout_marginEnd="@dimen/margin_8dp"
         android:layout_marginBottom="@dimen/margin_16dp"
         android:backgroundTint="@color/green"
+        android:insetTop="@dimen/margin_0dp"
+        android:insetBottom="@dimen/margin_0dp"
         android:enabled="false"
         android:text="@string/in_check"
         app:layout_constraintBottom_toBottomOf="parent"

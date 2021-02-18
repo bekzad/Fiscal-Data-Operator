@@ -1,6 +1,6 @@
 package kg.nurtelecom.data.enums
 
-enum class PaymentType(val paymentType: String) {
-    CASH("Наличными"),
-    CASHLESS("Безналичными")
+enum class PaymentType(val paymentTypeValue: String) {
+    CASH("НАЛИЧНЫЕ"),
+    CASHLESS("БЕЗНАЛИЧНАЯ ОПЛАТА")
 }

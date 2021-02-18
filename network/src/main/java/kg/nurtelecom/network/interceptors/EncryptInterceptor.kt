@@ -1,15 +1,16 @@
 package kg.nurtelecom.network.interceptors
 
-import android.util.Log
 import kg.nurtelecom.storage.sharedpref.AppPreferences
-import okhttp3.*
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
 import okio.Buffer
 
-class EncryptInterceptor(private val appPrefs: AppPreferences) : Interceptor {
+class EncryptInterceptor(appPrefs: AppPreferences) : Interceptor {
 
-    internal val encryption = Encryption(appPrefs)
+    private val encryption = Encryption(appPrefs)
 
     override fun intercept(chain: Interceptor.Chain): Response {
 
@@ -27,8 +28,6 @@ class EncryptInterceptor(private val appPrefs: AppPreferences) : Interceptor {
             .header("Content-Type", body.contentType().toString())
             .header("Content-Length", body.contentLength().toString())
             .method(request.method, body).build()
-
-        Log.e("Request, Encrypted", strNewBody)
 
         return chain.proceed(request)
     }
