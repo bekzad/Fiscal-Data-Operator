@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
 interface RefreshTokenApi {
     // Synchronous request api to get the refresh token
-    @Headers("Authorization: Basic ZGV2OkZndkRlNHZkITM=")
+    @Headers("Authorization: Basic authtoken=")
     @POST("oauth/token?grant_type=refresh_token")
     fun fetchRefreshToken(
             @Query("refresh_token") oldRefreshToken: String

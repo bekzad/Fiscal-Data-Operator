@@ -7,7 +7,7 @@ import kg.nurtelecom.data.session.OpenSession
 import retrofit2.http.*
 
 interface AuthorizationApi {
-    @Headers("Authorization: Basic ZGV2OkZndkRlNHZkITM=")
+    @Headers("Authorization: Basic authtoken=")
     @POST("oauth/token?grant_type=password&scope=read")
     suspend fun fetchAccessToken(@Query("username") username: String,
                                  @Query("password") password: String,
@@ -18,7 +18,7 @@ interface AuthorizationApi {
         @Header("Authorization") token: String
     ): UserResult
 
-    @Headers("Authorization: Basic ZGV2OkZndkRlNHZkITM={token}")
+    @Headers("Authorization: Basic authtoken={token}")
     @POST("invalidate")
     suspend fun logout(@Header("token") token: String): LogoutResult
 
